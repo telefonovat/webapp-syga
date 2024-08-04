@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Test from '../test/Test.vue';
+import Test from '../components/test/Test.vue';
 import Split from '../utils/Split.vue';
 </script>
 
