@@ -1,4 +1,4 @@
-import Graph from "../../interfaces/visualizer/Graph";
+import Graph from "@/interfaces/visualizer/Graph";
 
 function useSimpleGraph(): Graph {
   return {

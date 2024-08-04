@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import GraphNode from './graph/GraphNode.vue';
-import GraphEdge from './graph/GraphEdge.vue';
-import Zoomable from '../../utils/Zoomable.vue';
-import { useSimpleGraph } from '../../utils/test-data/graphTestData.ts';
+import GraphNode from '@/components/visualizer/graph/GraphNode.vue';
+import GraphEdge from '@/components/visualizer/graph/GraphEdge.vue';
+import Zoomable from '@/utils/Zoomable.vue';
+import { useSimpleGraph } from '@/utils/test-data/graphTestData.ts';
 
 import { computed } from "vue";
 

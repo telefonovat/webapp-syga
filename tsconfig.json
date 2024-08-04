@@ -1,5 +1,15 @@
 {
-  
+  "compilerOptions":{
+    "baseUrl": "./",
+    "paths": {
+    "@/*":[
+      "src/*",
+      ],
+    },
+    "types": [
+      "node",
+    ],
+  },
   "files": [],
   "references": [
     {
