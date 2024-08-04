@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Test from '../components/test/Test.vue';
 import Split from '../utils/Split.vue';
+import GraphVisualizer from '../components/visualizer/GraphVisualizer.vue';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import Split from '../utils/Split.vue';
     <split :initialSizes="[50, 50]">
       <test />
       <split :initialSizes="[50, 50]" direction="vertical">
-        <test />
+        <graph-visualizer />
         <test />
       </split>
     </split>

@@ -7,4 +7,4 @@ function useSimpleGraph(): Graph {
   }
 }
 
-export default { useSimpleGraph };
+export { useSimpleGraph };
