@@ -39,5 +39,7 @@ onMounted(() => {
 .zoom-container {
   border-style: solid;
   border-color: black;
+  height: 100%;
+  width: 100%;
 }
 </style>

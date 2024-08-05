@@ -2,6 +2,7 @@
 import Test from '@/components/test/Test.vue';
 import Split from '@/utils/Split.vue';
 import GraphVisualizer from '@/components/visualizer/GraphVisualizer.vue';
+
 </script>
 
 <template>

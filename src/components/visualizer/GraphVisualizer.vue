@@ -2,16 +2,21 @@
 import GraphNode from '@/components/visualizer/graph/GraphNode.vue';
 import GraphEdge from '@/components/visualizer/graph/GraphEdge.vue';
 import Zoomable from '@/utils/Zoomable.vue';
-import { useSimpleGraph } from '@/utils/test-data/graphTestData.ts';
+
+import Frame from '@/interfaces/backend/Frame';
 
 import { computed } from "vue";
-
+import useVisualizerStore from "@/stores/visualizer/store";
 //Default values
 const viewboxSize = () => 400;
 
-const { nodes, edges } = useSimpleGraph();
-console.log(nodes);
-console.log(edges);
+//State access
+const visualizerStore = useVisualizerStore();
+const frame: Frame = visualizerStore.currentFrame();
+const component = frame.components[0];
+const { nodes, edges } = component;
+const nodeColors = component.style.nodeColors;
+console.log(nodeColors);
 const positions = computed(() => {
   const pos: { [key: number]: { x: number, y: number } } = {};
   nodes.forEach((node, index) => {
@@ -30,7 +35,7 @@ console.log(positions.value);
   <div id="visualizer-panel">
     <zoomable>
       <svg viewBox="0 0 400 400" height="100%" width="100%">
-        <graph-edge v-for="(edge, index) in edges" :x1="positions[edge[0]].x" :y1="positions[edge[0]].y"
+        <graph-edge v-for="(edge) in edges" :x1="positions[edge[0]].x" :y1="positions[edge[0]].y"
           :x2="positions[edge[1]].x" :y2="positions[edge[1]].y" />
         <graph-node v-for="(node, index) in positions" :x="node.x" :y="node.y" :label="index" />
       </svg>

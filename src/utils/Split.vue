@@ -11,7 +11,6 @@
 //Imports
 import { ref, onMounted, computed } from "vue";
 import Split from "split.js";
-
 //Default values
 const DEFAULT_GUTTER_SIZE = 10;
 
