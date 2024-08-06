@@ -17,7 +17,6 @@ function click() {
 <template>
   <button @click="click">
     <icon :icon="icon" :iconSize="iconSize"></icon>
-
   </button>
 </template>
 

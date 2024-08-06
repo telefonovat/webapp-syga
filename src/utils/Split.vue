@@ -29,10 +29,20 @@ const props = withDefaults(
     gutterSize: DEFAULT_GUTTER_SIZE,
   }
 )
+const numberOfSplits = computed(() => {
+  // No splits
+  if (!(splitContainer.value instanceof HTMLElement)) {
+    return 0;
+  }
+  return splitContainer.value.children.length;
+});
 
 onMounted(() => {
   if (splitContainer.value) {
     const children = Array.from(splitContainer.value.children) as HTMLElement[];
+
+    const sizes = props.initialSizes ??
+      new Array(numberOfSplits.value).fill(100 / numberOfSplits.value);
     Split(children, {
       direction: props.direction,
       sizes: props.initialSizes,

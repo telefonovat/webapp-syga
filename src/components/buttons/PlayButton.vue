@@ -1,8 +1,11 @@
 <script lang="ts">
+import IconButton from './IconButton.vue';
 </script>
 
 <template>
-  <why></why>
+  <icon-button :icon="feather - play" :iconSize="15">
+    Play!
+  </icon-button>
 </template>
 
 <style scoped></style>

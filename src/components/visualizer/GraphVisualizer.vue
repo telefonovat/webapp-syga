@@ -7,6 +7,7 @@ import Frame from '@/interfaces/backend/Frame';
 
 import { computed } from "vue";
 import useVisualizerStore from "@/stores/visualizerStore.ts";
+import { onMounted } from 'vue';
 //Default values
 const VIEWBOX_SIZE = () => 400;
 
@@ -30,7 +31,10 @@ const positions = computed(() => {
   });
   return pos;
 });
-console.log(positions.value);
+
+onMounted(() => {
+  store.startPlaying();
+});
 </script>
 
 <template>
