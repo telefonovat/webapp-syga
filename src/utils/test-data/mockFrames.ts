@@ -3,6 +3,7 @@ import Component from "@/interfaces/backend/Component.ts";
 import ComponentStyle from "@/interfaces/backend/ComponentStyle";
 
 function useSimpleFrame(): Frame {
+
   return {
     lineNumber: [35],
     consoleLogs: "",
@@ -21,6 +22,15 @@ function useSimpleFrame(): Frame {
             1: "DeepSkyBlue", 2: null, 5: null, 4: null,
             7: null, 6: "DeepSkyBlue", 8: "DeepSkyBlue"
           },
+          edgeColors: {
+            0: { 3: "DeepSkyBlue", 9: null },
+            3: { 1: "DeepSkyBlue", 2: null },
+            9: { 1: "DeepSkyBlue", 8: "DeepSkyBlue" },
+            2: { 5: null },
+            4: { 7: null },
+            7: { 8: null },
+            6: { 8: "DeepSkyBlue" }
+          }
         }
       }
     ]

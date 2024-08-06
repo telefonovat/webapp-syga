@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//Default values
 const DEFAULT_COLOR = "#aaa";
 const DEFAULT_SHAPE = "solid";
 const DEFAULT_WIDTH = 10;
@@ -14,7 +15,7 @@ withDefaults(defineProps<Props>(),
     color: DEFAULT_COLOR,
     shape: DEFAULT_SHAPE,
   }
-)
+);
 </script>
 
 <template>

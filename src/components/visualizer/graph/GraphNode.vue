@@ -1,25 +1,32 @@
 <script setup lang="ts">
 //Default values
-const DEFAULT_COLOR = "#3498db";
+const DEFAULT_COLOR = "black";
 const DEFAULT_RADIUS = 30;
+const DEFAULT_SHAPE = "circle";
 
 //Props
 interface Props {
   x: number, y: number,
   label: string | number,
+  color?: string,
   shape?: string
+  radius?: number,
 }
 
 withDefaults(
   defineProps<Props>(),
   {
-    shape: () => "circle",
+    color: DEFAULT_COLOR,
+    shape: DEFAULT_SHAPE,
+    radius: DEFAULT_RADIUS,
   }
 );
+
 </script>
+
 <template>
   <g class="node">
-    <circle v-if="shape === 'circle'" :cx="x" :cy="y" :r="DEFAULT_RADIUS" :fill="DEFAULT_COLOR">
+    <circle v-if="shape === 'circle'" :cx="x" :cy="y" :r="radius" :fill="color">
     </circle>
     <text :x="x" :y="y" text-anchor="middle">
       {{ label }}
@@ -37,8 +44,5 @@ withDefaults(
 .node:hover {
   transform: scale(1.2);
 
-  circle {
-    fill: red;
-  }
 }
 </style>
