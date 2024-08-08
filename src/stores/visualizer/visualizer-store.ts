@@ -1,6 +1,6 @@
 import { defineStore, storeToRefs } from "pinia";
-import { useSimpleFrame } from "@/utils/test-data/mockFrames"
-import { computed, ref, reactive } from "vue";
+import { useSimpleAnimation } from "@/utils/test-data/mockFrames"
+import { computed, reactive } from "vue";
 import { shouldDoTick } from "./utils";
 import Frame from "@/interfaces/backend/Frame";
 
@@ -38,46 +38,64 @@ const useAnimationStore = defineStore("store-graph", () => {
     frames: [],
     activeFrame: 0,
   });
-  return { animationState };
+  const nFrames = computed(() => animationState.frames.length);
+  const currentFrame = computed(() => animationState.frames[animationState.activeFrame]);
+  function initializeTestState() {
+    animationState.frames = useSimpleAnimation();
+    animationState.activeFrame = 0;
+  }
+  function nextFrame() {
+    animationState.activeFrame =
+      animationState.activeFrame >= nFrames.value - 1 ?
+        animationState.activeFrame : animationState.activeFrame + 1;
+  }
+  return {
+    animationState,
+    nFrames, currentFrame,
+    initializeTestState, nextFrame,
+  };
 })
 const useVisualizerStore = defineStore("visualizer-store",
   () => {
+    // const playerStore = usePlayerStore();
+    const animationStore = useAnimationStore();
     const { playerState } = storeToRefs(usePlayerStore());
-    const { animationState } = storeToRefs(useAnimationStore());
-    // Constants
-    const frames = [useSimpleFrame];
-    const currentIndex = 0;
-    const lastTick = ref<DOMHighResTimeStamp | null>(null);
-    let i = 0;
-    const currentFrame = computed(() => frames[currentIndex]);
+    const { animationState,
+      nFrames, currentFrame } = storeToRefs(useAnimationStore());
 
+    const frame = computed(() => currentFrame.value);
     // Player actions
     function initialize() {
+      animationStore.initializeTestState();
+      console.log("Initializing");
       if (!playerState.value.isInitialized) {
         playerState.value.isInitialized = true;
-        mainLoop(performance.now());
+        play();
       }
     }
     function play() {
       playerState.value.isPlaying = true;
-      lastTick.value = performance.now();
-      mainLoop(lastTick.value);
+      playerState.value.lastTick = performance.now();
+      mainLoop(playerState.value.lastTick);
     }
     function pause() {
       playerState.value.isPlaying = false;
 
     }
     function mainLoop(timestamp: DOMHighResTimeStamp) {
-      if (lastTick.value !== null &&
-        shouldDoTick(playerState.value.TICK_PERIOD, lastTick.value, timestamp)) {
-        lastTick.value = timestamp;
+      if (playerState.value.lastTick !== null &&
+        shouldDoTick(playerState.value.TICK_PERIOD, playerState.value.lastTick, timestamp)) {
+        animationStore.nextFrame();
+        console.log(animationState.value.activeFrame);
+        playerState.value.lastTick = timestamp;
       }
       window.requestAnimationFrame((timestamp) => mainLoop(timestamp));
     }
 
     return {
-      currentFrame,
-      initialize, play, pause
+      frame,
+      initialize, play, pause,
+      mainLoop,
     }
   })
 export default useVisualizerStore;

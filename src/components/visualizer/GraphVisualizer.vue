@@ -8,22 +8,23 @@ import Frame from '@/interfaces/backend/Frame';
 import { computed } from "vue";
 import useVisualizerStore from "@/stores/visualizer/visualizer-store.ts";
 import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 //Default values
 const VIEWBOX_SIZE = () => 400;
 
+
 //State access
 const store = useVisualizerStore();
-const frame: Frame = store.currentFrame();
-const component = frame.components[0];
-
-const { nodes, edges } = component;
-const nodeColors = component.style.nodeColors;
-const edgeColors = component.style.edgeColors;
-
+store.initialize();
+const frame: Frame = store.frame;
+const nodes = computed(() => store.frame.components[0].nodes);
+const edges = computed(() => store.frame.components[0].edges);
+const edgeColors = computed(() => store.frame.components[0].style.edgeColors);
+const nodeColors = computed(() => store.frame.components[0].style.nodeColors);
 const positions = computed(() => {
   const pos: { [key: number]: { x: number, y: number } } = {};
-  nodes.forEach((node, index) => {
-    const rads = Math.PI * 2 * (index / nodes.length - 0.25);
+  nodes.value.forEach((node, index) => {
+    const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);
     pos[node] = {
       x: Math.cos(rads) * VIEWBOX_SIZE() * 0.4 + VIEWBOX_SIZE() / 2,
       y: Math.sin(rads) * VIEWBOX_SIZE() * 0.4 + VIEWBOX_SIZE() / 2,
@@ -33,7 +34,7 @@ const positions = computed(() => {
 });
 
 onMounted(() => {
-  store.play();
+
 });
 </script>
 
