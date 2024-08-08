@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import GraphVisualizer from '../visualizer/GraphVisualizer.vue';
-import IconButton from '@/components/buttons/IconButton.vue';
-import PlayButton from "@/components/buttons/PlayButton.vue";
+import ControlHeader from '../visualizer/ControlHeader.vue';
 import Split from '@/utils/Split.vue';
 import Test from '@/components/test/Test.vue';
 
-const iconSize = 15;
 </script>
 
 <template>
   <div>
-
-    <div style="display:flex">
-      <icon-button icon="feather-play" :iconSize="iconSize" />
-      <icon-button icon="feather-play" :iconSize="iconSize" />
-      <icon-button icon="feather-play" :iconSize="iconSize" />
-    </div>
+    <control-header />
     <split :initialSizes="[50, 50]" direction="vertical">
       <graph-visualizer />
       <test />

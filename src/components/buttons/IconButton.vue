@@ -12,12 +12,17 @@ const props = withDefaults(defineProps<Props>(), {
 function click() {
   console.log("Button clicked!");
 }
-</script>
+</script>t
 
 <template>
-  <button @click="click">
-    <icon :icon="icon" :iconSize="iconSize"></icon>
+  <button class="icon-button" @click="click">
+    <icon></icon>
   </button>
 </template>
 
-<style scoped></style>
+<style scoped>
+.icon-button {
+  min-width: 50px;
+  min-height: 50px;
+}
+</style>

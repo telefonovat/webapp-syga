@@ -13,4 +13,6 @@ import VisualizerPanel from "@/components/panels/VisualizerPanel.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.home-page {}
+</style>

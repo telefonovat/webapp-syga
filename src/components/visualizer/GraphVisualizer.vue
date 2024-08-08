@@ -33,7 +33,7 @@ const positions = computed(() => {
 });
 
 onMounted(() => {
-  store.startPlaying();
+  store.play();
 });
 </script>
 
