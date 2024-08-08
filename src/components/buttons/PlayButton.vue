@@ -1,8 +1,15 @@
 <script setup lang="ts">
+import useVisualizerStore from "@/stores/visualizer/visualizer-store.ts";
+
+const { play } = useVisualizerStore();
+function click() {
+  console.log("Playing!");
+  play();
+}
 </script>
 
 <template>
-  <icon-button class="play-button" text="Play" icon="feather-play" :iconSize="15">
+  <icon-button class="play-button" text="Play" icon="feather-play" :iconSize="15" @click="click">
   </icon-button>
 </template>
 

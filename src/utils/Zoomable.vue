@@ -3,12 +3,11 @@
  * TODO:
 *       > Slot validation
 */
-import { ref, onMounted, useSlots, nextTick } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import Panzoom from "@panzoom/panzoom";
 
 const panzoomElement = ref<HTMLDivElement | null>(null);
 const visualizer = ref<HTMLDivElement | null>(null);
-const slots = useSlots();
 
 
 onMounted(() => {

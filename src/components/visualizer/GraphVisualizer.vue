@@ -16,23 +16,26 @@ const VIEWBOX_SIZE = () => 400;
 //State access
 const store = useVisualizerStore();
 store.initialize();
-const frame: Frame = store.frame;
+
+
 const nodes = computed(() => store.frame.components[0].nodes);
 const edges = computed(() => store.frame.components[0].edges);
 const edgeColors = computed(() => store.frame.components[0].style.edgeColors);
 const nodeColors = computed(() => store.frame.components[0].style.nodeColors);
-const positions = computed(() => {
+const positions = computed(() => calculatePositions(nodes.value, VIEWBOX_SIZE()));
+
+function calculatePositions(nodes: number[], viewboxSize: number) {
   const pos: { [key: number]: { x: number, y: number } } = {};
-  nodes.value.forEach((node, index) => {
-    const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);
+  nodes.forEach((node, index) => {
+    const rads = Math.PI * 2 * (index / nodes.length - 0.25);
     pos[node] = {
-      x: Math.cos(rads) * VIEWBOX_SIZE() * 0.4 + VIEWBOX_SIZE() / 2,
-      y: Math.sin(rads) * VIEWBOX_SIZE() * 0.4 + VIEWBOX_SIZE() / 2,
+      x: Math.cos(rads) * viewboxSize * 0.4 + viewboxSize / 2,
+      y: Math.sin(rads) * viewboxSize * 0.4 + viewboxSize / 2,
     };
   });
   return pos;
-});
 
+}
 onMounted(() => {
 
 });

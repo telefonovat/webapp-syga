@@ -16,7 +16,7 @@ function click() {
 </script>t
 
 <template>
-  <button class="icon-button" @click="click">
+  <button class="icon-button">
     {{ text }}
   </button>
 </template>
