@@ -3,7 +3,7 @@ import FeatherPlay from "./FeatherPlay.vue";
 </script>
 
 <template>
-  <feather-play :size="30" />
+  <feather-play :size="100" />
 </template>
 
 <style scoped></style>

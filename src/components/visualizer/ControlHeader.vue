@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import IconButton from '../buttons/IconButton.vue';
-
+import PlayButton from "@/components/buttons/PlayButton.vue"
 const iconSize = 15;
 </script>
 
 <template>
   <div class="button-box">
+    <play-button />
     <icon-button icon="feather-play" :iconSize="iconSize" />
     <icon-button icon="feather-play" :iconSize="iconSize" />
     <icon-button icon="feather-play" :iconSize="iconSize" />

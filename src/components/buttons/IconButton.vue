@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
 interface Props {
-  icon: string,
+  text: string,
+  icon?: string,
   iconSize: number,
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -16,7 +17,7 @@ function click() {
 
 <template>
   <button class="icon-button" @click="click">
-    <icon></icon>
+    {{ text }}
   </button>
 </template>
 

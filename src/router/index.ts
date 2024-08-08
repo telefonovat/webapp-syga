@@ -1,7 +1,7 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 
-import Home from '../views/Home.vue';
-
+import Home from '@/views/Home.vue';
+import ControlHeader from "@/components/visualizer/ControlHeader.vue"
 const routes = [
   {
     path: '/',

@@ -1,10 +1,8 @@
-<script lang="ts">
-import IconButton from './IconButton.vue';
+<script setup lang="ts">
 </script>
 
 <template>
-  <icon-button :icon="feather - play" :iconSize="15">
-    Play!
+  <icon-button class="play-button" text="Play" icon="feather-play" :iconSize="15">
   </icon-button>
 </template>
 
