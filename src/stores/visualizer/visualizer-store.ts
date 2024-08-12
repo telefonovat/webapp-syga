@@ -1,22 +1,15 @@
 import { defineStore, storeToRefs } from "pinia";
 import { useSimpleAnimation } from "@/utils/test-data/mockFrames"
-import { computed, reactive } from "vue";
+import { ref, computed, reactive } from "vue";
 import { shouldDoTick } from "./utils";
-import Frame from "@/interfaces/backend/Frame";
 
+import { AnimationState } from "@/interfaces/visualizer/AnimationState.ts";
+import { PlayerState } from "@/interfaces/visualizer/PlayerState.ts";
+import { useSimpleWelcomeCode } from "@/utils/test-data/mockCode.ts";
 //Defaults
-const DEFAULT_TICK_PERIOD = 2000;
-interface PlayerState {
-  isInitialized: boolean,
-  isPlaying: boolean,
-  lastTick: DOMHighResTimeStamp | null,
-  timeStamp: number | null,
-  readonly TICK_PERIOD: number,
-}
-interface AnimationState {
-  frames: Frame[],
-  activeFrame: number,
-}
+const DEFAULT_TICK_PERIOD = 800;
+
+//Private store to represent state of the player component
 const usePlayerStore = defineStore("store-player", () => {
   const playerState = reactive<PlayerState>({
     isInitialized: false,
@@ -41,6 +34,7 @@ const usePlayerStore = defineStore("store-player", () => {
   };
 });
 
+//Private store for state of the animation
 const useAnimationStore = defineStore("store-graph", () => {
   const animationState = reactive<AnimationState>({
     frames: [],
@@ -69,8 +63,7 @@ const useVisualizerStore = defineStore("visualizer-store",
     const playerStore = usePlayerStore();
     const animationStore = useAnimationStore();
     const { playerState } = storeToRefs(usePlayerStore());
-    const { animationState,
-      nFrames, currentFrame } = storeToRefs(useAnimationStore());
+    const { currentFrame } = storeToRefs(useAnimationStore());
 
     const frame = computed(() => currentFrame.value);
     // Player actions
@@ -98,6 +91,19 @@ const useVisualizerStore = defineStore("visualizer-store",
       window.requestAnimationFrame((timestamp) => mainLoop(timestamp));
     }
 
+    //Backend interactions
+    const code = ref(useSimpleWelcomeCode());
+    function visualizeAlgorithm() {
+      try {
+        //TODO: Reset, start loading and set visualized code
+
+        //TODO: Handle case if code is changed before response is received
+
+      }
+      finally {
+
+      }
+    }
     return {
       frame,
       initialize, play, pause,

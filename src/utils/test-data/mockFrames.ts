@@ -118,13 +118,13 @@ function useSimpleAnimation(): Frame[] {
               7: null, 6: "Green", 8: "Red"
             },
             edgeColors: {
-              0: { 3: "Green", 9: null },
-              3: { 1: "Green", 2: null },
-              9: { 1: "Green", 8: "Red" },
+              0: { 3: "Black", 9: null },
+              3: { 1: "Black", 2: null },
+              9: { 1: "Black", 8: "Black" },
               2: { 5: null },
               4: { 7: null },
               7: { 8: null },
-              6: { 8: "Green" }
+              6: { 8: "Black" }
             }
           }
         }
