@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <button class="placeholder-button" @click="console.log('Click click click...')">
+    <slot />
     {{ props.text }}
   </button>
 </template>

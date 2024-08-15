@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import Split from "@/utils/Split.vue";
+import CodeEditor from "@/components/editor/CodeEditor.vue";
 </script>
 
 <template>
   <div class="home-view">
     <split :initialSizes="[50, 50]" direction="horizontal">
-      <placeholder-div />
+      <code-editor />
       <placeholder-div />
     </split>
   </div>

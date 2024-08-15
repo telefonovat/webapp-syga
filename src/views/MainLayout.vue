@@ -6,7 +6,9 @@ import HomeView from "./HomeView.vue";
   <div class="main-layout">
     <header class="header">
       <div>
-        <placeholder-button />
+        <placeholder-button>
+          <icon />
+        </placeholder-button>
         <placeholder-button />
         <placeholder-button />
       </div>
@@ -30,6 +32,7 @@ import HomeView from "./HomeView.vue";
 </template>
 
 <style scoped>
+/*TODO: Figure out css*/
 .main-layout {
   height: 100%;
   display: grid;

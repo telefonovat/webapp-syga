@@ -72,7 +72,7 @@ const computedStyle = computed(() => {
 .split-container {
   display: flex;
   max-height: 100%;
-  max-width: 100%;
+  min-width: 100%;
 }
 </style>
 
