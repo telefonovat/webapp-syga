@@ -31,6 +31,7 @@ import HomeView from "./HomeView.vue";
 
 <style scoped>
 .main-layout {
+  height: 100%;
   display: grid;
   grid-template-columns: 200px 1fr 1fr;
   /* Set the sidebar width explicitly */
