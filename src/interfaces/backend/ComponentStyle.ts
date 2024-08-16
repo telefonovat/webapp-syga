@@ -1,7 +1,7 @@
 import EdgeColors from "./EdgeColor";
 
 export default interface ComponentStyle {
-  nodeColors: { [key: number]: string | null },
-  edgeColors: { [key: number]: EdgeColors },
+  node_colors: { [key: number]: string | null },
+  edge_colors: { [key: number]: EdgeColors },
 }
 

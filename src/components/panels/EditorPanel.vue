@@ -16,7 +16,6 @@ function build() {
     .catch((_err) => {
 
     });
-  console.log(visualizerStore.currentFrame);
 }
 </script>
 
