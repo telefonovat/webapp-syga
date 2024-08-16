@@ -9,8 +9,9 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <button >
-    <icon />
+  <button>
+    <icon /><br />
+    <slot />
   </button>
 </template>
 

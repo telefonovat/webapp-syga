@@ -1,2 +1,3 @@
 import Icon from "./Icon.vue";
-export { Icon };
+import IconButton from "./IconButton.vue"
+export { Icon, IconButton };
