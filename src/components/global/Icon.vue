@@ -1,22 +1,22 @@
 <script setup lang="ts">
+import { iconMap } from "@/assets/icons/feather-icons";
+
+const DEFAULT_ICON = "feather-alert-triangle";
 interface Props {
   size?: number,
+  iconName?: string,
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   size: 24,
+  iconName: DEFAULT_ICON,
 })
+const iconHtml = iconMap[props.iconName] ?? DEFAULT_ICON;
+console.log(`${props.iconName}`);
 </script>
 
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle">
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="12" y1="8" x2="12" y2="12"></line>
-    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-  </svg>
-
-
+  <div v-html="iconHtml"></div>
 </template>
 
 <style scoped></style>

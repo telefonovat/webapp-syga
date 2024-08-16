@@ -3,16 +3,11 @@ import { useVisualizerStore } from '@/stores/visualizer';
 import ComponentVisualizer from './graph/ComponentVisualizer.vue';
 
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
 
 const store = useVisualizerStore();
 
 const { currentFrame } = storeToRefs(store);
 
-watch(currentFrame, (newFrame, oldFrame) => {
-  console.log("Frame changed!");
-  console.log(currentFrame.value.components[0]);
-});
 </script>
 
 <template>

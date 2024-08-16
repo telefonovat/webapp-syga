@@ -2,15 +2,17 @@
 import Icon from "./Icon.vue";
 interface Props {
   size?: number,
+  icon?: string,
 }
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   size: 24,
+
 })
 </script>
 
 <template>
   <button>
-    <icon /><br />
+    <icon :icon="icon" :size="size" /><br />
     <slot />
   </button>
 </template>

@@ -6,18 +6,21 @@ const DEFAULT_RADIUS = 30;
 interface Props {
   x: number, y: number,
   label: string | number,
+  color?: string,
   shape?: string
 }
-withDefaults(
+const props = withDefaults(
   defineProps<Props>(),
   {
-    shape: () => "circle",
+    shape: "circle",
+    color: DEFAULT_COLOR,
   }
 );
+console.log(`Node color : ${props.color}`)
 </script>
 <template>
   <g class="node">
-    <circle v-if="shape === 'circle'" :cx="x" :cy="y" :r="DEFAULT_RADIUS" :fill="DEFAULT_COLOR">
+    <circle v-if="shape === 'circle'" :cx="x" :cy="y" :r="DEFAULT_RADIUS" :fill="color ?? 'grey'">
     </circle>
     <text :x="x" :y="y" text-anchor="middle">
       {{ label }}
