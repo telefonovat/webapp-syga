@@ -1,6 +1,6 @@
 import Component from "./Component";
 interface Frame {
-  lineNumber: number[],
+  lineno: number[],
   consoleLogs: string,
   components: Component[],
 };

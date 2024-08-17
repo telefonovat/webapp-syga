@@ -12,6 +12,13 @@ const useVisualizerStore = defineStore("visualizer-store", () => {
   const { state: animationState } = storeToRefs(animationStore_);
 
   const currentFrame = computed(() => animationStore_.currentFrame);
+  const activeLines = computed(() => {
+    if (animationStore_.nFrames === 0) {
+      return [];
+    }
+    return animationStore_.currentFrame.lineno;
+  });
+  const isPlaying = computed(() => playerState.value.isPlaying);
   function setFrames(frames: Frame[]) {
     animationState.value.frames = frames;
   }
@@ -27,21 +34,30 @@ const useVisualizerStore = defineStore("visualizer-store", () => {
       initialize();
     }
     playerState.value.lastTick = performance.now();
+    playerState.value.isPlaying = true;
     mainLoop(playerState.value.lastTick);
+  }
+  function pause() {
+    playerState.value.isPlaying = !playerState.value.isPlaying;
   }
   function mainLoop(timestamp: DOMHighResTimeStamp) {
     if (playerState.value.lastTick !== null &&
+      playerState.value.isPlaying &&
       playerStore_.shouldDoTick(timestamp)) {
+      if (activeLines.value !== undefined) {
+        console.log(activeLines.value);
+      }
       animationStore_.goToNextFrame();
       playerState.value.lastTick = timestamp;
     }
     window.requestAnimationFrame((timestamp) => mainLoop(timestamp));
   }
   return {
-    currentFrame,
+    currentFrame, activeLines,
+    isPlaying,
     setFrames,
     initialize,
-    play, mainLoop,
+    play, pause, mainLoop,
   }
 })
 

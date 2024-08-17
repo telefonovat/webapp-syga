@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GraphVisualizer from '@/components/visualizer/GraphVisualizer.vue';
+import VisualizerHeader from './VisualizerHeader.vue';
 import { useVisualizerStore } from '@/stores/visualizer';
 
 const store = useVisualizerStore();
@@ -10,9 +11,7 @@ function play() {
 
 <template>
   <div class="visualizer-panel">
-    <div class="visualizer-header">
-      <icon-button icon="feather-play" @click="play()">Play</icon-button>
-    </div>
+    <visualizer-header />
     <graph-visualizer />
   </div>
 </template>

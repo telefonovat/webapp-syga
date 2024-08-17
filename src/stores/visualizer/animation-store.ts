@@ -17,10 +17,19 @@ const useAnimationStore_ = defineStore("animation-store", () => {
     state.value.activeFrame =
       (state.value.activeFrame + 1) % nFrames.value;
   }
+  function goToFrame(index: number): void {
+    if (index < 0 || index >= nFrames.value) {
+      //Log misuse
+      return;
+    }
+
+    state.value.activeFrame = index;
+  }
   return {
     state,
     nFrames, currentFrame,
     goToNextFrame,
+    goToFrame,
   }
 })
 

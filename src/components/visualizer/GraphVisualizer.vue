@@ -12,8 +12,8 @@ const { currentFrame } = storeToRefs(store);
 
 <template>
   <div class="graph-visualizer">
-    <div class="component-container">
-      <component-visualizer v-if="currentFrame" :componentIndex="0" />
+    <div v-if="currentFrame" class="component-container">
+      <component-visualizer v-for="(_component, index) in currentFrame.components" :componentIndex="index" />
     </div>
 
   </div>

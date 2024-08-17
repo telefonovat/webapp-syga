@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 24,
   iconName: DEFAULT_ICON,
 })
-const iconHtml = iconMap[props.iconName] ?? DEFAULT_ICON;
+const iconHtml = iconMap[props.iconName] ?? iconMap[DEFAULT_ICON];
 console.log(`${props.iconName}`);
 </script>
 

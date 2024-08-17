@@ -16,7 +16,6 @@ const props = withDefaults(
     color: DEFAULT_COLOR,
   }
 );
-console.log(`Node color : ${props.color}`)
 </script>
 <template>
   <g class="node">

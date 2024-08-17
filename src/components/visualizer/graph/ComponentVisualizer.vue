@@ -2,12 +2,8 @@
 
 import GraphNode from "./GraphNode.vue";
 import GraphEdge from "./GraphEdge.vue";
-
-import { useVisualizerStore } from "@/stores/visualizer";
-import type Component from "@/interfaces/backend/Component";
-import { computed } from "vue";
-import { watch } from "vue";
-const VIEW_BOX_SIZE = 400;
+import { useRenderData } from "./render-data";
+const DEFAULT_VIEW_BOX_SIZE = 400;
 
 interface Props {
   componentIndex: number,
@@ -15,34 +11,14 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  viewBoxSize: VIEW_BOX_SIZE,
-})
+  viewBoxSize: DEFAULT_VIEW_BOX_SIZE,
+});
 
-const store = useVisualizerStore();
-let i = 0;
-const component = computed<Component>(() => store.currentFrame.components[props.componentIndex]);
-const nodes = computed(() => component.value.nodes);
-const edges = computed(() => component.value.edges);
-const nodeColors = computed(() => component.value.style.node_colors);
-const edgeColors = computed(() => component.value.style.edge_colors);
+const { nodes, edges,
+  nodeColors, edgeColors,
+  nodePositions } = useRenderData(props.componentIndex, props.viewBoxSize);
 
-watch(component, (newComp, oldComp) => {
 
-})
-
-const nodePositions = computed(() => {
-  const positions: { [key: number]: { x: number, y: number } } = {};
-
-  nodes.value.forEach((node, index) => {
-    const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);
-    positions[node] = {
-      x: Math.cos(rads) * props.viewBoxSize * 0.4 + props.viewBoxSize / 2,
-      y: Math.sin(rads) * props.viewBoxSize * 0.4 + props.viewBoxSize / 2,
-    }
-  });
-
-  return positions;
-})
 </script>
 
 <template>

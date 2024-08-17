@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <button>
-    <icon :icon="icon" :size="size" /><br />
+    <icon :iconName="icon" :size="size" /><br />
     <slot />
   </button>
 </template>
