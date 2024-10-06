@@ -24,6 +24,14 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
     return component.value ? component.value.style.nodeColors : [];
   });
 
+  const edges = computed(() => {
+    return component.value ? component.value.edges : [];
+  })
+
+  const edgeColors = computed(() => {
+    return component.value ? component.value.style.edgeColors : {};
+  })
+
   const nodePositions = computed(() => {
 
     const positions: { [key: Node]: { x: number, y: number } } = {};
@@ -42,6 +50,7 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
   // Return the computed properties for use elsewhere
   return {
     component,
-    nodes, nodeColors, nodePositions
+    nodes, nodeColors, nodePositions,
+    edges, edgeColors,
   };
 }

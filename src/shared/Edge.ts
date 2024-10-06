@@ -1,5 +1,5 @@
 import { Node } from "./Node";
 
-type Edge = [Node, Node];
+type Edge = [u: Node, v: Node];
 
 export { type Edge };
