@@ -1,5 +1,5 @@
-import Node from "./Node";
+import { Node } from "./Node";
 
 type Edge = [Node, Node];
 
-export default Edge;
+export { type Edge };

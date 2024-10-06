@@ -2,7 +2,7 @@
 import ComponentRenderer from "./graph/ComponentRenderer.vue"
 </script>
 <template>
-  <ComponentRenderer />
+  <ComponentRenderer :componentIndex="0" />
 </template>
 
 <style scoped></style>

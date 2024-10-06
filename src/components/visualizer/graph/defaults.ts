@@ -1,3 +1,4 @@
+//Default values for graph nodes and edges
 type DefaultValues = {
   readonly [key: string]: string | number;
 };
@@ -14,4 +15,8 @@ const defaultEdgeSettings: DefaultValues = {
   width: 10,
 };
 
-export { defaultNodeSettings, defaultEdgeSettings };
+const defaultRendererSettings: DefaultValues = {
+  viewBoxSize: 400 as number,
+}
+
+export { defaultNodeSettings, defaultEdgeSettings, defaultRendererSettings };

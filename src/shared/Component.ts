@@ -1,7 +1,9 @@
-import Edge from "./Edge";
-import Node from "./Node";
+import { Edge } from "./Edge";
+import { Node } from "./Node";
+import { ComponentStyle } from "./ComponentStyle";
 
-export default interface Component {
+export interface Component {
   nodes: Node[],
   edges: Edge[],
+  style: ComponentStyle,
 }

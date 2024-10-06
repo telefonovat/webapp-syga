@@ -1,4 +1,4 @@
-type Node = number | string;
+type Node = string | number;
 
 // WARNING: Not very well named
-export default Node;
+export { type Node };
