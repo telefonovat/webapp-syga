@@ -7,9 +7,10 @@ import { useRenderData } from "./renderData";
 import { defaultRendererSettings } from "./defaults";
 import { Node } from "@/shared/Node";
 import { onMounted } from "vue";
-import { useAnimationStore } from "@/store/visualizer/animationStore";
+import { useAnimationStore_ } from "@/store/visualizer/animationStore";
 import { simpleGraph } from "@/store/mock/frames";
 import { Edge } from "@/shared/Edge";
+import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 
 
 
@@ -23,9 +24,10 @@ const props_ = withDefaults(defineProps<Props>(), {
 });
 
 onMounted(() => {
-  const store_ = useAnimationStore();
 
+  const store_ = useVisualizerStore();
   store_.setFrames(simpleGraph);
+  store_.play();
 });
 
 
@@ -45,12 +47,13 @@ function getNodeData(node: Node) {
     x: number, y: number,
     label: Node, color?: string, shape?: string,
   }
+  let nodeHasColor = node in nodeColors.value;
   const data: nodeProps = {
     x: nodePositions.value[node].x,
     y: nodePositions.value[node].y,
     label: node,
     //TODO: Solve compiler error
-    ...(node in nodeColors.value && { color: nodeColors.value[node] })
+    ...(nodeHasColor && { color: nodeColors.value[node] })
   }
   return data;
 
@@ -58,10 +61,10 @@ function getNodeData(node: Node) {
 
 //Edges
 function getEdgeData(edge: Edge) {
-  function isEdgeValid(edge: Edge) {
+  function isEdgeValid([u, v]: Edge) {
     return edges.value.includes(edge) &&
-      nodes.value.includes(edge[0]) &&
-      nodes.value.includes(edge[1]);
+      nodes.value.includes(u) &&
+      nodes.value.includes(v);
   }
   if (!isEdgeValid(edge)) {
     throw new Error("Attempt to render invalid edge : " + edge);
@@ -73,8 +76,6 @@ function getEdgeData(edge: Edge) {
     width?: number,
   }
   const [u, v] = edge
-  console.log(edgeColors);
-  console.log(u);
   let edgeHasColour = u in edgeColors.value &&
     v in edgeColors.value[u];
   const data: edgeProps = {

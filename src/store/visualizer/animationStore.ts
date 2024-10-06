@@ -4,31 +4,42 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { Frame } from "@/shared/Frame";
 
-const useAnimationStore = defineStore("Animation Store",
+const useAnimationStore_ = defineStore("Animation Store",
   () => {
 
-    const frames = ref<Frame[]>([]);
+    const frames_ = ref<Frame[]>([]);
     const activeFrame = ref<number>(0);
 
-    const nFrames = computed(() => frames.value.length);
+    const nFrames = computed(() => frames_.value.length);
 
     const currentFrame = computed(() =>
       activeFrame.value >= 0 && activeFrame.value < nFrames.value ?
-        frames.value[activeFrame.value] : null
+        frames_.value[activeFrame.value] : null
     );
 
+    // API for player
+    function nextFrame() {
+      activeFrame.value = (activeFrame.value + 1) % nFrames.value;
+    }
+    function prevFrame() {
+      activeFrame.value = (activeFrame.value - 1) % nFrames.value;
+    }
+
+    //
     function setFrames(newFrames: Frame[]) {
-      frames.value = newFrames;
+      frames_.value = newFrames;
     }
 
     return {
-      frames, activeFrame,
+      frames_, activeFrame,
 
       nFrames,
       currentFrame,
+
+      nextFrame, prevFrame,
 
       setFrames,
     }
   })
 
-export { useAnimationStore };
+export { useAnimationStore_ };
