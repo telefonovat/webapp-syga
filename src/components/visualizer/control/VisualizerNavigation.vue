@@ -7,13 +7,16 @@ const store_ = useVisualizerStore();
 
 const playButtonText = computed(() => store_.isPlaying ? "Pause" : "Play");
 function togglePlay() {
-  console.log("Playing");
   if (store_.isPlaying) {
     store_.pause();
   }
   else {
     store_.play();
   }
+}
+
+function jumpToStart() {
+
 }
 </script>
 
