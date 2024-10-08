@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import MockHeader from './mock/sfc/MockHeader.vue';
 import Visualizer from '@/components/visualizer/Visualizer.vue';
 import MockFooter from "./mock/sfc/MockFooter.vue"
+import VisualizerNavigation from './visualizer/control/VisualizerNavigation.vue';
 </script>
 
 <template>
   <div id="home">
-    <MockHeader id="header" />
+    <VisualizerNavigation id="header" />
     <Visualizer id="editor" />
     <MockFooter id="footer" />
 
@@ -17,7 +17,7 @@ import MockFooter from "./mock/sfc/MockFooter.vue"
 #home {
   display: grid;
   grid-template-areas:
-    "header header header"
+    ". . header"
     ". editor editor"
     ". editor editor"
     "footer footer footer";

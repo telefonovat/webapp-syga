@@ -6,11 +6,7 @@ import GraphEdge from "./GraphEdge.vue";
 import { useRenderData } from "./renderData";
 import { defaultRendererSettings } from "./defaults";
 import { Node } from "@/shared/Node";
-import { onMounted } from "vue";
-import { useAnimationStore_ } from "@/store/visualizer/animationStore";
-import { simpleGraph } from "@/store/mock/frames";
 import { Edge } from "@/shared/Edge";
-import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 
 
 
@@ -23,12 +19,6 @@ const props_ = withDefaults(defineProps<Props>(), {
   viewBoxSize: defaultRendererSettings["viewBoxSize"] as number,
 });
 
-onMounted(() => {
-
-  const store_ = useVisualizerStore();
-  store_.setFrames(simpleGraph);
-  store_.play();
-});
 
 
 //Nodes

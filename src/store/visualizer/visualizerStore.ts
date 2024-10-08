@@ -21,7 +21,6 @@ const useVisualizerStore = defineStore("Visualizer Store",
       if (lastTick.value !== null &&
         isPlaying.value &&
         playerStore_.shouldDoTick(timestamp)) {
-        console.log("Next!");
         animationStore_.nextFrame();
         lastTick.value = timestamp;
       }
@@ -47,6 +46,7 @@ const useVisualizerStore = defineStore("Visualizer Store",
 
     return {
       currentFrame,
+      isPlaying,
       play, pause,
 
       setFrames,

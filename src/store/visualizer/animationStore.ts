@@ -10,7 +10,7 @@ const useAnimationStore_ = defineStore("Animation Store",
     const frames_ = ref<Frame[]>([]);
     const activeFrame = ref<number>(0);
 
-    const nFrames = computed(() => frames_.value.length);
+    const nFrames = computed(() => frames_.value.length ?? 0);
 
     const currentFrame = computed(() =>
       activeFrame.value >= 0 && activeFrame.value < nFrames.value ?
@@ -19,9 +19,15 @@ const useAnimationStore_ = defineStore("Animation Store",
 
     // API for player
     function nextFrame() {
+      if (nFrames.value === 0) {
+        throw new Error("There are no frames");
+      }
       activeFrame.value = (activeFrame.value + 1) % nFrames.value;
     }
     function prevFrame() {
+      if (nFrames.value === 0) {
+        throw new Error("There are no frames");
+      }
       activeFrame.value = (activeFrame.value - 1) % nFrames.value;
     }
 
