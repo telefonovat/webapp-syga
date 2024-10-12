@@ -9,4 +9,4 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 SFCs : PascalCase
 composables : camelCase
 CSS classes : kebab-case
-local variables : Underscore at the end
+local variables : Underscore at the end.
