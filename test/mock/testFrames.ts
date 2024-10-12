@@ -11,12 +11,12 @@ const simpleGraph: Frame[] = [
         style: {
           nodeColors: {
             1: "white",
-            2: "black",
-            3: "black",
+            2: "white",
+            3: "white",
           },
           edgeColors: {
-            1: { 2: "grey" },
-            2: { 3: "grey" },
+            1: { 2: "black" },
+            2: { 3: "black" },
           },
         }
       }]
@@ -31,13 +31,13 @@ const simpleGraph: Frame[] = [
         edges: [[1, 2], [2, 3]],
         style: {
           nodeColors: {
-            1: "white",
+            1: "black",
             2: "white",
-            3: "black",
+            3: "white",
           },
           edgeColors: {
-            1: { 2: "blue" },
-            2: { 3: "grey" },
+            1: { 2: "black" },
+            2: { 3: "black" },
           },
         }
       }]
@@ -51,13 +51,33 @@ const simpleGraph: Frame[] = [
         edges: [[1, 2], [2, 3]],
         style: {
           nodeColors: {
-            1: "white",
-            2: "white",
+            1: "black",
+            2: "black",
             3: "white",
           },
           edgeColors: {
-            1: { 2: "blue" },
-            2: { 3: "blue" },
+            1: { 2: "white" },
+            2: { 3: "black" },
+          },
+        }
+      }]
+  },
+  {
+    lineNo: [0],
+    consoleLogs: "",
+    components:
+      [{
+        nodes: [1, 2, 3],
+        edges: [[1, 2], [2, 3]],
+        style: {
+          nodeColors: {
+            1: "black",
+            2: "black",
+            3: "black",
+          },
+          edgeColors: {
+            1: { 2: "white" },
+            2: { 3: "white" },
           },
         }
       }]

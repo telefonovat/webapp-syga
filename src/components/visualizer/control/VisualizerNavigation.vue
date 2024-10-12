@@ -21,7 +21,7 @@ function jumpToStart() {
 </script>
 
 <template>
-  <div class="visualizer-navigation mock">
+  <div class="navigation-header mock">
     <MockButton :text="playButtonText" @click="togglePlay()" />
 
     <MockButton text="Start" />

@@ -9,3 +9,14 @@
   margin: 5px;
   align-items: center;
 }
+
+.navigation-header {
+  display: flex;
+  align-items: stretch;
+  min-height: 50px;
+
+}
+
+.navigation-header>* {
+  flex: 1;
+}

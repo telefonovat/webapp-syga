@@ -3,11 +3,13 @@ import Visualizer from '@/components/visualizer/Visualizer.vue';
 import MockFooter from "./mock/sfc/MockFooter.vue"
 import VisualizerNavigation from './visualizer/control/VisualizerNavigation.vue';
 import CodeEditor from './editor/CodeEditor.vue';
+import CodeEditorNavigation from "@/components/editor/control/CodeEditorNavigation.vue"
 </script>
 
 <template>
   <div id="home">
-    <VisualizerNavigation id="app-header" />
+    <VisualizerNavigation id="visualizer-header" />
+    <CodeEditorNavigation id="editor-header" />
     <CodeEditor id="editor" />
     <Visualizer id="visualizer" />
     <MockFooter id="app-footer" />
@@ -19,15 +21,19 @@ import CodeEditor from './editor/CodeEditor.vue';
 #home {
   display: grid;
   grid-template-areas:
-    "app-header app-header app-header"
+    "editor-header visualizer-header visualizer-header"
     ". editor  visualizer"
     ". editor  visualizer"
     "app-footer app-footer app-footer";
   grid-template-rows: auto 3fr auto;
 }
 
-#home>#app-header {
-  grid-area: app-header;
+#home>#visualizer-header {
+  grid-area: visualizer-header;
+}
+
+#home>#editor-header {
+  grid-area: editor-header;
 }
 
 #home>#editor {
