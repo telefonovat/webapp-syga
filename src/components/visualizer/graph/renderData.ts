@@ -21,7 +21,7 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
   });
 
   const nodeColors = computed(() => {
-    return component.value ? component.value.style.nodeColors : [];
+    return component.value ? component.value.style.nodeColors : {};
   });
 
   const edges = computed(() => {
