@@ -1,7 +1,7 @@
 import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
-import { Node } from "@/shared/Node";
+import { Node } from "@/shared-types/visualization/Node";
 
 export function useRenderData(componentIndex: number, viewBoxSize: number) {
   const store_ = useVisualizerStore();

@@ -2,7 +2,7 @@
 // Responsible for keeping track of Animation frames, updating and returning correct ones
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { Frame } from "@/shared/Frame";
+import { Frame } from "@/shared-types/visualization/Frame";
 
 const useAnimationStore_ = defineStore("Animation Store",
   () => {

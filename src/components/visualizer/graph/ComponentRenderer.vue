@@ -5,9 +5,9 @@ import GraphEdge from "./GraphEdge.vue";
 
 import { useRenderData } from "./renderData";
 import { defaultRendererSettings } from "./defaults";
-import { Node } from "@/shared/Node";
-import { Edge } from "@/shared/Edge";
 
+import { Node } from "@/shared-types/visualization/Node";
+import { Edge } from "@/shared-types/visualization/Edge";
 
 
 interface Props {

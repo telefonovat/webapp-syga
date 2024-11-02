@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Node } from '@/shared/Node';
+import { Node } from '@/shared-types/visualization/Node';
 import { withDefaults } from 'vue';
 import { defaultNodeSettings } from './defaults';
 
