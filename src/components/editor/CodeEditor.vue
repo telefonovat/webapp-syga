@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Codemirror } from "vue-codemirror";
 import { python } from "@codemirror/lang-python"
+import { useEditorStore } from "@/store/editor/editorStore";
+import { storeToRefs } from "pinia";
 
-import { ref } from "vue";
-const code = ref("print('Hello World')");
+const editorStore = useEditorStore();
+const { code } = storeToRefs(editorStore)
 const extensions = [python()];
 </script>
 

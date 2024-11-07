@@ -1,23 +1,12 @@
-import axios from "axios";
 
+import { VisualizationResult } from "@/shared-types/visualization/VisualizationResult";
 
-const connector = axios.create({
-
-});
-
-import { Frame } from "@/shared/Frame";
-const REST_API = "/api"
+const REST_API = "http://localhost:8020"
 const BUILD_ENDPOINT = "/algorithm/execute";
 //TODO: More specific return typing
-async function buildCode({ code }: { code: string }): Promise<Frame[]> {
+async function buildCode({ code }: { code: string }): Promise<VisualizationResult> {
   try {
-    // const res = await connector.post(REST_API + BUILD_ENDPOINT, {
-    //   code: code,
-    // });
-    // console.log("Success");
-    // console.log(res.data.frames); // Log the frames
-    // return res.data.frames; // Return the frames
-    const res = await fetch("http://localhost:8020/algorithm/execute",
+    const res = await fetch(REST_API + BUILD_ENDPOINT,
       {
         method: "POST",
         headers: {
@@ -26,13 +15,15 @@ async function buildCode({ code }: { code: string }): Promise<Frame[]> {
         },
         body: JSON.stringify({ code: code }),
       });
-    console.log(await res.json());
-    return [];
+    const visualizationResult: VisualizationResult = await res.json();
+    console.log(visualizationResult);
+    return visualizationResult;
 
 
   } catch (err) {
     console.error("Error occurred:", err);
-    return []; // Return an empty array or handle the error as needed
+
+    throw new Error("No response from REST API");
   }
 }
 

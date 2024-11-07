@@ -8,3 +8,5 @@ const useEditorStore = defineStore("Editor Store", () => {
     code,
   }
 });
+
+export { useEditorStore };
