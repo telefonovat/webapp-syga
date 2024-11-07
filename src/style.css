@@ -19,13 +19,13 @@ body {
 }
 
 #app {
-  background: #6e28d9;
+  background: #242424;
   min-width: 100vw;
   min-height: 100vh;
   display: flex;
   justify-items: stretch;
 }
 
-#app>* {
+#app > * {
   flex: 1;
 }

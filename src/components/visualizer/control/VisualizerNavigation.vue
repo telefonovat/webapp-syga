@@ -5,18 +5,19 @@ import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { computed } from 'vue';
 const store_ = useVisualizerStore();
 
-const playButtonText = computed(() => store_.isPlaying ? "Pause" : "Play");
+const playButtonText = computed(() =>
+  store_.isPlaying ? 'Pause' : 'Play'
+);
 function togglePlay() {
   if (store_.isPlaying) {
     store_.pause();
-  }
-  else {
+  } else {
     store_.play();
   }
 }
 
 function jumpToStart() {
-
+  store_.setActiveFrame(0);
 }
 </script>
 
@@ -24,7 +25,7 @@ function jumpToStart() {
   <div class="navigation-header mock">
     <MockButton :text="playButtonText" @click="togglePlay()" />
 
-    <MockButton text="Start" />
+    <MockButton text="Start" @click="jumpToStart()" />
     <MockButton text="Left" />
     <MockButton text="Right" />
     <MockButton text="End" />

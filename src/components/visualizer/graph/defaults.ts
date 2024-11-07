@@ -4,19 +4,23 @@ type DefaultValues = {
 };
 
 const defaultNodeSettings: DefaultValues = {
-  color: "#3498db",
-  shape: "circle",
-  radius: 30,
+  color: '#555',
+  shape: 'circle' as string,
+  radius: 20 as number,
 };
 
 const defaultEdgeSettings: DefaultValues = {
-  color: "#aaa" as string,
-  shape: "solid" as string,
-  width: 10,
+  color: '#555' as string,
+  shape: 'solid' as string,
+  width: 5,
 };
 
 const defaultRendererSettings: DefaultValues = {
   viewBoxSize: 400 as number,
-}
+};
 
-export { defaultNodeSettings, defaultEdgeSettings, defaultRendererSettings };
+export {
+  defaultNodeSettings,
+  defaultEdgeSettings,
+  defaultRendererSettings,
+};

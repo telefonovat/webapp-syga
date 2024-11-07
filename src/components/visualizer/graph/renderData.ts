@@ -1,21 +1,22 @@
 import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
-import { Node } from "@/shared-types/visualization/Node";
 
+import type { Node } from "@/shared-types/visualization/Node";
+
+
+//
 export function useRenderData(componentIndex: number, viewBoxSize: number) {
   const store_ = useVisualizerStore();
 
-  //HACK: Locally store currentFrame so that we can do type-narrowing
   const { currentFrame } = storeToRefs(store_);
 
 
-  // Reactive computed property to handle potential null value in currentFrame
   const component = computed(() => {
-    return currentFrame.value ? currentFrame.value.components[componentIndex] : null;
+    return currentFrame.value ?
+      currentFrame.value.components[componentIndex] : null;
   });
 
-  // Ensure nodes and nodeColors are computed only if component exists
   const nodes = computed(() => {
     return component.value ? component.value.nodes : [];
   });
@@ -32,6 +33,7 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
     return component.value ? component.value.style.edgeColors : {};
   })
 
+  //Even places nodes on the circumference of a circle
   const nodePositions = computed(() => {
 
     const positions: { [key: Node]: { x: number, y: number } } = {};
@@ -47,7 +49,6 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
     return positions;
   });
 
-  // Return the computed properties for use elsewhere
   return {
     component,
     nodes, nodeColors, nodePositions,

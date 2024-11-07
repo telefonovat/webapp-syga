@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Visualizer from '@/components/visualizer/Visualizer.vue';
-import MockFooter from "./mock/sfc/MockFooter.vue"
+import MockFooter from './mock/sfc/MockFooter.vue';
 import VisualizerNavigation from './visualizer/control/VisualizerNavigation.vue';
 import CodeEditor from './editor/CodeEditor.vue';
-import CodeEditorNavigation from "@/components/editor/control/CodeEditorNavigation.vue"
+import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigation.vue';
 </script>
 
 <template>
@@ -13,7 +13,6 @@ import CodeEditorNavigation from "@/components/editor/control/CodeEditorNavigati
     <CodeEditor id="editor" />
     <Visualizer id="visualizer" />
     <MockFooter id="app-footer" />
-
   </div>
 </template>
 
@@ -21,26 +20,30 @@ import CodeEditorNavigation from "@/components/editor/control/CodeEditorNavigati
 #home {
   display: grid;
   grid-template-areas:
-    "editor-header visualizer-header visualizer-header"
-    ". editor  visualizer"
-    ". editor  visualizer"
-    "app-footer app-footer app-footer";
+    'editor-header visualizer-header visualizer-header'
+    'editor visualizer  visualizer '
+    'app-footer app-footer app-footer';
   grid-template-rows: auto 3fr auto;
+  grid-template-columns: 2fr 2fr 2fr;
 }
 
-#home>#visualizer-header {
+#home > #visualizer-header {
   grid-area: visualizer-header;
 }
 
-#home>#editor-header {
+#home > #editor-header {
   grid-area: editor-header;
 }
 
-#home>#editor {
+#home > #editor {
   grid-area: editor;
 }
+#home > #visualizer{
+  grid-area: visualizer;
+}
 
-#home>#app-footer {
+
+#home > #app-footer {
   grid-area: app-footer;
 }
 </style>
