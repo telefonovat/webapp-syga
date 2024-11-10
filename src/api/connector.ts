@@ -1,15 +1,16 @@
 import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
 import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
 
-const REST_API = 'http://localhost:8020';
-const BUILD_ENDPOINT = '/algorithm/execute';
-//TODO: More specific return typing
+const API_BASE = import.meta.env.VITE_API_BASE;
+const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
+
 async function buildCode(
   visualizationRequest: VisualizationRequest
 ): Promise<VisualizationResult> {
   const { code } = visualizationRequest;
+
   try {
-    const res = await fetch(REST_API + BUILD_ENDPOINT, {
+    const res = await fetch(API_BASE + BUILD_ENDPOINT, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -17,8 +18,8 @@ async function buildCode(
       },
       body: JSON.stringify({ code: code }),
     });
+
     const visualizationResult: VisualizationResult = await res.json();
-    console.log(visualizationResult);
     return visualizationResult;
   } catch (err) {
     console.error('Error occurred:', err);
