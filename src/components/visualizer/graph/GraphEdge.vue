@@ -17,10 +17,6 @@ const props_ = withDefaults(defineProps<Props>(), {
   shape: defaultEdgeSettings['shape'] as string,
   width: defaultEdgeSettings['width'] as number,
 });
-
-onMounted(() => {
-  console.log(props_.color);
-});
 </script>
 
 <template>

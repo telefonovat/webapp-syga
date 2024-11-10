@@ -4,7 +4,7 @@ import { ref } from 'vue';
 const DEFAULT_TICK_PERIOD = 750;
 
 //REMINDER: Maybe this store is better named as ticker
-const usePlayerStore_ = defineStore('Player Store', () => {
+const useTicker = defineStore('Player Store', () => {
   const isInitialized = ref(false);
   const isPlaying = ref(false);
 
@@ -28,4 +28,4 @@ const usePlayerStore_ = defineStore('Player Store', () => {
   };
 });
 
-export { usePlayerStore_ };
+export { useTicker };

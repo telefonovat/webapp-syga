@@ -13,6 +13,7 @@ import { VisualizationRequest } from '@/shared-types/visualization/Visualization
 const editorStore = useEditorStore();
 const visualizerStore = useVisualizerStore();
 const { code } = storeToRefs(editorStore);
+
 function build() {
   const visualizationRequest: VisualizationRequest = {
     code: code.value,

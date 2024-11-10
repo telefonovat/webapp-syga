@@ -5,29 +5,32 @@ import { Frame } from '@/shared-types/visualization/Frame';
 
 const useAnimationStore_ = defineStore('Animation Store', () => {
   const frames_ = ref<Frame[]>([]);
-  const activeFrame = ref<number>(0);
+  const activeFrameNumber = ref<number>(0);
 
-  const nFrames = computed(() => frames_.value.length ?? 0);
+  const numberOfFrames = computed(() => frames_.value.length ?? 0);
 
   const currentFrame = computed(() =>
     //Check if within bounds
-    activeFrame.value >= 0 && activeFrame.value < nFrames.value
-      ? frames_.value[activeFrame.value]
+    activeFrameNumber.value >= 0 &&
+    activeFrameNumber.value < numberOfFrames.value
+      ? frames_.value[activeFrameNumber.value]
       : null
   );
 
   // API for player
   function nextFrame() {
-    if (nFrames.value === 0) {
+    if (numberOfFrames.value === 0) {
       throw new Error('There are no frames');
     }
-    activeFrame.value = (activeFrame.value + 1) % nFrames.value;
+    activeFrameNumber.value =
+      (activeFrameNumber.value + 1) % numberOfFrames.value;
   }
   function prevFrame() {
-    if (nFrames.value === 0) {
+    if (numberOfFrames.value === 0) {
       throw new Error('There are no frames');
     }
-    activeFrame.value = (activeFrame.value - 1) % nFrames.value;
+    activeFrameNumber.value =
+      (activeFrameNumber.value - 1) % numberOfFrames.value;
   }
 
   function setFrames(newFrames: Frame[]) {
@@ -36,9 +39,9 @@ const useAnimationStore_ = defineStore('Animation Store', () => {
 
   return {
     frames_,
-    activeFrame,
+    activeFrameNumber,
 
-    nFrames,
+    numberOfFrames,
     currentFrame,
 
     nextFrame,

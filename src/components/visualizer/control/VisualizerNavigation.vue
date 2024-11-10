@@ -5,6 +5,9 @@ import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { computed } from 'vue';
 const store_ = useVisualizerStore();
 
+const numberOfFrames = computed(() => store_.numberOfFrames);
+const activeFrameNumber = computed(() => store_.activeFrameNumber);
+
 const playButtonText = computed(() =>
   store_.isPlaying ? 'Pause' : 'Play'
 );
@@ -19,16 +22,27 @@ function togglePlay() {
 function jumpToStart() {
   store_.setActiveFrame(0);
 }
+
+function jumpToEnd() {
+  store_.setActiveFrame(numberOfFrames.value - 1);
+}
+
+function prevFrame() {
+  store_.setActiveFrame(activeFrameNumber.value - 1);
+}
+
+function nextFrame() {
+  store_.setActiveFrame(activeFrameNumber.value + 1);
+}
 </script>
 
 <template>
   <div class="navigation-header mock">
     <MockButton :text="playButtonText" @click="togglePlay()" />
-
     <MockButton text="Start" @click="jumpToStart()" />
-    <MockButton text="Left" />
-    <MockButton text="Right" />
-    <MockButton text="End" />
+    <MockButton text="Left" @click="jumpToEnd()" />
+    <MockButton text="Right" @click="nextFrame()" />
+    <MockButton text="End" @click="prevFrame()" />
   </div>
 </template>
 

@@ -18,9 +18,6 @@ const props_ = withDefaults(defineProps<Props>(), {
   shape: defaultNodeSettings['shape'] as string,
   radius: defaultNodeSettings['radius'] as number,
 });
-onMounted(() => {
-  console.log(props_.color);
-});
 </script>
 
 <template>

@@ -10,7 +10,7 @@ const defaultNodeSettings: DefaultValues = {
 };
 
 const defaultEdgeSettings: DefaultValues = {
-  color: '#555' as string,
+  color: '#aaa' as string,
   shape: 'solid' as string,
   width: 5,
 };
