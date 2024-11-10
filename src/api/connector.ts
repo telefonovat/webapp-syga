@@ -4,28 +4,34 @@ import { VisualizationResult } from '@/shared-types/visualization/VisualizationR
 const API_BASE = import.meta.env.VITE_API_BASE;
 const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
 
-async function buildCode(
-  visualizationRequest: VisualizationRequest
-): Promise<VisualizationResult> {
-  const { code } = visualizationRequest;
+class APIClient {
+  constructor() {}
 
-  try {
-    const res = await fetch(API_BASE + BUILD_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code: code }),
-    });
+  async buildCode(
+    visualizationRequest: VisualizationRequest
+  ): Promise<VisualizationResult> {
+    const { code } = visualizationRequest;
 
-    const visualizationResult: VisualizationResult = await res.json();
-    return visualizationResult;
-  } catch (err) {
-    console.error('Error occurred:', err);
+    try {
+      const res = await fetch(API_BASE + BUILD_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code: code }),
+      });
 
-    throw new Error('No response from REST API');
+      const visualizationResult: VisualizationResult =
+        await res.json();
+      return visualizationResult;
+    } catch (err) {
+      console.error('Error occurred:', err);
+
+      throw new Error('No response from REST API');
+    }
   }
 }
 
-export { buildCode };
+const apiClient = new APIClient();
+export { apiClient };

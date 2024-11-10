@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MockButton from '@/components/mock/sfc/MockButton.vue';
 
-import { buildCode } from '@/api/connector';
+import { apiClient } from '@/api/connector';
 
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
@@ -17,7 +17,8 @@ function build() {
   const visualizationRequest: VisualizationRequest = {
     code: code.value,
   };
-  buildCode(visualizationRequest)
+  apiClient
+    .buildCode(visualizationRequest)
     .then((visualizationResult: VisualizationResult) => {
       visualizerStore.setFrames(visualizationResult.frames);
       console.log(visualizationResult.frames);
