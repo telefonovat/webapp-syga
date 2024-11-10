@@ -4,12 +4,10 @@ import MockFooter from '@/components/mock/sfc/MockFooter.vue';
 import VisualizerNavigation from '@/components/visualizer/control/VisualizerNavigation.vue';
 import CodeEditor from '@/components/editor/CodeEditor.vue';
 import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigation.vue';
-import MockComponent from '@/components/mock/sfc/MockComponent.vue';
 </script>
 
 <template>
   <div id="algrithm-view">
-    <MockComponent id="featured-list" />
     <VisualizerNavigation id="visualizer-header" />
     <CodeEditorNavigation id="editor-header" />
     <CodeEditor id="editor" />
