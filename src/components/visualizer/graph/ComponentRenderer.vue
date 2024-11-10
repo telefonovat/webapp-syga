@@ -40,7 +40,6 @@ function getNodeProps(node: Node): NodeProps {
     //TODO: Solve compiler error
     ...(nodeHasColor && { color: nodeColors.value[node] }),
   };
-  console.log(data);
   return data;
 }
 

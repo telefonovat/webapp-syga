@@ -40,9 +40,9 @@ function nextFrame() {
   <div class="navigation-header mock">
     <MockButton :text="playButtonText" @click="togglePlay()" />
     <MockButton text="Start" @click="jumpToStart()" />
-    <MockButton text="Left" @click="jumpToEnd()" />
+    <MockButton text="Left" @click="prevFrame()" />
     <MockButton text="Right" @click="nextFrame()" />
-    <MockButton text="End" @click="prevFrame()" />
+    <MockButton text="End" @click="jumpToEnd()" />
   </div>
 </template>
 

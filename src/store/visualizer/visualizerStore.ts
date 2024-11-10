@@ -47,7 +47,7 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     isPlaying.value = false;
   }
   function setActiveFrame(frameNumber: number) {
-    if (!(frameNumber >= 0 || frameNumber < numberOfFrames.value)) {
+    if (!(frameNumber >= 0 && frameNumber < numberOfFrames.value)) {
       console.warn(`Frame number ${frameNumber} does not exist`);
       return;
     }
