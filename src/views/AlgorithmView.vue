@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import Visualizer from '@/components/visualizer/Visualizer.vue';
-import MockFooter from './mock/sfc/MockFooter.vue';
-import VisualizerNavigation from './visualizer/control/VisualizerNavigation.vue';
-import CodeEditor from './editor/CodeEditor.vue';
+import MockFooter from '@/components/mock/sfc/MockFooter.vue';
+import VisualizerNavigation from '@/components/visualizer/control/VisualizerNavigation.vue';
+import CodeEditor from '@/components/editor/CodeEditor.vue';
 import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigation.vue';
-import MockComponent from './mock/sfc/MockComponent.vue';
+import MockComponent from '@/components/mock/sfc/MockComponent.vue';
 </script>
 
 <template>
-  <div id="home">
+  <div id="algrithm-view">
     <MockComponent id="featured-list" />
     <VisualizerNavigation id="visualizer-header" />
     <CodeEditorNavigation id="editor-header" />
@@ -19,7 +19,7 @@ import MockComponent from './mock/sfc/MockComponent.vue';
 </template>
 
 <style scoped>
-#home {
+#algrithm-view {
   display: grid;
   grid-template-areas:
     'editor-header editor-header visualizer-header visualizer-header'
@@ -29,26 +29,26 @@ import MockComponent from './mock/sfc/MockComponent.vue';
   grid-template-columns: 1fr 2fr 1fr 1fr;
 }
 
-#home > #featured-list{
+#algrithm-view > #featured-list{
   grid-area: featured-list;
 }
-#home > #visualizer-header {
+#algrithm-view > #visualizer-header {
   grid-area: visualizer-header;
 }
 
-#home > #editor-header {
+#algrithm-view > #editor-header {
   grid-area: editor-header;
 }
 
-#home > #editor {
+#algrithm-view > #editor {
   grid-area: editor;
 }
-#home > #visualizer{
+#algrithm-view > #visualizer{
   grid-area: visualizer;
 }
 
 
-#home > #app-footer {
+#algrithm-view > #app-footer {
   grid-area: app-footer;
 }
 </style>

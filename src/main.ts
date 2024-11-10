@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { router } from './router';
 import VueCodeMirror from 'vue-codemirror';
 import { basicSetup } from 'codemirror';
 import './style.css';
@@ -11,4 +12,5 @@ const pinia = createPinia();
 createApp(App)
   .use(VueCodeMirror, { extensions: [basicSetup] })
   .use(pinia)
+  .use(router)
   .mount('#app');
