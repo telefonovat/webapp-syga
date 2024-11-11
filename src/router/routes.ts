@@ -1,5 +1,5 @@
 import AlgorithmView from '@/views/AlgorithmView.vue';
-import MockComponent from '@/components/mock/sfc/MockComponent.vue';
+import NavSidebar from '@/components/NavSidebar.vue';
 import HomeLayout from '@/views/HomeLayout.vue';
 import type { RouterOptions } from 'vue-router';
 export const routes: RouterOptions['routes'] = [
@@ -9,11 +9,12 @@ export const routes: RouterOptions['routes'] = [
     component: HomeLayout,
     children: [
       {
+        //View both the code and visualization of algorithm
         path: '',
         name: 'AlgorithmView',
         components: {
           main: AlgorithmView,
-          sidebar: MockComponent,
+          sidebar: NavSidebar,
         },
       },
     ],

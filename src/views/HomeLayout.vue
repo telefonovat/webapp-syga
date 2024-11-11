@@ -2,11 +2,11 @@
 
 <template>
   <div class="home-layout">
-    <aside>
-      <RouterView name="sidebar" class="home-layout__sidebar" />
+    <aside class="home-layout__sidebar">
+      <RouterView name="sidebar" />
     </aside>
-    <main>
-      <RouterView name="main" class="home-layout__main" />
+    <main class="home-layout__main">
+      <RouterView name="main" />
     </main>
   </div>
 </template>
@@ -22,6 +22,9 @@
 }
 
 .home-layout__sidebar{ 
-  width: 10%;
+  grid-area: sidebar;
+}
+.home-layout__main{
+grid-area: main;
 }
 </style>
