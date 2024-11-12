@@ -2,9 +2,9 @@
 
 /*CSS classes used for development*/
 .mock {
-  border-style: solid;
+  /* border-style: solid; */
   border-color: black;
-  margin: 5px;
+  /* margin: 5px; */
 }
 
 .navigation-header {
@@ -16,4 +16,9 @@
 .navigation-header > * {
   min-height: 50px;
   min-width: 50px;
+}
+
+.transparent-overlay {
+  position: fixed;
+  opacity: 0.25;
 }
