@@ -21,10 +21,10 @@ import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigati
   display: grid;
   grid-template-areas:
     'editor-header editor-header visualizer-header visualizer-header'
-    'editor editor visualizer  visualizer '
+    'editor editor visualizer visualizer'
     'app-footer app-footer app-footer app-footer';
   grid-template-rows: auto 3fr auto;
-  grid-template-columns: 1fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   
 }
 

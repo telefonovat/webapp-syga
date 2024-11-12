@@ -11,7 +11,9 @@ const extensions = [python()];
 </script>
 
 <template>
-  <Codemirror v-model="code" :extensions="extensions" />
+  <div class="code-editor mock">
+    <Codemirror v-model="code" :extensions="extensions" />
+  </div>
 </template>
 
 <style scoped></style>

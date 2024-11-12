@@ -3,7 +3,9 @@ import MockButton from '@/components/mock/sfc/MockButton.vue';
 import { router } from '@/router';
 import { ref } from 'vue';
 
-const isCollapsed = ref(false);
+const isCollapsed = ref(
+  localStorage.getItem('isCollapsed') === 'true' ? true : false
+);
 
 const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
 
@@ -24,6 +26,11 @@ function goToSettings() {
 
 function toggleCollapse() {
   isCollapsed.value = !isCollapsed.value;
+
+  localStorage.setItem(
+    'isCollapsed',
+    isCollapsed.value ? 'true' : 'false'
+  );
 
   emit(isCollapsed.value ? 'collapseSidebar' : 'expandSidebar');
 }
