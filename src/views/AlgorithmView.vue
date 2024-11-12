@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import Visualizer from '@/components/visualizer/Visualizer.vue';
 import MockFooter from '@/components/mock/sfc/MockFooter.vue';
-import VisualizerNavigation from '@/components/visualizer/control/VisualizerNavigation.vue';
 import CodeEditor from '@/components/editor/CodeEditor.vue';
-import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigation.vue';
+import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 </script>
 
 <template>
   <div class="algrithm-view">
-    <VisualizerNavigation class="visualizer-header" />
-    <CodeEditorNavigation class="editor-header" />
+    <AlgorithmControlPanel class="algorithm-view-header" />
     <CodeEditor class="editor" />
     <Visualizer class="visualizer" />
     <MockFooter class="app-footer" />
@@ -20,7 +18,7 @@ import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigati
 .algrithm-view {
   display: grid;
   grid-template-areas:
-    'editor-header editor-header visualizer-header visualizer-header'
+    '. . algorithm-view-header algorithm-view-header'
     'editor editor visualizer visualizer'
     'app-footer app-footer app-footer app-footer';
   grid-template-rows: auto 3fr auto;
@@ -31,14 +29,9 @@ import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigati
 .algrithm-view > .featured-list{
   grid-area: featured-list;
 }
-.algrithm-view > .visualizer-header {
-  grid-area: visualizer-header;
+.algrithm-view > .algorithm-view-header{
+  grid-area: algorithm-view-header;
 }
-
-.algrithm-view > .editor-header {
-  grid-area: editor-header;
-}
-
 .algrithm-view > .editor {
   grid-area: editor;
 }

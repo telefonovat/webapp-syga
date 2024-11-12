@@ -38,11 +38,11 @@ function nextFrame() {
 
 <template>
   <div class="navigation-header mock">
-    <MockButton :text="playButtonText" @click="togglePlay()" />
-    <MockButton text="Start" @click="jumpToStart()" />
-    <MockButton text="Left" @click="prevFrame()" />
-    <MockButton text="Right" @click="nextFrame()" />
-    <MockButton text="End" @click="jumpToEnd()" />
+    <v-btn :text="playButtonText" @click="togglePlay()" />
+    <v-btn text="Start" @click="jumpToStart()" />
+    <v-btn text="Left" @click="prevFrame()" />
+    <v-btn text="Right" @click="nextFrame()" />
+    <v-btn text="End" @click="jumpToEnd()" />
   </div>
 </template>
 

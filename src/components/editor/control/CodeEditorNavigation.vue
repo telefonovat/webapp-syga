@@ -32,7 +32,7 @@ function build() {
 
 <template>
   <div class="navigation-header mock">
-    <MockButton text="Build" @click="build()" />
+    <v-btn text="Build" @click="build()" />
   </div>
 </template>
 
