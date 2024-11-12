@@ -13,6 +13,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 
+* Resetting browser defaults
+*/
+* {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
 body {
   display: flex;
   flex-direction: row;
@@ -20,8 +29,10 @@ body {
 
 #app {
   background: #242424;
-  min-width: 100vw;
-  min-height: 100vh;
+
+  width: 100vw;
+  height: 100vh;
+
   display: flex;
   justify-items: stretch;
 }

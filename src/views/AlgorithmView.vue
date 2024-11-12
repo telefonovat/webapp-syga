@@ -25,6 +25,7 @@ import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigati
     'app-footer app-footer app-footer app-footer';
   grid-template-rows: auto 3fr auto;
   grid-template-columns: 1fr 2fr 1fr 1fr;
+  
 }
 
 .algrithm-view > .featured-list{

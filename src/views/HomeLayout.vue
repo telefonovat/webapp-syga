@@ -3,9 +3,13 @@
 <template>
   <div class="home-layout">
     <aside class="home-layout__sidebar">
-      <RouterView name="sidebar" />
+      <RouterView
+        @collapseSidebar="console.log('Collapsing')"
+        @expandSidebar="console.log('Expanding')"
+        name="sidebar"
+      />
     </aside>
-    <main class="home-layout__main">
+    <main class="home-layout__main mock">
       <RouterView name="main" />
     </main>
   </div>
@@ -18,13 +22,12 @@
   grid-template-areas: 
   'sidebar main'
   'sidebar main';
-  
 }
 
 .home-layout__sidebar{ 
   grid-area: sidebar;
 }
 .home-layout__main{
-grid-area: main;
+  grid-area: main;
 }
 </style>
