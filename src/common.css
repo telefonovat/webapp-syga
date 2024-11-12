@@ -1,4 +1,6 @@
 /*CSS classes shared by the whole app*/
+div:not(#app) {
+}
 
 /*CSS classes used for development*/
 .mock {

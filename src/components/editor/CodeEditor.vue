@@ -16,4 +16,9 @@ const extensions = [python()];
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.code-editor{background-color: #282c34;
+  height: 100%;
+  overflow-y: auto;
+}
+</style>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import MockButton from '@/components/mock/sfc/MockButton.vue';
-
 import { apiClient } from '@/api/connector';
 
 import { useEditorStore } from '@/store/editor/editorStore';

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import MockButton from '@/components/mock/sfc/MockButton.vue';
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 
 import { computed } from 'vue';

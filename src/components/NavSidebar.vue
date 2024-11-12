@@ -57,6 +57,7 @@ function toggleCollapse() {
   flex-direction: column;
   justify-content: space-between;
   min-height: 150px;
+
 }
 .app-navigation-menu{
   display: flex;
