@@ -17,6 +17,15 @@ export const routes: RouterOptions['routes'] = [
           sidebar: NavSidebar,
         },
       },
+      {
+        //Modify settings
+        path: '/settings',
+        name: 'UserSettings',
+        components: {
+          main: AlgorithmView,
+          sidebar: NavSidebar,
+        },
+      },
     ],
   },
 ];
