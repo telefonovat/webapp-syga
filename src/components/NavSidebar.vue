@@ -38,15 +38,28 @@ function toggleCollapse() {
 
 <template>
   <div class="navigation-header app-navigation-sidebar">
-    <MockButton
-      :text="isCollapsed ? '>>' : '<<'"
-      @click="toggleCollapse()"
-    />
+    <v-btn @click="toggleCollapse">
+      <v-icon
+        :icon="
+          isCollapsed
+            ? 'mdi-chevron-triple-right'
+            : 'mdi-chevron-triple-left'
+        "
+      />
+    </v-btn>
     <div class="app-navigation-menu" v-if="!isCollapsed">
-      <MockButton text="Home" @click="goToHome()" />
-      <MockButton text="Files" />
-      <MockButton text="Favourites" />
-      <MockButton text="Settings" @click="goToSettings()" />
+      <v-btn title="Home" @click="goToHome()">
+        <v-icon icon="mdi-home" />
+      </v-btn>
+      <v-btn title="Files">
+        <v-icon icon="mdi-file" />
+      </v-btn>
+      <v-btn title="Favourites">
+        <v-icon icon="mdi-star-outline" />
+      </v-btn>
+      <v-btn title="Settings" @click="goToSettings()">
+        <v-icon icon="mdi-cog-outline" />
+      </v-btn>
     </div>
   </div>
 </template>

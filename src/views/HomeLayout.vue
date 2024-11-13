@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const isSidebarTransparent = ref(false);
+const isSidebarTransparent = ref(true);
 </script>
 
 <template>

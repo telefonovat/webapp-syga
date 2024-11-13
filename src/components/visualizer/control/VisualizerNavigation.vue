@@ -7,11 +7,9 @@ const store_ = useVisualizerStore();
 const numberOfFrames = computed(() => store_.numberOfFrames);
 const activeFrameNumber = computed(() => store_.activeFrameNumber);
 
-const playButtonText = computed(() =>
-  store_.isPlaying ? 'Pause' : 'Play'
-);
+const isPlaying = computed(() => store_.isPlaying);
 function togglePlay() {
-  if (store_.isPlaying) {
+  if (isPlaying.value) {
     store_.pause();
   } else {
     store_.play();
@@ -37,11 +35,25 @@ function nextFrame() {
 
 <template>
   <div class="navigation-header mock">
-    <v-btn :text="playButtonText" @click="togglePlay()" />
-    <v-btn text="Start" @click="jumpToStart()" />
-    <v-btn text="Left" @click="prevFrame()" />
-    <v-btn text="Right" @click="nextFrame()" />
-    <v-btn text="End" @click="jumpToEnd()" />
+    <v-btn
+      title="Play/Pause"
+      :variant="isPlaying ? 'tonal' : 'elevated'"
+      @click="togglePlay()"
+    >
+      <v-icon icon="mdi-play-pause" />
+    </v-btn>
+    <v-btn title="Start" @click="jumpToStart()">
+      <v-icon icon="mdi-chevron-double-left" />
+    </v-btn>
+    <v-btn title="Left" @click="prevFrame()">
+      <v-icon icon="mdi-chevron-left" />
+    </v-btn>
+    <v-btn title="Right" @click="nextFrame()">
+      <v-icon icon="mdi-chevron-right" />
+    </v-btn>
+    <v-btn title="End" @click="jumpToEnd()">
+      <v-icon icon="mdi-chevron-double-right" />
+    </v-btn>
   </div>
 </template>
 

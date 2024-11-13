@@ -34,6 +34,7 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 }
 .algrithm-view > .editor {
   grid-area: editor;
+  border-right: 1px solid black;
 }
 .algrithm-view > .visualizer{
   grid-area: visualizer;

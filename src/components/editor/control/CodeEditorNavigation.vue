@@ -30,7 +30,9 @@ function build() {
 
 <template>
   <div class="navigation-header mock">
-    <v-btn text="Build" @click="build()" />
+    <v-btn @click="build()" title="Build">
+      <v-icon icon="mdi-hammer-screwdriver" />
+    </v-btn>
   </div>
 </template>
 
