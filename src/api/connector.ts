@@ -13,7 +13,7 @@ class APIClient {
     const { code } = visualizationRequest;
 
     try {
-      const res = await fetch(API_BASE + BUILD_ENDPOINT, {
+      const res = await fetch(BUILD_ENDPOINT, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
