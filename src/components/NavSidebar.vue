@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MockButton from '@/components/mock/sfc/MockButton.vue';
+import LogInDialogButton from '@/components/user/LogInDialogButton.vue';
 import { router } from '@/router';
 import { ref } from 'vue';
 
@@ -51,6 +51,7 @@ function toggleCollapse() {
       <v-btn title="Home" @click="goToHome()">
         <v-icon icon="mdi-home" />
       </v-btn>
+      <LogInDialogButton />
       <v-btn title="Files">
         <v-icon icon="mdi-file" />
       </v-btn>

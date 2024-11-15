@@ -22,5 +22,5 @@ div:not(#app) {
 
 .transparent-overlay {
   position: fixed;
-  opacity: 0.25;
+  opacity: 0.6;
 }
