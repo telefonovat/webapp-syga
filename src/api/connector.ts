@@ -1,10 +1,14 @@
-import { LogInFormData } from '@/shared-types/user/Authentication';
+import {
+  LogInFormData,
+  RegisterFormData,
+} from '@/shared-types/user/Authentication';
 import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
 import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
 
 // const API_BASE = import.meta.env.VITE_API_BASE;
 const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
 const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
+const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
 
 class APIClient {
   constructor() {}
@@ -47,6 +51,24 @@ class APIClient {
 
       if (response.status !== 201) {
         throw new Error('Log in failed!');
+      }
+    } catch (e: any) {
+      throw e;
+    }
+  }
+
+  async registerUser(registerData: RegisterFormData) {
+    try {
+      const response = await fetch(REGISTER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerData),
+      });
+      if (response.status !== 201) {
+        throw new Error('Register failed!');
       }
     } catch (e: any) {
       throw e;

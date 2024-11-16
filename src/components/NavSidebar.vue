@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import LogInDialogButton from '@/components/user/LogInDialogButton.vue';
+import LogInDialog from '@/components/user/LogInDialog.vue';
+import RegisterAccountDialog from './user/RegisterAccountDialog.vue';
 import { router } from '@/router';
 import { ref } from 'vue';
 
@@ -51,7 +52,8 @@ function toggleCollapse() {
       <v-btn title="Home" @click="goToHome()">
         <v-icon icon="mdi-home" />
       </v-btn>
-      <LogInDialogButton />
+      <LogInDialog />
+      <RegisterAccountDialog />
       <v-btn title="Files">
         <v-icon icon="mdi-file" />
       </v-btn>

@@ -35,7 +35,7 @@ const onSubmit = () => {
         <v-form @submit.prevent="onSubmit">
           <v-text-field
             v-model="logInFormData.username"
-            label="Username/Email*"
+            label="Username*"
             required
           />
           <v-text-field
@@ -44,7 +44,7 @@ const onSubmit = () => {
             type="password"
             required
           />
-          <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+          <v-btn class="mt-2" type="submit" block>Log in</v-btn>
         </v-form>
       </v-card>
     </v-sheet>
