@@ -11,6 +11,8 @@ const dialog = ref(false);
 const logInFormData = reactive<LogInFormData>({
   username: '',
   password: '',
+  email: '',
+  role: 'student',
 });
 
 const onSubmit = () => {
@@ -38,6 +40,13 @@ const onSubmit = () => {
             label="Username*"
             required
           />
+
+          <v-text-field
+            v-model="logInFormData.email"
+            label="Email"
+            required
+          />
+
           <v-text-field
             v-model="logInFormData.password"
             label="Password*"

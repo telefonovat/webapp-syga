@@ -46,10 +46,10 @@ class APIClient {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify({ user: loginData }),
       });
 
-      if (response.status !== 201) {
+      if (response.status !== 200) {
         throw new Error('Log in failed!');
       }
     } catch (e: any) {
@@ -65,7 +65,7 @@ class APIClient {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(registerData),
+        body: JSON.stringify({ user: registerData }),
       });
       if (response.status !== 201) {
         throw new Error('Register failed!');
