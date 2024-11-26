@@ -50,7 +50,7 @@ class APIClient {
       });
 
       if (response.status !== 200) {
-        throw new Error('Log in failed!');
+        throw new Error(await response.json());
       }
     } catch (e: any) {
       throw e;

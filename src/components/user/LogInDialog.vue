@@ -8,21 +8,32 @@ import { toRaw } from 'vue';
 
 const dialog = ref(false);
 
+const loginSuccessSnackBar = ref(false);
+const loginFailedSnackBar = ref(false);
+
 const logInFormData = reactive<LogInFormData>({
   username: '',
   password: '',
-  email: '',
-  role: 'student',
 });
 
 const onSubmit = () => {
-  apiClient.loginUser(toRaw(logInFormData)).catch((error) => {
-    console.warn(error);
-  });
+  apiClient
+    .loginUser(toRaw(logInFormData))
+    .then(() => {
+      loginSuccessSnackBar.value = true;
+    })
+    .catch((error) => {
+      console.warn(error);
+      loginFailedSnackBar.value = true;
+    });
 };
 </script>
 
 <template>
+  <v-snackbar v-model="loginSuccessSnackBar">
+    Log in successful
+  </v-snackbar>
+  <v-snackbar v-model="loginFailedSnackBar">Log in failed</v-snackbar>
   <v-dialog v-model="dialog">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn title="Log in" v-bind="activatorProps">
@@ -38,12 +49,6 @@ const onSubmit = () => {
           <v-text-field
             v-model="logInFormData.username"
             label="Username*"
-            required
-          />
-
-          <v-text-field
-            v-model="logInFormData.email"
-            label="Email"
             required
           />
 

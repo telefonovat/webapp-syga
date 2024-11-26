@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { apiClient } from '@/api/connector';
 import { RegisterFormData } from '@/shared-types/user/Authentication';
+import { toRaw } from 'vue';
 
 import { reactive, ref } from 'vue';
 
@@ -8,10 +9,15 @@ const dialog = ref(false);
 
 const registerFormData = reactive<RegisterFormData>({
   username: '',
+  email: '',
   password: '',
 });
 
-const onSubmit = () => {};
+const onSubmit = () => {
+  apiClient.registerUser(toRaw(registerFormData)).catch((error) => {
+    console.warn(error);
+  });
+};
 </script>
 
 <template>
@@ -30,6 +36,12 @@ const onSubmit = () => {};
           <v-text-field
             v-model="registerFormData.username"
             label="Username*"
+            required
+          />
+
+          <v-text-field
+            v-model="registerFormData.email"
+            label="Email"
             required
           />
           <v-text-field
