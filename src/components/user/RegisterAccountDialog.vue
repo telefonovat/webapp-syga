@@ -6,6 +6,8 @@ import { toRaw } from 'vue';
 import { reactive, ref } from 'vue';
 
 const dialog = ref(false);
+const registerSuccessSnackBar = ref(false);
+const registerFailedSnackBar = ref(false);
 
 const registerFormData = reactive<RegisterFormData>({
   username: '',
@@ -13,16 +15,45 @@ const registerFormData = reactive<RegisterFormData>({
   password: '',
 });
 
-const onSubmit = () => {
+const onSubmit = async () => {
   console.log('Submitting Register');
-  apiClient.registerUser(toRaw(registerFormData)).catch((error) => {
-    console.warn(error);
-  });
+  apiClient
+    .registerUser(toRaw(registerFormData))
+    .then(() => {
+      dialog.value = false;
+    })
+    .catch((error) => {
+      console.warn(error);
+    });
+
+  try {
+    await apiClient.registerUser(toRaw(registerFormData));
+
+    const token = await apiClient.loginUser({
+      username: registerFormData.username,
+      password: registerFormData.password,
+    });
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', registerFormData.username);
+
+    registerSuccessSnackBar.value = true;
+
+    dialog.value = false;
+  } catch (error: any) {
+    registerFailedSnackBar.value = true;
+  }
 };
 </script>
 
 <template>
   <v-dialog v-model="dialog">
+    <v-snackbar v-model="registerSuccessSnackBar">
+      We automatically logged in for you. Enjoy!
+    </v-snackbar>
+    <v-snackbar v-model="registerFailedSnackBar">
+      Registration failed!
+    </v-snackbar>
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn title="Register" v-bind="activatorProps">
         <v-icon icon="mdi-account-plus" />
