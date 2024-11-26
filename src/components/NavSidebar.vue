@@ -10,6 +10,8 @@ const isCollapsed = ref(
 
 const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
 
+const notLoggedInSnackBar = ref(false);
+
 /*
  * Navigation
  */
@@ -19,6 +21,15 @@ function goToHome() {
 
 function goToSettings() {
   router.replace('/settings');
+}
+
+function goToProfile() {
+  if (!localStorage.getItem('username')) {
+    notLoggedInSnackBar.value = true;
+    return;
+  }
+
+  router.replace(`users/${localStorage.getItem('username')}`);
 }
 
 /*
@@ -39,6 +50,9 @@ function toggleCollapse() {
 
 <template>
   <div class="navigation-header app-navigation-sidebar">
+    <v-snackbar v-model="notLoggedInSnackBar">
+      Please log in first
+    </v-snackbar>
     <v-btn @click="toggleCollapse">
       <v-icon
         :icon="
@@ -51,6 +65,9 @@ function toggleCollapse() {
     <div class="app-navigation-menu" v-if="!isCollapsed">
       <v-btn title="Home" @click="goToHome()">
         <v-icon icon="mdi-home" />
+      </v-btn>
+      <v-btn title="Go to profile" @click="goToProfile()">
+        <v-icon icon="mdi-account-badge" />
       </v-btn>
       <LogInDialog />
       <RegisterAccountDialog />

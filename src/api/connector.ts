@@ -9,6 +9,7 @@ import { VisualizationResult } from '@/shared-types/visualization/VisualizationR
 const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
 const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
 const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
+const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT;
 
 class APIClient {
   constructor() {}
@@ -38,7 +39,7 @@ class APIClient {
     }
   }
 
-  async loginUser(loginData: LogInFormData) {
+  async loginUser(loginData: LogInFormData): Promise<string> {
     try {
       const response = await fetch(LOGIN_ENDPOINT, {
         method: 'POST',
@@ -52,6 +53,10 @@ class APIClient {
       if (response.status !== 200) {
         throw new Error(await response.json());
       }
+
+      const json = await response.json();
+      const token: string = json.token;
+      return token;
     } catch (e: any) {
       throw e;
     }
@@ -70,6 +75,21 @@ class APIClient {
       if (response.status !== 201) {
         throw new Error('Register failed!');
       }
+    } catch (e: any) {
+      throw e;
+    }
+  }
+
+  async getUserInfo(username: string, token: string) {
+    try {
+      const response = await fetch(`${USERS_ENDPOINT}/username`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: token }),
+      });
     } catch (e: any) {
       throw e;
     }

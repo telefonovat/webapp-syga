@@ -14,6 +14,7 @@ const registerFormData = reactive<RegisterFormData>({
 });
 
 const onSubmit = () => {
+  console.log('Submitting Register');
   apiClient.registerUser(toRaw(registerFormData)).catch((error) => {
     console.warn(error);
   });

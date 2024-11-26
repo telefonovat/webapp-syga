@@ -19,8 +19,15 @@ const logInFormData = reactive<LogInFormData>({
 const onSubmit = () => {
   apiClient
     .loginUser(toRaw(logInFormData))
-    .then(() => {
+    .then((token) => {
+      //Savid JWT token to storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('username', logInFormData.username);
+      console.log('Set');
       loginSuccessSnackBar.value = true;
+
+      //Close dialog
+      dialog.value = false;
     })
     .catch((error) => {
       console.warn(error);
