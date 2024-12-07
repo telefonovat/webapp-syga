@@ -84,6 +84,8 @@ const onSubmit = async () => {
           />
           <v-btn class="mt-2" type="submit" block>Register</v-btn>
         </v-form>
+
+        <v-btn text="Close" @click="dialog = false" />
       </v-card>
     </v-sheet>
   </v-dialog>

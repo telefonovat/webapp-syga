@@ -41,6 +41,7 @@ const onSubmit = () => {
     Log in successful
   </v-snackbar>
   <v-snackbar v-model="loginFailedSnackBar">Log in failed</v-snackbar>
+
   <v-dialog v-model="dialog">
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn title="Log in" v-bind="activatorProps">
@@ -67,6 +68,8 @@ const onSubmit = () => {
           />
           <v-btn class="mt-2" type="submit" block>Log in</v-btn>
         </v-form>
+
+        <v-btn text="Close" @click="dialog = false" />
       </v-card>
     </v-sheet>
   </v-dialog>
