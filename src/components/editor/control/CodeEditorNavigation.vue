@@ -40,6 +40,9 @@ function build() {
     <v-btn @click="build()" title="Build">
       <v-icon icon="mdi-hammer-screwdriver" />
     </v-btn>
+    <v-btn title="Save">
+      <v-icon icon="mdi-content-save" />
+    </v-btn>
   </div>
 
   <v-dialog v-model="isBuilding" max-width="500">

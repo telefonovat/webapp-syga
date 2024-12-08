@@ -56,6 +56,11 @@ class APIClient {
 
       const json = await response.json();
       const token: string = json.token;
+
+      //Save JWT token to storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('username', loginData.username);
+
       return token;
     } catch (e: any) {
       throw e;
@@ -82,7 +87,7 @@ class APIClient {
 
   async getUserInfo(username: string, token: string) {
     try {
-      const response = await fetch(`${USERS_ENDPOINT}/username`, {
+      const response = await fetch(`${USERS_ENDPOINT}/${username}`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

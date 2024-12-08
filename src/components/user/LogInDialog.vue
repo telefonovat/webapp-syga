@@ -5,6 +5,9 @@ import { ref } from 'vue';
 import { LogInFormData } from '@/shared-types/user/Authentication';
 import { apiClient } from '@/api/connector';
 import { toRaw } from 'vue';
+import { useUserStore } from '@/store/user/userStore';
+
+const userStore = useUserStore();
 
 const dialog = ref(false);
 
@@ -19,15 +22,13 @@ const logInFormData = reactive<LogInFormData>({
 const onSubmit = () => {
   apiClient
     .loginUser(toRaw(logInFormData))
-    .then((token) => {
-      //Savid JWT token to storage
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', logInFormData.username);
-      console.log('Set');
+    .then(() => {
       loginSuccessSnackBar.value = true;
 
       //Close dialog
       dialog.value = false;
+
+      userStore.isAuthenticated = true;
     })
     .catch((error) => {
       console.warn(error);
@@ -37,6 +38,7 @@ const onSubmit = () => {
 </script>
 
 <template>
+  <!-- Snack bars for feedback on log in status -->
   <v-snackbar v-model="loginSuccessSnackBar">
     Log in successful
   </v-snackbar>
