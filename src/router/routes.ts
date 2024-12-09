@@ -2,6 +2,8 @@ import AlgorithmView from '@/views/AlgorithmView.vue';
 import NavSidebar from '@/components/NavSidebar.vue';
 import HomeLayout from '@/views/HomeLayout.vue';
 import ProfileView from '@/views/ProfileView.vue';
+
+import MockComponent from '@/components/mock/sfc/MockComponent.vue';
 import type { RouterOptions } from 'vue-router';
 export const routes: RouterOptions['routes'] = [
   {
@@ -37,5 +39,10 @@ export const routes: RouterOptions['routes'] = [
         },
       },
     ],
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: MockComponent,
   },
 ];

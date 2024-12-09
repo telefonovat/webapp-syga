@@ -29,7 +29,7 @@ function goToProfile() {
     return;
   }
 
-  router.replace(`users/${localStorage.getItem('username')}`);
+  router.replace(`/users/${localStorage.getItem('username')}`);
 }
 
 /*

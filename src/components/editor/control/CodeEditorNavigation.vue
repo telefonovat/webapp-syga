@@ -19,7 +19,9 @@ function build() {
   const visualizationRequest: VisualizationRequest = {
     code: code.value,
   };
+
   isBuilding.value = true;
+
   apiClient
     .buildCode(visualizationRequest)
     .then((visualizationResult: VisualizationResult) => {
