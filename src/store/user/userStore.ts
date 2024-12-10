@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 const useUserStore = defineStore('User Store', () => {
   const isAuthenticated = computed<boolean>(

@@ -11,6 +11,92 @@ const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
 const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
 const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT;
 
+class AlgorithmBuilder {
+  async buildCode(
+    visualizationRequest: VisualizationRequest
+  ): Promise<VisualizationResult> {
+    try {
+      const response = await fetch(BUILD_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(visualizationRequest),
+      });
+
+      const visualizationResult: VisualizationResult =
+        await response.json();
+      return visualizationResult;
+    } catch (err) {
+      throw new Error('No response from REST API');
+    }
+  }
+}
+
+class UserManager {
+  async loginUser(loginData: LogInFormData): Promise<string> {
+    try {
+      const response = await fetch(LOGIN_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: loginData }),
+      });
+
+      if (response.status !== 200) {
+        throw new Error(await response.json());
+      }
+
+      const json = await response.json();
+      const token: string = json.token;
+
+      //Save JWT token to storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('username', loginData.username);
+
+      return token;
+    } catch (e: any) {
+      throw e;
+    }
+  }
+
+  async registerUser(registerData: RegisterFormData) {
+    try {
+      const response = await fetch(REGISTER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user: registerData }),
+      });
+      if (response.status !== 201) {
+        throw new Error('Register failed!');
+      }
+    } catch (e: any) {
+      throw e;
+    }
+  }
+
+  async getUserInfo(username: string, token: string) {
+    try {
+      const response = await fetch(`${USERS_ENDPOINT}/${username}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: token }),
+      });
+    } catch (e: any) {
+      throw e;
+    }
+  }
+}
+
 class APIClient {
   constructor() {}
 
@@ -102,4 +188,8 @@ class APIClient {
 }
 
 const apiClient = new APIClient();
-export { apiClient };
+
+const algorithmBuilder = new AlgorithmBuilder();
+const userManager = new UserManager();
+
+export { apiClient, algorithmBuilder, userManager };

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { apiClient } from '@/api/connector';
+import { apiClient, userManager } from '@/api/connector';
 import { RegisterFormData } from '@/shared-types/user/Authentication';
 import { toRaw } from 'vue';
 
@@ -16,8 +16,7 @@ const registerFormData = reactive<RegisterFormData>({
 });
 
 const onSubmit = async () => {
-  console.log('Submitting Register');
-  apiClient
+  userManager
     .registerUser(toRaw(registerFormData))
     .then(() => {
       dialog.value = false;
@@ -27,7 +26,7 @@ const onSubmit = async () => {
     });
 
   try {
-    await apiClient.registerUser(toRaw(registerFormData));
+    await userManager.registerUser(toRaw(registerFormData));
 
     const token = await apiClient.loginUser({
       username: registerFormData.username,

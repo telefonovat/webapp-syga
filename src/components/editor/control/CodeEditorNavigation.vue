@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { apiClient } from '@/api/connector';
+import { algorithmBuilder } from '@/api/connector';
 
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
@@ -22,11 +22,10 @@ function build() {
 
   isBuilding.value = true;
 
-  apiClient
+  algorithmBuilder
     .buildCode(visualizationRequest)
     .then((visualizationResult: VisualizationResult) => {
       visualizerStore.setFrames(visualizationResult.frames);
-      console.log(visualizationResult.frames);
     })
     .catch((error) => {
       console.warn(error);
