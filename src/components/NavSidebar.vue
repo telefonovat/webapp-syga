@@ -4,10 +4,11 @@ import RegisterAccountDialog from './user/RegisterAccountDialog.vue';
 import { router } from '@/router';
 import { ref } from 'vue';
 
-const isCollapsed = ref(
-  localStorage.getItem('isCollapsed') === 'true' ? true : false
-);
+interface Props {
+  isCollapsed: boolean;
+}
 
+const props = defineProps<Props>();
 const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
 
 const notLoggedInSnackBar = ref(false);
@@ -37,14 +38,7 @@ function goToProfile() {
  */
 
 function toggleCollapse() {
-  isCollapsed.value = !isCollapsed.value;
-
-  localStorage.setItem(
-    'isCollapsed',
-    isCollapsed.value ? 'true' : 'false'
-  );
-
-  emit(isCollapsed.value ? 'collapseSidebar' : 'expandSidebar');
+  emit(props.isCollapsed ? 'expandSidebar' : 'collapseSidebar');
 }
 </script>
 

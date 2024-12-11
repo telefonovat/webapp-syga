@@ -1,5 +1,4 @@
 import AlgorithmView from '@/views/AlgorithmView.vue';
-import NavSidebar from '@/components/NavSidebar.vue';
 import HomeLayout from '@/views/HomeLayout.vue';
 import ProfileView from '@/views/ProfileView.vue';
 
@@ -17,7 +16,7 @@ export const routes: RouterOptions['routes'] = [
         name: 'AlgorithmView',
         components: {
           main: AlgorithmView,
-          sidebar: NavSidebar,
+          // sidebar: NavSidebar,
         },
       },
       {
@@ -26,7 +25,7 @@ export const routes: RouterOptions['routes'] = [
         name: 'UserSettings',
         components: {
           main: AlgorithmView,
-          sidebar: NavSidebar,
+          // sidebar: NavSidebar,
         },
       },
       {
@@ -35,7 +34,7 @@ export const routes: RouterOptions['routes'] = [
         name: 'ProfileView',
         components: {
           main: ProfileView,
-          sidebar: NavSidebar,
+          // sidebar: NavSidebar,
         },
       },
     ],

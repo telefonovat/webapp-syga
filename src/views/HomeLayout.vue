@@ -1,19 +1,21 @@
 <script setup lang="ts">
+import NavSidebar from '@/components/NavSidebar.vue';
+import { watch } from 'vue';
 import { ref } from 'vue';
 
-const isSidebarTransparent = ref(true);
+const isSidebarCollapsed = ref(false);
 </script>
 
 <template>
   <div class="home-layout">
     <aside
       class="home-layout__sidebar"
-      :class="{ 'transparent-overlay': isSidebarTransparent }"
+      :class="{ 'transparent-overlay': isSidebarCollapsed }"
     >
-      <RouterView
-        @collapseSidebar="() => (isSidebarTransparent = true)"
-        @expandSidebar="() => (isSidebarTransparent = false)"
-        name="sidebar"
+      <NavSidebar
+        :is-collapsed="isSidebarCollapsed"
+        @collapseSidebar="() => (isSidebarCollapsed = true)"
+        @expandSidebar="() => (isSidebarCollapsed = false)"
       />
     </aside>
     <main class="home-layout__main mock">
