@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 import { ref } from 'vue';
 
 import { LogInFormData } from '@/shared-types/user/Authentication';
-import { apiClient, userManager } from '@/api/connector';
+import { loginUser } from '@/api/connector';
 import { toRaw } from 'vue';
 import { useUserStore } from '@/store/user/userStore';
 
@@ -20,8 +20,7 @@ const logInFormData = reactive<LogInFormData>({
 });
 
 const onSubmit = () => {
-  userManager
-    .loginUser(toRaw(logInFormData))
+  loginUser(toRaw(logInFormData))
     .then(() => {
       loginSuccessSnackBar.value = true;
 

@@ -1,6 +1,7 @@
+import { APIResponse } from '@/shared-types/APIResponse';
 import {
-  LogInFormData,
-  RegisterFormData,
+  UserLoginInfo,
+  UserRegistrationInfo,
 } from '@/shared-types/user/Authentication';
 import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
 import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
@@ -11,185 +12,75 @@ const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
 const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
 const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT;
 
-class AlgorithmBuilder {
-  async buildCode(
-    visualizationRequest: VisualizationRequest
-  ): Promise<VisualizationResult> {
-    try {
-      const response = await fetch(BUILD_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(visualizationRequest),
-      });
-
-      const visualizationResult: VisualizationResult =
-        await response.json();
-      return visualizationResult;
-    } catch (err) {
-      throw new Error('No response from REST API');
-    }
-  }
-}
-
-class UserManager {
-  async loginUser(loginData: LogInFormData): Promise<string> {
-    try {
-      const response = await fetch(LOGIN_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user: loginData }),
-      });
-
-      if (response.status !== 200) {
-        throw new Error(await response.json());
-      }
-
-      const json = await response.json();
-      const token: string = json.token;
-
-      //Save JWT token to storage
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', loginData.username);
-
-      return token;
-    } catch (e: any) {
-      throw e;
-    }
+const validateResponse = (responseJSON: APIResponse) => {
+  if (!responseJSON.success) {
+    throw new Error(responseJSON.message);
   }
 
-  async registerUser(registerData: RegisterFormData) {
-    try {
-      const response = await fetch(REGISTER_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user: registerData }),
-      });
-      if (response.status !== 201) {
-        throw new Error('Register failed!');
-      }
-    } catch (e: any) {
-      throw e;
-    }
+  if (!responseJSON.content) {
+    throw new Error('Contents missing from API response');
   }
+};
+const buildCode = async (
+  visualizationRequest: VisualizationRequest
+): Promise<VisualizationResult> => {
+  const response = await fetch(BUILD_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(visualizationRequest),
+  });
 
-  async getUserInfo(username: string, token: string) {
-    try {
-      const response = await fetch(`${USERS_ENDPOINT}/${username}`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: token }),
-      });
-    } catch (e: any) {
-      throw e;
-    }
-  }
-}
+  const responseJSON = (await response.json()) as APIResponse;
 
-class APIClient {
-  constructor() {}
+  validateResponse(responseJSON);
 
-  async buildCode(
-    visualizationRequest: VisualizationRequest
-  ): Promise<VisualizationResult> {
-    const { code } = visualizationRequest;
+  const visualizationResult: VisualizationResult =
+    responseJSON.content as VisualizationResult;
 
-    try {
-      const res = await fetch(BUILD_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code: code }),
-      });
+  return visualizationResult;
+};
 
-      const visualizationResult: VisualizationResult =
-        await res.json();
-      return visualizationResult;
-    } catch (err) {
-      console.error('Error occurred:', err);
+const loginUser = async (
+  loginInfo: UserLoginInfo
+): Promise<string> => {
+  const response = await fetch(LOGIN_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user: loginInfo }),
+  });
 
-      throw new Error('No response from REST API');
-    }
-  }
+  const responseJSON: APIResponse =
+    (await response.json()) as APIResponse;
 
-  async loginUser(loginData: LogInFormData): Promise<string> {
-    try {
-      const response = await fetch(LOGIN_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user: loginData }),
-      });
+  validateResponse(responseJSON);
 
-      if (response.status !== 200) {
-        throw new Error(await response.json());
-      }
+  const responseContent = responseJSON.content;
+  const token: string = responseContent.token;
 
-      const json = await response.json();
-      const token: string = json.token;
+  //Save JWT token to storage
+  localStorage.setItem('token', token);
+  localStorage.setItem('username', loginInfo.username);
 
-      //Save JWT token to storage
-      localStorage.setItem('token', token);
-      localStorage.setItem('username', loginData.username);
+  return token;
+};
 
-      return token;
-    } catch (e: any) {
-      throw e;
-    }
-  }
+const registerUser = async (
+  registerInfo: UserRegistrationInfo
+): Promise<void> => {
+  await fetch(REGISTER_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ user: registerInfo }),
+  });
+};
 
-  async registerUser(registerData: RegisterFormData) {
-    try {
-      const response = await fetch(REGISTER_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user: registerData }),
-      });
-      if (response.status !== 201) {
-        throw new Error('Register failed!');
-      }
-    } catch (e: any) {
-      throw e;
-    }
-  }
-
-  async getUserInfo(username: string, token: string) {
-    try {
-      const response = await fetch(`${USERS_ENDPOINT}/${username}`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: token }),
-      });
-    } catch (e: any) {
-      throw e;
-    }
-  }
-}
-
-const apiClient = new APIClient();
-
-const algorithmBuilder = new AlgorithmBuilder();
-const userManager = new UserManager();
-
-export { apiClient, algorithmBuilder, userManager };
+export { buildCode, loginUser, registerUser };

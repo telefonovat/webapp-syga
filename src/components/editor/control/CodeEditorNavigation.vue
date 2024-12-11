@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { algorithmBuilder } from '@/api/connector';
+import { buildCode } from '@/api/connector';
 
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
@@ -22,8 +22,7 @@ function build() {
 
   isBuilding.value = true;
 
-  algorithmBuilder
-    .buildCode(visualizationRequest)
+  buildCode(visualizationRequest)
     .then((visualizationResult: VisualizationResult) => {
       visualizerStore.setFrames(visualizationResult.frames);
     })
