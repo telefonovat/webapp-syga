@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Node } from '@/shared-types/visualization/Node';
-import { onMounted, withDefaults } from 'vue';
+import { withDefaults } from 'vue';
 import { defaultNodeSettings } from './defaults';
 
 interface Props {
@@ -27,6 +27,14 @@ const props_ = withDefaults(defineProps<Props>(), {
       :cx="x"
       :cy="y"
       :r="radius"
+      :fill="color"
+    />
+    <rect
+      v-if="shape === 'square'"
+      :x="x - radius"
+      :y="y - radius"
+      :width="radius * 2"
+      :height="radius * 2"
       :fill="color"
     />
     <text :x="x" :y="y" text-anchor="middle">

@@ -18,8 +18,15 @@ const props_ = withDefaults(defineProps<Props>(), {
   viewBoxSize: defaultRendererSettings['viewBoxSize'] as number,
 });
 
-const { nodes, nodeColors, nodePositions, edges, edgeColors } =
-  useRenderData(props_.componentIndex, props_.viewBoxSize);
+const {
+  nodes,
+  nodeColors,
+  nodePositions,
+  nodeShapes,
+  edges,
+  edgeColors,
+  edgeShapes,
+} = useRenderData(props_.componentIndex, props_.viewBoxSize);
 
 //Get props to pass to GraphNode
 type NodeProps = InstanceType<typeof GraphNode>['$props'];
@@ -33,12 +40,14 @@ function getNodeProps(node: Node): NodeProps {
   }
   let nodeHasColor =
     node in nodeColors.value && nodeColors.value[node] !== null;
+  let nodeHasShape =
+    node in nodeShapes.value && nodeShapes.value[node] !== null;
   const data: NodeProps = {
     x: nodePositions.value[node].x,
     y: nodePositions.value[node].y,
     label: node,
-    //TODO: Solve compiler error
     ...(nodeHasColor && { color: nodeColors.value[node] }),
+    ...(nodeHasShape && { shape: nodeShapes.value[node] }),
   };
   return data;
 }
@@ -60,12 +69,17 @@ function getEdgeProps(edge: Edge): EdgeProps {
     u in edgeColors.value &&
     v in edgeColors.value[u] &&
     edgeColors.value[u][v] !== null;
+  let edgeHasShape =
+    u in edgeShapes.value &&
+    v in edgeShapes.value[u] &&
+    edgeShapes.value[u][v] !== null;
   const data: EdgeProps = {
     x1: nodePositions.value[u].x,
     y1: nodePositions.value[u].y,
     x2: nodePositions.value[v].x,
     y2: nodePositions.value[v].y,
     ...(edgeHasColour && { color: edgeColors.value[u][v] }),
+    ...(edgeHasShape && { shape: edgeShapes.value[u][v] }),
   };
   return data;
 }

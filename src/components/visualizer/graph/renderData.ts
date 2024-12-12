@@ -1,20 +1,22 @@
-import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
-import type { Node } from "@/shared-types/visualization/Node";
-
+import type { Node } from '@/shared-types/visualization/Node';
 
 //
-export function useRenderData(componentIndex: number, viewBoxSize: number) {
+export function useRenderData(
+  componentIndex: number,
+  viewBoxSize: number
+) {
   const store_ = useVisualizerStore();
 
   const { currentFrame } = storeToRefs(store_);
 
-
   const component = computed(() => {
-    return currentFrame.value ?
-      currentFrame.value.components[componentIndex] : null;
+    return currentFrame.value
+      ? currentFrame.value.components[componentIndex]
+      : null;
   });
 
   const nodes = computed(() => {
@@ -25,18 +27,27 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
     return component.value ? component.value.style.nodeColors : {};
   });
 
+  const nodeShapes = computed(() => {
+    return component.value ? component.value.style.nodeShapes : {};
+  });
+
+  console.log(nodeShapes.value);
+
   const edges = computed(() => {
     return component.value ? component.value.edges : [];
-  })
+  });
 
   const edgeColors = computed(() => {
     return component.value ? component.value.style.edgeColors : {};
-  })
+  });
 
-  //Even places nodes on the circumference of a circle
+  const edgeShapes = computed(() => {
+    return component.value ? component.value.style.edgeShapes : {};
+  });
+
+  //Evenly places nodes on the circumference of a circle
   const nodePositions = computed(() => {
-
-    const positions: { [key: Node]: { x: number, y: number } } = {};
+    const positions: { [key: Node]: { x: number; y: number } } = {};
 
     nodes.value.forEach((node, index) => {
       const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);
@@ -51,7 +62,12 @@ export function useRenderData(componentIndex: number, viewBoxSize: number) {
 
   return {
     component,
-    nodes, nodeColors, nodePositions,
-    edges, edgeColors,
+    nodes,
+    nodeColors,
+    nodePositions,
+    nodeShapes,
+    edges,
+    edgeColors,
+    edgeShapes,
   };
 }
