@@ -39,9 +39,11 @@ function build() {
   <div class="navigation-header mock">
     <v-btn @click="build()" title="Build">
       <v-icon icon="mdi-hammer-screwdriver" />
+      Build
     </v-btn>
     <v-btn title="Save">
       <v-icon icon="mdi-content-save" />
+      Save
     </v-btn>
   </div>
 
