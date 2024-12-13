@@ -1,4 +1,5 @@
 import { APIResponse } from '@/shared-types/APIResponse';
+import { APIRequest } from '@/shared-types/APIRequest';
 import {
   UserLoginInfo,
   UserRegistrationInfo,
@@ -24,13 +25,16 @@ const validateResponse = (responseJSON: APIResponse) => {
 const buildCode = async (
   visualizationRequest: VisualizationRequest
 ): Promise<VisualizationResult> => {
+  const requestBody: APIRequest = {
+    content: visualizationRequest,
+  };
   const response = await fetch(BUILD_ENDPOINT, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(visualizationRequest),
+    body: JSON.stringify(requestBody),
   });
 
   const responseJSON = (await response.json()) as APIResponse;
@@ -46,13 +50,17 @@ const buildCode = async (
 const loginUser = async (
   loginInfo: UserLoginInfo
 ): Promise<string> => {
+  const requestBody: APIRequest = {
+    content: loginInfo,
+  };
   const response = await fetch(LOGIN_ENDPOINT, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ user: loginInfo }),
+
+    body: JSON.stringify(requestBody),
   });
 
   const responseJSON: APIResponse =
@@ -73,13 +81,16 @@ const loginUser = async (
 const registerUser = async (
   registerInfo: UserRegistrationInfo
 ): Promise<void> => {
+  const requestBody: APIRequest = {
+    content: registerInfo,
+  };
   await fetch(REGISTER_ENDPOINT, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ user: registerInfo }),
+    body: JSON.stringify(requestBody),
   });
 };
 
