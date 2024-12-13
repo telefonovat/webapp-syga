@@ -4,9 +4,9 @@ div:not(#app) {
 
 /*CSS classes used for development*/
 .mock {
-  /* border-style: solid; */
-  /* border-color: black; */
-  /* margin: 5px; */
+  border-style: solid;
+  border-color: black;
+  margin: 5px;
 }
 
 .navigation-header {

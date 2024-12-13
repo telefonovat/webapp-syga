@@ -5,7 +5,7 @@ import UserProfile from './UserProfile.vue';
 </script>
 
 <template>
-  <div class="user-dashboard">
+  <div class="user-dashboard mock">
     <Searchbar class="user-dashboard__searchbar" />
     <AlgorithmMenu class="user-dashboard__body" />
     <UserProfile class="user-dashboard__profile" />
@@ -16,10 +16,11 @@ import UserProfile from './UserProfile.vue';
 .user-dashboard{
   display: grid;
   grid-template-areas: 
-    'searchbar searchbar'
-    'profile body';
+    'searchbar profile'
+    'body body';
   grid-template-rows: 1fr 4fr;
   grid-template-columns: auto auto;
+
 }
 
 .user-dashboard__searchbar{

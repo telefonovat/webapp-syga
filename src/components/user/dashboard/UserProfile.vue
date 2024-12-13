@@ -7,8 +7,18 @@ const username = computed(
 
 <template>
   <div class="user-profile">
-    <h1>Welcome {{ username }}</h1>
+    <v-card>
+      <div class="text-overline mb-1">Welcome {{ username }}</div>
+    </v-card>
+    <v-card>
+      <v-btn text="Settings" />
+      <v-btn text="Log out" />
+    </v-card>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.user-profile{
+  height: 100%;
+}
+</style>

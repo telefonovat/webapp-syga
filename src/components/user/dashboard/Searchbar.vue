@@ -2,7 +2,15 @@
 
 <template>
   <div class="user-searchbar">
-    <h1>This is the searchbar</h1>
+    <v-card title="Searchbar">
+      <v-card-text>
+        <v-text-field
+          label="Search"
+          model-value="My new post"
+          variant="filled"
+        />
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
