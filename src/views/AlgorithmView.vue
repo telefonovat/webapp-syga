@@ -7,10 +7,10 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 
 <template>
   <div class="algrithm-view">
-    <AlgorithmControlPanel class="algorithm-view-header" />
-    <CodeEditor class="editor" />
-    <Visualizer class="visualizer" />
-    <MockFooter class="app-footer" />
+    <AlgorithmControlPanel class="algrithm-view__header" />
+    <CodeEditor class="algrithm-view__editor" />
+    <Visualizer class="algrithm-view__visualizer" />
+    <MockFooter class="algrithm-view__footer" />
   </div>
 </template>
 
@@ -18,30 +18,27 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 .algrithm-view {
   display: grid;
   grid-template-areas:
-    '. . algorithm-view-header algorithm-view-header'
+    '. . header header'
     'editor editor visualizer visualizer'
-    'app-footer app-footer app-footer app-footer';
+    'footer footer footer footer';
   grid-template-rows: auto 3fr auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   
 }
 
-.algrithm-view > .featured-list{
-  grid-area: featured-list;
+.algrithm-view__header{
+  grid-area: header;
 }
-.algrithm-view > .algorithm-view-header{
-  grid-area: algorithm-view-header;
-}
-.algrithm-view > .editor {
+.algrithm-view__editor {
   grid-area: editor;
   border-right: 1px solid black;
 }
-.algrithm-view > .visualizer{
+.algrithm-view__visualizer{
   grid-area: visualizer;
 }
 
 
-.algrithm-view > .app-footer {
-  grid-area: app-footer;
+.algrithm-view__footer {
+  grid-area: footer;
 }
 </style>

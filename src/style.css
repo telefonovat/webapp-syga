@@ -40,3 +40,7 @@ body {
 #app > * {
   flex: 1;
 }
+
+/*
+* Mock styling for high-contrasted visuals during development
+*/

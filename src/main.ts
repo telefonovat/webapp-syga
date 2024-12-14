@@ -4,7 +4,6 @@ import { router } from './router';
 import VueCodeMirror from 'vue-codemirror';
 import { basicSetup } from 'codemirror';
 import './style.css';
-import './common.css';
 import App from './App.vue';
 
 import 'vuetify/styles';

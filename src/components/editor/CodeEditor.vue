@@ -17,7 +17,8 @@ const extensions = [python()];
 </template>
 
 <style scoped>
-.code-editor{background-color: #282c34;
+.code-editor{
+  background-color: #282c34;
   height: 100%;
   overflow-y: auto;
 }

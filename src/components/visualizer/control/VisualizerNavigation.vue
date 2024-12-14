@@ -57,15 +57,4 @@ function nextFrame() {
   </div>
 </template>
 
-<style scoped>
-.visualizer-navigation {
-  display: flex;
-  align-items: stretch;
-  min-height: 50px;
-
-}
-
-.visualizer-navigation>* {
-  flex: 1;
-}
-</style>
+<style scoped></style>
