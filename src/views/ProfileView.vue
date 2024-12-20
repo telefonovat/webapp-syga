@@ -8,15 +8,10 @@ import MockFooter from '@/components/mock/sfc/MockFooter.vue';
 
 const userStore = useUserStore();
 const { isAuthenticated } = storeToRefs(userStore);
-function logout() {
-  localStorage.clear();
-  router.replace('/');
-}
 </script>
 
 <template>
   <UserDashboard />
-  <v-btn @click="logout()" class="mt-3">Log out</v-btn>
 
   <MockFooter />
 </template>

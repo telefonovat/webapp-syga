@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { router } from '@/router';
 import { computed } from 'vue';
 const username = computed(
   () => localStorage.getItem('username') || 'null'
 );
+
+function logout() {
+  localStorage.clear();
+  router.replace('/');
+}
 </script>
 
 <template>
@@ -12,7 +18,7 @@ const username = computed(
     </v-card>
     <v-card>
       <v-btn text="Settings" />
-      <v-btn text="Log out" />
+      <v-btn text="Log out" @click="logout()" />
     </v-card>
   </div>
 </template>

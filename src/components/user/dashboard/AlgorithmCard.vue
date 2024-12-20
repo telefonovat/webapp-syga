@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  name: string;
+  title: string;
   tags: string[];
 }
 
@@ -9,7 +9,7 @@ defineProps<Props>();
 
 <template>
   <v-card>
-    <v-card-title>{{ name }}</v-card-title>
+    <v-card-title>{{ title }}</v-card-title>
     <v-card-actions>
       <v-btn>Open</v-btn>
       <v-btn>Delete</v-btn>

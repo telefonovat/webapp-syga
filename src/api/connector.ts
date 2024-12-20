@@ -105,10 +105,6 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
     throw new Error('Username not defined');
   }
 
-  const requestBody: APIRequest = {
-    token: token,
-  };
-
   const response = await fetch(`/api/users/${username}/codes`, {
     method: 'GET',
     headers: {

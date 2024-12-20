@@ -6,9 +6,7 @@ import { ref } from 'vue';
 import { onMounted } from 'vue';
 
 const algorithms = ref<Algorithm[]>([]);
-onMounted(() => {
-  console.log('Hello');
-});
+onMounted(() => {});
 
 async function refresh() {
   algorithms.value = await getUserAlgorithms();
