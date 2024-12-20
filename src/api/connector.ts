@@ -1,5 +1,6 @@
 import { APIResponse } from '@/shared-types/APIResponse';
 import { APIRequest } from '@/shared-types/APIRequest';
+import { Algorithm } from '@/shared-types/user/Algorithm';
 import {
   UserLoginInfo,
   UserRegistrationInfo,
@@ -11,7 +12,6 @@ import { VisualizationResult } from '@/shared-types/visualization/VisualizationR
 const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
 const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
 const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
-const USERS_ENDPOINT = import.meta.env.VITE_USERS_ENDPOINT;
 
 const validateResponse = (responseJSON: APIResponse) => {
   if (!responseJSON.success) {
@@ -94,4 +94,36 @@ const registerUser = async (
   });
 };
 
-export { buildCode, loginUser, registerUser };
+const getUserAlgorithms = async (): Promise<Algorithm[]> => {
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
+
+  if (token === null) {
+    throw new Error('Please log in');
+  }
+  if (username === null) {
+    throw new Error('Username not defined');
+  }
+
+  const requestBody: APIRequest = {
+    token: token,
+  };
+
+  const response = await fetch(`/api/users/${username}/codes`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `BEARER ${token}`,
+    },
+    // body: JSON.stringify(requestBody),
+  });
+
+  const responseJSON = (await response.json()) as APIResponse;
+
+  const algorithms = responseJSON.content as Algorithm[];
+
+  return algorithms;
+};
+
+export { buildCode, loginUser, registerUser, getUserAlgorithms };

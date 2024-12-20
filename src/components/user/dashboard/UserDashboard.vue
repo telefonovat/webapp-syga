@@ -7,8 +7,8 @@ import UserProfile from './UserProfile.vue';
 <template>
   <div class="user-dashboard mock">
     <Searchbar class="user-dashboard__searchbar" />
-    <AlgorithmMenu class="user-dashboard__body" />
     <UserProfile class="user-dashboard__profile" />
+    <AlgorithmMenu class="user-dashboard__body" />
   </div>
 </template>
 
