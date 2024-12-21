@@ -1,10 +1,8 @@
 import { defineStore } from 'pinia';
-import { computed } from 'vue';
+import { ref } from 'vue';
 
 const useUserStore = defineStore('User Store', () => {
-  const isAuthenticated = computed<boolean>(
-    () => localStorage.getItem('username') !== null
-  );
+  const isAuthenticated = ref<boolean>(false);
 
   return {
     isAuthenticated,

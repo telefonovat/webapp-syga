@@ -6,10 +6,14 @@ import { ref } from 'vue';
 import { onMounted } from 'vue';
 
 const algorithms = ref<Algorithm[]>([]);
-onMounted(() => {});
+onMounted(() => {
+  refresh();
+});
 
-async function refresh() {
-  algorithms.value = await getUserAlgorithms();
+function refresh() {
+  getUserAlgorithms().then((retrievedAlgorithms) => {
+    algorithms.value = retrievedAlgorithms;
+  });
 }
 </script>
 

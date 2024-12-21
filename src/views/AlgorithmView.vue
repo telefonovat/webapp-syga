@@ -18,7 +18,7 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 .algrithm-view {
   display: grid;
   grid-template-areas:
-    '. . header header'
+    'header header header header'
     'editor editor visualizer visualizer'
     'footer footer footer footer';
   grid-template-rows: auto 3fr auto;
