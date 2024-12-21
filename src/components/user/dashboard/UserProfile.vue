@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { router } from '@/router';
+import { useEditorStore } from '@/store/editor/editorStore';
 import { computed } from 'vue';
+
+const editorStore = useEditorStore();
 const username = computed(
   () => localStorage.getItem('username') || 'null'
 );
 
 function logout() {
+  editorStore.resetToInitialState();
   localStorage.clear();
   router.replace('/');
 }
