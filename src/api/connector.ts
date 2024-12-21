@@ -122,4 +122,41 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
   return algorithms;
 };
 
-export { buildCode, loginUser, registerUser, getUserAlgorithms };
+const saveUserAlgorithm = async (
+  algorithm: Omit<Algorithm, 'uuid'>
+) => {
+  const token = localStorage.getItem('token');
+  const username = localStorage.getItem('username');
+
+  if (token === null) {
+    throw new Error('Please log in');
+  }
+  if (username === null) {
+    throw new Error('Username not defined');
+  }
+
+  const requestBody: APIRequest = {
+    content: algorithm,
+  };
+  const response = await fetch(`/api/users/${username}/codes`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `BEARER ${token}`,
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  const responseJSON = (await response.json()) as APIResponse;
+
+  validateResponse(responseJSON);
+};
+
+export {
+  buildCode,
+  loginUser,
+  registerUser,
+  getUserAlgorithms,
+  saveUserAlgorithm,
+};

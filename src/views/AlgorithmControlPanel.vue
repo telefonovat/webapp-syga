@@ -9,7 +9,7 @@ import AlgorithmManager from '@/components/user/AlgorithmManager.vue';
     <VisualizerNavigation />
     <CodeEditorNavigation />
 
-    <AlgorithmManager />
+    <AlgorithmManager class="algorithm-control-panel__last-item" />
   </div>
 </template>
 
@@ -17,5 +17,8 @@ import AlgorithmManager from '@/components/user/AlgorithmManager.vue';
 .algorithm-control-panel{
   display: flex;
   flex-direction: row-reverse;
+}
+.algorithm-control-panel__last-item{
+  margin-right: auto;
 }
 </style>

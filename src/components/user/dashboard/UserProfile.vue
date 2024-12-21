@@ -9,7 +9,7 @@ const username = computed(
 );
 
 function logout() {
-  editorStore.resetToInitialState();
+  editorStore.$reset();
   localStorage.clear();
   router.replace('/');
 }

@@ -5,7 +5,7 @@ const useEditorStore = defineStore('Editor Store', () => {
   const code = ref('');
   const isInDatabase = ref<boolean>(false);
 
-  function resetToInitialState() {
+  function $reset() {
     code.value = '';
     isInDatabase.value = false;
   }
@@ -13,7 +13,7 @@ const useEditorStore = defineStore('Editor Store', () => {
   return {
     code,
     isInDatabase,
-    resetToInitialState,
+    $reset,
   };
 });
 
