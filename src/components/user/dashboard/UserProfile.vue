@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { router } from '@/router';
 import { useEditorStore } from '@/store/editor/editorStore';
+import { useUserStore } from '@/store/user/userStore';
 import { computed } from 'vue';
 
 const editorStore = useEditorStore();
-const username = computed(
-  () => localStorage.getItem('username') || 'null'
-);
+const userStore = useUserStore();
+const username = computed(() => userStore.username);
 
 function logout() {
   editorStore.$reset();
-  localStorage.clear();
+  userStore.$reset();
   router.replace('/');
 }
 </script>

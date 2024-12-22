@@ -7,6 +7,9 @@ import {
 } from '@/shared-types/user/Authentication';
 import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
 import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
+import { router } from '@/router';
+import { useUserStore } from '@/store/user/userStore';
+import { storeToRefs } from 'pinia';
 
 // const API_BASE = import.meta.env.VITE_API_BASE;
 const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
@@ -16,10 +19,6 @@ const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
 const validateResponse = (responseJSON: APIResponse) => {
   if (!responseJSON.success) {
     throw new Error(responseJSON.message);
-  }
-
-  if (!responseJSON.content) {
-    throw new Error('Contents missing from API response');
   }
 };
 const buildCode = async (
@@ -72,8 +71,11 @@ const loginUser = async (
   const token: string = responseContent.token;
 
   //Save JWT token to storage
-  localStorage.setItem('token', token);
-  localStorage.setItem('username', loginInfo.username);
+  // localStorage.setItem('token', token);
+  // localStorage.setItem('username', loginInfo.username);
+
+  const userStore = useUserStore();
+  userStore.setAuthenticationInfo(loginInfo.username, token);
 
   return token;
 };
@@ -95,28 +97,33 @@ const registerUser = async (
 };
 
 const getUserAlgorithms = async (): Promise<Algorithm[]> => {
-  const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
+  const userStore = useUserStore();
+  const { token, username } = storeToRefs(userStore);
 
-  if (token === null) {
+  if (token.value === null) {
     throw new Error('Please log in');
   }
-  if (username === null) {
+  if (username.value === null) {
     throw new Error('Username not defined');
   }
 
-  const response = await fetch(`/api/users/${username}/codes`, {
+  const response = await fetch(`/api/users/${username.value}/codes`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `BEARER ${token}`,
+      Authorization: `BEARER ${token.value}`,
     },
     // body: JSON.stringify(requestBody),
   });
 
   const responseJSON = (await response.json()) as APIResponse;
 
+  if (response.status === 401) {
+    userStore.$reset();
+    alert('Token expired. Please log in again');
+    router.replace('/');
+  }
   const algorithms = responseJSON.content as Algorithm[];
 
   return algorithms;
@@ -125,25 +132,24 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
 const saveUserAlgorithm = async (
   algorithm: Omit<Algorithm, 'uuid'>
 ) => {
-  const token = localStorage.getItem('token');
-  const username = localStorage.getItem('username');
-
-  if (token === null) {
+  const userStore = useUserStore();
+  const { token, username } = storeToRefs(userStore);
+  if (token.value === null) {
     throw new Error('Please log in');
   }
-  if (username === null) {
+  if (username.value === null) {
     throw new Error('Username not defined');
   }
 
   const requestBody: APIRequest = {
     content: algorithm,
   };
-  const response = await fetch(`/api/users/${username}/codes`, {
+  const response = await fetch(`/api/users/${username.value}/codes`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `BEARER ${token}`,
+      Authorization: `BEARER ${token.value}`,
     },
     body: JSON.stringify(requestBody),
   });

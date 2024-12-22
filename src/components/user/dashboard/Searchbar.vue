@@ -6,7 +6,7 @@
       <v-card-text>
         <v-text-field
           label="Search"
-          model-value="My new post"
+          model-value="Syga"
           variant="filled"
         />
       </v-card-text>
