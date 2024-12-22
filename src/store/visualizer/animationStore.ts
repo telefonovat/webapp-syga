@@ -37,6 +37,11 @@ const useAnimationStore_ = defineStore('Animation Store', () => {
     frames_.value = newFrames;
   }
 
+  function $reset() {
+    frames_.value = [];
+    activeFrameNumber.value = 0;
+  }
+
   return {
     frames_,
     activeFrameNumber,
@@ -48,6 +53,8 @@ const useAnimationStore_ = defineStore('Animation Store', () => {
     prevFrame,
 
     setFrames,
+
+    $reset,
   };
 });
 

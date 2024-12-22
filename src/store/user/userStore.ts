@@ -1,3 +1,4 @@
+import { Algorithm } from '@/shared-types/user/Algorithm';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -5,6 +6,8 @@ const useUserStore = defineStore('User Store', () => {
   const isAuthenticated = ref<boolean>(false);
   const username = ref<string | null>(null);
   const token = ref<string | null>(null);
+
+  const algorithms = ref<Algorithm[]>([]);
 
   if (
     localStorage.getItem('username') &&
@@ -32,6 +35,8 @@ const useUserStore = defineStore('User Store', () => {
     username.value = null;
     token.value = null;
 
+    algorithms.value = [];
+
     localStorage.removeItem('username');
     localStorage.removeItem('token');
   }
@@ -42,6 +47,8 @@ const useUserStore = defineStore('User Store', () => {
     token,
     setAuthenticationInfo,
     $reset,
+
+    algorithms,
   };
 });
 

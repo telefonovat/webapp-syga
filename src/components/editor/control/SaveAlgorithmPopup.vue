@@ -2,9 +2,11 @@
 import { saveUserAlgorithm } from '@/api/connector';
 import { Algorithm } from '@/shared-types/user/Algorithm';
 import { useEditorStore } from '@/store/editor/editorStore';
+import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
 
 const editorStore = useEditorStore();
+const userStore = useUserStore();
 
 const dialog = ref(false);
 
@@ -13,8 +15,12 @@ const isPublic = ref(false);
 const isStarred = ref(false);
 
 function saveAlgorithm() {
+  if (userStore.username === null) {
+    throw new Error('Please log in first');
+  }
   const algorithm: Omit<Algorithm, 'uuid'> = {
     title: title.value,
+    creatorUsername: userStore.username,
     code: editorStore.code,
     tags: [],
     isPublic: isPublic.value,

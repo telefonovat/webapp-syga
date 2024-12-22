@@ -18,6 +18,13 @@ const useTicker = defineStore('Player Store', () => {
     return lastTick.value + tickPeriod_.value <= timestamp;
   }
 
+  function $reset() {
+    isInitialized.value = false;
+    isPlaying.value = false;
+    lastTick.value = null;
+    tickPeriod_.value = DEFAULT_TICK_PERIOD;
+  }
+
   return {
     isInitialized,
     isPlaying,
@@ -25,6 +32,8 @@ const useTicker = defineStore('Player Store', () => {
     tickPeriod_,
 
     shouldDoTick,
+
+    $reset,
   };
 });
 

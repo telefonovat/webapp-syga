@@ -13,12 +13,21 @@ function closeAlgorithm() {
 
 <template>
   <div v-if="editorStore.isInDatabase" class="algorithm-manager">
+    <v-card>
+      <v-card-text>
+        {{ editorStore.title }}
+      </v-card-text>
+    </v-card>
     <v-btn>Duplicate</v-btn>
-    <v-btn>Save</v-btn>
     <v-btn>Delete</v-btn>
     <v-btn @click="closeAlgorithm()">Close</v-btn>
     <v-btn>Mark as favourite</v-btn>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.algorithm-manager{
+  display:flex;
+  flex-direction: row;
+}
+</style>

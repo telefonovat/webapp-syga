@@ -128,6 +128,32 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
 
   return algorithms;
 };
+const updateUserAlgorithm = async (
+  uuid: string,
+  algorithmUpdate: Partial<Algorithm>
+) => {
+  const userStore = useUserStore();
+  const { token, username } = storeToRefs(userStore);
+  if (token.value === null) {
+    throw new Error('Please log in');
+  }
+  if (username.value === null) {
+    throw new Error('Username not defined');
+  }
+
+  const requestBody: APIRequest = {
+    content: algorithmUpdate,
+  };
+  const response = await fetch(`/api/algorithms/detail/${uuid}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `BEARER ${token.value}`,
+    },
+    body: JSON.stringify(requestBody),
+  });
+};
 
 const saveUserAlgorithm = async (
   algorithm: Omit<Algorithm, 'uuid'>
@@ -165,4 +191,5 @@ export {
   registerUser,
   getUserAlgorithms,
   saveUserAlgorithm,
+  updateUserAlgorithm,
 };

@@ -57,6 +57,11 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     frames_.value = frames;
   }
 
+  function $reset() {
+    animationStore_.$reset();
+    ticker_.$reset();
+  }
+
   return {
     currentFrame,
     activeFrameNumber,
@@ -69,6 +74,8 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     setFrames,
 
     mainLoop,
+
+    $reset,
   };
 });
 
