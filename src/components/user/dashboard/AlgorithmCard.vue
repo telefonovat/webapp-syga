@@ -17,6 +17,7 @@ const userStore = useUserStore();
 const editorStore = useEditorStore();
 
 const deleteAlgorithmDialog = ref(false);
+const isAlgorithmLinkCopied = ref(false);
 
 const openAlgorithm = () => {
   const algorithm = userStore.algorithms.find(
@@ -42,15 +43,26 @@ const deleteAlgorithm = () => {
 
   deleteUserAlgorithm(props.uuid);
 };
+
+const copyLink = () => {
+  navigator.clipboard.writeText(
+    `${window.location.origin}/algorithms/detail/${props.uuid}`
+  );
+
+  isAlgorithmLinkCopied.value = true;
+};
 </script>
 
 <template>
   <v-card>
+    <v-snackbar v-model="isAlgorithmLinkCopied">
+      Copied link to clipboard
+    </v-snackbar>
     <v-card-title>{{ title }}</v-card-title>
     <v-card-actions>
       <v-btn @click="openAlgorithm()">Open</v-btn>
       <v-btn @click="deleteAlgorithmDialog = true">Delete</v-btn>
-      <v-btn>Share</v-btn>
+      <v-btn @click="copyLink()">Share</v-btn>
     </v-card-actions>
   </v-card>
   <v-dialog v-model="deleteAlgorithmDialog" max-width="320">

@@ -107,15 +107,18 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
     throw new Error('Username not defined');
   }
 
-  const response = await fetch(`/api/users/${username.value}/codes`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `BEARER ${token.value}`,
-    },
-    // body: JSON.stringify(requestBody),
-  });
+  const response = await fetch(
+    `/api/users/${username.value}/algorithms`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `BEARER ${token.value}`,
+      },
+      // body: JSON.stringify(requestBody),
+    }
+  );
 
   const responseJSON = (await response.json()) as APIResponse;
 
@@ -190,15 +193,18 @@ const saveUserAlgorithm = async (
   const requestBody: APIRequest = {
     content: algorithm,
   };
-  const response = await fetch(`/api/users/${username.value}/codes`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `BEARER ${token.value}`,
-    },
-    body: JSON.stringify(requestBody),
-  });
+  const response = await fetch(
+    `/api/users/${username.value}/algorithms`,
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `BEARER ${token.value}`,
+      },
+      body: JSON.stringify(requestBody),
+    }
+  );
 
   const responseJSON = (await response.json()) as APIResponse;
 

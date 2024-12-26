@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { saveUserAlgorithm } from '@/api/connector';
+import {
+  saveUserAlgorithm,
+  updateUserAlgorithm,
+} from '@/api/connector';
 import { Algorithm } from '@/shared-types/user/Algorithm';
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
+import SimpleMessagePopup from '@/components/user/SimpleMessagePopup.vue';
 
 const editorStore = useEditorStore();
 const userStore = useUserStore();
@@ -14,6 +18,24 @@ const title = ref('');
 const isPublic = ref(false);
 const isStarred = ref(false);
 
+const isExistingAlgorithmUpdated = ref(false);
+
+const handleClick = () => {
+  if (userStore.username === null) {
+    throw new Error('Please log in first');
+  }
+  const algorithmUpdate: Partial<Algorithm> = {
+    code: editorStore.code,
+  };
+  if (editorStore.isInDatabase) {
+    updateUserAlgorithm(editorStore.uuid!, algorithmUpdate).catch(
+      (error) => console.warn(error)
+    );
+    isExistingAlgorithmUpdated.value = true;
+  } else {
+    dialog.value = true;
+  }
+};
 function saveAlgorithm() {
   if (userStore.username === null) {
     throw new Error('Please log in first');
@@ -38,9 +60,13 @@ function saveAlgorithm() {
 </script>
 
 <template>
+  <SimpleMessagePopup
+    message="Algorithm updated"
+    :is-visible="isExistingAlgorithmUpdated"
+  />
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn v-bind="activatorProps">Save</v-btn>
+      <v-btn @click="handleClick">Save</v-btn>
     </template>
     <v-card>
       <v-card-text>
