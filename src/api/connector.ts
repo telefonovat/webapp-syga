@@ -155,6 +155,26 @@ const updateUserAlgorithm = async (
   });
 };
 
+const deleteUserAlgorithm = async (uuid: Algorithm['uuid']) => {
+  const userStore = useUserStore();
+  const { token, username } = storeToRefs(userStore);
+  if (token.value === null) {
+    throw new Error('Please log in');
+  }
+  if (username.value === null) {
+    throw new Error('Username not defined');
+  }
+
+  const response = await fetch(`/api/algorithms/detail/${uuid}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `BEARER ${token.value}`,
+    },
+  });
+};
+
 const saveUserAlgorithm = async (
   algorithm: Omit<Algorithm, 'uuid'>
 ) => {
@@ -192,4 +212,5 @@ export {
   getUserAlgorithms,
   saveUserAlgorithm,
   updateUserAlgorithm,
+  deleteUserAlgorithm,
 };
