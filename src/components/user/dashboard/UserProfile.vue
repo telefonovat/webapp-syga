@@ -1,34 +1,31 @@
 <script setup lang="ts">
-import { router } from '@/router';
-import { useEditorStore } from '@/store/editor/editorStore';
-import { useUserStore } from '@/store/user/userStore';
-import { computed } from 'vue';
-
-const editorStore = useEditorStore();
-const userStore = useUserStore();
-const username = computed(() => userStore.username);
-
-function logout() {
-  editorStore.$reset();
-  userStore.$reset();
-  router.replace('/');
+import { User } from '@/shared-types/user/Authentication';
+import { getUserPublicAlgorithms } from '@/api/connector';
+import { onMounted, ref } from 'vue';
+import { Algorithm } from '@/shared-types/user/Algorithm';
+interface Props {
+  username: User['username'];
 }
+
+const props = defineProps<Props>();
+
+const userPublicAlgorithms = ref<Algorithm[]>([]);
+
+onMounted(async () => {
+  userPublicAlgorithms.value = await getUserPublicAlgorithms(
+    props.username
+  );
+  console.log(userPublicAlgorithms.value);
+});
 </script>
 
 <template>
-  <div class="user-profile">
-    <v-card>
-      <div class="text-overline mb-1">Welcome {{ username }}</div>
-    </v-card>
-    <v-card>
-      <v-btn text="Settings" />
-      <v-btn text="Log out" @click="logout()" />
-    </v-card>
-  </div>
+  <v-card v-for="algorithm in userPublicAlgorithms">
+    <v-card-title>{{ algorithm.title }}</v-card-title>
+    <v-card-actions>
+      <v-btn>Fork</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
-<style scoped>
-.user-profile{
-  height: 100%;
-}
-</style>
+<style scoped></style>

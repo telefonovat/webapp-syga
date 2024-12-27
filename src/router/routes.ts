@@ -1,6 +1,7 @@
 import AlgorithmView from '@/views/AlgorithmView.vue';
 import HomeLayout from '@/views/HomeLayout.vue';
 import ProfileView from '@/views/ProfileView.vue';
+import UserProfile from '@/components/user/dashboard/UserProfile.vue';
 
 import MockComponent from '@/components/mock/sfc/MockComponent.vue';
 import type { RouterOptions } from 'vue-router';
@@ -36,6 +37,14 @@ export const routes: RouterOptions['routes'] = [
           main: ProfileView,
           // sidebar: NavSidebar,
         },
+      },
+      {
+        path: 'users/view/:username',
+        name: 'MockUser',
+        components: {
+          main: UserProfile,
+        },
+        props: true,
       },
     ],
   },

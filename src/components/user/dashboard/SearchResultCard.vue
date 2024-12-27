@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { router } from '@/router';
 import { User } from '@/shared-types/user/Authentication';
 interface Props {
   username: User['username'];
@@ -14,7 +15,9 @@ defineProps<Props>();
     </v-card-text>
 
     <v-card-actions>
-      <v-btn>View</v-btn>
+      <v-btn @click="router.replace(`/users/view/${username}`)">
+        View
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

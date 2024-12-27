@@ -234,6 +234,26 @@ const searchForUser = async (
   return usernames;
 };
 
+const getUserPublicAlgorithms = async (
+  username: string
+): Promise<Algorithm[]> => {
+  const response = await fetch(
+    `/api/users/${username}/algorithms/public`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  const responseJSON = (await response.json()) as APIResponse;
+
+  const algorithms = responseJSON.content as Algorithm[];
+  return algorithms;
+};
+
 export {
   buildCode,
   loginUser,
@@ -243,4 +263,5 @@ export {
   updateUserAlgorithm,
   deleteUserAlgorithm,
   searchForUser,
+  getUserPublicAlgorithms,
 };

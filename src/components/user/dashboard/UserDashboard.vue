@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Searchbar from './Searchbar.vue';
 import AlgorithmMenu from './AlgorithmMenu.vue';
-import UserProfile from './UserProfile.vue';
+import MyProfile from './MyProfile.vue';
 import SearchResultsList from './SearchResultsList.vue';
 
 import { searchForUser } from '@/api/connector';
@@ -30,7 +30,7 @@ const searchForUsername = (username: string) => {
       @search-for-user="(username) => searchForUsername(username)"
       class="user-dashboard__searchbar"
     />
-    <UserProfile class="user-dashboard__profile" />
+    <MyProfile class="user-dashboard__profile" />
     <AlgorithmMenu
       v-if="displayedBody === 'algorithm-menu'"
       class="user-dashboard__body"
