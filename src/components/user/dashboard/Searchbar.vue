@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+
+defineEmits(['search-for-user']);
+
+const searchBarValue = ref('');
+</script>
 
 <template>
   <div class="user-searchbar">
@@ -6,10 +12,15 @@
       <v-card-text>
         <v-text-field
           label="Search"
-          model-value="Syga"
+          v-model="searchBarValue"
           variant="filled"
         />
       </v-card-text>
+      <v-card-actions>
+        <v-btn @click="$emit('search-for-user', searchBarValue)">
+          Go
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>

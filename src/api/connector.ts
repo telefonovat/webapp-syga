@@ -2,6 +2,7 @@ import { APIResponse } from '@/shared-types/APIResponse';
 import { APIRequest } from '@/shared-types/APIRequest';
 import { Algorithm } from '@/shared-types/user/Algorithm';
 import {
+  User,
   UserLoginInfo,
   UserRegistrationInfo,
 } from '@/shared-types/user/Authentication';
@@ -211,6 +212,28 @@ const saveUserAlgorithm = async (
   validateResponse(responseJSON);
 };
 
+const searchForUser = async (
+  username: string
+): Promise<User['username'][]> => {
+  const requestBody: APIRequest = {
+    content: username,
+  };
+  const response = await fetch('/api/users/search', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  const responseJSON = (await response.json()) as APIResponse;
+
+  const usernames = responseJSON.content as User['username'][];
+
+  return usernames;
+};
+
 export {
   buildCode,
   loginUser,
@@ -219,4 +242,5 @@ export {
   saveUserAlgorithm,
   updateUserAlgorithm,
   deleteUserAlgorithm,
+  searchForUser,
 };
