@@ -7,8 +7,11 @@ import SearchResultsList from './SearchResultsList.vue';
 import { searchForUser } from '@/api/connector';
 import { User } from '@/shared-types/user/Authentication';
 import { ref } from 'vue';
+import { useUserStore } from '@/store/user/userStore';
 
 type DashboardBody = 'algorithm-menu' | 'search-results';
+
+const userStore = useUserStore();
 
 const displayedBody = ref<DashboardBody>('algorithm-menu');
 
@@ -16,8 +19,9 @@ const searchResults = ref<User['username'][]>([]);
 
 const searchForUsername = (username: string) => {
   searchForUser(username).then((usernames) => {
-    console.log(usernames);
-    searchResults.value = usernames;
+    searchResults.value = usernames.filter(
+      (username) => username !== userStore.username
+    );
   });
 
   displayedBody.value = 'search-results';

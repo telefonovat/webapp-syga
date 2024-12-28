@@ -10,10 +10,12 @@ defineProps<Props>();
 </script>
 
 <template>
-  <SearchResultCard
-    v-for="username in usernames"
-    :username="username"
-  />
+  <div>
+    <SearchResultCard
+      v-for="username in usernames"
+      :username="username"
+    />
+  </div>
 </template>
 
 <style scoped></style>
