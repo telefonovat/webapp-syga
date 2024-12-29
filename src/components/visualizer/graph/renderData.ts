@@ -19,6 +19,10 @@ export function useRenderData(
       : null;
   });
 
+  const type = computed(() =>
+    component.value ? component.value.type : 'Graph'
+  );
+
   const nodes = computed(() => {
     return component.value ? component.value.nodes : [];
   });
@@ -30,8 +34,6 @@ export function useRenderData(
   const nodeShapes = computed(() => {
     return component.value ? component.value.style.nodeShapes : {};
   });
-
-  console.log(nodeShapes.value);
 
   const edges = computed(() => {
     return component.value ? component.value.edges : [];
@@ -62,6 +64,7 @@ export function useRenderData(
 
   return {
     component,
+    type,
     nodes,
     nodeColors,
     nodePositions,

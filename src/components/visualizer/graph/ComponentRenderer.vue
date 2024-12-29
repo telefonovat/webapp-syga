@@ -19,6 +19,7 @@ const props_ = withDefaults(defineProps<Props>(), {
 });
 
 const {
+  type,
   nodes,
   nodeColors,
   nodePositions,
@@ -53,7 +54,7 @@ function getNodeProps(node: Node): NodeProps {
 }
 
 type EdgeProps = InstanceType<typeof GraphEdge>['$props'];
-function getEdgeProps(edge: Edge): EdgeProps {
+function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
   function isEdgeValid([u, v]: Edge) {
     return (
       edges.value.includes(edge) &&
@@ -73,7 +74,7 @@ function getEdgeProps(edge: Edge): EdgeProps {
     u in edgeShapes.value &&
     v in edgeShapes.value[u] &&
     edgeShapes.value[u][v] !== null;
-  const data: EdgeProps = {
+  const data = {
     x1: nodePositions.value[u].x,
     y1: nodePositions.value[u].y,
     x2: nodePositions.value[v].x,
@@ -90,9 +91,16 @@ function getEdgeProps(edge: Edge): EdgeProps {
     class="component-renderer mock"
     :viewBox="`0 0 ${props_.viewBoxSize} ${props_.viewBoxSize}`"
   >
-    <template v-for="edge in edges">
-      <GraphEdge v-bind="getEdgeProps(edge)" />
+    <template v-for="(edge, index) in edges">
+      <GraphEdge
+        v-bind="{
+          ...getEdgeProps(edge),
+          isDirected: type === 'DiGraph',
+          index: index,
+        }"
+      />
     </template>
+
     <template v-for="node in nodes">
       <GraphNode v-bind="getNodeProps(node)" />
     </template>

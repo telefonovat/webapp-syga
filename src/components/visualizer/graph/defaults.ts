@@ -1,6 +1,6 @@
 //Default values for graph nodes and edges
 type DefaultValues = {
-  readonly [key: string]: string | number;
+  readonly [key: string]: string | number | boolean;
 };
 
 const defaultNodeSettings: DefaultValues = {
@@ -13,6 +13,7 @@ const defaultEdgeSettings: DefaultValues = {
   color: '#aaa' as string,
   shape: 'solid' as string,
   width: 5,
+  isDirected: false,
 };
 
 const defaultRendererSettings: DefaultValues = {
