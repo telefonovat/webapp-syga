@@ -16,8 +16,10 @@ const props = defineProps<Props>();
 const userStore = useUserStore();
 const editorStore = useEditorStore();
 
-const deleteAlgorithmDialog = ref(false);
-const isAlgorithmLinkCopied = ref(false);
+const dialogState = ref({
+  deleteAlgorithm: false,
+  isLinkCopied: false,
+});
 
 const openAlgorithm = () => {
   const algorithm = userStore.algorithms.find(
@@ -27,12 +29,13 @@ const openAlgorithm = () => {
   if (!algorithm) {
     throw new Error(`Cannot find algorithm of uuid ${props.uuid}`);
   }
-  editorStore.isInDatabase = true;
-  editorStore.uuid = algorithm.uuid;
 
-  editorStore.code = algorithm.code;
-  editorStore.title = algorithm.title;
-
+  editorStore.$patch({
+    isInDatabase: true,
+    uuid: algorithm.uuid,
+    code: algorithm.code,
+    title: algorithm.title,
+  });
   router.replace('/');
 };
 
@@ -40,6 +43,10 @@ const deleteAlgorithm = () => {
   userStore.algorithms = userStore.algorithms.filter(
     (algorithm) => algorithm.uuid !== props.uuid
   );
+
+  if (editorStore.uuid === props.uuid) {
+    editorStore.$reset();
+  }
 
   deleteUserAlgorithm(props.uuid);
 };
@@ -49,33 +56,37 @@ const copyLink = () => {
     `${window.location.origin}/algorithms/detail/${props.uuid}`
   );
 
-  isAlgorithmLinkCopied.value = true;
+  dialogState.value.isLinkCopied = true;
 };
 </script>
 
 <template>
   <v-card>
-    <v-snackbar v-model="isAlgorithmLinkCopied">
+    <!-- Snackbar for copied link feedback -->
+    <v-snackbar v-model="dialogState.isLinkCopied">
       Copied link to clipboard
     </v-snackbar>
+
     <v-card-title>{{ title }}</v-card-title>
     <v-card-actions>
       <v-btn @click="openAlgorithm()">Open</v-btn>
-      <v-btn @click="deleteAlgorithmDialog = true">Delete</v-btn>
+      <v-btn @click="dialogState.deleteAlgorithm = true">
+        Delete
+      </v-btn>
       <v-btn @click="copyLink()">Share</v-btn>
     </v-card-actions>
   </v-card>
-  <v-dialog v-model="deleteAlgorithmDialog" max-width="320">
+  <v-dialog v-model="dialogState.deleteAlgorithm" max-width="320">
     <v-card>
       <v-card-text>
         Are you sure you want to delete {{ props.title }}?
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="deleteAlgorithmDialog = false">No</v-btn>
+        <v-btn @click="dialogState.deleteAlgorithm = false">No</v-btn>
         <v-btn
           @click="
             deleteAlgorithm();
-            deleteAlgorithmDialog = false;
+            dialogState.deleteAlgorithm = false;
           "
         >
           Yes

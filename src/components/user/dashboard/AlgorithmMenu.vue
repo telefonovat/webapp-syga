@@ -5,19 +5,18 @@ import AlgorithmCard from './AlgorithmCard.vue';
 import { ref } from 'vue';
 import { onMounted } from 'vue';
 import { useUserStore } from '@/store/user/userStore';
+import { computed } from 'vue';
 
 const userStore = useUserStore();
 
-const algorithms = ref<Algorithm[]>([]);
+const algorithms = computed(() => userStore.algorithms);
 onMounted(() => {
   refresh();
 });
 
 function refresh() {
   getUserAlgorithms().then((retrievedAlgorithms) => {
-    algorithms.value = retrievedAlgorithms;
-
-    userStore.algorithms = algorithms.value;
+    userStore.algorithms = retrievedAlgorithms;
   });
 }
 </script>
