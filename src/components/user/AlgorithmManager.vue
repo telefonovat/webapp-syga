@@ -4,8 +4,12 @@ import { useEditorStore } from '@/store/editor/editorStore';
 
 import SaveAlgorithmPopup from './algorithm/SaveAlgorithmPopup.vue';
 import DeleteAlgorithmPopUp from './algorithm/DeleteAlgorithmPopUp.vue';
+import MarkFavouriteButton from './algorithm/MarkFavouriteButton.vue';
+import { useUserStore } from '@/store/user/userStore';
+import { userInfo } from 'os';
 
 const editorStore = useEditorStore();
+const userStore = useUserStore();
 
 function closeAlgorithm() {
   //Closes current algorithm and reroutes to an empty sheet
@@ -38,8 +42,12 @@ function closeAlgorithm() {
         :title="editorStore.title!"
         :uuid="editorStore.uuid!"
       />
+
       <v-btn @click="closeAlgorithm()">Close</v-btn>
-      <v-btn>Mark as favourite</v-btn>
+      <MarkFavouriteButton
+        :uuid="editorStore.uuid!"
+        :is-starred="userStore.algorithms.find(algorithm=>algorithm.uuid === editorStore.uuid!)!.isStarred"
+      />
     </div>
   </div>
 </template>

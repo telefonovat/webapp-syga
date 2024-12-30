@@ -30,6 +30,7 @@ function refresh() {
       :uuid="algorithm.uuid"
       :title="algorithm.title"
       :tags="algorithm.tags"
+      :is-starred="algorithm.isStarred"
     />
   </div>
 </template>

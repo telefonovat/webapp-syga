@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { router } from '@/router';
 import { useEditorStore } from '@/store/editor/editorStore';
-import { deleteUserAlgorithm } from '@/api/connector';
 import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
 
 import DeleteAlgorithmPopUp from '../algorithm/DeleteAlgorithmPopUp.vue';
+import MarkFavouriteButton from '../algorithm/MarkFavouriteButton.vue';
 
 interface Props {
   uuid: string;
   title: string;
   tags: string[];
+  isStarred: boolean;
 }
 
 const props = defineProps<Props>();
@@ -23,7 +24,7 @@ const dialogState = ref({
   isLinkCopied: false,
 });
 
-const openAlgorithm = async () => {
+const openAlgorithm = () => {
   const algorithm = userStore.algorithms.find(
     (algorithm) => algorithm.uuid === props.uuid
   );
@@ -32,11 +33,12 @@ const openAlgorithm = async () => {
     throw new Error(`Cannot find algorithm of uuid ${props.uuid}`);
   }
 
-  await editorStore.$patch({
+  editorStore.$patch({
     isInDatabase: true,
     uuid: algorithm.uuid,
     code: algorithm.code,
     title: algorithm.title,
+    isStarred: algorithm.isStarred,
   });
   router.replace('/');
 };
@@ -62,6 +64,7 @@ const copyLink = () => {
       <v-btn @click="openAlgorithm()">Open</v-btn>
       <DeleteAlgorithmPopUp :title="title" :uuid="uuid" />
       <v-btn @click="copyLink()">Share</v-btn>
+      <MarkFavouriteButton :uuid="uuid" :is-starred="isStarred" />
     </v-card-actions>
   </v-card>
 </template>
