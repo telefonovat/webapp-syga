@@ -11,10 +11,12 @@ import SimpleMessagePopup from '@/components/user/SimpleMessagePopup.vue';
 
 interface Props {
   defaultTitle?: string;
+  duplicate?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   defaultTitle: '',
+  duplicate: false,
 });
 
 const editorStore = useEditorStore();
@@ -35,7 +37,7 @@ const handleClick = () => {
   const algorithmUpdate: Partial<Algorithm> = {
     code: editorStore.code,
   };
-  if (editorStore.isInDatabase) {
+  if (editorStore.isInDatabase && !props.duplicate) {
     updateUserAlgorithm(editorStore.uuid!, algorithmUpdate).catch(
       (error) => console.warn(error)
     );

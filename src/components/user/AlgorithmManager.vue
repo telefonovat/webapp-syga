@@ -27,7 +27,12 @@ function closeAlgorithm() {
           {{ editorStore.title }}
         </v-card-text>
       </v-card>
-      <v-btn>Duplicate</v-btn>
+      <SaveAlgorithmPopup
+        :default-title="`${editorStore.title}-duplicate`"
+        :duplicate="true"
+      >
+        Duplicate
+      </SaveAlgorithmPopup>
       <v-btn>Delete</v-btn>
       <v-btn @click="closeAlgorithm()">Close</v-btn>
       <v-btn>Mark as favourite</v-btn>
