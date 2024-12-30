@@ -9,12 +9,20 @@ import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
 import SimpleMessagePopup from '@/components/user/SimpleMessagePopup.vue';
 
+interface Props {
+  defaultTitle?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  defaultTitle: '',
+});
+
 const editorStore = useEditorStore();
 const userStore = useUserStore();
 
 const dialog = ref(false);
 
-const title = ref('');
+const title = ref(props.defaultTitle);
 const isPublic = ref(false);
 const isStarred = ref(false);
 
@@ -66,7 +74,9 @@ function saveAlgorithm() {
   />
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-btn @click="handleClick">Save</v-btn>
+      <v-btn @click="handleClick">
+        <slot />
+      </v-btn>
     </template>
     <v-card>
       <v-card-text>

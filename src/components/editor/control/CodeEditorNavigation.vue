@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SaveAlgorithmPopup from './SaveAlgorithmPopup.vue';
 import { buildCode } from '@/api/connector';
 
 import { useEditorStore } from '@/store/editor/editorStore';
@@ -42,7 +41,6 @@ function build() {
       <v-icon icon="mdi-hammer-screwdriver" />
       Build
     </v-btn>
-    <SaveAlgorithmPopup />
   </div>
 
   <v-dialog v-model="isBuilding" max-width="500">
