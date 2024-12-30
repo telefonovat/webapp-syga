@@ -3,6 +3,7 @@ import { router } from '@/router';
 import { useEditorStore } from '@/store/editor/editorStore';
 
 import SaveAlgorithmPopup from './algorithm/SaveAlgorithmPopup.vue';
+import DeleteAlgorithmPopUp from './algorithm/DeleteAlgorithmPopUp.vue';
 
 const editorStore = useEditorStore();
 
@@ -33,7 +34,10 @@ function closeAlgorithm() {
       >
         Duplicate
       </SaveAlgorithmPopup>
-      <v-btn>Delete</v-btn>
+      <DeleteAlgorithmPopUp
+        :title="editorStore.title!"
+        :uuid="editorStore.uuid!"
+      />
       <v-btn @click="closeAlgorithm()">Close</v-btn>
       <v-btn>Mark as favourite</v-btn>
     </div>

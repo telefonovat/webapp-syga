@@ -5,6 +5,8 @@ import { deleteUserAlgorithm } from '@/api/connector';
 import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
 
+import DeleteAlgorithmPopUp from '../algorithm/DeleteAlgorithmPopUp.vue';
+
 interface Props {
   uuid: string;
   title: string;
@@ -21,7 +23,7 @@ const dialogState = ref({
   isLinkCopied: false,
 });
 
-const openAlgorithm = () => {
+const openAlgorithm = async () => {
   const algorithm = userStore.algorithms.find(
     (algorithm) => algorithm.uuid === props.uuid
   );
@@ -30,25 +32,13 @@ const openAlgorithm = () => {
     throw new Error(`Cannot find algorithm of uuid ${props.uuid}`);
   }
 
-  editorStore.$patch({
+  await editorStore.$patch({
     isInDatabase: true,
     uuid: algorithm.uuid,
     code: algorithm.code,
     title: algorithm.title,
   });
   router.replace('/');
-};
-
-const deleteAlgorithm = () => {
-  userStore.algorithms = userStore.algorithms.filter(
-    (algorithm) => algorithm.uuid !== props.uuid
-  );
-
-  if (editorStore.uuid === props.uuid) {
-    editorStore.$reset();
-  }
-
-  deleteUserAlgorithm(props.uuid);
 };
 
 const copyLink = () => {
@@ -70,30 +60,10 @@ const copyLink = () => {
     <v-card-title>{{ title }}</v-card-title>
     <v-card-actions>
       <v-btn @click="openAlgorithm()">Open</v-btn>
-      <v-btn @click="dialogState.deleteAlgorithm = true">
-        Delete
-      </v-btn>
+      <DeleteAlgorithmPopUp :title="title" :uuid="uuid" />
       <v-btn @click="copyLink()">Share</v-btn>
     </v-card-actions>
   </v-card>
-  <v-dialog v-model="dialogState.deleteAlgorithm" max-width="320">
-    <v-card>
-      <v-card-text>
-        Are you sure you want to delete {{ props.title }}?
-      </v-card-text>
-      <v-card-actions>
-        <v-btn @click="dialogState.deleteAlgorithm = false">No</v-btn>
-        <v-btn
-          @click="
-            deleteAlgorithm();
-            dialogState.deleteAlgorithm = false;
-          "
-        >
-          Yes
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
 </template>
 
 <style scoped></style>
