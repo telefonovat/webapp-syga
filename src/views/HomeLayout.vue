@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavSidebar from '@/components/NavSidebar.vue';
+import UserAuthenticationPanel from '@/components/user/UserAuthenticationPanel.vue';
 import { watch } from 'vue';
 import { ref } from 'vue';
 
@@ -14,6 +15,10 @@ const isSidebarCollapsed = ref(false);
           <v-app-bar-nav-icon
             @click.stop="isSidebarCollapsed = !isSidebarCollapsed"
           ></v-app-bar-nav-icon>
+        </template>
+
+        <template v-slot:append>
+          <UserAuthenticationPanel />
         </template>
       </v-app-bar>
       <v-main>

@@ -50,28 +50,46 @@ function toggleCollapse() {
       Please log in first
     </v-snackbar>
     <v-navigation-drawer v-model="props.isCollapsed" temporary>
-      <v-list>
-        <v-list-item-icon>
-          <v-btn title="Home" @click="goToHome()">
-            <v-icon icon="mdi-home" />
-          </v-btn>
-        </v-list-item-icon>
-        <v-list-item-icon>
-          <v-btn title="Go to profile" @click="goToProfile()">
-            <v-icon icon="mdi-account-badge" />
-          </v-btn>
-        </v-list-item-icon>
-        <LogInDialog />
-        <RegisterAccountDialog />
-        <v-btn title="Files">
-          <v-icon icon="mdi-file" />
-        </v-btn>
-        <v-btn title="Favourites">
-          <v-icon icon="mdi-star-outline" />
-        </v-btn>
-        <v-btn title="Settings" @click="goToSettings()">
-          <v-icon icon="mdi-cog-outline" />
-        </v-btn>
+      <v-list nav>
+        <v-list-item
+          title="Home"
+          value="Home"
+          prepend-icon="mdi-home"
+          @click="goToHome()"
+        ></v-list-item>
+        <v-list-item
+          title="Dashboard"
+          value="Dashboard"
+          prepend-icon="mdi-code-tags"
+          @click="goToProfile()"
+        ></v-list-item>
+        <v-list-item
+          title="Settings"
+          value="Settings"
+          prepend-icon="mdi-cog-outline"
+        ></v-list-item>
+
+        <!-- <v-list-item> -->
+        <!--   <v-btn title="Home" @click="goToHome()"> -->
+        <!--     <v-icon icon="mdi-home" /> -->
+        <!--   </v-btn> -->
+        <!-- </v-list-item> -->
+        <!-- <v-list-item> -->
+        <!--   <v-btn title="Go to profile" @click="goToProfile()"> -->
+        <!--     <v-icon icon="mdi-account-badge" /> -->
+        <!--   </v-btn> -->
+        <!-- </v-list-item> -->
+        <!-- <LogInDialog /> -->
+        <!-- <RegisterAccountDialog /> -->
+        <!-- <v-btn title="Files"> -->
+        <!--   <v-icon icon="mdi-file" /> -->
+        <!-- </v-btn> -->
+        <!-- <v-btn title="Favourites"> -->
+        <!--   <v-icon icon="mdi-star-outline" /> -->
+        <!-- </v-btn> -->
+        <!-- <v-btn title="Settings" @click="goToSettings()"> -->
+        <!--   <v-icon icon="mdi-cog-outline" /> -->
+        <!-- </v-btn> -->
       </v-list>
     </v-navigation-drawer>
   </div>
