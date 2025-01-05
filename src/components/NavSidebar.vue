@@ -11,6 +11,8 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
 
+const navigationDrawer = ref(false);
+
 const notLoggedInSnackBar = ref(false);
 
 /*
@@ -43,38 +45,35 @@ function toggleCollapse() {
 </script>
 
 <template>
-  <div class="navigation-header app-navigation-sidebar">
+  <div>
     <v-snackbar v-model="notLoggedInSnackBar">
       Please log in first
     </v-snackbar>
-    <v-btn @click="toggleCollapse">
-      <v-icon
-        :icon="
-          isCollapsed
-            ? 'mdi-chevron-triple-right'
-            : 'mdi-chevron-triple-left'
-        "
-      />
-    </v-btn>
-    <div class="app-navigation-menu" v-if="!isCollapsed">
-      <v-btn title="Home" @click="goToHome()">
-        <v-icon icon="mdi-home" />
-      </v-btn>
-      <v-btn title="Go to profile" @click="goToProfile()">
-        <v-icon icon="mdi-account-badge" />
-      </v-btn>
-      <LogInDialog />
-      <RegisterAccountDialog />
-      <v-btn title="Files">
-        <v-icon icon="mdi-file" />
-      </v-btn>
-      <v-btn title="Favourites">
-        <v-icon icon="mdi-star-outline" />
-      </v-btn>
-      <v-btn title="Settings" @click="goToSettings()">
-        <v-icon icon="mdi-cog-outline" />
-      </v-btn>
-    </div>
+    <v-navigation-drawer v-model="props.isCollapsed" temporary>
+      <v-list>
+        <v-list-item-icon>
+          <v-btn title="Home" @click="goToHome()">
+            <v-icon icon="mdi-home" />
+          </v-btn>
+        </v-list-item-icon>
+        <v-list-item-icon>
+          <v-btn title="Go to profile" @click="goToProfile()">
+            <v-icon icon="mdi-account-badge" />
+          </v-btn>
+        </v-list-item-icon>
+        <LogInDialog />
+        <RegisterAccountDialog />
+        <v-btn title="Files">
+          <v-icon icon="mdi-file" />
+        </v-btn>
+        <v-btn title="Favourites">
+          <v-icon icon="mdi-star-outline" />
+        </v-btn>
+        <v-btn title="Settings" @click="goToSettings()">
+          <v-icon icon="mdi-cog-outline" />
+        </v-btn>
+      </v-list>
+    </v-navigation-drawer>
   </div>
 </template>
 

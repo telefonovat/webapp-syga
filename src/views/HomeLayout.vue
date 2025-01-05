@@ -7,21 +7,34 @@ const isSidebarCollapsed = ref(false);
 </script>
 
 <template>
-  <div class="home-layout">
-    <aside
-      class="home-layout__sidebar"
-      :class="{ 'transparent-overlay': isSidebarCollapsed }"
-    >
-      <NavSidebar
-        :is-collapsed="isSidebarCollapsed"
-        @collapseSidebar="() => (isSidebarCollapsed = true)"
-        @expandSidebar="() => (isSidebarCollapsed = false)"
-      />
-    </aside>
-    <main class="home-layout__main mock">
-      <RouterView name="main" />
-    </main>
-  </div>
+  <v-app>
+    <v-layout>
+      <v-app-bar title="Syga">
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon
+            @click.stop="isSidebarCollapsed = !isSidebarCollapsed"
+          ></v-app-bar-nav-icon>
+        </template>
+      </v-app-bar>
+      <v-main>
+        <div class="home-layout">
+          <aside
+            class="home-layout__sidebar"
+            :class="{ 'transparent-overlay': isSidebarCollapsed }"
+          >
+            <NavSidebar
+              :is-collapsed="isSidebarCollapsed"
+              @collapseSidebar="() => (isSidebarCollapsed = true)"
+              @expandSidebar="() => (isSidebarCollapsed = false)"
+            />
+          </aside>
+          <main class="home-layout__main mock">
+            <RouterView name="main" />
+          </main>
+        </div>
+      </v-main>
+    </v-layout>
+  </v-app>
 </template>
 
 <style scoped>

@@ -10,7 +10,6 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
     <AlgorithmControlPanel class="algrithm-view__header" />
     <CodeEditor class="algrithm-view__editor" />
     <Visualizer class="algrithm-view__visualizer" />
-    <MockFooter class="algrithm-view__footer" />
   </div>
 </template>
 
@@ -19,9 +18,8 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
   display: grid;
   grid-template-areas:
     'header header header header'
-    'editor editor visualizer visualizer'
-    'footer footer footer footer';
-  grid-template-rows: auto 3fr auto;
+    'editor editor visualizer visualizer';
+  grid-template-rows: auto 3fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   
 }
