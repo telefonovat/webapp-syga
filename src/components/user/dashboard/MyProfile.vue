@@ -3,16 +3,11 @@ import { router } from '@/router';
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useUserStore } from '@/store/user/userStore';
 import { computed } from 'vue';
+import LogoutButton from '../LogoutButton.vue';
 
 const editorStore = useEditorStore();
 const userStore = useUserStore();
 const username = computed(() => userStore.username);
-
-function logout() {
-  editorStore.$reset();
-  userStore.$reset();
-  router.replace('/');
-}
 </script>
 
 <template>
@@ -22,7 +17,7 @@ function logout() {
     </v-card>
     <v-card>
       <v-btn text="Settings" />
-      <v-btn text="Log out" @click="logout()" />
+      <LogoutButton />
     </v-card>
   </div>
 </template>

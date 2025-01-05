@@ -47,6 +47,7 @@ const onSubmit = () => {
     <template v-slot:activator="{ props: activatorProps }">
       <v-btn title="Log in" v-bind="activatorProps">
         <v-icon icon="mdi-login" />
+        <slot />
       </v-btn>
     </template>
     <v-sheet class="mx-auto" width="300">
