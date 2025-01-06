@@ -10,7 +10,7 @@ const isSidebarCollapsed = ref(false);
 <template>
   <v-app>
     <v-layout>
-      <v-app-bar title="Syga">
+      <v-app-bar density="compact" title="Syga">
         <template v-slot:prepend>
           <v-app-bar-nav-icon
             @click.stop="isSidebarCollapsed = !isSidebarCollapsed"
@@ -45,6 +45,7 @@ const isSidebarCollapsed = ref(false);
 <style scoped>
 .home-layout{
   display: flex;
+  height: 100%
 }
 
 

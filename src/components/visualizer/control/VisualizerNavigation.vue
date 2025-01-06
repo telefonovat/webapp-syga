@@ -34,7 +34,7 @@ function nextFrame() {
 </script>
 
 <template>
-  <div class="navigation-header mock">
+  <v-toolbar-items>
     <v-btn
       title="Play/Pause"
       :variant="isPlaying ? 'tonal' : 'elevated'"
@@ -54,7 +54,7 @@ function nextFrame() {
     <v-btn title="End" @click="jumpToEnd()">
       <v-icon icon="mdi-chevron-double-right" />
     </v-btn>
-  </div>
+  </v-toolbar-items>
 </template>
 
 <style scoped></style>

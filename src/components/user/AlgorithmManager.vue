@@ -19,7 +19,7 @@ function closeAlgorithm() {
 </script>
 
 <template>
-  <div class="algorithm-manager-panel">
+  <v-toolbar-items>
     <div class="algorithm-manager-panel__sub-panel">
       <SaveAlgorithmPopup>Save</SaveAlgorithmPopup>
     </div>
@@ -49,7 +49,7 @@ function closeAlgorithm() {
         :is-starred="userStore.algorithms.find(algorithm=>algorithm.uuid === editorStore.uuid!)!.isStarred"
       />
     </div>
-  </div>
+  </v-toolbar-items>
 </template>
 
 <style scoped>

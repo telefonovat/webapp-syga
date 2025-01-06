@@ -3,11 +3,12 @@ import { Codemirror } from 'vue-codemirror';
 import { python } from '@codemirror/lang-python';
 import { useEditorStore } from '@/store/editor/editorStore';
 import { storeToRefs } from 'pinia';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 const editorStore = useEditorStore();
 
 const { code } = storeToRefs(editorStore);
-const extensions = [python()];
+const extensions = [python(), oneDark];
 </script>
 
 <template>

@@ -5,12 +5,13 @@ import AlgorithmManager from '@/components/user/AlgorithmManager.vue';
 </script>
 
 <template>
-  <div class="algorithm-control-panel">
-    <VisualizerNavigation />
-    <CodeEditorNavigation />
+  <v-toolbar dark>
+    <AlgorithmManager />
+    <v-spacer />
 
-    <AlgorithmManager class="algorithm-control-panel__last-item" />
-  </div>
+    <CodeEditorNavigation />
+    <VisualizerNavigation />
+  </v-toolbar>
 </template>
 
 <style scoped>
