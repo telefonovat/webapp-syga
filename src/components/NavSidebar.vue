@@ -68,28 +68,6 @@ function toggleCollapse() {
           value="Settings"
           prepend-icon="mdi-cog-outline"
         ></v-list-item>
-
-        <!-- <v-list-item> -->
-        <!--   <v-btn title="Home" @click="goToHome()"> -->
-        <!--     <v-icon icon="mdi-home" /> -->
-        <!--   </v-btn> -->
-        <!-- </v-list-item> -->
-        <!-- <v-list-item> -->
-        <!--   <v-btn title="Go to profile" @click="goToProfile()"> -->
-        <!--     <v-icon icon="mdi-account-badge" /> -->
-        <!--   </v-btn> -->
-        <!-- </v-list-item> -->
-        <!-- <LogInDialog /> -->
-        <!-- <RegisterAccountDialog /> -->
-        <!-- <v-btn title="Files"> -->
-        <!--   <v-icon icon="mdi-file" /> -->
-        <!-- </v-btn> -->
-        <!-- <v-btn title="Favourites"> -->
-        <!--   <v-icon icon="mdi-star-outline" /> -->
-        <!-- </v-btn> -->
-        <!-- <v-btn title="Settings" @click="goToSettings()"> -->
-        <!--   <v-icon icon="mdi-cog-outline" /> -->
-        <!-- </v-btn> -->
       </v-list>
     </v-navigation-drawer>
   </div>

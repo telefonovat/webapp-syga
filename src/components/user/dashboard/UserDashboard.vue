@@ -29,22 +29,29 @@ const searchForUsername = (username: string) => {
 </script>
 
 <template>
-  <div class="user-dashboard mock">
-    <Searchbar
-      @search-for-user="(username) => searchForUsername(username)"
-      class="user-dashboard__searchbar"
-    />
-    <MyProfile class="user-dashboard__profile" />
-    <AlgorithmMenu
-      v-if="displayedBody === 'algorithm-menu'"
-      class="user-dashboard__body"
-    />
-    <SearchResultsList
-      v-else-if="displayedBody === 'search-results'"
-      class="user-dashboard__body"
-      :usernames="searchResults"
-    />
-  </div>
+  <!-- <div class="user-dashboard mock"></div> -->
+
+  <v-container>
+    <v-row>
+      <v-col>
+        <Searchbar
+          @search-for-user="(username) => searchForUsername(username)"
+        />
+      </v-col>
+      <v-col>
+        <MyProfile />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <AlgorithmMenu v-if="displayedBody === 'algorithm-menu'" />
+        <SearchResultsList
+          v-else-if="displayedBody === 'search-results'"
+          :usernames="searchResults"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
