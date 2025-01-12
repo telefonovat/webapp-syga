@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import LogInDialog from '@/components/user/LogInDialog.vue';
-import RegisterAccountDialog from './user/RegisterAccountDialog.vue';
+import RegisterAccountDialog from './user/authentication/RegisterAccountDialog.vue';
 import { router } from '@/router';
 import { ref } from 'vue';
 
@@ -10,8 +9,6 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
-
-const navigationDrawer = ref(false);
 
 const notLoggedInSnackBar = ref(false);
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { User } from '@/shared-types/user/Authentication';
-import SearchResultCard from './SearchResultCard.vue';
+import SearchResultCard from './SearchResultsListCard.vue';
 
 interface Props {
   usernames: User['username'][];

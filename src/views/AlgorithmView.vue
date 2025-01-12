@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Visualizer from '@/components/visualizer/Visualizer.vue';
-import MockFooter from '@/components/mock/sfc/MockFooter.vue';
 import CodeEditor from '@/components/editor/CodeEditor.vue';
 import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 </script>

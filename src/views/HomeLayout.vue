@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NavSidebar from '@/components/NavSidebar.vue';
-import UserAuthenticationPanel from '@/components/user/UserAuthenticationPanel.vue';
+import UserAuthenticationPanel from '@/components/user/authentication/UserAuthenticationPanel.vue';
 import { watch } from 'vue';
 import { ref } from 'vue';
 

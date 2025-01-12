@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { getUserAlgorithms } from '@/api/connector';
-import { Algorithm } from '@/shared-types/user/Algorithm';
-import AlgorithmCard from './AlgorithmCard.vue';
-import { ref } from 'vue';
+import AlgorithmCard from './AlgorithmMenuCard.vue';
 import { onMounted } from 'vue';
 import { useUserStore } from '@/store/user/userStore';
 import { computed } from 'vue';

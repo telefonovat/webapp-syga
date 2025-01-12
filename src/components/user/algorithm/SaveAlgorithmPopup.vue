@@ -7,7 +7,7 @@ import { Algorithm } from '@/shared-types/user/Algorithm';
 import { useEditorStore } from '@/store/editor/editorStore';
 import { useUserStore } from '@/store/user/userStore';
 import { ref } from 'vue';
-import SimpleMessagePopup from '@/components/user/SimpleMessagePopup.vue';
+import SimpleMessagePopup from '@/components/utility/SimpleMessagePopup.vue';
 
 interface Props {
   defaultTitle?: string;

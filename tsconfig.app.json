@@ -32,5 +32,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/stores/visualizerStore.ts",
-  "test/**/*.ts"]
+  "test/**/*.ts", "src/components/utility/SimpleMessagePopup.vue", "src/components/util/SimpleMessagePopup.vue", "src/components/visualizer/VisualizerNavigation.vue"]
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import VisualizerNavigation from '@/components/visualizer/control/VisualizerNavigation.vue';
-import CodeEditorNavigation from '@/components/editor/control/CodeEditorNavigation.vue';
+import VisualizerNavigation from '@/components/visualizer/VisualizerNavigation.vue';
+import CodeEditorNavigation from '@/components/editor/CodeEditorNavigation.vue';
 import AlgorithmManager from '@/components/user/AlgorithmManager.vue';
 </script>
 
