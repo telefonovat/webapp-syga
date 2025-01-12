@@ -29,11 +29,9 @@ const searchForUsername = (username: string) => {
 </script>
 
 <template>
-  <!-- <div class="user-dashboard mock"></div> -->
-
-  <v-container>
-    <v-row>
-      <v-col>
+  <v-container style="border-color: blue" class="ma-0 pa-0">
+    <v-row class="ma-0 pa-0">
+      <v-col class="ma-0 pa-0">
         <Searchbar
           @search-for-user="(username) => searchForUsername(username)"
         />
@@ -42,12 +40,17 @@ const searchForUsername = (username: string) => {
         <MyProfile />
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <AlgorithmMenu v-if="displayedBody === 'algorithm-menu'" />
+    <v-row class="ma-0 pa-0">
+      <v-col class="ma-0 pa-0">
+        <AlgorithmMenu
+          v-if="displayedBody === 'algorithm-menu'"
+          class="ma-0 pa-0"
+        />
+
         <SearchResultsList
           v-else-if="displayedBody === 'search-results'"
           :usernames="searchResults"
+          class="ma-0 pa-0"
         />
       </v-col>
     </v-row>

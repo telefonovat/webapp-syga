@@ -45,11 +45,13 @@ const isSidebarCollapsed = ref(false);
 <style scoped>
 .home-layout{
   display: flex;
-  height: 100%
+  height: 100%;
 }
 
 
 .home-layout__main{
   flex-grow: 1;
+  height: 100%;
+  overflow-y: scroll;
 }
 </style>

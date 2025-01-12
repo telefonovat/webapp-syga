@@ -11,8 +11,8 @@ const { isAuthenticated } = storeToRefs(userStore);
 </script>
 
 <template>
-  <UserDashboard />
-
-  <MockFooter />
+  <v-container>
+    <UserDashboard class="mock" />
+  </v-container>
 </template>
 <style scoped></style>

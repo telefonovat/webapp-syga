@@ -18,9 +18,10 @@ const extensions = [python(), oneDark];
 </template>
 
 <style scoped>
-.code-editor{
+.cm-editor, .code-editor{
   background-color: #282c34;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
 </style>

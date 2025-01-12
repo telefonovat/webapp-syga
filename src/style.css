@@ -19,7 +19,12 @@
 * {
   margin: 0;
   padding: 0;
-  overflow: auto;
+  /* overflow: auto; */
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -42,5 +47,14 @@ body {
 }
 
 /*
+* Utility classes
+*/
+
+/*
 * Mock styling for high-contrasted visuals during development
 */
+
+.mock {
+  /* border-style: solid; */
+  /* border-color: red; */
+}
