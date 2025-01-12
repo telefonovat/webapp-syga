@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
+import { storeToRefs } from 'pinia';
 
 import { computed } from 'vue';
 const store_ = useVisualizerStore();
 
 const numberOfFrames = computed(() => store_.numberOfFrames);
-const activeFrameNumber = computed(() => store_.activeFrameNumber);
+
+const { activeFrameNumber } = storeToRefs(store_);
 
 const isPlaying = computed(() => store_.isPlaying);
 function togglePlay() {
@@ -48,6 +50,17 @@ function nextFrame() {
     <v-btn title="Left" @click="prevFrame()">
       <v-icon icon="mdi-chevron-left" />
     </v-btn>
+    <v-container>
+      <v-slider
+        v-model="activeFrameNumber"
+        min-width="200"
+        min="0"
+        :max="numberOfFrames - 1"
+        step="1"
+        thumb-label
+        :disabled="numberOfFrames === 0"
+      ></v-slider>
+    </v-container>
     <v-btn title="Right" @click="nextFrame()">
       <v-icon icon="mdi-chevron-right" />
     </v-btn>
