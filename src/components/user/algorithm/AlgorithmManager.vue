@@ -2,9 +2,9 @@
 import { router } from '@/router';
 import { useEditorStore } from '@/store/editor/editorStore';
 
-import SaveAlgorithmPopup from './algorithm/SaveAlgorithmPopup.vue';
-import DeleteAlgorithmPopUp from './algorithm/DeleteAlgorithmPopUp.vue';
-import MarkFavouriteButton from './algorithm/MarkFavouriteButton.vue';
+import SaveAlgorithmPopup from './SaveAlgorithmPopup.vue';
+import DeleteAlgorithmPopUp from './DeleteAlgorithmPopUp.vue';
+import MarkFavouriteButton from './MarkFavouriteButton.vue';
 import { useUserStore } from '@/store/user/userStore';
 import { userInfo } from 'os';
 
