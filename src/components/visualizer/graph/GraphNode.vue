@@ -37,7 +37,12 @@ const props_ = withDefaults(defineProps<Props>(), {
       :height="radius * 2"
       :fill="color"
     />
-    <text :x="x" :y="y" text-anchor="middle">
+    <text
+      :x="x"
+      :y="y"
+      text-anchor="middle"
+      dominant-baseline="middle"
+    >
       {{ label }}
     </text>
   </g>

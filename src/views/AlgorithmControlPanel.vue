@@ -7,8 +7,8 @@ import AlgorithmManager from '@/components/user/algorithm/AlgorithmManager.vue';
 <template>
   <v-toolbar dark>
     <AlgorithmManager />
-    <v-spacer />
 
+    <v-spacer />
     <CodeEditorNavigation />
     <VisualizerNavigation />
   </v-toolbar>

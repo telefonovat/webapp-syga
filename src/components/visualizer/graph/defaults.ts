@@ -6,13 +6,13 @@ type DefaultValues = {
 const defaultNodeSettings: DefaultValues = {
   color: '#555',
   shape: 'circle' as string,
-  radius: 20 as number,
+  radius: 12 as number,
 };
 
 const defaultEdgeSettings: DefaultValues = {
   color: '#aaa' as string,
   shape: 'solid' as string,
-  width: 5,
+  width: 3,
   isDirected: false,
 };
 

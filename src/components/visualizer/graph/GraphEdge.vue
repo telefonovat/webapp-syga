@@ -46,8 +46,8 @@ onMounted(() => {
     <defs>
       <marker
         :id="arrowheadId"
-        markerWidth="4"
-        markerHeight="4"
+        markerWidth="3"
+        markerHeight="3"
         refX="6"
         refY="1.75"
         orient="auto"

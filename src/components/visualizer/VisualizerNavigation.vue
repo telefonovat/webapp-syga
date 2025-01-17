@@ -50,6 +50,9 @@ function nextFrame() {
     <v-btn title="Left" @click="prevFrame()">
       <v-icon icon="mdi-chevron-left" />
     </v-btn>
+    <v-card-item>
+      {{ activeFrameNumber + 1 }}
+    </v-card-item>
     <v-container>
       <v-slider
         v-model="activeFrameNumber"
@@ -57,7 +60,6 @@ function nextFrame() {
         min="0"
         :max="numberOfFrames - 1"
         step="1"
-        thumb-label
         :disabled="numberOfFrames === 0"
       ></v-slider>
     </v-container>
