@@ -24,9 +24,11 @@ const {
   nodeColors,
   nodePositions,
   nodeShapes,
+  nodeLabels,
   edges,
   edgeColors,
   edgeShapes,
+  edgeLabels,
 } = useRenderData(props_.componentIndex, props_.viewBoxSize);
 
 //Get props to pass to GraphNode
@@ -46,7 +48,7 @@ function getNodeProps(node: Node): NodeProps {
   const data: NodeProps = {
     x: nodePositions.value[node].x,
     y: nodePositions.value[node].y,
-    label: node,
+    label: nodeLabels.value[node] ?? node,
     ...(nodeHasColor && { color: nodeColors.value[node] }),
     ...(nodeHasShape && { shape: nodeShapes.value[node] }),
   };
@@ -74,14 +76,21 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
     u in edgeShapes.value &&
     v in edgeShapes.value[u] &&
     edgeShapes.value[u][v] !== null;
+  let edgeHasLabel =
+    u in edgeLabels.value &&
+    v in edgeLabels.value[u] &&
+    edgeLabels.value[u][v] !== null;
   const data = {
     x1: nodePositions.value[u].x,
     y1: nodePositions.value[u].y,
     x2: nodePositions.value[v].x,
     y2: nodePositions.value[v].y,
+
+    ...(edgeHasLabel && { label: edgeLabels.value[u][v] }),
     ...(edgeHasColour && { color: edgeColors.value[u][v] }),
     ...(edgeHasShape && { shape: edgeShapes.value[u][v] }),
   };
+  // console.log(data);
   return data;
 }
 </script>

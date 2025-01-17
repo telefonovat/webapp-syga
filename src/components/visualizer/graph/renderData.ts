@@ -35,6 +35,10 @@ export function useRenderData(
     return component.value ? component.value.style.nodeShapes : {};
   });
 
+  const nodeLabels = computed(() =>
+    component.value ? component.value.style.nodeLabels : {}
+  );
+
   const edges = computed(() => {
     return component.value ? component.value.edges : [];
   });
@@ -45,6 +49,10 @@ export function useRenderData(
 
   const edgeShapes = computed(() => {
     return component.value ? component.value.style.edgeShapes : {};
+  });
+
+  const edgeLabels = computed(() => {
+    return component.value ? component.value.style.edgeLabels : {};
   });
 
   //Evenly places nodes on the circumference of a circle
@@ -69,8 +77,10 @@ export function useRenderData(
     nodeColors,
     nodePositions,
     nodeShapes,
+    nodeLabels,
     edges,
     edgeColors,
     edgeShapes,
+    edgeLabels,
   };
 }

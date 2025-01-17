@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 import { defaultEdgeSettings } from './defaults';
 import { computed } from 'vue';
 
@@ -12,6 +12,7 @@ interface Props {
   color?: string;
   shape?: string;
   width?: number;
+  label?: string;
   isDirected?: boolean;
 }
 
@@ -66,6 +67,7 @@ onMounted(() => {
       :stroke-dasharray="strokeDashArray"
       :marker-end="isDirected ? `url(#${arrowheadId})` : undefined"
     />
+    <text :x="(x1 + x2) / 2" :y="(y1 + y2) / 2">{{ label }}</text>
   </g>
 </template>
 
