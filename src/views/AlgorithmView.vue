@@ -20,7 +20,9 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
       </v-col>
       <v-divider vertical />
       <v-col cols="6" class="ma-0 pa-0 h-100">
+        <!-- <v-row> -->
         <Visualizer />
+        <!-- </v-row> -->
       </v-col>
     </v-row>
   </v-container>

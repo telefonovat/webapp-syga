@@ -96,6 +96,7 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
 </script>
 
 <template>
+  <!-- <v-container class="ma-0 pa-0"> -->
   <svg
     class="component-renderer mock"
     :viewBox="`0 0 ${props_.viewBoxSize} ${props_.viewBoxSize}`"
@@ -114,10 +115,12 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
       <GraphNode v-bind="getNodeProps(node)" />
     </template>
   </svg>
+  <!-- </v-container> -->
 </template>
 
 <style scoped>
 .component-renderer{
-  flex-grow: 1;
+  /* flex-grow:; */
+  height: 75%;
 }
 </style>

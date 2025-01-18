@@ -63,6 +63,7 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
   }
 
   return {
+    frames_,
     currentFrame,
     activeFrameNumber,
     numberOfFrames,
