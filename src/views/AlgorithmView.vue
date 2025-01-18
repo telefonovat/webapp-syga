@@ -5,7 +5,8 @@ import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
 </script>
 
 <template>
-  <v-container class="ma-0 pa-0" style="height: 85%" fluid>
+  <!-- Hack: 88% of ancestor height is the sweet spot -->
+  <v-container class="ma-0 pa-0" style="height: 88%" fluid>
     <v-row class="ma-0 pa-0">
       <AlgorithmControlPanel />
     </v-row>

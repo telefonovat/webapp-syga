@@ -9,6 +9,7 @@ import ComponentRenderer from './graph/ComponentRenderer.vue';
 
 <style scoped>
 .visualizer{
+  display: flex;
   background-color: #282c34;
   width: 100%;
   height:100%; 

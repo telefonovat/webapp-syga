@@ -116,4 +116,8 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
   </svg>
 </template>
 
-<style scoped></style>
+<style scoped>
+.component-renderer{
+  flex-grow: 1;
+}
+</style>

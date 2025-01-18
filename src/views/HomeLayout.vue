@@ -9,7 +9,7 @@ const isSidebarCollapsed = ref(false);
 
 <template>
   <v-app>
-    <v-layout>
+    <v-layout class="h-100">
       <v-app-bar density="compact" title="Syga">
         <template v-slot:prepend>
           <v-app-bar-nav-icon
@@ -21,23 +21,24 @@ const isSidebarCollapsed = ref(false);
           <UserAuthenticationPanel />
         </template>
       </v-app-bar>
-      <v-main>
-        <div class="home-layout">
-          <aside
-            class="home-layout__sidebar"
-            :class="{ 'transparent-overlay': isSidebarCollapsed }"
-          >
-            <NavSidebar
-              :is-collapsed="isSidebarCollapsed"
-              @collapseSidebar="() => (isSidebarCollapsed = true)"
-              @expandSidebar="() => (isSidebarCollapsed = false)"
-            />
-          </aside>
-          <main class="home-layout__main mock">
-            <RouterView name="main" />
-          </main>
-        </div>
+      <!-- <v-main> -->
+      <!-- <div class="home-layout"> -->
+      <aside
+        class="home-layout__sidebar"
+        :class="{ 'transparent-overlay': isSidebarCollapsed }"
+      >
+        <NavSidebar
+          :is-collapsed="isSidebarCollapsed"
+          @collapseSidebar="() => (isSidebarCollapsed = true)"
+          @expandSidebar="() => (isSidebarCollapsed = false)"
+        />
+      </aside>
+      <v-main class="home-layout__main mock">
+        <RouterView name="main" />
       </v-main>
+      <v-footer app></v-footer>
+      <!-- </div> -->
+      <!-- </v-main> -->
     </v-layout>
   </v-app>
 </template>
