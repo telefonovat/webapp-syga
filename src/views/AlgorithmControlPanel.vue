@@ -5,12 +5,15 @@ import AlgorithmManager from '@/components/user/algorithm/AlgorithmManager.vue';
 </script>
 
 <template>
-  <v-toolbar dark>
-    <AlgorithmManager />
+  <v-toolbar dark density="compact">
+    <AlgorithmManager style="max-width: 50%" />
 
     <v-spacer />
-    <CodeEditorNavigation />
-    <VisualizerNavigation />
+    <v-divider vertical />
+    <v-toolbar-items class="d-flex" style="max-width: 50%">
+      <CodeEditorNavigation />
+      <VisualizerNavigation />
+    </v-toolbar-items>
   </v-toolbar>
 </template>
 

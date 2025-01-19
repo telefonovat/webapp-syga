@@ -36,40 +36,38 @@ function nextFrame() {
 </script>
 
 <template>
-  <v-toolbar-items>
-    <v-btn
-      title="Play/Pause"
-      :variant="isPlaying ? 'tonal' : 'elevated'"
-      @click="togglePlay()"
-    >
-      <v-icon icon="mdi-play-pause" />
-    </v-btn>
-    <v-btn title="Start" @click="jumpToStart()">
-      <v-icon icon="mdi-chevron-double-left" />
-    </v-btn>
-    <v-btn title="Left" @click="prevFrame()">
-      <v-icon icon="mdi-chevron-left" />
-    </v-btn>
-    <v-card-item>
-      {{ activeFrameNumber + 1 }}
-    </v-card-item>
-    <v-container>
-      <v-slider
-        v-model="activeFrameNumber"
-        min-width="200"
-        min="0"
-        :max="numberOfFrames - 1"
-        step="1"
-        :disabled="numberOfFrames === 0"
-      ></v-slider>
-    </v-container>
-    <v-btn title="Right" @click="nextFrame()">
-      <v-icon icon="mdi-chevron-right" />
-    </v-btn>
-    <v-btn title="End" @click="jumpToEnd()">
-      <v-icon icon="mdi-chevron-double-right" />
-    </v-btn>
-  </v-toolbar-items>
+  <v-btn
+    title="Play/Pause"
+    :variant="isPlaying ? 'tonal' : 'elevated'"
+    @click="togglePlay()"
+  >
+    <v-icon icon="mdi-play-pause" />
+  </v-btn>
+  <v-btn title="Start" @click="jumpToStart()">
+    <v-icon icon="mdi-chevron-double-left" />
+  </v-btn>
+  <v-btn title="Left" @click="prevFrame()">
+    <v-icon icon="mdi-chevron-left" />
+  </v-btn>
+  <v-card-item>
+    {{ activeFrameNumber + 1 }}
+  </v-card-item>
+  <v-container>
+    <v-slider
+      v-model="activeFrameNumber"
+      min-width="200"
+      min="0"
+      :max="numberOfFrames - 1"
+      step="1"
+      :disabled="numberOfFrames === 0"
+    ></v-slider>
+  </v-container>
+  <v-btn title="Right" @click="nextFrame()">
+    <v-icon icon="mdi-chevron-right" />
+  </v-btn>
+  <v-btn title="End" @click="jumpToEnd()">
+    <v-icon icon="mdi-chevron-double-right" />
+  </v-btn>
 </template>
 
 <style scoped></style>

@@ -10,7 +10,7 @@ const visualizerStore = useVisualizerStore();
 const { frames_, activeFrameNumber } = storeToRefs(visualizerStore);
 
 const processedFrames = computed(() =>
-  frames_.value.slice(0, activeFrameNumber.value)
+  frames_.value.slice(0, activeFrameNumber.value + 1)
 );
 
 const consoleOutputs = computed<ConsoleOutput[]>(() => {
@@ -33,7 +33,10 @@ const consoleOutputs = computed<ConsoleOutput[]>(() => {
 <template>
   <v-container class="visualizer-console ma-0 pa-0">
     <template v-for="output in consoleOutputs">
-      <v-container class="d-flex">
+      <v-container
+        class="d-flex"
+        style="background-color: rgba(0, 0, 0, 0.1)"
+      >
         <pre>{{ output[0] }}</pre>
         <v-spacer />
         <span>{{ output[1] }}</span>

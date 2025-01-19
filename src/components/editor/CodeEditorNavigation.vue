@@ -36,12 +36,11 @@ function build() {
 </script>
 
 <template>
-  <v-toolbar-items>
-    <v-btn @click="build()" title="Build">
-      <v-icon icon="mdi-hammer-screwdriver" />
-      Build
-    </v-btn>
-  </v-toolbar-items>
+  <v-btn
+    icon="mdi-hammer-screwdriver"
+    @click="build()"
+    title="Build"
+  ></v-btn>
 
   <v-dialog v-model="isBuilding" max-width="500">
     <template v-slot:default="{ isActive }">

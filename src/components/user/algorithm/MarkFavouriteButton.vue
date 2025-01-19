@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { updateUserAlgorithm } from '@/api/connector';
 import { useUserStore } from '@/store/user/userStore';
-import { computed } from 'vue';
 interface Props {
   uuid: string;
   isStarred: boolean;
