@@ -35,6 +35,7 @@ const handleClick = () => {
     throw new Error('Please log in first');
   }
   const algorithmUpdate: Partial<Algorithm> = {
+    title: editorStore.title!,
     code: editorStore.code,
   };
   if (editorStore.isInDatabase && !props.duplicate) {

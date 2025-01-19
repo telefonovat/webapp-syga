@@ -30,7 +30,9 @@ const deleteAlgorithm = () => {
 </script>
 
 <template>
-  <v-btn @click="dialogState.deleteAlgorithm = true">Delete</v-btn>
+  <v-btn @click="dialogState.deleteAlgorithm = true">
+    <slot />
+  </v-btn>
   <v-dialog v-model="dialogState.deleteAlgorithm" max-width="320">
     <v-card>
       <v-card-text>

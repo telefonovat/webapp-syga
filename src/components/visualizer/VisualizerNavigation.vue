@@ -55,7 +55,8 @@ function nextFrame() {
   <v-container>
     <v-slider
       v-model="activeFrameNumber"
-      min-width="200"
+      min-width="150"
+      max-width="300"
       min="0"
       :max="numberOfFrames - 1"
       step="1"

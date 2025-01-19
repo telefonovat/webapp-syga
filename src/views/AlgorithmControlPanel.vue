@@ -6,11 +6,10 @@ import AlgorithmManager from '@/components/user/algorithm/AlgorithmManager.vue';
 
 <template>
   <v-toolbar dark density="compact">
-    <AlgorithmManager style="max-width: 50%" />
+    <AlgorithmManager style="width: 50%" />
 
-    <v-spacer />
     <v-divider vertical />
-    <v-toolbar-items class="d-flex" style="max-width: 50%">
+    <v-toolbar-items class="d-flex" style="width: 50%">
       <CodeEditorNavigation />
       <VisualizerNavigation />
     </v-toolbar-items>
