@@ -61,6 +61,11 @@ function toggleCollapse() {
           @click="goToProfile()"
         ></v-list-item>
         <v-list-item
+          title="Featured"
+          value="Featured"
+          prepend-icon="mdi-rocket-launch-outline"
+        ></v-list-item>
+        <v-list-item
           title="Settings"
           value="Settings"
           prepend-icon="mdi-cog-outline"

@@ -109,7 +109,7 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
   }
 
   const response = await fetch(
-    `/api/users/${username.value}/algorithms`,
+    `/api/user/${username.value}/algorithms`,
     {
       method: 'GET',
       headers: {
@@ -148,7 +148,7 @@ const updateUserAlgorithm = async (
   const requestBody: APIRequest = {
     content: algorithmUpdate,
   };
-  const response = await fetch(`/api/algorithms/detail/${uuid}`, {
+  const response = await fetch(`/api/algorithm/detail/${uuid}`, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',
@@ -169,7 +169,7 @@ const deleteUserAlgorithm = async (uuid: Algorithm['uuid']) => {
     throw new Error('Username not defined');
   }
 
-  const response = await fetch(`/api/algorithms/detail/${uuid}`, {
+  const response = await fetch(`/api/algorithm/detail/${uuid}`, {
     method: 'DELETE',
     headers: {
       Accept: 'application/json',
@@ -195,7 +195,7 @@ const saveUserAlgorithm = async (
     content: algorithm,
   };
   const response = await fetch(
-    `/api/users/${username.value}/algorithms`,
+    `/api/user/${username.value}/algorithms`,
     {
       method: 'POST',
       headers: {
@@ -238,7 +238,7 @@ const getUserPublicAlgorithms = async (
   username: string
 ): Promise<Algorithm[]> => {
   const response = await fetch(
-    `/api/users/${username}/algorithms/public`,
+    `/api/user/${username}/algorithms/public`,
     {
       method: 'GET',
       headers: {

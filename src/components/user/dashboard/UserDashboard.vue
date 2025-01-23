@@ -29,17 +29,18 @@ const searchForUsername = (username: string) => {
 </script>
 
 <template>
-  <v-container style="border-color: blue" class="ma-0 pa-0">
+  <v-container class="ma-0 pa-0" fluid>
     <v-row class="ma-0 pa-0">
       <v-col class="ma-0 pa-0">
         <Searchbar
           @search-for-user="(username) => searchForUsername(username)"
         />
       </v-col>
-      <v-col>
+      <v-col class="ma-0 pa-0">
         <MyProfile />
       </v-col>
     </v-row>
+    <v-divider />
     <v-row class="ma-0 pa-0">
       <v-col class="ma-0 pa-0">
         <AlgorithmMenu

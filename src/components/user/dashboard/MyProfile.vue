@@ -8,7 +8,7 @@ const username = computed(() => userStore.username);
 </script>
 
 <template>
-  <div class="user-profile">
+  <v-container class="ma-0 pa-0">
     <v-card>
       <div class="text-overline mb-1">Welcome {{ username }}</div>
     </v-card>
@@ -16,7 +16,7 @@ const username = computed(() => userStore.username);
       <v-btn text="Settings" />
       <LogoutButton />
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <style scoped>

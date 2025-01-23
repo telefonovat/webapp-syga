@@ -62,7 +62,9 @@ const copyLink = () => {
     <v-card-title>{{ title }}</v-card-title>
     <v-card-actions>
       <v-btn @click="openAlgorithm()">Open</v-btn>
-      <DeleteAlgorithmPopUp :title="title" :uuid="uuid" />
+      <DeleteAlgorithmPopUp :title="title" :uuid="uuid">
+        Delete
+      </DeleteAlgorithmPopUp>
       <v-btn @click="copyLink()">Share</v-btn>
       <MarkFavouriteButton :uuid="uuid" :is-starred="isStarred" />
     </v-card-actions>

@@ -21,15 +21,17 @@ function refresh() {
 
 <template>
   <div class="algorithm-menu">
-    <v-btn @click="refresh()">Refresh</v-btn>
+    <!-- <v-btn @click="refresh()">Refresh</v-btn> -->
     <v-card title="Algorithms" />
-    <AlgorithmCard
-      v-for="algorithm in algorithms"
-      :uuid="algorithm.uuid"
-      :title="algorithm.title"
-      :tags="algorithm.tags"
-      :is-starred="algorithm.isStarred"
-    />
+    <template v-for="algorithm in algorithms">
+      <v-divider />
+      <AlgorithmCard
+        :uuid="algorithm.uuid"
+        :title="algorithm.title"
+        :tags="algorithm.tags"
+        :is-starred="algorithm.isStarred"
+      />
+    </template>
   </div>
 </template>
 
