@@ -64,6 +64,11 @@ function closeAlgorithm() {
       />
       <v-btn icon="mdi-close" @click="closeAlgorithm()"></v-btn>
     </div>
+    <div v-else class="algorithm-manager-panel__sub-panel">
+      <SaveAlgorithmPopup>
+        <v-icon icon="mdi-content-save" />
+      </SaveAlgorithmPopup>
+    </div>
   </v-toolbar-items>
 </template>
 

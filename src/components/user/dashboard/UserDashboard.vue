@@ -29,33 +29,34 @@ const searchForUsername = (username: string) => {
 </script>
 
 <template>
-  <v-container class="ma-0 pa-0" fluid>
-    <v-row class="ma-0 pa-0">
-      <v-col class="ma-0 pa-0">
-        <Searchbar
-          @search-for-user="(username) => searchForUsername(username)"
-        />
-      </v-col>
-      <v-col class="ma-0 pa-0">
-        <MyProfile />
-      </v-col>
-    </v-row>
-    <v-divider />
-    <v-row class="ma-0 pa-0">
-      <v-col class="ma-0 pa-0">
-        <AlgorithmMenu
-          v-if="displayedBody === 'algorithm-menu'"
-          class="ma-0 pa-0"
-        />
-
-        <SearchResultsList
-          v-else-if="displayedBody === 'search-results'"
-          :usernames="searchResults"
-          class="ma-0 pa-0"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+  <AlgorithmMenu />
+  <!-- <v-container class="ma-0 pa-0" fluid> -->
+  <!--   <v-row class="ma-0 pa-0"> -->
+  <!--     <v-col class="ma-0 pa-0"> -->
+  <!--       <Searchbar -->
+  <!--         @search-for-user="(username) => searchForUsername(username)" -->
+  <!--       /> -->
+  <!--     </v-col> -->
+  <!--     <v-col class="ma-0 pa-0"> -->
+  <!--       <MyProfile /> -->
+  <!--     </v-col> -->
+  <!--   </v-row> -->
+  <!--   <v-divider /> -->
+  <!--   <v-row class="ma-0 pa-0"> -->
+  <!--     <v-col class="ma-0 pa-0"> -->
+  <!--       <AlgorithmMenu -->
+  <!--         v-if="displayedBody === 'algorithm-menu'" -->
+  <!--         class="ma-0 pa-0" -->
+  <!--       /> -->
+  <!---->
+  <!--       <SearchResultsList -->
+  <!--         v-else-if="displayedBody === 'search-results'" -->
+  <!--         :usernames="searchResults" -->
+  <!--         class="ma-0 pa-0" -->
+  <!--       /> -->
+  <!--     </v-col> -->
+  <!--   </v-row> -->
+  <!-- </v-container> -->
 </template>
 
 <style scoped>

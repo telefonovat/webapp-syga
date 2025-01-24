@@ -21,8 +21,6 @@ const isSidebarCollapsed = ref(false);
           <UserAuthenticationPanel />
         </template>
       </v-app-bar>
-      <!-- <v-main> -->
-      <!-- <div class="home-layout"> -->
       <aside
         class="home-layout__sidebar"
         :class="{ 'transparent-overlay': isSidebarCollapsed }"
@@ -37,8 +35,6 @@ const isSidebarCollapsed = ref(false);
         <RouterView name="main" />
       </v-main>
       <v-footer app></v-footer>
-      <!-- </div> -->
-      <!-- </v-main> -->
     </v-layout>
   </v-app>
 </template>
