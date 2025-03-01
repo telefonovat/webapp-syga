@@ -24,7 +24,7 @@ function build() {
 
   buildCode(visualizationRequest)
     .then((visualizationResult: VisualizationResult) => {
-      visualizerStore.setFrames(visualizationResult.frames);
+      visualizerStore.frames = visualizationResult.frames;
     })
     .catch((error) => {
       console.warn(error);

@@ -39,8 +39,6 @@ const buildCode = async (
 
   const responseJSON = (await response.json()) as APIResponse;
 
-  validateResponse(responseJSON);
-
   const visualizationResult: VisualizationResult =
     responseJSON.content as VisualizationResult;
 
