@@ -3,8 +3,27 @@ import { useTicker } from './ticker';
 import { createPinia } from 'pinia';
 import { useAnimationStore_ } from './animationStore';
 import { Frame } from '@/shared-types/visualization/Frame';
+import { useVisualizerStore } from './visualizerStore';
 
-describe('Ticker store', () => {
+const testFrames: Frame[] = [
+  {
+    lineNo: [0],
+    consoleLogs: 'frame 0',
+    components: [],
+  },
+  {
+    lineNo: [1],
+    consoleLogs: 'frame 1',
+    components: [],
+  },
+  {
+    lineNo: [2],
+    consoleLogs: 'frame 2',
+    components: [],
+  },
+];
+
+describe('Private Ticker store', () => {
   it('should not tick before tick period ends', () => {
     const store = useTicker(createPinia());
 
@@ -23,7 +42,7 @@ describe('Ticker store', () => {
   });
 });
 
-describe('Animation Store', () => {
+describe('Private Animation Store', () => {
   it('throws errors if frame movement is done when there are no frames', () => {
     const store = useAnimationStore_(createPinia());
 
@@ -35,24 +54,6 @@ describe('Animation Store', () => {
 
   it('should cycle through frames correctly', () => {
     const store = useAnimationStore_(createPinia());
-
-    const testFrames: Frame[] = [
-      {
-        lineNo: [],
-        consoleLogs: 'frame 0',
-        components: [],
-      },
-      {
-        lineNo: [],
-        consoleLogs: 'frame 1',
-        components: [],
-      },
-      {
-        lineNo: [],
-        consoleLogs: 'frame 2',
-        components: [],
-      },
-    ];
 
     store.setFrames(testFrames);
 
@@ -70,5 +71,27 @@ describe('Animation Store', () => {
     store.prevFrame();
     expect(store.activeFrameNumber).toBe(1);
     expect(store.currentFrame?.consoleLogs).toBe('frame 1');
+  });
+});
+
+describe('Visualizer Store', () => {
+  it('should set active frame number correctly', () => {
+    const store = useVisualizerStore(createPinia());
+
+    expect(store.activeFrameNumber).toEqual(0);
+
+    store.setFrames(testFrames);
+    store.setActiveFrame(testFrames.length - 1);
+    expect(store.activeFrameNumber).toEqual(testFrames.length - 1);
+  });
+
+  it('should set frames correctly', () => {
+    const store = useVisualizerStore(createPinia());
+
+    expect(store.frames).toEqual([]);
+
+    store.setFrames(testFrames);
+
+    expect(store.frames).toEqual(testFrames);
   });
 });
