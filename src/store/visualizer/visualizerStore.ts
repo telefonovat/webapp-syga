@@ -14,7 +14,7 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     lastTick,
   } = storeToRefs(ticker_);
 
-  const { numberOfFrames, frames_, activeFrameNumber } =
+  const { numberOfFrames, frames, activeFrameNumber } =
     storeToRefs(animationStore_);
 
   const currentFrame = computed(() => animationStore_.currentFrame);
@@ -53,8 +53,8 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     }
     activeFrameNumber.value = frameNumber;
   }
-  function setFrames(frames: Frame[]) {
-    frames_.value = frames;
+  function setFrames(newFrames: Frame[]) {
+    animationStore_.setFrames(newFrames);
   }
 
   function $reset() {
@@ -63,7 +63,7 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
   }
 
   return {
-    frames_,
+    frames,
     currentFrame,
     activeFrameNumber,
     numberOfFrames,

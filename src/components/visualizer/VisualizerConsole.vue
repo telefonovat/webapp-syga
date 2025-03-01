@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { storeToRefs } from 'pinia';
-import { computed, watch } from 'vue';
+import { computed } from 'vue';
 
 type ConsoleOutput = [log: string, metaInfo: string];
 
 const visualizerStore = useVisualizerStore();
 
-const { frames_, activeFrameNumber } = storeToRefs(visualizerStore);
+const { frames, activeFrameNumber } = storeToRefs(visualizerStore);
 
 const processedFrames = computed(() =>
-  frames_.value.slice(0, activeFrameNumber.value + 1)
+  frames.value.slice(0, activeFrameNumber.value + 1)
 );
 
 const consoleOutputs = computed<ConsoleOutput[]>(() => {
