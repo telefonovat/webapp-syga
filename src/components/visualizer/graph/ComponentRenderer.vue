@@ -15,7 +15,7 @@ interface Props {
   viewBoxSize?: number;
 }
 
-const props_ = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   viewBoxSize: defaultRendererSettings['viewBoxSize'] as number,
 });
 
@@ -30,7 +30,7 @@ const {
   edgeColors,
   edgeShapes,
   edgeLabels,
-} = toRefs(useRenderData(props_.componentIndex, props_.viewBoxSize));
+} = toRefs(useRenderData(props.componentIndex, props.viewBoxSize));
 
 //Get props to pass to GraphNode
 type NodeProps = InstanceType<typeof GraphNode>['$props'];
@@ -100,7 +100,7 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
   <!-- <v-container class="ma-0 pa-0"> -->
   <svg
     class="component-renderer mock"
-    :viewBox="`0 0 ${props_.viewBoxSize} ${props_.viewBoxSize}`"
+    :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`"
   >
     <template v-for="(edge, index) in edges">
       <GraphEdge

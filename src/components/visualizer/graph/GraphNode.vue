@@ -11,7 +11,7 @@ interface Props {
   radius?: number;
 }
 
-const props_ = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   //Is this dangerous?
   color: defaultNodeSettings['color'] as string,
   shape: defaultNodeSettings['shape'] as string,

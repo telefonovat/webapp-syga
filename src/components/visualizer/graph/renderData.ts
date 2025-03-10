@@ -10,9 +10,9 @@ export function useRenderData(
   componentIndex: number,
   viewBoxSize: number
 ): Reactive<RenderData> {
-  const store_ = useVisualizerStore();
+  const store = useVisualizerStore();
 
-  const { currentFrame } = storeToRefs(store_);
+  const { currentFrame } = storeToRefs(store);
 
   const component = computed(() => {
     return currentFrame.value

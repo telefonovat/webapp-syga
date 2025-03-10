@@ -16,17 +16,17 @@ interface Props {
   isDirected?: boolean;
 }
 
-const props_ = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   color: defaultEdgeSettings['color'] as string,
   shape: defaultEdgeSettings['shape'] as string,
   width: defaultEdgeSettings['width'] as number,
   isDirected: defaultEdgeSettings['isDirected'] as boolean,
 });
 
-const arrowheadId = `arrowhead-${props_.index}`;
+const arrowheadId = `arrowhead-${props.index}`;
 //stroke-dasharray to pass to svg line
 const strokeDashArray = computed(() => {
-  switch (props_.shape) {
+  switch (props.shape) {
     case 'dashed':
       return '6 6';
     case 'dotted':
@@ -37,7 +37,7 @@ const strokeDashArray = computed(() => {
 });
 
 onMounted(() => {
-  // console.log(`directed : ${props_.isDirected}`);
+  // console.log(`directed : ${props.isDirected}`);
   // console.log(arrowheadId);
 });
 </script>

@@ -3,35 +3,35 @@ import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { storeToRefs } from 'pinia';
 
 import { computed } from 'vue';
-const store_ = useVisualizerStore();
+const store = useVisualizerStore();
 
-const numberOfFrames = computed(() => store_.numberOfFrames);
+const numberOfFrames = computed(() => store.numberOfFrames);
 
-const { activeFrameNumber } = storeToRefs(store_);
+const { activeFrameNumber } = storeToRefs(store);
 
-const isPlaying = computed(() => store_.isPlaying);
+const isPlaying = computed(() => store.isPlaying);
 function togglePlay() {
   if (isPlaying.value) {
-    store_.pause();
+    store.pause();
   } else {
-    store_.play();
+    store.play();
   }
 }
 
 function jumpToStart() {
-  store_.setActiveFrame(0);
+  store.setActiveFrame(0);
 }
 
 function jumpToEnd() {
-  store_.setActiveFrame(numberOfFrames.value - 1);
+  store.setActiveFrame(numberOfFrames.value - 1);
 }
 
 function prevFrame() {
-  store_.setActiveFrame(activeFrameNumber.value - 1);
+  store.setActiveFrame(activeFrameNumber.value - 1);
 }
 
 function nextFrame() {
-  store_.setActiveFrame(activeFrameNumber.value + 1);
+  store.setActiveFrame(activeFrameNumber.value + 1);
 }
 </script>
 
