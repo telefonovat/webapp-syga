@@ -71,7 +71,6 @@ export function useRenderData(
   });
 
   return {
-    component,
     type,
     nodes,
     nodeColors,
