@@ -1,7 +1,7 @@
 import jsonServer from 'json-server';
 
 const server = jsonServer.create();
-const router = jsonServer.router('./routes.json');
+const router = jsonServer.router('./mock/routes.json');
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
