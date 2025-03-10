@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import GraphNode from './GraphNode.vue';
 import GraphEdge from './GraphEdge.vue';
+import { toRefs } from 'vue';
 
 import { useRenderData } from './renderData';
 import { defaultRendererSettings } from './defaults';
@@ -29,7 +30,7 @@ const {
   edgeColors,
   edgeShapes,
   edgeLabels,
-} = useRenderData(props_.componentIndex, props_.viewBoxSize);
+} = toRefs(useRenderData(props_.componentIndex, props_.viewBoxSize));
 
 //Get props to pass to GraphNode
 type NodeProps = InstanceType<typeof GraphNode>['$props'];

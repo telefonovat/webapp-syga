@@ -1,6 +1,6 @@
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 
 import type { Node } from '@/shared-types/visualization/Node';
 
@@ -70,7 +70,7 @@ export function useRenderData(
     return positions;
   });
 
-  return {
+  return reactive({
     type,
     nodes,
     nodeColors,
@@ -81,5 +81,5 @@ export function useRenderData(
     edgeColors,
     edgeShapes,
     edgeLabels,
-  };
+  });
 }
