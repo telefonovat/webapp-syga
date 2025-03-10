@@ -1,14 +1,15 @@
 import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
 import { storeToRefs } from 'pinia';
-import { computed, reactive } from 'vue';
+import { computed, Reactive, reactive } from 'vue';
 
 import type { Node } from '@/shared-types/visualization/Node';
+import { RenderData } from '@/types/visualizer/RenderData';
 
 //
 export function useRenderData(
   componentIndex: number,
   viewBoxSize: number
-) {
+): Reactive<RenderData> {
   const store_ = useVisualizerStore();
 
   const { currentFrame } = storeToRefs(store_);

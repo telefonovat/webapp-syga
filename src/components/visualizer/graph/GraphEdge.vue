@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue';
+import { onMounted } from 'vue';
 import { defaultEdgeSettings } from './defaults';
 import { computed } from 'vue';
 
