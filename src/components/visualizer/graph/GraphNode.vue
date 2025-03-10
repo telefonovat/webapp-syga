@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Node } from '@/shared-types/visualization/Node';
-import { withDefaults } from 'vue';
 import { defaultNodeSettings } from './defaults';
 
 interface Props {
@@ -21,7 +20,7 @@ const props_ = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <g class="node">
+  <g class="node" role="img">
     <circle
       v-if="shape === 'circle'"
       :cx="x"
