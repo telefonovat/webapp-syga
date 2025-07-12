@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@codemirror/lang-python": "^6.1.6",
+    "@codemirror/state": "^6.5.2",
     "@codemirror/theme-one-dark": "^6.1.2",
+    "@codemirror/view": "^6.38.0",
     "@mdi/font": "^7.4.47",
     "@vue/test-utils": "^2.4.6",
     "axios": "^1.7.7",
@@ -42,5 +44,6 @@
     "vite": "^5.4.8",
     "vitest": "^2.1.9",
     "vue-tsc": "^2.1.6"
-  }
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
