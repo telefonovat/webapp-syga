@@ -19,5 +19,8 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: ['src/testSetup.ts'],
+    deps: {
+      inline: ['vuetify'],
+    },
   },
 });

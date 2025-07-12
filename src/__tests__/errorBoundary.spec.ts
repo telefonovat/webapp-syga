@@ -6,18 +6,26 @@ import { defineComponent, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import ErrorBoundary from '@/components/ErrorBoundary.vue';
 
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+const vuetify = createVuetify({
+  components,
+  directives,
+});
+
 describe('Top level error boundary', () => {
   it('renders the app without any errors thrown', async () => {
     const pinia = createPinia();
     render(App, {
       global: {
-        plugins: [router, pinia],
+        plugins: [router, pinia, vuetify],
       },
     });
 
     await router.isReady();
 
-    expect(screen.getByTitle(/Syga/i)).toBeInTheDocument();
+    expect(screen.getByText(/Syga/i)).toBeInTheDocument();
   });
 
   it('renders top-level error when an error bubbles up', async () => {
