@@ -43,13 +43,21 @@ function getNodeProps(node: Node): NodeProps {
     throw new Error('Attempt render invalid node : ' + node);
   }
   let nodeHasColor =
-    node in nodeColors.value && nodeColors.value[node] !== null;
+    nodeColors.value &&
+    node in nodeColors.value &&
+    nodeColors.value[node] !== null;
   let nodeHasShape =
-    node in nodeShapes.value && nodeShapes.value[node] !== null;
+    nodeShapes.value &&
+    node in nodeShapes.value &&
+    nodeShapes.value[node] !== null;
+  let nodeHasLabel =
+    nodeLabels.value &&
+    node in nodeLabels.value &&
+    nodeLabels.value[node] !== null;
   const data: NodeProps = {
     x: nodePositions.value[node].x,
     y: nodePositions.value[node].y,
-    label: nodeLabels.value[node] ?? node,
+    label: nodeHasLabel ? nodeLabels.value[node] : node,
     ...(nodeHasColor && { color: nodeColors.value[node] }),
     ...(nodeHasShape && { shape: nodeShapes.value[node] }),
   };
@@ -70,14 +78,17 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
   }
   const [u, v] = edge;
   let edgeHasColour =
+    edgeColors.value &&
     u in edgeColors.value &&
     v in edgeColors.value[u] &&
     edgeColors.value[u][v] !== null;
   let edgeHasShape =
+    edgeShapes.value &&
     u in edgeShapes.value &&
     v in edgeShapes.value[u] &&
     edgeShapes.value[u][v] !== null;
   let edgeHasLabel =
+    edgeLabels.value &&
     u in edgeLabels.value &&
     v in edgeLabels.value[u] &&
     edgeLabels.value[u][v] !== null;
@@ -97,12 +108,16 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
 </script>
 
 <template>
+
   <!-- <v-container class="ma-0 pa-0"> -->
+
   <svg
     class="component-renderer mock"
     :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`"
   >
+
     <template v-for="(edge, index) in edges">
+
       <GraphEdge
         v-bind="{
           ...getEdgeProps(edge),
@@ -110,13 +125,19 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
           index: index,
         }"
       />
+
     </template>
 
     <template v-for="node in nodes">
+
       <GraphNode v-bind="getNodeProps(node)" />
+
     </template>
+
   </svg>
+
   <!-- </v-container> -->
+
 </template>
 
 <style scoped>
@@ -125,3 +146,4 @@ function getEdgeProps(edge: Edge): Omit<EdgeProps, 'index'> {
   height: 75%;
 }
 </style>
+
