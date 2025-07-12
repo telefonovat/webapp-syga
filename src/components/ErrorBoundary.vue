@@ -11,7 +11,7 @@ onErrorCaptured((err) => {
 </script>
 
 <template>
-  <div v-if="error">Error: {{ error.message }}</div>
+  <div v-if="error">Error: {{ error.message }},{{ error.stack }}</div>
   <slot v-else></slot>
 </template>
 
