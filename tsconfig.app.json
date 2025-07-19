@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "noUnusedLocals": false,
     // Does this even do anything?
-    "importModuleSpecifierPreference": "project-relative",
+    // "importModuleSpecifierPreference": "project-relative",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"], 

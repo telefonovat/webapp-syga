@@ -3,5 +3,7 @@
   "proseWrap": "never",
   "printWidth": 70,
   "htmlWhitespaceSensitivity": "ignore",
-  "plugins": ["prettier-plugin-vue"]
+  "plugins": ["prettier-plugin-vue"],
+  "bracketSameLine": true,
+  "vueIndentScriptAndStyle": true
 }

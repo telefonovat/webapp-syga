@@ -1,74 +1,104 @@
 <script setup lang="ts">
-import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-import { storeToRefs } from 'pinia';
+  import AwesomeSlider from '@/components/utility/slider/AwesomeSlider.vue';
+  import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
+  import { storeToRefs } from 'pinia';
 
-import { computed } from 'vue';
-const store = useVisualizerStore();
+  import { computed, reactive, ref, watch } from 'vue';
+  import { AwesomeSliderModel } from '../utility/slider';
+  const store = useVisualizerStore();
 
-const numberOfFrames = computed(() => store.numberOfFrames);
+  const numberOfFrames = computed(() => store.numberOfFrames);
 
-const { activeFrameNumber } = storeToRefs(store);
+  const { activeFrameNumber } = storeToRefs(store);
 
-const isPlaying = computed(() => store.isPlaying);
-function togglePlay() {
-  if (isPlaying.value) {
-    store.pause();
-  } else {
-    store.play();
+  const isPlaying = computed(() => store.isPlaying);
+  function togglePlay() {
+    if (isPlaying.value) {
+      store.pause();
+    } else {
+      store.play();
+    }
   }
-}
 
-function jumpToStart() {
-  store.setActiveFrame(0);
-}
+  function jumpToStart() {
+    store.setActiveFrame(0);
+  }
 
-function jumpToEnd() {
-  store.setActiveFrame(numberOfFrames.value - 1);
-}
+  function jumpToEnd() {
+    store.setActiveFrame(numberOfFrames.value - 1);
+  }
 
-function prevFrame() {
-  store.setActiveFrame(activeFrameNumber.value - 1);
-}
+  function prevFrame() {
+    store.setActiveFrame(activeFrameNumber.value - 1);
+  }
 
-function nextFrame() {
-  store.setActiveFrame(activeFrameNumber.value + 1);
-}
+  function nextFrame() {
+    store.setActiveFrame(activeFrameNumber.value + 1);
+  }
+
+  const sliderModel = ref<AwesomeSliderModel>({
+    get value() {
+      return activeFrameNumber.value;
+    },
+    set value(v) {
+      activeFrameNumber.value = v;
+    },
+    min: 0,
+    get max() {
+      return numberOfFrames.value - 1;
+    },
+  });
+
+  watch(
+    () => sliderModel.value.value,
+    (newValue) => {
+      activeFrameNumber.value = newValue;
+    },
+  );
 </script>
 
 <template>
-  <v-btn
-    title="Play/Pause"
-    :variant="isPlaying ? 'tonal' : 'elevated'"
-    @click="togglePlay()"
-  >
-    <v-icon icon="mdi-play-pause" />
-  </v-btn>
-  <v-btn title="Start" @click="jumpToStart()">
-    <v-icon icon="mdi-chevron-double-left" />
-  </v-btn>
-  <v-btn title="Left" @click="prevFrame()">
-    <v-icon icon="mdi-chevron-left" />
-  </v-btn>
-  <v-card-item>
-    {{ activeFrameNumber + 1 }}
-  </v-card-item>
-  <v-container>
-    <v-slider
-      v-model="activeFrameNumber"
-      min-width="150"
-      max-width="300"
-      min="0"
-      :max="numberOfFrames - 1"
-      step="1"
-      :disabled="numberOfFrames === 0"
-    ></v-slider>
-  </v-container>
-  <v-btn title="Right" @click="nextFrame()">
-    <v-icon icon="mdi-chevron-right" />
-  </v-btn>
-  <v-btn title="End" @click="jumpToEnd()">
-    <v-icon icon="mdi-chevron-double-right" />
-  </v-btn>
+
+  <div class="container">
+
+    <Button @click="togglePlay()">Toggle play</Button>
+
+    <Button
+      @click="
+        sliderModel.value = (sliderModel.value - 1) % sliderModel.max
+      ">
+       Prev
+    </Button>
+
+    <AwesomeSlider
+      class="container__frames-slider"
+      v-model="sliderModel" />
+
+    <Button
+      @click="
+        sliderModel.value = (sliderModel.value + 1) % sliderModel.max
+      ">
+       Next
+    </Button>
+
+  </div>
+
 </template>
 
-<style scoped></style>
+<style scoped>
+  .container{
+  display: flex;
+  align-items: stretch;
+
+  /* WARN: might grow obsolete with vuetify removed */
+  flex-grow: 1;
+
+  > * {
+    padding: 8px;
+  }
+}
+.container__frames-slider{
+  min-width: 300px;
+}
+</style>
+
