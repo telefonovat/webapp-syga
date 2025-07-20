@@ -1,27 +1,37 @@
 <script setup lang="ts">
-import VisualizerNavigation from '@/components/visualizer/VisualizerNavigation.vue';
-import CodeEditorNavigation from '@/components/editor/CodeEditorNavigation.vue';
-import AlgorithmManager from '@/components/user/algorithm/AlgorithmManager.vue';
+  import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
+  import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
+  import AlgorithmManager from "@/components/user/algorithm/AlgorithmManager.vue";
 </script>
 
 <template>
-  <v-toolbar dark density="compact">
+
+  <div class="panel-wrapper" dark density="compact">
+
     <AlgorithmManager style="width: 50%" />
 
-    <v-divider vertical />
-    <v-toolbar-items class="d-flex" style="width: 50%">
+    <div class="navigation-container">
+
       <CodeEditorNavigation />
+
       <VisualizerNavigation />
-    </v-toolbar-items>
-  </v-toolbar>
+
+    </div>
+
+  </div>
+
 </template>
 
 <style scoped>
-.algorithm-control-panel{
+  .panel-wrapper{
+  width: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  align-items: center;
 }
-.algorithm-control-panel__last-item{
-  margin-right: auto;
+
+.navigation-container{
+  display: flex;
+  width: 50%;
 }
 </style>
+

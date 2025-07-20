@@ -1,64 +1,45 @@
 <script setup lang="ts">
-import { buildCode } from '@/api/connector';
+  import { buildCode } from "@/api/connector";
 
-import { useEditorStore } from '@/store/editor/editorStore';
-import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-import { storeToRefs } from 'pinia';
+  import { useEditorStore } from "@/store/editor/editorStore";
+  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+  import { storeToRefs } from "pinia";
 
-import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
-import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
-import { ref } from 'vue';
+  import { VisualizationResult } from "@/shared-types/visualization/VisualizationResult";
+  import { VisualizationRequest } from "@/shared-types/visualization/VisualizationRequest";
+  import { ref } from "vue";
 
-const editorStore = useEditorStore();
-const visualizerStore = useVisualizerStore();
-const { code } = storeToRefs(editorStore);
+  const editorStore = useEditorStore();
+  const visualizerStore = useVisualizerStore();
+  const { code } = storeToRefs(editorStore);
 
-const isBuilding = ref(false);
+  const isBuilding = ref(false);
 
-function build() {
-  const visualizationRequest: VisualizationRequest = {
-    code: code.value,
-  };
+  function build() {
+    const visualizationRequest: VisualizationRequest = {
+      code: code.value,
+    };
 
-  isBuilding.value = true;
+    isBuilding.value = true;
 
-  buildCode(visualizationRequest)
-    .then((visualizationResult: VisualizationResult) => {
-      visualizerStore.frames = visualizationResult.frames;
-    })
-    .catch((error) => {
-      console.warn(error);
-    })
-    .finally(() => {
-      isBuilding.value = false;
-    });
-}
+    buildCode(visualizationRequest)
+      .then((visualizationResult: VisualizationResult) => {
+        visualizerStore.frames = visualizationResult.frames;
+      })
+      .catch((error) => {
+        console.warn(error);
+      })
+      .finally(() => {
+        isBuilding.value = false;
+      });
+  }
 </script>
 
 <template>
-  <v-btn
-    icon="mdi-hammer-screwdriver"
-    @click="build()"
-    title="Build"
-  ></v-btn>
 
-  <v-dialog v-model="isBuilding" max-width="500">
-    <template v-slot:default="{ isActive }">
-      <v-card
-        class="d-flex flex-column align-center justify-center pa-5"
-      >
-        <v-card-text class="text-center mb-4">
-          Your algorithm is building. Take this moment to stretch your
-          wrist!
-        </v-card-text>
-        <v-progress-circular
-          size="50"
-          color="primary"
-          indeterminate
-        />
-      </v-card>
-    </template>
-  </v-dialog>
+  <Button @click="build()">Build</Button>
+
 </template>
 
 <style scoped></style>
+

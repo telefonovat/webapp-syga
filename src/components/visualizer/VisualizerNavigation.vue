@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  import AwesomeSlider from '@/components/utility/slider/AwesomeSlider.vue';
-  import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-  import { storeToRefs } from 'pinia';
+  import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
+  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+  import { storeToRefs } from "pinia";
 
-  import { computed, reactive, ref, watch } from 'vue';
-  import { AwesomeSliderModel } from '../utility/slider';
+  import { computed, reactive, ref, watch } from "vue";
+  import { AwesomeSliderModel } from "../utility/slider";
   const store = useVisualizerStore();
 
   const numberOfFrames = computed(() => store.numberOfFrames);
