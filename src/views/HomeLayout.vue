@@ -1,54 +1,47 @@
 <script setup lang="ts">
-import NavSidebar from '@/components/NavSidebar.vue';
-import UserAuthenticationPanel from '@/components/user/authentication/UserAuthenticationPanel.vue';
-import { watch } from 'vue';
-import { ref } from 'vue';
+  import NavSidebar from "@/components/NavSidebar.vue";
+  import UserAuthenticationPanel from "@/components/user/authentication/UserAuthenticationPanel.vue";
+  import { ref } from "vue";
 
-const isSidebarCollapsed = ref(false);
+  const isSidebarCollapsed = ref(false);
 </script>
 
 <template>
-  <v-app>
-    <v-layout class="h-100">
-      <v-app-bar density="compact" title="Syga">
-        <template v-slot:prepend>
-          <v-app-bar-nav-icon
-            @click.stop="isSidebarCollapsed = !isSidebarCollapsed"
-          ></v-app-bar-nav-icon>
-        </template>
 
-        <template v-slot:append>
-          <UserAuthenticationPanel />
-        </template>
-      </v-app-bar>
-      <aside
-        class="home-layout__sidebar"
-        :class="{ 'transparent-overlay': isSidebarCollapsed }"
-      >
-        <NavSidebar
-          :is-collapsed="isSidebarCollapsed"
-          @collapseSidebar="() => (isSidebarCollapsed = true)"
-          @expandSidebar="() => (isSidebarCollapsed = false)"
-        />
-      </aside>
-      <v-main class="home-layout__main mock">
-        <RouterView name="main" />
-      </v-main>
-      <v-footer app></v-footer>
-    </v-layout>
-  </v-app>
+  <div class="h-100">
+
+    <div class="top-panel">
+
+      <Button @click.stop="isSidebarCollapsed = !isSidebarCollapsed">
+         Toggle collapse
+      </Button>
+
+      <UserAuthenticationPanel />
+
+    </div>
+
+    <div class="home-layout__main">
+
+      <RouterView name="main" />
+
+    </div>
+
+  </div>
+
 </template>
 
 <style scoped>
-.home-layout{
+  .home-layout{
   display: flex;
   height: 100%;
 }
 
-
+.top-panel{
+  display: flex;
+}
 .home-layout__main{
   flex-grow: 1;
   height: 100%;
-  overflow-y: scroll;
 }
 </style>
+
