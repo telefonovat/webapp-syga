@@ -1,31 +1,43 @@
 <script setup lang="ts">
-import Visualizer from '@/components/visualizer/Visualizer.vue';
-import CodeEditor from '@/components/editor/CodeEditor.vue';
-import AlgorithmControlPanel from './AlgorithmControlPanel.vue';
+  import Visualizer from "@/components/visualizer/Visualizer.vue";
+  import CodeEditor from "@/components/editor/CodeEditor.vue";
+  import AlgorithmControlPanel from "./AlgorithmControlPanel.vue";
 </script>
 
 <template>
-  <!-- Hack: 88% of ancestor height is the sweet spot -->
-  <v-container class="ma-0 pa-0" style="height: 88%" fluid>
-    <v-row class="ma-0 pa-0">
-      <AlgorithmControlPanel />
-    </v-row>
-    <v-row class="ma-0 pa-0 h-100">
-      <v-col
-        cols="6"
-        class="ma-0 pa-0 h-100"
-        style="overflow-y: scroll"
-      >
-        <CodeEditor />
-      </v-col>
-      <v-divider vertical />
-      <v-col cols="6" class="ma-0 pa-0 h-100">
-        <!-- <v-row> -->
-        <Visualizer />
-        <!-- </v-row> -->
-      </v-col>
-    </v-row>
-  </v-container>
+
+  <div class="container">
+
+    <AlgorithmControlPanel />
+
+    <div class="view-container">
+
+      <CodeEditor class="code-editor" />
+
+      <Visualizer />
+
+    </div>
+
+  </div>
+
 </template>
 
-<style scoped></style>
+<style scoped>
+  .container{
+  /* HACK: This is perfect height for my local machine. The whole CSS section needs rethinking*/
+  height: 90%;
+}
+
+.view-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.code-editor{
+  height: 100%;
+  /* HACK: Also needed so that the editor expands */
+  width: 100%;
+}
+</style>
+
