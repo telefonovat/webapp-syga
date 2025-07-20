@@ -23,7 +23,6 @@
   function jumpToStart() {
     store.setActiveFrame(0);
   }
-
   function jumpToEnd() {
     store.setActiveFrame(numberOfFrames.value - 1);
   }
