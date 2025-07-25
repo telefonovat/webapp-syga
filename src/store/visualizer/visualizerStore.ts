@@ -1,42 +1,41 @@
-import { defineStore, storeToRefs } from 'pinia';
-import { useAnimationStore_ } from './animationStore';
-import { computed } from 'vue';
-import { useTicker } from './ticker';
-import { Frame } from '@/shared-types/visualization/Frame';
+import { defineStore, storeToRefs } from "pinia";
+import { useAnimationStore_ } from "./animationStore";
+import { computed, ref } from "vue";
+import { Frame } from "@/shared-types/visualization/Frame";
 
-const useVisualizerStore = defineStore('Visualizer Store', () => {
-  const animationStore_ = useAnimationStore_();
-  const ticker_ = useTicker();
+const useVisualizerStore = defineStore("Visualizer Store", () => {
+  const animationStore = useAnimationStore_();
 
-  const {
-    isInitialized: isPlayerInitialized,
-    isPlaying,
-    lastTick,
-  } = storeToRefs(ticker_);
+  // Ticker
+  const lastTick = ref(performance.now());
+  const isPlaying = ref(false);
+  const isInitialized = ref(false);
+  const tickPeriod = ref(750);
 
-  const { numberOfFrames, frames, activeFrameNumber } =
-    storeToRefs(animationStore_);
+  // Re-exporting animationStore.frames does not work
+  const { frames, numberOfFrames, activeFrameNumber } =
+    storeToRefs(animationStore);
 
-  const currentFrame = computed(() => animationStore_.currentFrame);
+  const currentFrame = computed(() => animationStore.currentFrame);
 
   function initialize() {
-    isPlayerInitialized.value = true;
+    isInitialized.value = true;
   }
   function mainLoop(timestamp: DOMHighResTimeStamp) {
     if (
       lastTick.value !== null &&
       isPlaying.value &&
-      ticker_.shouldDoTick(timestamp)
+      lastTick.value + tickPeriod.value <= timestamp
     ) {
-      animationStore_.nextFrame();
+      animationStore.nextFrame();
       lastTick.value = timestamp;
     }
     window.requestAnimationFrame((timestamp) => mainLoop(timestamp));
   }
 
-  //User commands
+  // Frame navigation commands
   function play() {
-    if (!isPlayerInitialized.value) {
+    if (!isInitialized.value) {
       initialize();
     }
     lastTick.value = performance.now();
@@ -47,26 +46,38 @@ const useVisualizerStore = defineStore('Visualizer Store', () => {
     isPlaying.value = false;
   }
   function setActiveFrame(frameNumber: number) {
-    if (!(frameNumber >= 0 && frameNumber < numberOfFrames.value)) {
+    if (
+      !(
+        frameNumber >= 0 &&
+        frameNumber < animationStore.numberOfFrames
+      )
+    ) {
       console.warn(`Frame number ${frameNumber} does not exist`);
       return;
     }
-    activeFrameNumber.value = frameNumber;
+    animationStore.activeFrameNumber = frameNumber;
   }
   function setFrames(newFrames: Frame[]) {
-    animationStore_.setFrames(newFrames);
+    animationStore.setFrames(newFrames);
   }
 
+  // reset functions
+  function resetTicker() {
+    lastTick.value = performance.now();
+    isPlaying.value = false;
+    isInitialized.value = false;
+    tickPeriod.value = 750;
+  }
   function $reset() {
-    animationStore_.$reset();
-    ticker_.$reset();
+    animationStore.$reset();
+    resetTicker();
   }
 
   return {
     frames,
-    currentFrame,
     activeFrameNumber,
     numberOfFrames,
+    currentFrame,
     isPlaying,
     play,
     pause,

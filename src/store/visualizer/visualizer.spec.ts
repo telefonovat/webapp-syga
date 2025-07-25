@@ -1,49 +1,29 @@
-import { describe, expect, it, vi } from 'vitest';
-import { useTicker } from './ticker';
-import { createPinia } from 'pinia';
-import { useAnimationStore_ } from './animationStore';
-import { Frame } from '@/shared-types/visualization/Frame';
-import { useVisualizerStore } from './visualizerStore';
+import { describe, expect, it, vi } from "vitest";
+import { createPinia } from "pinia";
+import { useAnimationStore_ } from "./animationStore";
+import { Frame } from "@/shared-types/visualization/Frame";
+import { useVisualizerStore } from "./visualizerStore";
 
 const testFrames: Frame[] = [
   {
     lineNo: [0],
-    consoleLogs: 'frame 0',
+    consoleLogs: "frame 0",
     components: [],
   },
   {
     lineNo: [1],
-    consoleLogs: 'frame 1',
+    consoleLogs: "frame 1",
     components: [],
   },
   {
     lineNo: [2],
-    consoleLogs: 'frame 2',
+    consoleLogs: "frame 2",
     components: [],
   },
 ];
 
-describe('Private Ticker store', () => {
-  it('should not tick before tick period ends', () => {
-    const store = useTicker(createPinia());
-
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date());
-
-    store.lastTick = Date.now();
-
-    vi.advanceTimersByTime(store.tickPeriod_ / 2);
-    expect(store.shouldDoTick(Date.now())).toBe(false);
-
-    vi.advanceTimersByTime(store.tickPeriod_ / 2);
-    expect(store.shouldDoTick(Date.now())).toBe(true);
-
-    vi.useRealTimers();
-  });
-});
-
-describe('Private Animation Store', () => {
-  it('throws errors if frame movement is done when there are no frames', () => {
+describe("Private Animation Store", () => {
+  it("throws errors if frame movement is done when there are no frames", () => {
     const store = useAnimationStore_(createPinia());
 
     store.setFrames([]);
@@ -52,30 +32,30 @@ describe('Private Animation Store', () => {
     expect(() => store.prevFrame()).toThrowError();
   });
 
-  it('should cycle through frames correctly', () => {
+  it("should cycle through frames correctly", () => {
     const store = useAnimationStore_(createPinia());
 
     store.setFrames(testFrames);
 
     expect(store.activeFrameNumber).toBe(0);
-    expect(store.currentFrame?.consoleLogs).toBe('frame 0');
+    expect(store.currentFrame?.consoleLogs).toBe("frame 0");
 
     store.nextFrame();
     expect(store.activeFrameNumber).toBe(1);
-    expect(store.currentFrame?.consoleLogs).toBe('frame 1');
+    expect(store.currentFrame?.consoleLogs).toBe("frame 1");
 
     store.nextFrame();
     expect(store.activeFrameNumber).toBe(2);
-    expect(store.currentFrame?.consoleLogs).toBe('frame 2');
+    expect(store.currentFrame?.consoleLogs).toBe("frame 2");
 
     store.prevFrame();
     expect(store.activeFrameNumber).toBe(1);
-    expect(store.currentFrame?.consoleLogs).toBe('frame 1');
+    expect(store.currentFrame?.consoleLogs).toBe("frame 1");
   });
 });
 
-describe('Visualizer Store', () => {
-  it('should set active frame number correctly', () => {
+describe("Visualizer Store", () => {
+  it("should set active frame number correctly", () => {
     const store = useVisualizerStore(createPinia());
 
     expect(store.activeFrameNumber).toEqual(0);
@@ -85,7 +65,7 @@ describe('Visualizer Store', () => {
     expect(store.activeFrameNumber).toEqual(testFrames.length - 1);
   });
 
-  it('should set frames correctly', () => {
+  it("should set frames correctly", () => {
     const store = useVisualizerStore(createPinia());
 
     expect(store.frames).toEqual([]);
