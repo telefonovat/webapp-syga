@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, watch } from "vue";
+  import { computed } from "vue";
   import AwesomeSliderPresentationBar from "./AwesomeSliderPresentationBar.vue";
   import type { AwesomeSliderModel } from "./AwesomeSliderModel";
 
@@ -20,12 +20,9 @@
         100,
     ),
   );
-  watch(
-    () => positionPercentage.value,
-    () => {
-      console.log(model.value.max);
-      console.log(model.value.max - model.value.min);
-    },
+
+  const displayText = computed(
+    () => `${model.value.value}/${model.value.max}`,
   );
 </script>
 
@@ -34,7 +31,7 @@
   <AwesomeSliderPresentationBar
     :position-percentage="positionPercentage"
     :color="props.color"
-    :text="positionPercentage.toString()" />
+    :text="displayText" />
 
 </template>
 
