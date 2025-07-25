@@ -31,11 +31,11 @@
 
   <div class="container">
 
-    <Button @click="togglePlay()">Toggle play</Button>
+    <button @click="togglePlay()">Toggle play</button>
 
-    <Button @click="sliderModel.value = 1"><<</Button>
+    <button @click="sliderModel.value = 1"><<</button>
 
-    <Button
+    <button
       @click="
         sliderModel.value = modulo(
           sliderModel.value - 1,
@@ -43,13 +43,14 @@
         )
       ">
        <
-    </Button>
+    </button>
 
     <AwesomeSlider
+      data-testid="visualizer-frame-slider"
       class="container__frames-slider"
       v-model="sliderModel" />
 
-    <Button
+    <button
       @click="
         sliderModel.value = modulo(
           sliderModel.value + 1,
@@ -57,9 +58,9 @@
         )
       ">
        >
-    </Button>
+    </button>
 
-    <Button @click="sliderModel.value = sliderModel.max"> >> </Button>
+    <button @click="sliderModel.value = sliderModel.max"> >> </button>
 
   </div>
 

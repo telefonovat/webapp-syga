@@ -12,9 +12,9 @@
 
     <div class="top-panel">
 
-      <Button @click.stop="isSidebarCollapsed = !isSidebarCollapsed">
+      <button @click.stop="isSidebarCollapsed = !isSidebarCollapsed">
          Toggle collapse
-      </Button>
+      </button>
 
       <UserAuthenticationPanel />
 

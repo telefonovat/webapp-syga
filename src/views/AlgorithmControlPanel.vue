@@ -14,7 +14,8 @@
 
       <CodeEditorNavigation />
 
-      <VisualizerNavigation />
+      <VisualizerNavigation
+        data-testid="visualizer-navigation-panel" />
 
     </div>
 

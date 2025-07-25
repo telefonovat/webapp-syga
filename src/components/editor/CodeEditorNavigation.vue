@@ -37,7 +37,7 @@
 
 <template>
 
-  <Button @click="build()">Build</Button>
+  <button @click="build()">Build</button>
 
 </template>
 
