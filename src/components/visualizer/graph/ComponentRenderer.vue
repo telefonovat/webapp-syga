@@ -111,8 +111,6 @@
 
 <template>
 
-  <!-- <v-container class="ma-0 pa-0"> -->
-
   <svg :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
 
     <template v-for="(edge, index) in edges">
@@ -133,8 +131,6 @@
     </template>
 
   </svg>
-
-  <!-- </v-container> -->
 
 </template>
 

@@ -5,15 +5,13 @@
 
 <template>
 
-  <v-container class="visualizer ma-0 pa-0">
+  <div class="visualizer">
 
     <ComponentRenderer :componentIndex="0" class="renderer" />
 
-    <v-divider />
-
     <VisualizerConsole class="console" />
 
-  </v-container>
+  </div>
 
 </template>
 

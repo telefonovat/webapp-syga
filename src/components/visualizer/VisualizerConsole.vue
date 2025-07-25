@@ -32,11 +32,11 @@
 
 <template>
 
-  <v-container class="visualizer-console ma-0 pa-0">
+  <div class="visualizer-console ma-0 pa-0">
 
     <template v-for="output in consoleOutputs">
 
-      <v-container
+      <div
         class="d-flex"
         style="background-color: rgba(0, 0, 0, 0.1)">
 
@@ -46,11 +46,11 @@
 
         <span>{{ output[1] }}</span>
 
-      </v-container>
+      </div>
 
     </template>
 
-  </v-container>
+  </div>
 
 </template>
 
