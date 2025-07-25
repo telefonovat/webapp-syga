@@ -7,17 +7,8 @@
   import { shallowRef } from "vue";
   import { EditorView } from "codemirror";
 
-  import {
-    Decoration,
-    DecorationSet,
-    keymap,
-  } from "@codemirror/view";
-  import {
-    StateEffect,
-    StateField,
-    Transaction,
-  } from "@codemirror/state";
-  import { onMounted } from "vue";
+  import { Decoration } from "@codemirror/view";
+  import { StateEffect, StateField } from "@codemirror/state";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { computed } from "vue";
   import { watch } from "vue";
@@ -80,9 +71,10 @@
 
 <template>
 
-  <div class="code-editor mock">
+  <div class="code-editor">
 
     <Codemirror
+      class="code-editor"
       v-model="code"
       :extensions="extensions"
       @ready="handleReady" />

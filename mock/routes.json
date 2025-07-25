@@ -11,7 +11,7 @@
       "frames": [
         {
           "lineNo": [],
-          "consoleLogs": "",
+          "consoleLogs": "log line 1",
           "components": [
             {
               "nodes": [1, 2, 3],
@@ -40,7 +40,7 @@
 
         {
           "lineNo": [],
-          "consoleLogs": "",
+          "consoleLogs": "log line 2",
           "components": [
             {
               "nodes": [1, 2, 3],
