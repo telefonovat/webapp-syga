@@ -26,6 +26,7 @@
 
 .renderer{
   height: 75%;
+  border-bottom: 1px solid grey;
 }
 .console{
 height: 25%;

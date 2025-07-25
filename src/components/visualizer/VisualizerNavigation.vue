@@ -8,16 +8,21 @@
 
   const { togglePlay } = useVisualizerCommands();
 
+  function modulo(a: number, n: number): number {
+    return ((a % n) + n) % n;
+  }
+
+  // WARN: The store is 0-indexed but the sliderModel is 1-indexed
   const sliderModel = ref<AwesomeSliderModel>({
     get value() {
-      return store.activeFrameNumber;
+      return store.activeFrameNumber + 1;
     },
     set value(v) {
-      store.activeFrameNumber = v;
+      store.setActiveFrame(v - 1);
     },
     min: 0,
     get max() {
-      return store.numberOfFrames - 1;
+      return store.numberOfFrames;
     },
   });
 </script>
@@ -28,13 +33,16 @@
 
     <Button @click="togglePlay()">Toggle play</Button>
 
-    <Button @click="sliderModel.value = 0">Start</Button>
+    <Button @click="sliderModel.value = 1"><<</Button>
 
     <Button
       @click="
-        sliderModel.value = (sliderModel.value - 1) % sliderModel.max
+        sliderModel.value = modulo(
+          sliderModel.value - 1,
+          sliderModel.max + 1,
+        )
       ">
-       Prev
+       <
     </Button>
 
     <AwesomeSlider
@@ -43,14 +51,15 @@
 
     <Button
       @click="
-        sliderModel.value = (sliderModel.value + 1) % sliderModel.max
+        sliderModel.value = modulo(
+          sliderModel.value + 1,
+          sliderModel.max + 1,
+        )
       ">
-       Next
+       >
     </Button>
 
-    <Button @click="sliderModel.value = sliderModel.max - 1">
-       End
-    </Button>
+    <Button @click="sliderModel.value = sliderModel.max"> >> </Button>
 
   </div>
 

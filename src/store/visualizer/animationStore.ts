@@ -1,9 +1,9 @@
 // Responsible for keeping track of Animation frames, updating and returning correct ones
-import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
-import { Frame } from '@/shared-types/visualization/Frame';
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { Frame } from "@/shared-types/visualization/Frame";
 
-const useAnimationStore_ = defineStore('Animation Store', () => {
+const useAnimationStore_ = defineStore("Animation Store", () => {
   const frames = ref<Frame[]>([]);
   const activeFrameNumber = ref<number>(0);
 
@@ -14,20 +14,23 @@ const useAnimationStore_ = defineStore('Animation Store', () => {
     activeFrameNumber.value >= 0 &&
     activeFrameNumber.value < numberOfFrames.value
       ? frames.value[activeFrameNumber.value]
-      : null
+      : null,
   );
 
   // API for player
   function nextFrame() {
+    console.log(
+      `Alpha : ${activeFrameNumber.value},${numberOfFrames.value}`,
+    );
     if (numberOfFrames.value === 0) {
-      throw new Error('There are no frames');
+      throw new Error("There are no frames");
     }
     activeFrameNumber.value =
       (activeFrameNumber.value + 1) % numberOfFrames.value;
   }
   function prevFrame() {
     if (numberOfFrames.value === 0) {
-      throw new Error('There are no frames');
+      throw new Error("There are no frames");
     }
     activeFrameNumber.value =
       (activeFrameNumber.value - 1) % numberOfFrames.value;
