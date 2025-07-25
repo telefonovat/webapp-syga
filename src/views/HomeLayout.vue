@@ -38,6 +38,7 @@
 
 .top-panel{
   display: flex;
+  border-bottom: 1px solid #444;
 }
 .home-layout__main{
   flex-grow: 1;

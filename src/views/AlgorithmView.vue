@@ -8,7 +8,7 @@
 
   <div class="container">
 
-    <AlgorithmControlPanel />
+    <AlgorithmControlPanel class="control-panel" />
 
     <div class="view-container">
 
@@ -28,6 +28,10 @@
   height: 90%;
 }
 
+.control-panel{
+  border-bottom: 1px solid #444;
+}
+
 .view-container{
   height: 100%;
   width: 100%;
@@ -38,6 +42,8 @@
   height: 100%;
   /* HACK: Also needed so that the editor expands */
   width: 100%;
+
+  border-right: 1px solid #444;
 }
 </style>
 
