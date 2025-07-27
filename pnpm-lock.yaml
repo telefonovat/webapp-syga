@@ -23,6 +23,9 @@ importers:
       '@mdi/font':
         specifier: ^7.4.47
         version: 7.4.47
+      '@telefonovat/syga--contract':
+        specifier: ^4.1.0
+        version: 4.1.0
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -635,6 +638,9 @@ packages:
     resolution: {integrity: sha512-fbMkAF7fufku0N2dE5TBXcNlg0pt0cJue4xBRE2Qc5Vqikxr4VCgKj/ht6SMdFcOacVA9rqF70APJ8RN/4vMJw==}
     cpu: [x64]
     os: [win32]
+
+  '@telefonovat/syga--contract@4.1.0':
+    resolution: {integrity: sha512-ol9rko+5dscWDjAlHGQQG4Zq1olvu7E7Nz+Lg21cSZTiVKivAYj55+gKqTCJf7WGDLCUBVHwOgNZGn7LzEN9HQ==, tarball: https://npm.pkg.github.com/download/@telefonovat/syga--contract/4.1.0/10e5f3ac809a956863f0cb9a9fd4294b794805e9}
 
   '@testing-library/dom@9.3.4':
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}
@@ -2647,6 +2653,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.24.0':
     optional: true
+
+  '@telefonovat/syga--contract@4.1.0': {}
 
   '@testing-library/dom@9.3.4':
     dependencies:
