@@ -1,43 +1,43 @@
-import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-import { storeToRefs } from 'pinia';
-import { computed, Reactive, reactive } from 'vue';
+import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+import { storeToRefs } from "pinia";
+import { computed, Reactive, reactive } from "vue";
 
-import type { Node } from '@/shared-types/visualization/Node';
-import { RenderData } from '@/types/visualizer/RenderData';
+import type { Node } from "@/shared-types/visualization/Node";
+import { RenderData } from "@/types/visualizer/RenderData";
 
 //
 export function useRenderData(
   componentIndex: number,
-  viewBoxSize: number
-): Reactive<RenderData> {
+  viewBoxSize: number,
+) {
   const store = useVisualizerStore();
 
   const { currentFrame } = storeToRefs(store);
 
   const component = computed(() => {
     return currentFrame.value
-      ? currentFrame.value.components[componentIndex]
+      ? currentFrame.value.graphComponents[componentIndex]
       : null;
   });
 
   const type = computed(() =>
-    component.value ? component.value.type : 'Graph'
+    component.value ? component.value.type : "Graph",
   );
 
   const nodes = computed(() => {
-    return component.value ? component.value.nodes : [];
+    return component.value ? component.value.vertices : [];
   });
 
   const nodeColors = computed(() => {
-    return component.value ? component.value.style.nodeColors : {};
+    return component.value ? component.value.style.vertexColors : {};
   });
 
   const nodeShapes = computed(() => {
-    return component.value ? component.value.style.nodeShapes : {};
+    return component.value ? component.value.style.vertexShapes : {};
   });
 
   const nodeLabels = computed(() =>
-    component.value ? component.value.style.nodeLabels : {}
+    component.value ? component.value.style.vertexLabels : {},
   );
 
   const edges = computed(() => {
@@ -62,7 +62,7 @@ export function useRenderData(
 
     nodes.value.forEach((node, index) => {
       const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);
-      positions[node] = {
+      positions[node.id] = {
         x: Math.cos(rads) * viewBoxSize * 0.4 + viewBoxSize / 2,
         y: Math.sin(rads) * viewBoxSize * 0.4 + viewBoxSize / 2,
       };
