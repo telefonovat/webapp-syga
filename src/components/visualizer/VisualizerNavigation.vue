@@ -62,6 +62,8 @@
 
     <button @click="sliderModel.value = sliderModel.max"> >> </button>
 
+    <button @click="store.$reset()">X</button>
+
   </div>
 
 </template>
