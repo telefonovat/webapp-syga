@@ -7,12 +7,10 @@
   import { useRenderData } from "./renderData";
   import { defaultRendererSettings } from "./defaults";
 
-  import type { Node } from "@/shared-types/visualization/Node";
-  import type { Edge } from "@/shared-types/visualization/Edge";
-
-  import type {
-    GraphVertex,
-    GraphEdge,
+  import {
+    type GraphVertex,
+    type GraphEdge,
+    GraphType,
   } from "@telefonovat/syga--contract";
 
   interface Props {
@@ -51,24 +49,24 @@
     if (!nodeIsValid) {
       throw new Error("Attempt render invalid node : " + node);
     }
-    // let nodeHasColor =
-    //   nodeColors.value &&
-    //   node in nodeColors.value &&
-    //   nodeColors.value[node] !== null;
-    // let nodeHasShape =
-    //   nodeShapes.value &&
-    //   node in nodeShapes.value &&
-    //   nodeShapes.value[node] !== null;
-    // let nodeHasLabel =
-    //   nodeLabels.value &&
-    //   node.id in nodeLabels.value &&
-    //   nodeLabels.value[node.id] !== null;
+    let nodeHasColor =
+      nodeColors.value &&
+      node.id in nodeColors.value &&
+      nodeColors.value[node.id] !== null;
+    let nodeHasShape =
+      nodeShapes.value &&
+      node.id in nodeShapes.value &&
+      nodeShapes.value[node.id] !== null;
+    let nodeHasLabel =
+      nodeLabels.value &&
+      node.id in nodeLabels.value &&
+      nodeLabels.value[node.id] !== null;
     const data: NodeProps = {
       x: nodePositions.value[node.id].x,
       y: nodePositions.value[node.id].y,
-      label: node.id,
-      // ...(nodeHasColor && { color: nodeColors.value[node] }),
-      // ...(nodeHasShape && { shape: nodeShapes.value[node] }),
+      label: nodeHasLabel ? nodeLabels.value[node.id] : node.id,
+      ...(nodeHasColor && { color: nodeColors.value[node.id] }),
+      ...(nodeHasShape && { shape: nodeShapes.value[node.id] }),
     };
     return data;
   }
@@ -93,36 +91,36 @@
       throw new Error("Attempt to render invalid edge : " + edge);
     }
     const { start, end } = edge;
-    // let edgeHasColour =
-    //   edgeColors.value &&
-    //   start.id in edgeColors.value &&
-    //   end.id in edgeColors.value[start.id] &&
-    //   edgeColors.value[start.id][end.id] !== null;
-    // let edgeHasShape =
-    //   edgeShapes.value &&
-    //   start.id in edgeShapes.value &&
-    //   end.id in edgeShapes.value[start.id] &&
-    //   edgeShapes.value[start.id][end.id] !== null;
-    // let edgeHasLabel =
-    //   edgeLabels.value &&
-    //   start.id in edgeLabels.value &&
-    //   end.id in edgeLabels.value[start.id] &&
-    //   edgeLabels.value[start.id][end.id] !== null;
+    let edgeHasColour =
+      edgeColors.value &&
+      start.id in edgeColors.value &&
+      end.id in edgeColors.value[start.id] &&
+      edgeColors.value[start.id][end.id] !== null;
+    let edgeHasShape =
+      edgeShapes.value &&
+      start.id in edgeShapes.value &&
+      end.id in edgeShapes.value[start.id] &&
+      edgeShapes.value[start.id][end.id] !== null;
+    let edgeHasLabel =
+      edgeLabels.value &&
+      start.id in edgeLabels.value &&
+      end.id in edgeLabels.value[start.id] &&
+      edgeLabels.value[start.id][end.id] !== null;
     const data = {
       x1: nodePositions.value[start.id].x,
       y1: nodePositions.value[start.id].y,
       x2: nodePositions.value[end.id].x,
       y2: nodePositions.value[end.id].y,
 
-      // ...(edgeHasLabel && {
-      //   label: edgeLabels.value[start.id][end.id],
-      // }),
-      // ...(edgeHasColour && {
-      //   color: edgeColors.value[start.id][end.id],
-      // }),
-      // ...(edgeHasShape && {
-      //   shape: edgeShapes.value[start.id][end.id],
-      // }),
+      ...(edgeHasLabel && {
+        label: edgeLabels.value[start.id][end.id],
+      }),
+      ...(edgeHasColour && {
+        color: edgeColors.value[start.id][end.id],
+      }),
+      ...(edgeHasShape && {
+        shape: edgeShapes.value[start.id][end.id],
+      }),
     };
     // console.log(data);
     return data;
@@ -139,7 +137,7 @@
         v-bind="{
           ...getEdgeProps(edge),
 
-          isDirected: type === 'DiGraph',
+          isDirected: type === GraphType.DIRECTED,
 
           index: index,
         }" />
