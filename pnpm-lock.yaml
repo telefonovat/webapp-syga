@@ -24,8 +24,8 @@ importers:
         specifier: ^7.4.47
         version: 7.4.47
       '@telefonovat/syga--contract':
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.1.4
+        version: 4.1.4
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -639,8 +639,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@telefonovat/syga--contract@4.1.3':
-    resolution: {integrity: sha512-XAJXvMDiK8hXDnAn1m4YPcYmVwthqfgGu49y35BUsUcUQ+7k8vjRbrQ000+KeMbXMcPdHLwzdy9BOEmFWDS4hg==, tarball: https://npm.pkg.github.com/download/@telefonovat/syga--contract/4.1.3/7d3d70b94ffca0892975f61123c67d8f51c70b12}
+  '@telefonovat/syga--contract@4.1.4':
+    resolution: {integrity: sha512-2j/lSAj902ykPgTY57DREJKKjFNhdArsz963SgId4qAv/VLOdkKtMOVggqu6Ksp/nx/HX5zp1Anv363bUjBS9Q==, tarball: https://npm.pkg.github.com/download/@telefonovat/syga--contract/4.1.4/e029c9e72bd81e7113d804ead9769fb434dcd175}
 
   '@testing-library/dom@9.3.4':
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}
@@ -2654,7 +2654,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.24.0':
     optional: true
 
-  '@telefonovat/syga--contract@4.1.3': {}
+  '@telefonovat/syga--contract@4.1.4': {}
 
   '@testing-library/dom@9.3.4':
     dependencies:
