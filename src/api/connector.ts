@@ -1,19 +1,21 @@
-import { APIResponse } from '@/shared-types/APIResponse';
-import { APIRequest } from '@/shared-types/APIRequest';
-import { Algorithm } from '@/shared-types/user/Algorithm';
+import { APIResponse } from "@/shared-types/APIResponse";
+import { APIRequest } from "@/shared-types/APIRequest";
+import { Algorithm } from "@/shared-types/user/Algorithm";
 import {
   User,
   UserLoginInfo,
   UserRegistrationInfo,
-} from '@/shared-types/user/Authentication';
-import { VisualizationRequest } from '@/shared-types/visualization/VisualizationRequest';
-import { VisualizationResult } from '@/shared-types/visualization/VisualizationResult';
-import { router } from '@/router';
-import { useUserStore } from '@/store/user/userStore';
-import { storeToRefs } from 'pinia';
+} from "@/shared-types/user/Authentication";
+import { VisualizationRequest } from "@/shared-types/visualization/VisualizationRequest";
+import { VisualizationResult } from "@/shared-types/visualization/VisualizationResult";
+import { router } from "@/router";
+import { useUserStore } from "@/store/user/userStore";
+import { storeToRefs } from "pinia";
 
 // const API_BASE = import.meta.env.VITE_API_BASE;
-const BUILD_ENDPOINT = import.meta.env.VITE_BUILD_ENDPOINT;
+const BUILD_ENDPOINT =
+  import.meta.env.VITE_BUILD_ENDPOINT ||
+  "http://localhost:6000/algorithm/execute";
 const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
 const REGISTER_ENDPOINT = import.meta.env.VITE_REGISTER_ENDPOINT;
 
@@ -23,39 +25,55 @@ const validateResponse = (responseJSON: APIResponse) => {
   }
 };
 const buildCode = async (
-  visualizationRequest: VisualizationRequest
+  visualizationRequest: VisualizationRequest,
 ): Promise<VisualizationResult> => {
   const requestBody: APIRequest = {
     content: visualizationRequest,
   };
-  const response = await fetch(BUILD_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody),
-  });
+  try {
+    const response = await fetch(
+      "http://localhost:8100/algorithm/execute",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mode: "anonymous",
+          code: visualizationRequest.code,
+        }),
+      },
+    );
+    // const response = await fetch(BUILD_ENDPOINT, {
+    //   method: "POST",
+    //   /
+    //   body: JSON.stringify(requestBody),
+    // });
+    const responseJSON = (await response.json()) as APIResponse;
 
-  const responseJSON = (await response.json()) as APIResponse;
+    const visualizationResult: VisualizationResult =
+      responseJSON.content as VisualizationResult;
 
-  const visualizationResult: VisualizationResult =
-    responseJSON.content as VisualizationResult;
-
-  return visualizationResult;
+    console.log(visualizationResult);
+    return visualizationResult;
+  } catch (error) {
+    console.log(`Error is ${error}`);
+    throw error;
+  }
 };
 
 const loginUser = async (
-  loginInfo: UserLoginInfo
+  loginInfo: UserLoginInfo,
 ): Promise<string> => {
   const requestBody: APIRequest = {
     content: loginInfo,
   };
   const response = await fetch(LOGIN_ENDPOINT, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
 
     body: JSON.stringify(requestBody),
@@ -80,16 +98,16 @@ const loginUser = async (
 };
 
 const registerUser = async (
-  registerInfo: UserRegistrationInfo
+  registerInfo: UserRegistrationInfo,
 ): Promise<void> => {
   const requestBody: APIRequest = {
     content: registerInfo,
   };
   await fetch(REGISTER_ENDPOINT, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(requestBody),
   });
@@ -100,31 +118,31 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
   const { token, username } = storeToRefs(userStore);
 
   if (token.value === null) {
-    throw new Error('Please log in');
+    throw new Error("Please log in");
   }
   if (username.value === null) {
-    throw new Error('Username not defined');
+    throw new Error("Username not defined");
   }
 
   const response = await fetch(
     `/api/user/${username.value}/algorithms`,
     {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
         Authorization: `BEARER ${token.value}`,
       },
       // body: JSON.stringify(requestBody),
-    }
+    },
   );
 
   const responseJSON = (await response.json()) as APIResponse;
 
   if (response.status === 401) {
     userStore.$reset();
-    alert('Token expired. Please log in again');
-    router.replace('/');
+    alert("Token expired. Please log in again");
+    router.replace("/");
   }
   const algorithms = responseJSON.content as Algorithm[];
 
@@ -132,61 +150,61 @@ const getUserAlgorithms = async (): Promise<Algorithm[]> => {
 };
 const updateUserAlgorithm = async (
   uuid: string,
-  algorithmUpdate: Partial<Algorithm>
+  algorithmUpdate: Partial<Algorithm>,
 ) => {
   const userStore = useUserStore();
   const { token, username } = storeToRefs(userStore);
   if (token.value === null) {
-    throw new Error('Please log in');
+    throw new Error("Please log in");
   }
   if (username.value === null) {
-    throw new Error('Username not defined');
+    throw new Error("Username not defined");
   }
 
   const requestBody: APIRequest = {
     content: algorithmUpdate,
   };
   const response = await fetch(`/api/algorithm/detail/${uuid}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `BEARER ${token.value}`,
     },
     body: JSON.stringify(requestBody),
   });
 };
 
-const deleteUserAlgorithm = async (uuid: Algorithm['uuid']) => {
+const deleteUserAlgorithm = async (uuid: Algorithm["uuid"]) => {
   const userStore = useUserStore();
   const { token, username } = storeToRefs(userStore);
   if (token.value === null) {
-    throw new Error('Please log in');
+    throw new Error("Please log in");
   }
   if (username.value === null) {
-    throw new Error('Username not defined');
+    throw new Error("Username not defined");
   }
 
   const response = await fetch(`/api/algorithm/detail/${uuid}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `BEARER ${token.value}`,
     },
   });
 };
 
 const saveUserAlgorithm = async (
-  algorithm: Omit<Algorithm, 'uuid'>
+  algorithm: Omit<Algorithm, "uuid">,
 ) => {
   const userStore = useUserStore();
   const { token, username } = storeToRefs(userStore);
   if (token.value === null) {
-    throw new Error('Please log in');
+    throw new Error("Please log in");
   }
   if (username.value === null) {
-    throw new Error('Username not defined');
+    throw new Error("Username not defined");
   }
 
   const requestBody: APIRequest = {
@@ -195,14 +213,14 @@ const saveUserAlgorithm = async (
   const response = await fetch(
     `/api/user/${username.value}/algorithms`,
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
         Authorization: `BEARER ${token.value}`,
       },
       body: JSON.stringify(requestBody),
-    }
+    },
   );
 
   const responseJSON = (await response.json()) as APIResponse;
@@ -211,39 +229,39 @@ const saveUserAlgorithm = async (
 };
 
 const searchForUser = async (
-  username: string
-): Promise<User['username'][]> => {
+  username: string,
+): Promise<User["username"][]> => {
   const requestBody: APIRequest = {
     content: username,
   };
-  const response = await fetch('/api/users/search', {
-    method: 'POST',
+  const response = await fetch("/api/users/search", {
+    method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(requestBody),
   });
 
   const responseJSON = (await response.json()) as APIResponse;
 
-  const usernames = responseJSON.content as User['username'][];
+  const usernames = responseJSON.content as User["username"][];
 
   return usernames;
 };
 
 const getUserPublicAlgorithms = async (
-  username: string
+  username: string,
 ): Promise<Algorithm[]> => {
   const response = await fetch(
     `/api/user/${username}/algorithms/public`,
     {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   const responseJSON = (await response.json()) as APIResponse;
