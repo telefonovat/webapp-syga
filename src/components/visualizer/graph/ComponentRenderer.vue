@@ -12,11 +12,14 @@
     type GraphEdge,
     GraphType,
   } from "@telefonovat/syga--contract";
+  import { useEditorStore } from "@/store/editor/editorStore";
 
   interface Props {
     componentIndex: number;
     viewBoxSize?: number;
   }
+
+  const editorStore = useEditorStore();
 
   const props = withDefaults(defineProps<Props>(), {
     viewBoxSize: defaultRendererSettings["viewBoxSize"] as number,
@@ -124,20 +127,19 @@
 
 <template>
 
-  <svg :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
+  <svg
+    v-if="!editorStore.isCodeBuilding"
+    :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
 
-    <template v-for="(edge, index) in edges">
+    <GraphEdgeVueComponent
+      v-for="(edge, index) in edges"
+      v-bind="{
+        ...getEdgeProps(edge),
 
-      <GraphEdgeVueComponent
-        v-bind="{
-          ...getEdgeProps(edge),
+        isDirected: type === GraphType.DIRECTED,
 
-          isDirected: type === GraphType.DIRECTED,
-
-          index: index,
-        }" />
-
-    </template>
+        index: index,
+      }" />
 
     <GraphNodeVueComponent
       v-for="vertex in nodes"
@@ -145,6 +147,8 @@
       v-bind="getNodeProps(vertex)" />
 
   </svg>
+
+  <span v-else role="status"> Code is building </span>
 
 </template>
 

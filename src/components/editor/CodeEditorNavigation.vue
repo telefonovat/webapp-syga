@@ -12,11 +12,10 @@
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
-  const { code } = storeToRefs(editorStore);
-
-  const isBuilding = ref(false);
+  const { code, isCodeBuilding } = storeToRefs(editorStore);
 
   function buildCode(code: string) {
+    isCodeBuilding.value = true;
     fetch(buildUrl, {
       method: "POST",
 
@@ -39,14 +38,14 @@
       const result = body.result;
 
       if (body.success && isExecuteAlgorithmResult(result)) {
-        console.log("Success");
-        console.log(result.frames);
         visualizerStore.frames = result.frames;
       } else if (isSygaAPIErrorResponse(result)) {
         console.log("Error");
       } else {
         console.log("Unknown case");
       }
+
+      isCodeBuilding.value = false;
     });
   }
 </script>
