@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { Frame } from "@/shared-types/visualization/Frame";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+  import { VisualizationFrame } from "@telefonovat/syga--contract";
   import { format } from "path";
   import { storeToRefs } from "pinia";
   import { computed } from "vue";
@@ -15,7 +15,7 @@
     frames.value.slice(0, activeFrameNumber.value + 1),
   );
 
-  function formatMetaInfo(frame: Frame): string {
+  function formatMetaInfo(frame: VisualizationFrame): string {
     if (frame.lineNo.length === 0) {
       return "---";
     }
@@ -28,12 +28,18 @@
   const consoleOutputs = computed<ConsoleOutput[]>(() => {
     const outputs: ConsoleOutput[] = [];
     for (const frame of processedFrames.value) {
-      if (frame.consoleLogs === "") {
+      if (frame.consoleLogs.length === 0) {
+        continue;
+      }
+      if (
+        frame.consoleLogs.length === 1 &&
+        frame.consoleLogs[0] === ""
+      ) {
         continue;
       }
 
       const metaInfo = formatMetaInfo(frame);
-      outputs.push([frame.consoleLogs, metaInfo]);
+      outputs.push([frame.consoleLogs.join("\n"), metaInfo]);
     }
     return outputs;
   });
