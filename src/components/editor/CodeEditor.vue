@@ -71,24 +71,21 @@
 
 <template>
 
-  <div class="code-editor">
-
-    <Codemirror
-      class="code-editor"
-      v-model="code"
-      :extensions="extensions"
-      @ready="handleReady" />
-
-  </div>
+  <Codemirror
+    v-model="code"
+    :extensions="extensions"
+    @ready="handleReady" />
 
 </template>
 
 <style scoped>
-  .cm-editor, .code-editor{
-  background-color: #282c34;
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: scroll;
+
+</style>
+
+<style>
+  .cm-editor{
+  flex: auto;
+  max-width: 50%;
 }
 </style>
 

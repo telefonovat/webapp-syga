@@ -69,7 +69,6 @@
 
 <style scoped>
   .visualizer-console{
-  height: 25%;
   overflow-y: auto;
 }
 

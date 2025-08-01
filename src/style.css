@@ -17,34 +17,20 @@
 * Resetting browser defaults
 */
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
+  /* border: 1px solid red !important; */
   /* overflow: auto; */
+  box-sizing: border-box;
 }
+
 html,
-body {
+body,
+#app {
+  height: 100vh;
   margin: 0;
   padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: row;
-  overflow: auto;
-}
-
-#app {
-  background: #242424;
-
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  justify-items: stretch;
-}
-
-#app > * {
-  flex: 1;
+  box-sizing: border-box;
 }
 
 button:hover {

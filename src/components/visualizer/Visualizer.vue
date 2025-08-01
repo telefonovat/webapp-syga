@@ -20,16 +20,15 @@
   display: flex;
   flex-direction: column;
   background-color: #282c34;
-  width: 100%;
-  height:100%; 
+  flex-grow: 1;
 }
 
 .renderer{
-  height: 75%;
+  flex: 3;
   border-bottom: 1px solid #444;
 }
 .console{
-height: 25%;
+  flex: 1;
 }
 </style>
 

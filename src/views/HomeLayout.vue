@@ -8,23 +8,11 @@
 
 <template>
 
-  <div class="h-100">
+  <div class="home-layout">
 
-    <div class="top-panel">
+    <RouterView name="main" />
 
-      <button @click.stop="isSidebarCollapsed = !isSidebarCollapsed">
-         Toggle collapse
-      </button>
-
-      <UserAuthenticationPanel />
-
-    </div>
-
-    <div class="home-layout__main">
-
-      <RouterView name="main" />
-
-    </div>
+    <footer class="home-layout__footer"></footer>
 
   </div>
 
@@ -33,16 +21,25 @@
 <style scoped>
   .home-layout{
   display: flex;
+  flex-direction: column;
   height: 100%;
+
+  & > *{
+    flex-grow: 1;
+  }
 }
 
 .top-panel{
+  display: hidden;
   display: flex;
   border-bottom: 1px solid #444;
 }
-.home-layout__main{
-  flex-grow: 1;
-  height: 100%;
+
+.home-layout__footer{
+  min-height: 0.6rem;
+  max-height: 1.3rem;
+  background-color: #1e1e1e;
+  margin: 0;
 }
 </style>
 

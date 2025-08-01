@@ -6,44 +6,41 @@
 
 <template>
 
-  <div class="container">
+  <AlgorithmControlPanel class="control-panel" />
 
-    <AlgorithmControlPanel class="control-panel" />
+  <div class="view-container">
 
-    <div class="view-container">
+    <!-- <div class="placeholder">Hi</div> -->
 
-      <CodeEditor class="code-editor" />
+    <CodeEditor />
 
-      <Visualizer />
-
-    </div>
+    <Visualizer class="visualizer" />
 
   </div>
 
 </template>
 
 <style scoped>
-  .container{
-  /* HACK: This is perfect height for my local machine. The whole CSS section needs rethinking*/
-  height: 90%;
-}
-
-.control-panel{
+  .control-panel{
   border-bottom: 1px solid #444;
 }
 
 .view-container{
-  height: 100%;
-  width: 100%;
   display: flex;
+  max-height: 80%;
+
+  & > *{
+    flex-grow: 1;
+  }
 }
 
-.code-editor{
-  height: 100%;
-  /* HACK: Also needed so that the editor expands */
-  width: 100%;
+.placeholder{
+  flex-grow: 1;
+}
 
-  border-right: 1px solid #444;
+.visualizer{
+
+  border-left: 1px solid #444;
 }
 </style>
 
