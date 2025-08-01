@@ -2,6 +2,7 @@ import { defineStore, storeToRefs } from "pinia";
 import { useAnimationStore_ } from "./animationStore";
 import { computed, ref } from "vue";
 import { Frame } from "@/shared-types/visualization/Frame";
+import { VisualizationFrame } from "@telefonovat/syga--contract";
 
 const useVisualizerStore = defineStore("Visualizer Store", () => {
   const animationStore = useAnimationStore_();
@@ -57,7 +58,7 @@ const useVisualizerStore = defineStore("Visualizer Store", () => {
     }
     animationStore.activeFrameNumber = frameNumber;
   }
-  function setFrames(newFrames: Frame[]) {
+  function setFrames(newFrames: VisualizationFrame[]) {
     animationStore.setFrames(newFrames);
   }
 
