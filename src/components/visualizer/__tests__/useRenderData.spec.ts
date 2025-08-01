@@ -1,17 +1,17 @@
-import { Frame } from '@/shared-types/visualization/Frame';
-import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-import { createTestingPinia } from '@pinia/testing';
-import { setActivePinia } from 'pinia';
-import { useRenderData } from '../graph/renderData';
-import { mockedStore } from '@/types/mock/mockedStore';
+import { Frame } from "@/shared-types/visualization/Frame";
+import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+import { createTestingPinia } from "@pinia/testing";
+import { setActivePinia } from "pinia";
+import { useRenderData } from "../graph/renderData";
+import { mockedStore } from "@/types/mock/mockedStore";
 
-describe('Test useRenderdata composable', () => {
+describe("Test useRenderdata composable", () => {
   const testFrame: Frame = {
     lineNo: [],
-    consoleLogs: '',
+    consoleLogs: "",
     components: [
       {
-        type: 'Graph',
+        type: "Graph",
         nodes: [1, 2, 3],
         edges: [
           [1, 2],
@@ -19,13 +19,13 @@ describe('Test useRenderdata composable', () => {
         ],
         style: {
           nodeColors: {
-            '1': 'white',
-            '2': 'white',
-            '3': 'white',
+            "1": "white",
+            "2": "white",
+            "3": "white",
           },
           edgeColors: {
-            '1': { '2': 'black' },
-            '2': { '3': 'black' },
+            "1": { "2": "black" },
+            "2": { "3": "black" },
           },
           nodeLabels: {},
           edgeLabels: {},
@@ -35,7 +35,7 @@ describe('Test useRenderdata composable', () => {
       },
     ],
   };
-  it('extracts frame properties from the store correctly', () => {
+  it("extracts frame properties from the store correctly", () => {
     setActivePinia(createTestingPinia());
     const store = mockedStore(useVisualizerStore);
 

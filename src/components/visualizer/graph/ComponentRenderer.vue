@@ -76,11 +76,6 @@
   >["$props"];
   function getEdgeProps(edge: GraphEdge): Omit<EdgeProps, "index"> {
     function isEdgeValid({ start, end }: GraphEdge) {
-      console.log(edges.value);
-      console.log(nodes.value);
-      console.log(
-        `${edges.value.includes(edge)}, ${nodes.value.includes(start)}, ${nodes.value.includes(end)}`,
-      );
       return (
         edges.value.includes(edge) &&
         nodes.value.some((node) => node.id === start.id) &&
@@ -144,11 +139,10 @@
 
     </template>
 
-    <template v-for="node in nodes">
-
-      <GraphNodeVueComponent v-bind="getNodeProps(node)" />
-
-    </template>
+    <GraphNodeVueComponent
+      v-for="vertex in nodes"
+      :data-testid="`graph-vertex-${vertex.id}`"
+      v-bind="getNodeProps(vertex)" />
 
   </svg>
 
