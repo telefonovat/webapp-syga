@@ -47,20 +47,20 @@
   const extensions = [python(), oneDark, lineHighlightField];
 
   watch(currentLineNos, (value, _old) => {
-    if (view.value === undefined) {
-      return;
-    }
-    const linesToHighlight = value.map(
-      (line) => view.value!.state.doc.line(line).from,
-    );
-
-    view.value.dispatch({
-      effects: linesToHighlight.map((line) =>
-        addLineHighlight.of({
-          line: line,
-        }),
-      ),
-    });
+    // if (view.value === undefined) {
+    //   return;
+    // }
+    // const linesToHighlight = value.map(
+    //   (line) => view.value!.state.doc.line(line).from,
+    // );
+    //
+    // view.value.dispatch({
+    //   effects: linesToHighlight.map((line) =>
+    //     addLineHighlight.of({
+    //       line: line,
+    //     }),
+    //   ),
+    // });
   });
 
   const view = shallowRef<EditorView>();
