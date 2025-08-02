@@ -23,11 +23,11 @@
 <style scoped>
   .control-panel{
   border-bottom: 1px solid #444;
+  flex: 0;
 }
 
 .view-container{
   display: flex;
-  max-height: 80%;
 
   & > *{
     flex-grow: 1;
