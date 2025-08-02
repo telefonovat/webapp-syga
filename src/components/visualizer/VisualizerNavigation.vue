@@ -31,7 +31,9 @@
 
   <div class="container">
 
-    <button @click="togglePlay()">Toggle play</button>
+    <button @click="togglePlay()">
+       {{ store.isPlaying ? "Pause" : "Play" }}
+    </button>
 
     <button @click="sliderModel.value = 1"><<</button>
 
