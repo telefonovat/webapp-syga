@@ -1,28 +1,36 @@
 <script setup lang="ts">
-import { computed } from "vue";
+  import { ref, computed } from "vue";
 
-interface AwesomeSliderPresentationProps {
-  positionPercentage: number;
-  color?: string;
-  text: string;
-}
+  interface AwesomeSliderPresentationProps {
+    positionPercentage: number;
+    color?: string;
+    text: string;
+  }
 
-const props = withDefaults(defineProps<AwesomeSliderPresentationProps>(), {
-  type: "default",
-  color: "darkcyan",
-});
+  const props = withDefaults(
+    defineProps<AwesomeSliderPresentationProps>(),
+    {
+      type: "default",
+      color: "darkcyan",
+    },
+  );
 
-const positionPercentageFormatted = computed(
-  () => `${props.positionPercentage}%`,
-);
+  const positionPercentageFormatted = computed(
+    () => `${props.positionPercentage}%`,
+  );
+
+  const sliderBar = ref<HTMLElement | null>(null);
+  defineExpose({ sliderBar });
 </script>
 
 <template>
-  <div class="slider-bar">{{ text }}</div>
+
+  <div ref="sliderBar" class="slider-bar">{{ text }}</div>
+
 </template>
 
 <style scoped>
-.slider-bar {
+  .slider-bar {
   background: linear-gradient(
     90deg,
     v-bind(color) 0%,
@@ -33,3 +41,4 @@ const positionPercentageFormatted = computed(
   text-align: center;
 }
 </style>
+
