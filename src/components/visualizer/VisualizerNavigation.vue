@@ -1,12 +1,13 @@
 <script setup lang="ts">
   import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-  import { ref } from "vue";
+  import { computed, ref } from "vue";
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
   const store = useVisualizerStore();
 
   const { togglePlay } = useVisualizerCommands();
+  const canVisualizerPlay = computed(() => store.frames.length !== 0);
 
   function modulo(a: number, n: number): number {
     return ((a % n) + n) % n;
@@ -31,13 +32,18 @@
 
   <div class="container">
 
-    <button @click="togglePlay()">
+    <button :disabled="!canVisualizerPlay" @click="togglePlay()">
        {{ store.isPlaying ? "Pause" : "Play" }}
     </button>
 
-    <button @click="sliderModel.value = 1"><<</button>
+    <button
+      :disabled="!canVisualizerPlay"
+      @click="sliderModel.value = 1">
+       <<
+    </button>
 
     <button
+      :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = modulo(
           sliderModel.value - 1,
@@ -48,11 +54,13 @@
     </button>
 
     <AwesomeSlider
+      :disabled="!canVisualizerPlay"
       data-testid="visualizer-frame-slider"
       class="container__frames-slider"
       v-model="sliderModel" />
 
     <button
+      :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = modulo(
           sliderModel.value + 1,
@@ -62,7 +70,11 @@
        >
     </button>
 
-    <button @click="sliderModel.value = sliderModel.max"> >> </button>
+    <button
+      :disabled="!canVisualizerPlay"
+      @click="sliderModel.value = sliderModel.max">
+       >>
+    </button>
 
     <button @click="store.$reset()">X</button>
 

@@ -37,8 +37,17 @@ body,
   font-size: var(--global-font-size);
 }
 
+button {
+  padding: 0 1rem;
+}
+
 button:hover {
   background-color: #555555;
+}
+
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
 }
 
 /*
