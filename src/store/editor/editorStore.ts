@@ -3,12 +3,12 @@ import { ref } from "vue";
 
 const useEditorStore = defineStore("Editor Store", () => {
   const code = ref("");
-  const isCodeBuilding = ref(false);
-
   const isInDatabase = ref<boolean>(false);
   const uuid = ref<string | null>(null);
   const title = ref<string | null>(null);
   const isStarred = ref(false);
+
+  const isCodeBuilding = ref(false);
 
   function $reset() {
     code.value = "";
@@ -20,11 +20,12 @@ const useEditorStore = defineStore("Editor Store", () => {
 
   return {
     code,
-    isCodeBuilding,
     isInDatabase,
     uuid,
     title,
     isStarred,
+
+    isCodeBuilding,
     $reset,
   };
 });

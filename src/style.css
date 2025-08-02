@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --global-font-size: 14px;
 }
 
 /* 
@@ -31,6 +33,8 @@ body,
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  font-size: var(--global-font-size);
 }
 
 button:hover {

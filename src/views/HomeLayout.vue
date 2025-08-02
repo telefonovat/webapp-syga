@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  import NavSidebar from "@/components/NavSidebar.vue";
-  import UserAuthenticationPanel from "@/components/user/authentication/UserAuthenticationPanel.vue";
   import { ref } from "vue";
+  import AlgorithmViewFooter from "./AlgorithmViewFooter.vue";
 
   const isSidebarCollapsed = ref(false);
 </script>
@@ -12,7 +11,10 @@
 
     <RouterView name="main" />
 
-    <footer class="home-layout__footer"></footer>
+    <!-- <footer class="home-layout__footer"></footer> -->
+
+    <AlgorithmViewFooter
+      class="home-layout__footer"></AlgorithmViewFooter>
 
   </div>
 
@@ -37,7 +39,7 @@
 
 .home-layout__footer{
   min-height: 0.6rem;
-  max-height: 1.3rem;
+  max-height: 2rem;
   background-color: #1e1e1e;
   margin: 0;
 }
