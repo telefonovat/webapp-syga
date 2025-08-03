@@ -92,8 +92,14 @@
     padding: 8px;
   }
 }
+
 .container__frames-slider{
   min-width: 200px;
+  cursor: grab;
+}
+
+.container__frames-slider:active:hover{
+  cursor: grabbing;
 }
 </style>
 
