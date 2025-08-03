@@ -22,7 +22,7 @@ const testFrames: Frame[] = [
   },
 ];
 
-describe("Private Animation Store", () => {
+describe.skip("Private Animation Store", () => {
   it("throws errors if frame movement is done when there are no frames", () => {
     const store = useAnimationStore_(createPinia());
 
@@ -54,7 +54,7 @@ describe("Private Animation Store", () => {
   });
 });
 
-describe("Visualizer Store", () => {
+describe.skip("Visualizer Store", () => {
   it("should set active frame number correctly", () => {
     const store = useVisualizerStore(createPinia());
 

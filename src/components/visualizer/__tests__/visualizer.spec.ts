@@ -271,8 +271,8 @@ describe("Graph visualizer", async function () {
     setActivePinia(pinia);
     const store = useVisualizerStore();
 
-    store.setFrames([testFrame]);
-    store.setActiveFrame(0);
+    store.frames = [testFrame];
+    store.activeFrameNumber = 0;
 
     const visualizer = render(Visualizer, {
       global: {

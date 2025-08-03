@@ -3,92 +3,77 @@ import { useAnimationStore_ } from "./animationStore";
 import { computed, ref } from "vue";
 import { VisualizationFrame } from "@telefonovat/syga--contract";
 
-const useVisualizerStore = defineStore("Visualizer Store", () => {
-  const animationStore = useAnimationStore_();
+const TICK_PERIOD_MS = 750;
 
-  // Ticker
-  const lastTick = ref(performance.now());
-  const isPlaying = ref(false);
-  const isInitialized = ref(false);
-  const tickPeriod = ref(750);
+export const useVisualizerStore = defineStore("Visualizer state", {
+  state: () => ({
+    frames: [] as VisualizationFrame[],
+    activeFrameNumber: 0,
 
-  // Re-exporting animationStore.frames does not work
-  const { frames, numberOfFrames, activeFrameNumber } =
-    storeToRefs(animationStore);
+    isPlaying: false,
 
-  const currentFrame = computed(() => animationStore.currentFrame);
+    // internal ticker
+    lastTick: performance.now(),
+    intervalId: -1, // from window.setInterval
+  }),
+  getters: {
+    numberOfFrames(state) {
+      return state.frames.length;
+    },
 
-  function initialize() {
-    isInitialized.value = true;
-  }
-  function mainLoop(timestamp: DOMHighResTimeStamp) {
-    if (
-      lastTick.value !== null &&
-      isPlaying.value &&
-      lastTick.value + tickPeriod.value <= timestamp
-    ) {
-      animationStore.nextFrame();
-      lastTick.value = timestamp;
-    }
-    window.requestAnimationFrame((timestamp) => mainLoop(timestamp));
-  }
+    currentFrame(state) {
+      if (
+        state.activeFrameNumber < 0 ||
+        state.activeFrameNumber >= this.numberOfFrames
+      ) {
+        return null;
+      }
+      return state.frames[state.activeFrameNumber];
+    },
 
-  // Frame navigation commands
-  function play() {
-    if (!isInitialized.value) {
-      initialize();
-    }
-    lastTick.value = performance.now();
-    isPlaying.value = true;
-    mainLoop(lastTick.value);
-  }
-  function pause() {
-    isPlaying.value = false;
-  }
-  function setActiveFrame(frameNumber: number) {
-    if (
-      !(
-        frameNumber >= 0 &&
-        frameNumber < animationStore.numberOfFrames
-      )
-    ) {
-      console.warn(`Frame number ${frameNumber} does not exist`);
-      return;
-    }
-    animationStore.activeFrameNumber = frameNumber;
-  }
-  function setFrames(newFrames: VisualizationFrame[]) {
-    animationStore.setFrames(newFrames);
-  }
+    shouldTick(state) {
+      return performance.now() - state.lastTick >= TICK_PERIOD_MS;
+    },
+  },
+  actions: {
+    nextFrame() {
+      if (this.numberOfFrames === 0) {
+        throw new Error("Primitive error: there are no frames");
+      }
+      this.activeFrameNumber =
+        (this.activeFrameNumber + 1) % this.numberOfFrames;
+    },
+    prevFrame() {
+      if (this.numberOfFrames === 0) {
+        throw new Error("Primitive error: there are no frames");
+      }
+      this.activeFrameNumber =
+        (this.activeFrameNumber - 1) % this.numberOfFrames;
+    },
 
-  // reset functions
-  function resetTicker() {
-    lastTick.value = performance.now();
-    isPlaying.value = false;
-    isInitialized.value = false;
-    tickPeriod.value = 750;
-  }
-  function $reset() {
-    animationStore.$reset();
-    resetTicker();
-  }
+    tryTick() {
+      if (!this.isPlaying) {
+        return;
+      }
 
-  return {
-    frames,
-    activeFrameNumber,
-    numberOfFrames,
-    currentFrame,
-    isPlaying,
-    play,
-    pause,
+      this.nextFrame();
 
-    setActiveFrame,
-    setFrames,
+      window.clearInterval(this.intervalId);
+      this.intervalId = window.setInterval(
+        () => window.requestAnimationFrame(this.tryTick),
+        TICK_PERIOD_MS,
+      );
+    },
 
-    mainLoop,
-
-    $reset,
-  };
+    play() {
+      this.intervalId = window.setInterval(
+        this.tryTick,
+        TICK_PERIOD_MS,
+      );
+    },
+    pause() {
+      window.clearInterval(this.intervalId);
+      this.intervalId = -1;
+    },
+  },
 });
-
-export { useVisualizerStore };

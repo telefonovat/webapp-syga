@@ -1,12 +1,13 @@
 <script setup lang="ts">
   import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-  import { computed, ref } from "vue";
+  import { computed, onMounted, ref } from "vue";
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
-  const store = useVisualizerStore();
 
+  const store = useVisualizerStore();
   const { togglePlay } = useVisualizerCommands();
+
   const canVisualizerPlay = computed(() => store.frames.length !== 0);
 
   function modulo(a: number, n: number): number {
@@ -19,7 +20,8 @@
       return store.activeFrameNumber + 1;
     },
     set value(v) {
-      store.setActiveFrame(v - 1);
+      // store.setActiveFrame(v - 1);
+      store.activeFrameNumber = v - 1;
     },
     min: 0,
     get max() {
