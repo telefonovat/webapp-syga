@@ -30,16 +30,16 @@
     }).then(async (response) => {
       const body = await response.json();
 
-      if (!("success" in body) || !("result" in body)) {
+      if (!("success" in body) || !("payload" in body)) {
         // TODO: Proper error handling
         throw "Response from API is deformed";
       }
 
-      const result = body.result;
+      const payload = body.payload;
 
-      if (body.success && isExecuteAlgorithmResult(result)) {
-        visualizerStore.frames = result.frames;
-      } else if (isSygaAPIErrorResponse(result)) {
+      if (body.success && isExecuteAlgorithmResult(payload)) {
+        visualizerStore.frames = payload.frames;
+      } else if (isSygaAPIErrorResponse(payload)) {
         console.log("Error");
       } else {
         console.log("Unknown case");
