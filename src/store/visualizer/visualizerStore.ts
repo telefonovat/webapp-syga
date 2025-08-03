@@ -1,7 +1,6 @@
 import { defineStore, storeToRefs } from "pinia";
 import { useAnimationStore_ } from "./animationStore";
 import { computed, ref } from "vue";
-import { Frame } from "@/shared-types/visualization/Frame";
 import { VisualizationFrame } from "@telefonovat/syga--contract";
 
 const useVisualizerStore = defineStore("Visualizer Store", () => {

@@ -1,10 +1,10 @@
 import { watch } from "vue";
 import { storeToRefs } from "pinia";
-import { useUserStore } from "./store/user/userStore";
+import { useSettingsStore } from "./store/user/settingsStore";
 
 export function useSyncFontSize() {
-  const userStore = useUserStore();
-  const { fontSizePx } = storeToRefs(userStore);
+  const settingsStore = useSettingsStore();
+  const { fontSizePx } = storeToRefs(settingsStore);
   function updateFontSize(size: number) {
     document.documentElement.style.setProperty(
       "--global-font-size",

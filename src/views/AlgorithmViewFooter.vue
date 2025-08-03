@@ -1,9 +1,9 @@
 
 <script setup lang="ts">
-  import { useUserStore } from "@/store/user/userStore";
+  import { useSettingsStore } from "@/store/user/settingsStore";
   import { storeToRefs } from "pinia";
 
-  const { fontSizePx } = storeToRefs(useUserStore());
+  const { fontSizePx } = storeToRefs(useSettingsStore());
 </script>
 
 <template>
