@@ -19,20 +19,20 @@
 * Resetting browser defaults
 */
 * {
-  /* margin: 0; */
-  /* padding: 0; */
+  margin: 0;
+  padding: 0;
   /* border: 1px solid red !important; */
   /* overflow: auto; */
   box-sizing: border-box;
+  min-height: 0;
 }
 
 html,
 body,
 #app {
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 
   font-size: var(--global-font-size);
 }

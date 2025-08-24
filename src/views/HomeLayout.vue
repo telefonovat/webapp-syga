@@ -11,8 +11,6 @@
 
     <RouterView name="main" />
 
-    <!-- <footer class="home-layout__footer"></footer> -->
-
     <AlgorithmViewFooter
       class="home-layout__footer"></AlgorithmViewFooter>
 
@@ -38,7 +36,7 @@
 }
 
 .home-layout__footer{
-  min-height: 0.6rem;
+  min-height: 1rem;
   max-height: 2rem;
   background-color: #1e1e1e;
   margin: 0;

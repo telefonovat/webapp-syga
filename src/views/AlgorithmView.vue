@@ -23,7 +23,7 @@
 <style scoped>
   .control-panel{
   border-bottom: 1px solid #444;
-  flex: 0;
+  min-height: 2rem;
 }
 
 .view-container{

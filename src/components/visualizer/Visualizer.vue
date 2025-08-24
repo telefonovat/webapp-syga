@@ -20,7 +20,6 @@
   display: flex;
   flex-direction: column;
   background-color: #282c34;
-  flex-grow: 1;
 }
 
 .renderer{
