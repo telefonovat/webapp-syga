@@ -1,8 +1,6 @@
 <script setup lang="ts">
-  import { ref } from "vue";
   import AlgorithmViewFooter from "./AlgorithmViewFooter.vue";
-
-  const isSidebarCollapsed = ref(false);
+  import AppSidebar from "./AppSidebar.vue";
 </script>
 
 <template>
@@ -11,7 +9,7 @@
 
     <div class="main-container">
 
-      <div class="sidebar">Sidebar</div>
+      <AppSidebar />
 
       <!-- Necessary to wrap RouterView in flexbox. Otherwise, CSS goes crazy -->
 
