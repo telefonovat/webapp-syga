@@ -23,11 +23,12 @@
 }
 
 .renderer{
-  flex: 3;
+  flex: 3 1 0%;
   border-bottom: 1px solid #444;
 }
+
 .console{
-  flex: 1;
+  flex: 1 1 0%;
 }
 </style>
 

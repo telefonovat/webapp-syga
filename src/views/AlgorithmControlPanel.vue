@@ -27,7 +27,7 @@
   .panel-wrapper{
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 
 .navigation-container{

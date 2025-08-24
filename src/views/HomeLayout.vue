@@ -37,7 +37,7 @@
 
 .home-layout__footer{
   min-height: 1rem;
-  max-height: 2rem;
+  max-height: 1.5rem;
   background-color: #1e1e1e;
   margin: 0;
 }

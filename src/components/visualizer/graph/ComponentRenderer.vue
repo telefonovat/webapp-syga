@@ -127,32 +127,40 @@
 
 <template>
 
-  <svg
-    v-if="!editorStore.isCodeBuilding"
-    :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
+  <div v-if="!editorStore.isCodeBuilding">
 
-    <GraphEdgeVueComponent
-      v-for="(edge, index) in edges"
-      v-bind="{
-        ...getEdgeProps(edge),
+    <svg
+      class="component"
+      :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
 
-        isDirected: type === GraphType.DIRECTED,
+      <GraphEdgeVueComponent
+        v-for="(edge, index) in edges"
+        v-bind="{
+          ...getEdgeProps(edge),
 
-        index: index,
-      }" />
+          isDirected: type === GraphType.DIRECTED,
 
-    <GraphNodeVueComponent
-      v-for="vertex in nodes"
-      :data-testid="`graph-vertex-${vertex.id}`"
-      v-bind="getNodeProps(vertex)" />
+          index: index,
+        }" />
 
-  </svg>
+      <GraphNodeVueComponent
+        v-for="vertex in nodes"
+        :data-testid="`graph-vertex-${vertex.id}`"
+        v-bind="getNodeProps(vertex)" />
 
-  <span v-else role="status"> Code is building </span>
+    </svg>
+
+  </div>
+
+  <div v-else role="status">Code is building :)</div>
 
 </template>
 
 <style scoped>
-
+  .component{
+  display: block;
+  height: 100%;
+  margin: auto;
+}
 </style>
 

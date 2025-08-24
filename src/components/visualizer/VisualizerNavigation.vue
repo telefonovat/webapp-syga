@@ -95,6 +95,8 @@
 
 .container__frames-slider{
   min-width: 200px;
+  align-self: center;
+
   cursor: grab;
 }
 

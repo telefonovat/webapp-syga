@@ -24,10 +24,12 @@
   .control-panel{
   border-bottom: 1px solid #444;
   min-height: 2rem;
+  max-height: 2.75rem;
 }
 
 .view-container{
   display: flex;
+  height: 100%;
 
   & > *{
     flex-grow: 1;
