@@ -9,10 +9,23 @@
 
   <div class="home-layout">
 
-    <RouterView name="main" />
+    <div class="main-container">
 
-    <AlgorithmViewFooter
-      class="home-layout__footer"></AlgorithmViewFooter>
+      <div class="sidebar">Sidebar</div>
+
+      <!-- Necessary to wrap RouterView in flexbox. Otherwise, CSS goes crazy -->
+
+      <div
+        class="main-view"
+        style="display: flex; flex-direction: column">
+
+        <RouterView name="main" />
+
+      </div>
+
+    </div>
+
+    <AlgorithmViewFooter class="home-layout__footer" />
 
   </div>
 
@@ -29,11 +42,20 @@
   }
 }
 
-.top-panel{
-  display: hidden;
+.main-container{
   display: flex;
-  border-bottom: 1px solid #444;
+  height: 100%;
 }
+
+.main-view{
+  flex: 1 1 90%;
+}
+
+.sidebar{
+  flex: 1 1 0%;
+  min-width: 1.5rem;
+}
+
 
 .home-layout__footer{
   min-height: 1rem;
