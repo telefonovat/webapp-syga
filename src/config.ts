@@ -3,5 +3,5 @@ interface WebappConfig {
 }
 
 export const webappConfig: WebappConfig = {
-  API_PORT: import.meta.env.API_PORT || 8100,
+  API_PORT: import.meta.env.VITE_API_PORT || 8100,
 };
