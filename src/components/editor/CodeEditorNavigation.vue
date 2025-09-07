@@ -3,12 +3,9 @@
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { storeToRefs } from "pinia";
 
-  import { VisualizationResult } from "@/shared-types/visualization/VisualizationResult";
-  import { VisualizationRequest } from "@/shared-types/visualization/VisualizationRequest";
-  import { ref } from "vue";
   import { buildUrl } from "@/api/endpoints";
   import { isExecuteAlgorithmResult } from "@telefonovat/syga--contract/response/results/ExecuteAlgorithmSuccessResponse";
-  import { isSygaAPIErrorResponse } from "@telefonovat/syga--contract/response/SygaApiErrorResponse";
+  import { isApiErrorResponse } from "@telefonovat/syga--contract/response";
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
@@ -39,7 +36,7 @@
 
       if (body.success && isExecuteAlgorithmResult(payload)) {
         visualizerStore.frames = payload.frames;
-      } else if (isSygaAPIErrorResponse(payload)) {
+      } else if (isApiErrorResponse(payload)) {
         console.log("Error");
       } else {
         console.log("Unknown case");
