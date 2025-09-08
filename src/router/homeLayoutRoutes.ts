@@ -12,7 +12,7 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
     {
       //View both the code and visualization of algorithm
       path: "",
-      name: "AlgorithmView",
+      name: "algorithm-view",
       components: {
         main: AlgorithmView,
         // sidebar: NavSidebar,
@@ -26,12 +26,10 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
       },
     },
     {
-      //Modify settings
       path: "/settings",
       name: "user-settings",
       components: {
         main: AlgorithmView,
-        // sidebar: NavSidebar,
       },
       beforeEnter: (_to, _from, next) => {
         const authStore = useAuthStore();

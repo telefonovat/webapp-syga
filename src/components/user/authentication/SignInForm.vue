@@ -8,11 +8,14 @@
   } from "@telefonovat/syga--contract";
   import { ref } from "vue";
 
+  const authStore = useAuthStore();
+
   const username = ref("");
   const password = ref("");
 
+  const isSignInSuccessful = ref(false);
+
   function trySignIn() {
-    const authStore = useAuthStore();
     const body: AuthenticateRequest = {
       username: username.value,
       password: password.value,
@@ -45,7 +48,11 @@
         });
         authStore.setIsAuthenticated(true);
 
-        router.replace({ path: "/" });
+        isSignInSuccessful.value = true;
+        setTimeout(
+          () => router.replace({ name: "algorithm-view" }),
+          1500,
+        );
       }
     });
   }
@@ -65,12 +72,16 @@
 
     <label>
        password
-      <input v-model="password" type="text" />
+      <input v-model="password" type="password" />
 
     </label>
 
     <button @click="trySignIn()">Sign in</button>
 
+  </div>
+
+  <div v-if="isSignInSuccessful">
+     Sign in was successful. Welcome {{ authStore.username }}
   </div>
 
 </template>
