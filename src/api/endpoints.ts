@@ -9,3 +9,4 @@ if (DEBUG) {
 }
 
 export const buildUrl = `${DEBUG ? debugAPIPrefix : ""}/algorithm/build`;
+export const signinUrl = `${DEBUG ? debugAPIPrefix : ""}/signin`;

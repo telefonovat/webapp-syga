@@ -47,6 +47,7 @@
 
 .main-view{
   flex: 1 1 90%;
+  border-left: 1px solid #444;
 }
 
 .sidebar{

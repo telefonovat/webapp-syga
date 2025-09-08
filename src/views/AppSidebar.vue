@@ -1,18 +1,20 @@
 <script setup lang="ts">
-  import HomeSharpIcon from "@mui/icons-material/HomeSharp";
+  import { router } from "@/router";
 </script>
 
 <template>
 
   <div class="sidebar">
 
-    <button>Home</button>
+    <button @click="router.replace('/')">Home</button>
+
+    <button>Featured</button>
 
     <button>Save</button>
 
     <button>Favourites</button>
 
-    <button>Settings</button>
+    <button @click="router.push('/settings')">Settings</button>
 
   </div>
 

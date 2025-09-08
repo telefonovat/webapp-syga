@@ -1,56 +1,11 @@
-import AlgorithmView from '@/views/AlgorithmView.vue';
-import HomeLayout from '@/views/HomeLayout.vue';
-import ProfileView from '@/views/ProfileView.vue';
-import UserProfile from '@/components/user/dashboard/UserProfile.vue';
-
-import MockComponent from '@/components/mock/sfc/MockComponent.vue';
-import type { RouterOptions } from 'vue-router';
-export const routes: RouterOptions['routes'] = [
+import MockComponent from "@/components/mock/sfc/MockComponent.vue";
+import type { RouterOptions } from "vue-router";
+import { homeLayoutRouterRecord } from "./homeLayoutRoutes";
+export const routes: RouterOptions["routes"] = [
+  homeLayoutRouterRecord,
   {
-    path: '/',
-    name: 'HomeLayout',
-    component: HomeLayout,
-    children: [
-      {
-        //View both the code and visualization of algorithm
-        path: '',
-        name: 'AlgorithmView',
-        components: {
-          main: AlgorithmView,
-          // sidebar: NavSidebar,
-        },
-      },
-      {
-        //Modify settings
-        path: '/settings',
-        name: 'UserSettings',
-        components: {
-          main: AlgorithmView,
-          // sidebar: NavSidebar,
-        },
-      },
-      {
-        //View profile if logged in
-        path: '/users/:username',
-        name: 'ProfileView',
-        components: {
-          main: ProfileView,
-          // sidebar: NavSidebar,
-        },
-      },
-      {
-        path: 'users/view/:username',
-        name: 'MockUser',
-        components: {
-          main: UserProfile,
-        },
-        props: true,
-      },
-    ],
-  },
-  {
-    path: '/:catchAll(.*)',
-    name: 'NotFound',
+    path: "/:catchAll(.*)",
+    name: "NotFound",
     component: MockComponent,
   },
 ];
