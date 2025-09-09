@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import { router } from "@/router";
+  import { useAuthStore } from "@/store/user/authStore";
+
+  const authStore = useAuthStore();
 </script>
 
 <template>
@@ -8,13 +11,19 @@
 
     <button @click="router.replace('/')">Home</button>
 
-    <button>Featured</button>
+    <button @click="router.replace('/featured')">Featured</button>
 
     <button>Save</button>
 
     <button>Favourites</button>
 
     <button @click="router.push('/settings')">Settings</button>
+
+    <button>
+       {{
+        authStore.isAuthenticated ? authStore.username : "Anonymous"
+      }}
+    </button>
 
   </div>
 

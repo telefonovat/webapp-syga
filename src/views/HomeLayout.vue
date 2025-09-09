@@ -15,9 +15,11 @@
 
       <div
         class="main-view"
-        style="display: flex; flex-direction: column">
+        style="display: flex; flex-direction: row">
 
-        <RouterView name="main" />
+        <RouterView name="extra" class="main-view-extra" />
+
+        <RouterView name="main" class="main-view-main" />
 
       </div>
 
@@ -49,6 +51,13 @@
   flex: 1 1 90%;
   border-left: 1px solid #444;
 }
+
+.main-view-main{
+    flex-grow: 10;
+  }
+.main-view-extra{
+    flex-grow: 1;
+  }
 
 .sidebar{
   flex: 1 1 0%;

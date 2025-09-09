@@ -6,21 +6,28 @@
 
 <template>
 
-  <AlgorithmControlPanel class="control-panel" />
+  <div class="algorithm-view">
 
-  <div class="view-container">
+    <AlgorithmControlPanel class="control-panel" />
 
-    <!-- <div class="placeholder">Hi</div> -->
+    <div class="view-container">
 
-    <CodeEditor />
+      <CodeEditor />
 
-    <Visualizer class="visualizer" />
+      <Visualizer class="visualizer" />
+
+    </div>
 
   </div>
 
 </template>
 
 <style scoped>
+  .algorithm-view{
+  display: flex;
+  flex-direction: column;
+}
+
   .control-panel{
   border-bottom: 1px solid #444;
   min-height: 2rem;

@@ -17,7 +17,7 @@
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.38.0",
     "@mdi/font": "^7.4.47",
-    "@telefonovat/syga--contract": "^6.5.0",
+    "@telefonovat/syga--contract": "^6.6.0",
     "@vue/test-utils": "^2.4.6",
     "axios": "^1.7.7",
     "codemirror": "^6.0.1",

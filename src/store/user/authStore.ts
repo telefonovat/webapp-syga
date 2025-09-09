@@ -10,6 +10,10 @@ interface AuthTokens {
   refreshToken: string;
 }
 
+interface UserInfo {
+  username: string;
+}
+
 export const useAuthStore = defineStore("Auth Store", {
   state: () => ({
     isAuthenticated: false as boolean,
@@ -30,6 +34,9 @@ export const useAuthStore = defineStore("Auth Store", {
     },
     setIsAuthenticated(isAuthenticated: boolean) {
       this.isAuthenticated = isAuthenticated;
+    },
+    setUserInfo({ username }: UserInfo) {
+      this.username = username;
     },
   },
 });

@@ -1,3 +1,4 @@
+import FeaturedAlgorithms from "@/components/user/dashboard/FeaturedAlgorithms.vue";
 import { useAuthStore } from "@/store/user/authStore";
 import AlgorithmView from "@/views/AlgorithmView.vue";
 import HomeLayout from "@/views/HomeLayout.vue";
@@ -16,6 +17,14 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
       components: {
         main: AlgorithmView,
         // sidebar: NavSidebar,
+      },
+    },
+    {
+      path: "/featured",
+      name: "featured-algorithms",
+      components: {
+        main: AlgorithmView,
+        extra: FeaturedAlgorithms,
       },
     },
     {

@@ -47,6 +47,7 @@
           refreshToken: body.payload.refreshToken,
         });
         authStore.setIsAuthenticated(true);
+        authStore.setUserInfo({ username: username.value });
 
         isSignInSuccessful.value = true;
         setTimeout(
