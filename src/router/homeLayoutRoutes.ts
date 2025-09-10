@@ -1,9 +1,10 @@
 import FeaturedAlgorithms from "@/components/user/dashboard/FeaturedAlgorithms.vue";
 import { useAuthStore } from "@/store/user/authStore";
-import AlgorithmView from "@/views/AlgorithmView.vue";
 import HomeLayout from "@/views/HomeLayout.vue";
+import UserAlgorithmsView from "@/views/UserAlgorithmsView.vue";
 import LogInPageView from "@/views/LogInPageView.vue";
 import { RouteRecordRaw } from "vue-router";
+import AlgorithmView from "@/views/AlgorithmView.vue";
 
 export const homeLayoutRouterRecord: RouteRecordRaw = {
   path: "/",
@@ -49,6 +50,18 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
         }
 
         next();
+      },
+    },
+    {
+      path: "/:username/algorithms",
+      name: "user-algorithms-view",
+      components: {
+        main: UserAlgorithmsView,
+      },
+      props: {
+        main: (route) => ({
+          targetUsername: route.params.username,
+        }),
       },
     },
     // {

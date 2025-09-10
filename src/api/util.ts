@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/store/user/authStore";
 
-const authStore = useAuthStore();
 export function buildHeaders() {
+  const authStore = useAuthStore();
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
