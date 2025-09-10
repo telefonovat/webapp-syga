@@ -1,14 +1,14 @@
 <script setup lang="ts">
-  import FeaturedAlgorithmCard from "./FeaturedAlgorithmCard.vue";
+  import AlgorithmCard from "./AlgorithmCard.vue";
 </script>
 
 <template>
 
   <ul class="featured-algorithms">
 
-    <figcaption>Featured</figcaption>
+    <h4>Featured</h4>
 
-    <FeaturedAlgorithmCard
+    <AlgorithmCard
       v-for="index in 10"
       :key="index"
       :name="`generic-algorithm-${index}`" />
