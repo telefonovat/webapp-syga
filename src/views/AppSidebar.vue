@@ -1,25 +1,54 @@
 <script setup lang="ts">
   import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";
+  import {
+    faFontAwesome,
+    faHouse,
+    faFloppyDisk,
+    faHeart,
+    faSun,
+  } from "@fortawesome/free-regular-svg-icons";
 
   const authStore = useAuthStore();
+
+  import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 </script>
 
 <template>
 
   <div class="sidebar">
 
-    <button @click="router.replace('/')">Home</button>
+    <button title="Home" @click="router.replace('/')">
 
-    <button @click="router.replace('/featured')">Featured</button>
+      <FontAwesomeIcon :icon="faHouse" />
 
-    <button>Save</button>
+    </button>
 
-    <button>Favourites</button>
+    <button title="Featured" @click="router.replace('/featured')">
 
-    <button @click="router.push('/settings')">Settings</button>
+      <FontAwesomeIcon :icon="faFontAwesome" />
+
+    </button>
+
+    <button title="Save">
+
+      <FontAwesomeIcon :icon="faFloppyDisk" />
+
+    </button>
 
     <button>
+
+      <FontAwesomeIcon :icon="faHeart" />
+
+    </button>
+
+    <button @click="router.push('/settings')">
+
+      <FontAwesomeIcon :icon="faSun" />
+
+    </button>
+
+    <button @click="router.push(`/${authStore.username}/algorithms`)">
        {{
         authStore.isAuthenticated ? authStore.username : "Anonymous"
       }}
