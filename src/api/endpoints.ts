@@ -11,6 +11,7 @@ if (DEBUG) {
 // Static urls
 export const buildUrl = `${DEBUG ? debugAPIPrefix : ""}/algorithm/build`;
 export const signinUrl = `${DEBUG ? debugAPIPrefix : ""}/signin`;
+export const algorithmsUrl = `${DEBUG ? debugAPIPrefix : ""}/algorithms`;
 
 // Dynamic urls
 export const getUserAlgorithmsUrl = (targetUsername: string) =>

@@ -1,5 +1,9 @@
 import { defineStore } from "pinia";
 
+import { SygaAlgorithmIdentifier } from "@telefonovat/syga--contract";
+
+type AlgorithmData = SygaAlgorithmIdentifier | undefined;
+
 export const useEditorStore = defineStore(
   "Editor read, write, change state, etc",
   {
@@ -8,6 +12,10 @@ export const useEditorStore = defineStore(
 
       // UI Logic depends on these
       isCodeBuilding: false,
+
+      // Synchronization with database
+      isAnonymous: true,
+      algorithmData: undefined as AlgorithmData,
     }),
     getters: {},
     actions: {},

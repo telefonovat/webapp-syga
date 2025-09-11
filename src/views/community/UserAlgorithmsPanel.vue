@@ -27,7 +27,6 @@
     }).then(async (response) => {
       const body = await response.json();
 
-      console.log("[LOG] Done");
       if (!body.success) {
         console.log("Could not get user algorithms");
         return;
@@ -37,7 +36,6 @@
         return;
       }
 
-      console.log(`[LOG] ${body.payload}`);
       if (isGetUserAlgorithmsSuccessResponse(body.payload)) {
         algorithmIdentifiers.value = body.payload;
       }
