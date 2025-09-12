@@ -37,8 +37,17 @@ body,
   font-size: var(--global-font-size);
 }
 
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border-style: none;
+}
+
 button {
   padding: 0 1rem;
+  cursor: pointer;
 }
 
 button:hover {
