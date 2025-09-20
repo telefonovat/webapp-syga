@@ -3,8 +3,27 @@ import { useAuthStore } from "@/store/user/authStore";
 import HomeLayout from "@/views/HomeLayout.vue";
 import UserAlgorithmsView from "@/views/UserAlgorithmsView.vue";
 import LogInPageView from "@/views/LogInPageView.vue";
-import { RouteRecordRaw } from "vue-router";
+import {
+  NavigationGuardNext,
+  RouteLocationNormalizedGeneric,
+  RouteRecordRaw,
+} from "vue-router";
 import AlgorithmView from "@/views/AlgorithmView.vue";
+
+const mandateSignIn = function (
+  _to: RouteLocationNormalizedGeneric,
+  _from: RouteLocationNormalizedGeneric,
+  next: NavigationGuardNext,
+) {
+  const authStore = useAuthStore();
+  if (!authStore.isAuthenticated) {
+    return next({
+      name: "signin",
+    });
+  }
+
+  next();
+};
 
 export const homeLayoutRouterRecord: RouteRecordRaw = {
   path: "/",
@@ -41,16 +60,7 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
       components: {
         main: AlgorithmView,
       },
-      beforeEnter: (_to, _from, next) => {
-        const authStore = useAuthStore();
-        if (!authStore.isAuthenticated) {
-          return next({
-            name: "signin",
-          });
-        }
-
-        next();
-      },
+      beforeEnter: mandateSignIn,
     },
     {
       path: "/:username/algorithms",
@@ -58,6 +68,7 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
       components: {
         main: UserAlgorithmsView,
       },
+      beforeEnter: mandateSignIn,
       props: {
         main: (route) => ({
           targetUsername: route.params.username,

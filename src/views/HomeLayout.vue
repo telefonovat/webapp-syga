@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import AwesomePopup from "@/components/utility/AwesomePopup.vue";
   import AlgorithmViewFooter from "./AlgorithmViewFooter.vue";
   import AppSidebar from "./AppSidebar.vue";
 </script>

@@ -4,7 +4,6 @@
   import {
     faFontAwesome,
     faHouse,
-    faFloppyDisk,
     faHeart,
     faSun,
   } from "@fortawesome/free-regular-svg-icons";
@@ -30,12 +29,6 @@
 
     </button>
 
-    <button title="Save">
-
-      <FontAwesomeIcon :icon="faFloppyDisk" />
-
-    </button>
-
     <button>
 
       <FontAwesomeIcon :icon="faHeart" />
@@ -49,9 +42,7 @@
     </button>
 
     <button @click="router.push(`/${authStore.username}/algorithms`)">
-       {{
-        authStore.isAuthenticated ? authStore.username : "Anonymous"
-      }}
+       {{ authStore.isAuthenticated ? authStore.username : "N/A" }}
     </button>
 
   </div>
