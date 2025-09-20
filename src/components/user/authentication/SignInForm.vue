@@ -63,35 +63,44 @@
 
   <div class="sign-in-form">
 
-    <h1>Sign in</h1>
+    <h2>Sign in</h2>
 
-    <label>
+    <label class="sign-in-field">
        username
       <input v-model="username" type="text" />
 
     </label>
 
-    <label>
+    <label class="sign-in-field">
        password
       <input v-model="password" type="password" />
 
-    </label>
+    </label class="sign-in-field">
 
     <button @click="trySignIn()">Sign in</button>
 
-  </div>
+    <div v-if="isSignInSuccessful">
+       Sign in was successful. Welcome {{ authStore.username }}
+    </div>
 
-  <div v-if="isSignInSuccessful">
-     Sign in was successful. Welcome {{ authStore.username }}
   </div>
 
 </template>
 
 <style scoped>
   .sign-in-form{
+    min-height: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    padding: 2rem;
+    background-color: #121417;
+    gap: 3px;
 }
+
+    .sign-in-field{
+      min-height: 2rem;
+    }
 </style>
 
