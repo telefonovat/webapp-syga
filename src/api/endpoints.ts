@@ -14,6 +14,8 @@ const prefix = DEBUG ? debugAPIPrefix : "";
 export const buildUrl = `${prefix}/algorithm/build`;
 export const signinUrl = `${prefix}/signin`;
 export const algorithmsUrl = `${prefix}/algorithms`;
+export const verifyAuthUrl = `${prefix}/auth`;
+export const refreshTokenUrl = `${prefix}/refresh-token`;
 
 // Dynamic urls
 export const getUserAlgorithmsUrl = (targetUsername: string) =>

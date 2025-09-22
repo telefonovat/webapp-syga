@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { refreshAuth } from "./refreshAuth";
 
 type AnonymousUsername = { kind: "anonymous" };
 type Username = AnonymousUsername | string;
@@ -41,6 +42,13 @@ export const useAuthStore = defineStore("Auth Store", {
     signOut() {
       this.isAuthenticated = false;
       this.username = { kind: "anonymous" };
+    },
+    async verifyAuth() {
+      const auth = await refreshAuth();
+      if (auth) {
+        this.username = auth.payload.username;
+        this.isAuthenticated = true;
+      }
     },
   },
 });

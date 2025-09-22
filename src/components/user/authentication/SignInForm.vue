@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { awesomeFetch } from "@/api/auth";
 import { signinUrl } from "@/api/endpoints";
   import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";

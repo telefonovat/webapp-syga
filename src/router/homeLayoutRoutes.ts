@@ -12,12 +12,14 @@ import AlgorithmView from "@/views/AlgorithmView.vue";
 import { getAlgorithmDetail } from "@/store/editor/getAlgorithmDetail";
 import { useEditorStore } from "@/store/editor/editorStore";
 
-const mandateSignIn = function (
+const mandateSignIn = async function (
   _to: RouteLocationNormalizedGeneric,
   _from: RouteLocationNormalizedGeneric,
   next: NavigationGuardNext,
 ) {
   const authStore = useAuthStore();
+  //TODO: Temporary measure. I should centralize initialization
+  await authStore.verifyAuth();
   if (!authStore.isAuthenticated) {
     return next({
       name: "signin",
