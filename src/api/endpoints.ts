@@ -8,11 +8,16 @@ if (DEBUG) {
   console.log(`Prefix for API URL is ${debugAPIPrefix}`);
 }
 
+const prefix = DEBUG ? debugAPIPrefix : "";
+
 // Static urls
-export const buildUrl = `${DEBUG ? debugAPIPrefix : ""}/algorithm/build`;
-export const signinUrl = `${DEBUG ? debugAPIPrefix : ""}/signin`;
-export const algorithmsUrl = `${DEBUG ? debugAPIPrefix : ""}/algorithms`;
+export const buildUrl = `${prefix}/algorithm/build`;
+export const signinUrl = `${prefix}/signin`;
+export const algorithmsUrl = `${prefix}/algorithms`;
 
 // Dynamic urls
 export const getUserAlgorithmsUrl = (targetUsername: string) =>
-  `${DEBUG ? debugAPIPrefix : ""}/${targetUsername}/algorithms`;
+  `${prefix}/${targetUsername}/algorithms`;
+
+export const getAlgorithmDetailUrl = (uuid: string) =>
+  `${prefix}/algorithm/${uuid}`;

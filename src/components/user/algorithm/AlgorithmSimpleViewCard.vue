@@ -7,11 +7,9 @@
 
 <template>
 
-  <li>
-
-    <button>{{ name }} </button>
-
-  </li>
+  <button>{{ name }} </button>
 
 </template>
+
+<style scoped></style>
 

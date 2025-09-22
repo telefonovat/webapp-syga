@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AlgorithmCard from "./AlgorithmCard.vue";
+  import AlgorithmSimpleViewCard from "../algorithm/AlgorithmSimpleViewCard.vue";
 </script>
 
 <template>
@@ -8,10 +8,11 @@
 
     <h4>Featured</h4>
 
-    <AlgorithmCard
-      v-for="index in 10"
-      :key="index"
-      :name="`generic-algorithm-${index}`" />
+    <li v-for="index in 10" :key="index">
+
+      <AlgorithmSimpleViewCard :name="`generic-algorithm-${index}`" />
+
+    </li>
 
   </ul>
 

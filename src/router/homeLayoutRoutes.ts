@@ -9,6 +9,8 @@ import {
   RouteRecordRaw,
 } from "vue-router";
 import AlgorithmView from "@/views/AlgorithmView.vue";
+import { getAlgorithmDetail } from "@/store/editor/getAlgorithmDetail";
+import { useEditorStore } from "@/store/editor/editorStore";
 
 const mandateSignIn = function (
   _to: RouteLocationNormalizedGeneric,
@@ -73,6 +75,28 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
         main: (route) => ({
           targetUsername: route.params.username,
         }),
+      },
+    },
+    {
+      path: "/algorithm/:uuid",
+      name: "algorithm-detail-view",
+      components: {
+        main: AlgorithmView,
+      },
+      beforeEnter: async (to, _from, next) => {
+        const algorithmDetail = await getAlgorithmDetail(
+          //WARN: Safety?
+          to.params.uuid as string,
+        );
+        console.log(algorithmDetail);
+        const editorStore = useEditorStore();
+        editorStore.algorithmData = {
+          name: algorithmDetail.name,
+          uuid: algorithmDetail.uuid,
+        };
+        editorStore.code = algorithmDetail.code;
+
+        next();
       },
     },
     // {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { buildHeaders, getUserAlgorithmsUrl } from "@/api";
-  import AlgorithmCard from "@/components/user/dashboard/AlgorithmCard.vue";
+  import AlgorithmFullViewCard from "@/components/user/algorithm/AlgorithmFullViewCard.vue";
   import { useAuthStore } from "@/store/user/authStore";
   import {
     isGetUserAlgorithmsSuccessResponse,
@@ -55,9 +55,10 @@
 
     <ul class="algorithms-list">
 
-      <AlgorithmCard
+      <AlgorithmFullViewCard
         v-for="algorithm in algorithmIdentifiers"
         :key="algorithm.uuid"
+        :uuid="algorithm.uuid"
         :name="algorithm.name" />
 
     </ul>
