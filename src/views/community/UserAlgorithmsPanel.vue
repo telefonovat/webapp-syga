@@ -56,8 +56,6 @@
 
   <div class="user-algorithms-panel">
 
-    <div class="mini-profile">Mini profile</div>
-
     <ul class="algorithms-list">
 
       <AlgorithmFullViewCard

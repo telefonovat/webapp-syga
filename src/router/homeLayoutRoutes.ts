@@ -1,7 +1,7 @@
 import FeaturedAlgorithms from "@/components/user/dashboard/FeaturedAlgorithms.vue";
 import { useAuthStore } from "@/store/user/authStore";
 import HomeLayout from "@/views/HomeLayout.vue";
-import UserAlgorithmsView from "@/views/UserAlgorithmsView.vue";
+import UserPageView from "@/views/UserPageView.vue";
 import LogInPageView from "@/views/LogInPageView.vue";
 import {
   NavigationGuardNext,
@@ -68,9 +68,9 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
     },
     {
       path: "/:username/algorithms",
-      name: "user-algorithms-view",
+      name: "user-page-view",
       components: {
-        main: UserAlgorithmsView,
+        main: UserPageView,
       },
       beforeEnter: mandateSignIn,
       props: {

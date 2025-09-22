@@ -4,7 +4,7 @@ import { signinUrl } from "@/api/endpoints";
   import { useAuthStore } from "@/store/user/authStore";
   import {
     AuthenticateRequestBody,
-    isAuthenticateSuccessResponse,
+    AuthenticationSuccessBodySchema,
   } from "@telefonovat/syga--contract";
   import { ref } from "vue";
 
@@ -31,31 +31,17 @@ import { signinUrl } from "@/api/endpoints";
     }).then(async (response) => {
       const body = await response.json();
 
-      //TODO: Check if response is deformed
+      const successBody = AuthenticationSuccessBodySchema.parse(body)
+      const {username} = successBody.payload
 
-      if (!body.success) {
-        console.log("Log in failed...");
-        return;
-      }
-      if (!body.payload) {
-        console.log("Missing payload");
-        return;
-      }
+      authStore.setIsAuthenticated(true);
+      authStore.setUserInfo({ username });
 
-      if (isAuthenticateSuccessResponse(body.payload)) {
-        authStore.setAuthToken({
-          accessToken: body.payload.accessToken,
-          refreshToken: body.payload.refreshToken,
-        });
-        authStore.setIsAuthenticated(true);
-        authStore.setUserInfo({ username: username.value });
-
-        isSignInSuccessful.value = true;
-        setTimeout(
-          () => router.replace({ name: "algorithm-view" }),
-          1500,
-        );
-      }
+      isSignInSuccessful.value = true;
+      setTimeout(
+        () => router.replace({ name: "algorithm-view" }),
+        1500,
+      );
     });
   }
 </script>

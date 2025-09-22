@@ -30,8 +30,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(@fortawesome/fontawesome-svg-core@7.0.1)(vue@3.5.11(typescript@5.6.2))
       '@telefonovat/syga--contract':
-        specifier: ^9.0.0
-        version: 9.0.0
+        specifier: ^9.2.0
+        version: 9.2.0
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -720,8 +720,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@telefonovat/syga--contract@9.0.0':
-    resolution: {integrity: sha512-dmgiKc8SCbDvGQWEx9Js8+6tMnlZ4KVGPRIbJ0QbKd0nr6tXEJ3EgBhRgEZo1N2d23wmosA/NA9IoOqilQwsyg==, tarball: https://npm.pkg.github.com/download/@telefonovat/syga--contract/9.0.0/ac4d3afbedf05ce2daf09ccfa37bc4187e93d33a}
+  '@telefonovat/syga--contract@9.2.0':
+    resolution: {integrity: sha512-CLdUy1k1QnTf7PNNNriuGnWCmXIbF/cx69QtPCsPrD4aeCl7kK1WR2CQvhXGjW1ZnlgDlNY0qHyXAAszmNTqmg==, tarball: https://npm.pkg.github.com/download/@telefonovat/syga--contract/9.2.0/b7000e994bbeca3adf62adeed5d9c8b926f950a0}
 
   '@testing-library/dom@9.3.4':
     resolution: {integrity: sha512-FlS4ZWlp97iiNWig0Muq8p+3rVDjRiYE+YKGbAqXOu9nwJFFOdL00kFpz42M+4huzYi86vAK1sOOfyOG45muIQ==}
@@ -2864,7 +2864,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.50.2':
     optional: true
 
-  '@telefonovat/syga--contract@9.0.0':
+  '@telefonovat/syga--contract@9.2.0':
     dependencies:
       zod: 4.1.11
 

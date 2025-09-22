@@ -1,6 +1,5 @@
 
 <script setup lang="ts">
-  import { useAuthStore } from "@/store/user/authStore";
   import UserAlgorithmsPanel from "./community/UserAlgorithmsPanel.vue";
 
   interface Props {
