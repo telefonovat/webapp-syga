@@ -1,6 +1,7 @@
 
 <script setup lang="ts">
   import UserAlgorithmsPanel from "./community/UserAlgorithmsPanel.vue";
+  import UserProfilePanel from "./community/UserProfilePanel.vue";
 
   interface Props {
     targetUsername: string;
@@ -12,7 +13,7 @@
 
   <div class="user-page-view">
 
-    <div class="left">Some profile stuff</div>
+    <UserProfilePanel class="left"></UserProfilePanel>
 
     <UserAlgorithmsPanel
       class="right"

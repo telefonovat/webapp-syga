@@ -64,7 +64,7 @@ import { signinUrl } from "@/api/endpoints";
 
     </label class="sign-in-field">
 
-    <button @click="trySignIn()">Sign in</button>
+    <button class="popping-button" @click="trySignIn()">Sign in</button>
 
     <div v-if="isSignInSuccessful">
        Sign in was successful. Welcome {{ authStore.username }}
