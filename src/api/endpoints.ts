@@ -19,5 +19,12 @@ export const algorithmsUrl = `${prefix}/algorithms`;
 export const getUserAlgorithmsUrl = (targetUsername: string) =>
   `${prefix}/${targetUsername}/algorithms`;
 
-export const getAlgorithmDetailUrl = (uuid: string) =>
+export const getAlgorithmResourceUrl = (uuid: string) =>
   `${prefix}/algorithm/${uuid}`;
+
+//TODO: Convert to configurable parameter
+export const globalUrlPrefix = DEBUG ? debugAPIPrefix : "";
+
+export function getGlobalUrl(path: string) {
+  return globalUrlPrefix + path;
+}

@@ -20,7 +20,6 @@
     if (!authStore.isAuthenticated) {
       return;
     }
-    console.log("?");
     fetch(getUserAlgorithmsUrl(props.targetUsername), {
       method: "GET",
       headers: buildHeaders(),
