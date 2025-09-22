@@ -2,7 +2,6 @@
   import { buildHeaders, getUserAlgorithmsUrl } from "@/api";
   import { handleUnauthorized } from "@/api/auth";
   import AlgorithmFullViewCard from "@/components/user/algorithm/AlgorithmFullViewCard.vue";
-  import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";
   import {
     isGetUserAlgorithmsSuccessResponse,
@@ -75,11 +74,6 @@
     display: flex;
   }
 
-  .mini-profile{
-    flex-grow: 5;
-    text-align: center;
-  }
-  
   .algorithms-list{
     list-style: none;
     flex-grow: 20;

@@ -38,11 +38,14 @@ body,
 }
 
 button,
-input,
 select,
 textarea {
   background-color: transparent;
   border-style: none;
+}
+
+input {
+  background-color: #444;
 }
 
 button {
