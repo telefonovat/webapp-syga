@@ -30,6 +30,7 @@
       method: "POST",
       headers: buildHeaders(),
       body: JSON.stringify(body),
+      credentials: "include",
     })
       .then(async (response) => {
         const body = await response.json();

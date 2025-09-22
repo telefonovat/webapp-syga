@@ -10,6 +10,7 @@ export async function getAlgorithmDetail(
   const response = await fetch(getAlgorithmResourceUrl(uuid), {
     method: "GET",
     headers: buildHeaders(),
+    credentials: "include",
   });
 
   const body: GetAlgorithmDetailSuccessBody = await response.json();

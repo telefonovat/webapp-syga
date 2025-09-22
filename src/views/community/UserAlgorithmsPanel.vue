@@ -23,6 +23,7 @@
     fetch(getUserAlgorithmsUrl(props.targetUsername), {
       method: "GET",
       headers: buildHeaders(),
+      credentials: "include",
     }).then(async (response) => {
       const body = await response.json();
 

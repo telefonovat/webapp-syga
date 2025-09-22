@@ -15,11 +15,11 @@
     isCodeBuilding.value = true;
     fetch(buildUrl, {
       method: "POST",
-
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({
         mode: "anonymous",
         code,

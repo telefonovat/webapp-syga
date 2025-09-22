@@ -26,6 +26,7 @@
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(body),
     }).then(async (response) => {
       const body = await response.json();

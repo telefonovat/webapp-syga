@@ -10,6 +10,7 @@ export async function deleteAlgorithm(uuid: string) {
   const response = await fetch(getAlgorithmResourceUrl(uuid), {
     method: "DELETE",
     headers: buildHeaders(),
+    credentials: "include",
   });
 
   if (response.status === 200 || response.status === 204) {
