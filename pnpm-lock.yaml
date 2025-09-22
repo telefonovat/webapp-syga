@@ -26,6 +26,9 @@ importers:
       '@fortawesome/free-regular-svg-icons':
         specifier: ^7.0.1
         version: 7.0.1
+      '@fortawesome/free-solid-svg-icons':
+        specifier: ^7.0.1
+        version: 7.0.1
       '@fortawesome/vue-fontawesome':
         specifier: ^3.1.2
         version: 3.1.2(@fortawesome/fontawesome-svg-core@7.0.1)(vue@3.5.11(typescript@5.6.2))
@@ -570,6 +573,10 @@ packages:
 
   '@fortawesome/free-regular-svg-icons@7.0.1':
     resolution: {integrity: sha512-4V9fHbHjcx9Qu4O99AM5B4zuEDfB4zajk1I77hEzOxPN00f8g3484Aeq6WpfFcmookvjLE3Pr71Dhf/lqw7tbA==}
+    engines: {node: '>=6'}
+
+  '@fortawesome/free-solid-svg-icons@7.0.1':
+    resolution: {integrity: sha512-esKuSrl1WMOTMDLNt38i16VfLe/gRZt2ZAJ3Yw7slfs7sj583MKqNFqO57zmhknk1Sya6f9Wys89aCzIJkcqlg==}
     engines: {node: '>=6'}
 
   '@fortawesome/vue-fontawesome@3.1.2':
@@ -2753,6 +2760,10 @@ snapshots:
       '@fortawesome/fontawesome-common-types': 7.0.1
 
   '@fortawesome/free-regular-svg-icons@7.0.1':
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 7.0.1
+
+  '@fortawesome/free-solid-svg-icons@7.0.1':
     dependencies:
       '@fortawesome/fontawesome-common-types': 7.0.1
 

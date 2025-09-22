@@ -1,12 +1,15 @@
 <script setup lang="ts">
   import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";
+
   import {
     faFontAwesome,
     faHouse,
     faHeart,
     faSun,
-  } from "@fortawesome/free-regular-svg-icons";
+    faUserTie,
+    faUserSecret,
+  } from "@fortawesome/free-solid-svg-icons";
 
   const authStore = useAuthStore();
 
@@ -29,20 +32,27 @@
 
     </button>
 
-    <button>
+    <button title="Favourites">
 
       <FontAwesomeIcon :icon="faHeart" />
 
     </button>
 
-    <button @click="router.push('/settings')">
+    <button title="Settings" @click="router.push('/settings')">
 
       <FontAwesomeIcon :icon="faSun" />
 
     </button>
 
-    <button @click="router.push(`/${authStore.username}/algorithms`)">
-       {{ authStore.isAuthenticated ? authStore.username : "N/A" }}
+    <button
+      title="Your page"
+      @click="router.push(`/${authStore.username}/algorithms`)">
+
+      <FontAwesomeIcon
+        :icon="
+          authStore.isAuthenticated ? faUserTie : faUserSecret
+        " />
+
     </button>
 
   </div>
