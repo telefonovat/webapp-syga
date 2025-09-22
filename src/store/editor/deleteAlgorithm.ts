@@ -1,5 +1,6 @@
 import { getAlgorithmResourceUrl, buildHeaders } from "@/api";
 import { useAuthStore } from "../user/authStore";
+import { handleUnauthorized } from "@/api/auth";
 
 export async function deleteAlgorithm(uuid: string) {
   const authStore = useAuthStore();
@@ -12,6 +13,10 @@ export async function deleteAlgorithm(uuid: string) {
     headers: buildHeaders(),
     credentials: "include",
   });
+
+  if (response.status === 401) {
+    handleUnauthorized();
+  }
 
   if (response.status === 200 || response.status === 204) {
     alert("Deletion OK");

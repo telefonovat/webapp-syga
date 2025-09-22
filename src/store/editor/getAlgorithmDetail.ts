@@ -1,4 +1,5 @@
 import { buildHeaders, getAlgorithmResourceUrl } from "@/api";
+import { handleUnauthorized } from "@/api/auth";
 import {
   GetAlgorithmDetailSuccessBody,
   SygaAlgorithmPublicData,
@@ -12,6 +13,10 @@ export async function getAlgorithmDetail(
     headers: buildHeaders(),
     credentials: "include",
   });
+
+  if (response.status === 401) {
+    handleUnauthorized();
+  }
 
   const body: GetAlgorithmDetailSuccessBody = await response.json();
   if (!body.success) {

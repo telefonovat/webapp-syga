@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import { buildHeaders, getUserAlgorithmsUrl } from "@/api";
+  import { handleUnauthorized } from "@/api/auth";
   import AlgorithmFullViewCard from "@/components/user/algorithm/AlgorithmFullViewCard.vue";
+  import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";
   import {
     isGetUserAlgorithmsSuccessResponse,
@@ -25,6 +27,9 @@
       headers: buildHeaders(),
       credentials: "include",
     }).then(async (response) => {
+      if (response.status === 401) {
+        handleUnauthorized();
+      }
       const body = await response.json();
 
       if (!body.success) {

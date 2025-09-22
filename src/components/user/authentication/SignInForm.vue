@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  import { signinUrl } from "@/api/endpoints";
+  import { awesomeFetch } from "@/api/auth";
+import { signinUrl } from "@/api/endpoints";
   import { router } from "@/router";
   import { useAuthStore } from "@/store/user/authStore";
   import {
-    AuthenticateRequest,
+    AuthenticateRequestBody,
     isAuthenticateSuccessResponse,
   } from "@telefonovat/syga--contract";
   import { ref } from "vue";
@@ -16,7 +17,7 @@
   const isSignInSuccessful = ref(false);
 
   function trySignIn() {
-    const body: AuthenticateRequest = {
+    const body: AuthenticateRequestBody = {
       username: username.value,
       password: password.value,
     };

@@ -38,5 +38,9 @@ export const useAuthStore = defineStore("Auth Store", {
     setUserInfo({ username }: UserInfo) {
       this.username = username;
     },
+    signOut() {
+      this.isAuthenticated = false;
+      this.username = { kind: "anonymous" };
+    },
   },
 });
