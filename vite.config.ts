@@ -5,7 +5,7 @@ import mkcert from "vite-plugin-mkcert";
 // https://vitejs.dev/config
 /// <reference types="vitest/config" />/
 export default defineConfig({
-  plugins: [vue(), mkcert()],
+  plugins: [vue()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

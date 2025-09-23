@@ -1,14 +1,14 @@
 import { webappConfig } from "@/config";
 
 const debugAPIPrefix = `http://localhost:${webappConfig.API_PORT}`;
-const DEBUG = true;
+const DEBUG = webappConfig.DEV;
 
 if (DEBUG) {
   console.log(`DEBUG MODE ON......`);
   console.log(`Prefix for API URL is ${debugAPIPrefix}`);
 }
 
-const prefix = DEBUG ? debugAPIPrefix : "";
+const prefix = webappConfig.API_URL;
 
 // Static urls
 export const buildUrl = `${prefix}/algorithm/build`;
