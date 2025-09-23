@@ -1,22 +1,29 @@
 <script setup lang="ts">
-  import { algorithmsUrl, buildHeaders } from "@/api";
+  import {
+    algorithmsUrl,
+    buildHeaders,
+    getAlgorithmResourceUrl,
+  } from "@/api";
   import AwesomePopup from "@/components/utility/AwesomePopup.vue";
   import { useEditorStore } from "@/store/editor/editorStore";
+  import { getAlgorithmDetail } from "@/store/editor/getAlgorithmDetail";
   import {
     isAddAlgorithmsSuccessBody,
     AddAlgorithmsRequestBody,
+    UpdateAlgorithmRequestBody,
   } from "@telefonovat/syga--contract";
   import { ref } from "vue";
 
-  const algorithmName = ref("Anonymous");
+  const editorStore = useEditorStore();
+  const algorithmName = ref(editorStore.algorithmData?.name || "");
   //TODO: Sync with editor store
-  const isAlgorithmPublic = ref(false);
+  const isAlgorithmPublic = ref(
+    editorStore.algorithmData?.isPublic || false,
+  );
 
   const isSaveModalDisplayed = ref(false);
 
   function trySaveCode() {
-    const editorStore = useEditorStore();
-
     const body: AddAlgorithmsRequestBody = {
       algorithms: [
         {
@@ -26,36 +33,63 @@
         },
       ],
     };
-    fetch(algorithmsUrl, {
-      method: "POST",
-      headers: buildHeaders(),
-      body: JSON.stringify(body),
-      credentials: "include",
-    })
-      .then(async (response) => {
-        const body = await response.json();
+    if (editorStore.algorithmData) {
+      console.log("[bog]");
+      const algorithm = body.algorithms[0];
+      editorStore.algorithmData.name = algorithm.name;
+      editorStore.algorithmData.isPublic = algorithm.isPublic;
 
-        if (!body.success) {
-          console.log("[LOG] Could not add algorithms");
-          return;
-        }
-        if (!body.payload) {
-          console.log("[ERROR] Missing payload");
-          return;
-        }
-        if (
-          isAddAlgorithmsSuccessBody(body) &&
-          body.payload.length === 1
-        ) {
-          editorStore.isAnonymous = false;
-          editorStore.algorithmData = body.payload[0];
-        }
-
-        alert("Algorithm saved successfully");
+      const updateBody: UpdateAlgorithmRequestBody = {
+        ...algorithm,
+      };
+      fetch(getAlgorithmResourceUrl(editorStore.algorithmData.uuid), {
+        method: "PATCH",
+        headers: buildHeaders(),
+        body: JSON.stringify(updateBody),
+        credentials: "include",
       })
-      .finally(() => {
-        isSaveModalDisplayed.value = false;
-      });
+        .then((response) => {
+          if (response.status !== 200) {
+            alert("There was a problem modifying the algorithm");
+          } else {
+            alert("Algorithm modified successfully");
+          }
+        })
+        .finally(() => {
+          isSaveModalDisplayed.value = false;
+        });
+    } else {
+      fetch(algorithmsUrl, {
+        method: "POST",
+        headers: buildHeaders(),
+        body: JSON.stringify(body),
+        credentials: "include",
+      })
+        .then(async (response) => {
+          const body = await response.json();
+
+          if (!body.success) {
+            console.log("[LOG] Could not add algorithms");
+            return;
+          }
+          if (!body.payload) {
+            console.log("[ERROR] Missing payload");
+            return;
+          }
+          if (
+            isAddAlgorithmsSuccessBody(body) &&
+            body.payload.length === 1
+          ) {
+            editorStore.isAnonymous = false;
+            editorStore.algorithmData = body.payload[0];
+          }
+
+          alert("Algorithm saved successfully");
+        })
+        .finally(() => {
+          isSaveModalDisplayed.value = false;
+        });
+    }
   }
 </script>
 
