@@ -90,9 +90,10 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
           //WARN: Safety?
           to.params.uuid as string,
         );
-        console.log(algorithmDetail);
         const editorStore = useEditorStore();
         editorStore.algorithmData = {
+          // TODO: Wrong!
+          isPublic: true,
           name: algorithmDetail.name,
           uuid: algorithmDetail.uuid,
         };
