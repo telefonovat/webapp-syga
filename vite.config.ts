@@ -1,26 +1,27 @@
-import { defineConfig } from 'vitest/config';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import { defineConfig } from "vitest/config";
+import vue from "@vitejs/plugin-vue";
+import path from "path";
+import mkcert from "vite-plugin-mkcert";
 // https://vitejs.dev/config
 /// <reference types="vitest/config" />/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), mkcert()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@test': path.resolve(__dirname, './test'),
+      "@": path.resolve(__dirname, "./src"),
+      "@test": path.resolve(__dirname, "./test"),
     },
   },
   server: {
     port: 8080,
-    host: '0.0.0.0',
+    host: "0.0.0.0",
   },
   test: {
     globals: true,
-    environment: 'happy-dom',
-    setupFiles: ['src/testSetup.ts'],
+    environment: "happy-dom",
+    setupFiles: ["src/testSetup.ts"],
     deps: {
-      inline: ['vuetify'],
+      inline: ["vuetify"],
     },
   },
 });
