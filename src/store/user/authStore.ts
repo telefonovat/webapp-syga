@@ -48,6 +48,9 @@ export const useAuthStore = defineStore("Auth Store", {
       if (auth) {
         this.username = auth.payload.username;
         this.isAuthenticated = true;
+      } else {
+        this.username = { kind: "anonymous" };
+        this.isAuthenticated = false;
       }
     },
   },
