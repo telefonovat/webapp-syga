@@ -2,6 +2,7 @@
   import { onMounted, ref } from "vue";
   import AlgorithmSimpleViewCard from "../algorithm/AlgorithmSimpleViewCard.vue";
 
+  import { router } from "@/router";
   import {
     isGetUserAlgorithmsSuccessResponse,
     SygaAlgorithmIdentifier,
@@ -53,7 +54,9 @@
 
     <li v-for="(algorithm, index) in featuredAlgorithms" :key="index">
 
-      <AlgorithmSimpleViewCard :name="algorithm.name" />
+      <AlgorithmSimpleViewCard
+        :name="algorithm.name"
+        @click="router.replace(`/algorithm/${algorithm.uuid}`)" />
 
     </li>
 
