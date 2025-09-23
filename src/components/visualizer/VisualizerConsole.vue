@@ -52,7 +52,7 @@
     <template v-for="output in consoleOutputs">
 
       <div
-        class="d-flex"
+        class="console-card"
         style="background-color: rgba(0, 0, 0, 0.1)">
 
         <pre class="console-logs">{{ output[0] }}</pre>
@@ -70,6 +70,11 @@
 <style scoped>
   .visualizer-console{
   overflow-y: auto;
+}
+
+.console-card{
+  display: flex;
+  padding: 0.25rem;
 }
 
 .console-logs{
