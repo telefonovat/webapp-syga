@@ -20,10 +20,9 @@
       return store.activeFrameNumber + 1;
     },
     set value(v) {
-      // store.setActiveFrame(v - 1);
       store.activeFrameNumber = v - 1;
     },
-    min: 0,
+    min: 1,
     get max() {
       return store.numberOfFrames;
     },
@@ -47,9 +46,9 @@
     <button
       :disabled="!canVisualizerPlay"
       @click="
-        sliderModel.value = modulo(
-          sliderModel.value - 1,
-          sliderModel.max + 1,
+        sliderModel.value = Math.max(
+          sliderModel.min,
+          modulo(sliderModel.value - 1, sliderModel.max),
         )
       ">
        <
@@ -66,7 +65,7 @@
       @click="
         sliderModel.value = modulo(
           sliderModel.value + 1,
-          sliderModel.max + 1,
+          sliderModel.max,
         )
       ">
        >

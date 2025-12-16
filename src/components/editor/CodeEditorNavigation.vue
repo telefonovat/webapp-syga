@@ -36,6 +36,7 @@
 
       if (body.success && isExecuteAlgorithmResult(payload)) {
         visualizerStore.frames = payload.frames;
+        visualizerStore.activeFrameNumber = 0;
       } else if (isApiErrorResponse(payload)) {
         console.log("Error");
       } else {
