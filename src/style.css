@@ -40,11 +40,13 @@ body,
 button,
 select,
 textarea {
+  color: white;
   background-color: transparent;
   border-style: none;
 }
 
 input {
+  color: white;
   background-color: #444;
 }
 
