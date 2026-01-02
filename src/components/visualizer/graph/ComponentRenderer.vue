@@ -1,15 +1,15 @@
 //Renders a single component of the graph
 <script setup lang="ts">
-  import GraphNodeVueComponent from "./GraphNode.vue";
-  import GraphEdgeVueComponent from "./GraphEdge.vue";
+  import GraphNode from "./GraphNode.vue";
+  import GraphEdge from "./GraphEdge.vue";
   import { toRefs } from "vue";
 
   import { useRenderData } from "./renderData";
   import { defaultRendererSettings } from "./defaults";
 
   import {
-    type GraphVertex,
-    type GraphEdge,
+    type GraphVertex as GraphVertexType,
+    type GraphEdge as GraphEdgeType,
     GraphType,
   } from "@telefonovat/syga--contract";
   import { useEditorStore } from "@/store/editor/editorStore";
@@ -39,12 +39,10 @@
   } = toRefs(useRenderData(props.componentIndex, props.viewBoxSize));
 
   //Get props to pass to GraphNode
-  type NodeProps = InstanceType<
-    typeof GraphNodeVueComponent
-  >["$props"];
+  type NodeProps = InstanceType<typeof GraphNode>["$props"];
 
-  function getNodeProps(node: GraphVertex): NodeProps {
-    function nodeIsValid(node: GraphVertex): boolean {
+  function getNodeProps(node: GraphVertexType): NodeProps {
+    function nodeIsValid(node: GraphVertexType): boolean {
       return (
         nodes.value.includes(node) && !!nodePositions.value[node.id]
       );
@@ -74,11 +72,11 @@
     return data;
   }
 
-  type EdgeProps = InstanceType<
-    typeof GraphEdgeVueComponent
-  >["$props"];
-  function getEdgeProps(edge: GraphEdge): Omit<EdgeProps, "index"> {
-    function isEdgeValid({ start, end }: GraphEdge) {
+  type EdgeProps = InstanceType<typeof GraphEdge>["$props"];
+  function getEdgeProps(
+    edge: GraphEdgeType,
+  ): Omit<EdgeProps, "index"> {
+    function isEdgeValid({ start, end }: GraphEdgeType) {
       return (
         edges.value.includes(edge) &&
         nodes.value.some((node) => node.id === start.id) &&
@@ -133,7 +131,7 @@
       class="component"
       :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
 
-      <GraphEdgeVueComponent
+      <GraphEdge
         v-for="(edge, index) in edges"
         v-bind="{
           ...getEdgeProps(edge),
@@ -143,7 +141,7 @@
           index: index,
         }" />
 
-      <GraphNodeVueComponent
+      <GraphNode
         v-for="vertex in nodes"
         :data-testid="`graph-vertex-${vertex.id}`"
         v-bind="getNodeProps(vertex)" />

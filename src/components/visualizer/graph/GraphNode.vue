@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Node } from "@/shared-types/visualization/Node";
+  import { Node } from "@telefonovat/syga--contract";
   import { defaultNodeSettings } from "./defaults";
 
   interface Props {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { onMounted } from "vue";
   import { defaultEdgeSettings } from "./defaults";
   import { computed } from "vue";
 
@@ -34,11 +33,6 @@
       default:
         return "0 0";
     }
-  });
-
-  onMounted(() => {
-    // console.log(`directed : ${props.isDirected}`);
-    // console.log(arrowheadId);
   });
 </script>
 
