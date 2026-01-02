@@ -1,11 +1,10 @@
 import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 import { storeToRefs } from "pinia";
-import { computed, Reactive, reactive } from "vue";
+import { computed, reactive } from "vue";
 
-import type { Node } from "@/shared-types/visualization/Node";
-import { RenderData } from "@/types/visualizer/RenderData";
+import { GraphVertex } from "@telefonovat/syga--contract";
+type GraphVertexId = GraphVertex["id"];
 
-//
 export function useRenderData(
   componentIndex: number,
   viewBoxSize: number,
@@ -58,7 +57,9 @@ export function useRenderData(
 
   //Evenly places nodes on the circumference of a circle
   const nodePositions = computed(() => {
-    const positions: { [key: Node]: { x: number; y: number } } = {};
+    const positions: {
+      [key: GraphVertexId]: { x: number; y: number };
+    } = {};
 
     nodes.value.forEach((node, index) => {
       const rads = Math.PI * 2 * (index / nodes.value.length - 0.25);

@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { VisualizationFrame } from "@telefonovat/syga--contract";
-  import { format } from "path";
   import { storeToRefs } from "pinia";
   import { computed } from "vue";
 

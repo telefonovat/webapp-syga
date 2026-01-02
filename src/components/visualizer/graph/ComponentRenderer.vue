@@ -118,7 +118,6 @@
         shape: edgeShapes.value[start.id][end.id],
       }),
     };
-    // console.log(data);
     return data;
   }
 </script>
