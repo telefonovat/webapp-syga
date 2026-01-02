@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import AwesomePopup from "@/components/utility/AwesomePopup.vue";
-  import AlgorithmViewFooter from "./AlgorithmViewFooter.vue";
+  import HomeLayoutFooter from "./HomeLayoutFooter.vue";
   import AppSidebar from "./AppSidebar.vue";
 </script>
 
@@ -26,7 +25,7 @@
 
     </div>
 
-    <AlgorithmViewFooter class="home-layout__footer" />
+    <HomeLayoutFooter class="home-layout__footer" />
 
   </div>
 

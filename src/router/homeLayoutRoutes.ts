@@ -8,7 +8,7 @@ import {
   RouteLocationNormalizedGeneric,
   RouteRecordRaw,
 } from "vue-router";
-import AlgorithmView from "@/views/AlgorithmView.vue";
+import AlgorithmView from "@/views/algorithmView/AlgorithmView.vue";
 import { getAlgorithmDetail } from "@/store/editor/getAlgorithmDetail";
 import { useEditorStore } from "@/store/editor/editorStore";
 

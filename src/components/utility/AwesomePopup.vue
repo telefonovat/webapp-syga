@@ -4,6 +4,9 @@
   }
 
   defineProps<Props>();
+  defineEmits<{
+    (e: "closed"): void;
+  }>();
 </script>
 
 <template>
@@ -11,6 +14,8 @@
   <Teleport to="body">
 
     <div v-if="isDisplayed" class="awesome-popup">
+
+      <button class="close-btn" @click="$emit('closed')"> × </button>
 
       <slot />
 
@@ -31,7 +36,17 @@
 
   min-height: 40%;
 
+
   background-color: #242424;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  background: none;
+  border: solid #444;
+  cursor: pointer;
 }
 </style>
 
