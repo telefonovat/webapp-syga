@@ -20,7 +20,7 @@
     () => visualizerStore.currentFrame?.lineNo ?? [],
   );
   const lineHighlightMark = Decoration.line({
-    attributes: { style: "background-color: #00bfffff" },
+    attributes: { style: "background-color: #008b8b" },
   });
   const addLineHighlight = StateEffect.define<{ line: number }>();
   const lineHighlightField = StateField.define({
