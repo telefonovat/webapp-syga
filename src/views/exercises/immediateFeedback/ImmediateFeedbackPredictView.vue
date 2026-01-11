@@ -6,22 +6,54 @@
 
   <div class="immediate-feedback-predict">
 
-    <div>Hello world</div>
+    <PrettyText />
 
-    <Grift :component="props.component" :viewBoxSize="400" />
+    <Grift
+      @edge-option-selected="
+        (start, end, option) =>
+          emit('edge-option-selected', start, end, option)
+      "
+      @vertex-option-selected="
+        (vertex, option) =>
+          emit('vertex-option-selected', vertex, option)
+      "
+      :edgeOptions="edgeOptions"
+      :vertexOptions="vertexOptions"
+      :component="props.component"
+      :viewBoxSize="400" />
 
   </div>
 
 </template>
 
 <script setup lang="ts">
-  import { GraphComponent } from "@telefonovat/syga--contract";
+  import {
+    GraphComponent,
+    GraphVertex,
+  } from "@telefonovat/syga--contract";
   import Grift from "@/components/visualizer/grift/Grift.vue";
+  import PrettyText from "@/components/utility/text/PrettyText.vue";
 
   interface Props {
     component: GraphComponent;
+    edgeOptions: { [key: string]: string };
+    vertexOptions: { [key: string]: string };
   }
   const props = defineProps<Props>();
+
+  const emit = defineEmits<{
+    (
+      e: "edge-option-selected",
+      start: GraphVertex,
+      end: GraphVertex,
+      option: string,
+    ): void;
+    (
+      e: "vertex-option-selected",
+      vertex: GraphVertex,
+      option: string,
+    ): void;
+  }>();
 </script>
 
 <style scoped>

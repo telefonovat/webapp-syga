@@ -2,11 +2,11 @@ import {
   GraphComponent,
   GraphComponentStyle,
   GraphVertex,
-  GraphEdge as GraphEdgeType,
   GraphType,
 } from "@telefonovat/syga--contract";
 import GraphEdge from "../graph/GraphEdge.vue";
 import GraphNode from "../graph/GraphNode.vue";
+import { computed, reactive } from "vue";
 
 type EdgePropsPartial = Omit<
   InstanceType<typeof GraphEdge>["$props"],
@@ -29,8 +29,8 @@ type EdgeStyle = Pick<
 >;
 
 interface GraphRenderData {
-  edgesProps: EdgePropsPartial[];
-  verticesProps: VertexProps[];
+  edgesPropsPartial: { [key: string]: EdgePropsPartial };
+  verticesProps: { [key: string]: VertexProps };
 }
 
 function getVertexPositions(
@@ -92,33 +92,47 @@ export function useGraphRenderData(
   graph: GraphComponent,
   viewBoxSize: number,
 ): GraphRenderData {
-  const vertices = graph.vertices;
-  const vertexLabels = graph.style.vertexLabels;
-  const vertexColors = graph.style.vertexColors;
-  const vertexShapes = graph.style.vertexShapes;
+  console.log("Render run");
 
-  const vertexPositions = getVertexPositions(vertices, viewBoxSize);
-  const verticesProps = vertices.map(({ id }) =>
-    getVertexProps(id, vertexPositions, {
-      vertexLabels,
-      vertexColors,
-      vertexShapes,
-    }),
-  );
+  const vertexPositions = computed(() => {
+    const vertices = graph.vertices;
+    return getVertexPositions(vertices, viewBoxSize);
+  });
+  const verticesProps = computed(() => {
+    const vertices = graph.vertices;
+    const vertexLabels = graph.style.vertexLabels;
+    const vertexColors = graph.style.vertexColors;
+    const vertexShapes = graph.style.vertexShapes;
+    const props: Record<string, VertexProps> = {};
+    vertices.forEach(
+      ({ id }) =>
+        (props[id] = getVertexProps(id, vertexPositions.value, {
+          vertexLabels,
+          vertexColors,
+          vertexShapes,
+        })),
+    );
+    return props;
+  });
 
-  const edges = graph.edges;
-  const isGraphDirected = graph.type === GraphType.DIRECTED;
-  const edgeLabels = graph.style.edgeLabels;
-  const edgeColors = graph.style.edgeColors;
-  const edgeShapes = graph.style.edgeShapes;
-  const edgesProps = edges.map(({ start, end }) =>
-    getEdgePropsPartial(
-      { start: start.id, end: end.id },
-      vertexPositions,
-      isGraphDirected,
-      { edgeColors, edgeLabels, edgeShapes },
-    ),
-  );
+  const edgesPropsPartial = computed(() => {
+    const propsPartial: Record<string, EdgePropsPartial> = {};
 
-  return { verticesProps, edgesProps };
+    const edges = graph.edges;
+    const isGraphDirected = graph.type === GraphType.DIRECTED;
+    const edgeLabels = graph.style.edgeLabels;
+    const edgeColors = graph.style.edgeColors;
+    const edgeShapes = graph.style.edgeShapes;
+    edges.forEach(
+      ({ start, end }) =>
+        (propsPartial[`${start.id}->${end.id}`] = getEdgePropsPartial(
+          { start: start.id, end: end.id },
+          vertexPositions.value,
+          isGraphDirected,
+          { edgeColors, edgeLabels, edgeShapes },
+        )),
+    );
+    return propsPartial;
+  });
+  return reactive({ verticesProps, edgesPropsPartial });
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { defaultEdgeSettings } from "./defaults";
-  import { computed } from "vue";
+  import { computed, watch } from "vue";
 
   interface Props {
     index: number;

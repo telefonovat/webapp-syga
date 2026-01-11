@@ -6,7 +6,17 @@
 
       <ImmediateFeedbackPredictView
         class="immediate-feedback-content"
-        :component="testGraph"
+        :vertexOptions="vertexOptions"
+        :edgeOptions="edgeOptions"
+        :component="bleachedGraph"
+        @edge-option-selected="
+          () => {
+            throw new Error(
+              'Edge option selection handler is not implemented!',
+            );
+          }
+        "
+        @vertex-option-selected="onSelectVertexOption"
         v-if="stage === 'predict'" />
 
       <ImmediateFeedbackControlPanel
@@ -26,11 +36,30 @@
   import {
     GraphComponent,
     GraphType,
+    GraphVertex,
   } from "@telefonovat/syga--contract";
+  import { bleachGraph } from "./util";
 
   type ImmediateFeedbackFlowStage = "predict" | "reveal" | "show";
   const stage = ref<ImmediateFeedbackFlowStage>("predict");
 
+  function onSelectVertexOption(vertex: GraphVertex, option: string) {
+    bleachedGraph.value.style.vertexColors = {
+      ...bleachedGraph.value.style.vertexColors,
+      [vertex.id]:
+        vertexOptions[option as keyof typeof vertexOptions],
+    };
+  }
+
+  const edgeOptions = {
+    tree: "grey",
+    back: "red",
+    cross: "blue",
+  };
+  const vertexOptions = {
+    good: "#0F0",
+    bad: "#444",
+  };
   const testGraph: GraphComponent = {
     type: GraphType.DIRECTED,
     vertices: [{ id: 1 }, { id: 2 }, { id: 3 }],
@@ -59,6 +88,8 @@
       edgeShapes: {},
     },
   };
+
+  const bleachedGraph = ref(bleachGraph(testGraph));
 </script>
 
 <style scoped>
