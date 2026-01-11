@@ -40,7 +40,6 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
       name: "algorithm-view",
       components: {
         main: AlgorithmView,
-        // sidebar: NavSidebar,
       },
     },
     {
@@ -102,22 +101,5 @@ export const homeLayoutRouterRecord: RouteRecordRaw = {
         next();
       },
     },
-    // {
-    //   //View profile if logged in
-    //   path: "/users/:username",
-    //   name: "ProfileView",
-    //   components: {
-    //     main: ProfileView,
-    //     // sidebar: NavSidebar,
-    //   },
-    // },
-    // {
-    //   path: "users/view/:username",
-    //   name: "MockUser",
-    //   components: {
-    //     main: UserProfile,
-    //   },
-    //   props: true,
-    // },
   ],
 };
