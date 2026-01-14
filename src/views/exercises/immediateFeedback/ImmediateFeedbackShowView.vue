@@ -1,12 +1,10 @@
 <template>
 
-  <div> Reveal </div>
+  <div> Show </div>
 
 </template>
 
 <script setup lang="ts">
 
 </script>
-
-<style scoped></style>
 

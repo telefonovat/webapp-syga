@@ -19,7 +19,17 @@
         @vertex-option-selected="onSelectVertexOption"
         v-if="stage === 'predict'" />
 
+      <ImmmediateFeedbackRevealView
+        class="immediate-feedback-content"
+        v-else-if="stage === 'reveal'" />
+
+      <ImmediateFeedbackShowView
+        class="immediate-feedback-content"
+        v-else-if="stage === 'show'" />
+
       <ImmediateFeedbackControlPanel
+        :stages="stages"
+        v-model="stage"
         class="immediate-feedback-control-panel" />
 
     </div>
@@ -31,6 +41,8 @@
 <script setup lang="ts">
   import ImmediateFeedbackPredictView from "./ImmediateFeedbackPredictView.vue";
   import ImmediateFeedbackControlPanel from "./ImmediateFeedbackControlPanel.vue";
+  import ImmmediateFeedbackRevealView from "./ImmediateFeedbackRevealView.vue";
+  import ImmediateFeedbackShowView from "./ImmediateFeedbackShowView.vue";
 
   import { ref } from "vue";
   import {
@@ -41,6 +53,11 @@
   import { bleachGraph } from "./util";
 
   type ImmediateFeedbackFlowStage = "predict" | "reveal" | "show";
+  const stages = [
+    "predict",
+    "reveal",
+    "show",
+  ] satisfies ImmediateFeedbackFlowStage[];
   const stage = ref<ImmediateFeedbackFlowStage>("predict");
 
   function onSelectVertexOption(vertex: GraphVertex, option: string) {
@@ -93,6 +110,9 @@
 </script>
 
 <style scoped>
+  .test-view{
+    height: 100%;
+  }
   .immediate-feedback{
   display: flex;
   flex-direction: column;
@@ -102,10 +122,12 @@
 }
 
   .immediate-feedback-content{
-    flex-grow: 6;
+    flex-grow: 11;
   }
   .immediate-feedback-control-panel{
-    flex-grow: 2;
+    flex-grow: 1;
+    max-height: 15%;
+    min-height: 10%;
   }
 </style>
 
