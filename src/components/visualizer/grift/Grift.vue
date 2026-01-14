@@ -103,7 +103,8 @@
   let handleGraphEdgeOptionSelect: (option: string) => void;
   let handleGraphVertexOptionSelect: (option: string) => void;
   function onGraphEdgeClick(edgeId: string) {
-    if (props.static) return;
+    if (props.static || Object.keys(props.edgeOptions).length === 0)
+      return;
     areOptionsVisible.value = true;
 
     const tokens = edgeId.split("->");
@@ -124,7 +125,8 @@
     };
   }
   function onGraphVertexClick(vertexId: string) {
-    if (props.static) return;
+    if (props.static || Object.keys(props.vertexOptions).length === 0)
+      return;
     areOptionsVisible.value = true;
     optionSelectionType.value = "vertex";
     handleGraphVertexOptionSelect = (option: string) => {
