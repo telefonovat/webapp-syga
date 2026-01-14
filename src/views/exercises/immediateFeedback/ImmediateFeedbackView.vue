@@ -15,7 +15,7 @@
 
       <ImmmediateFeedbackRevealView
         class="immediate-feedback-content"
-        :trueGraphSolution="startGraph!"
+        :trueGraphSolution="endGraph!"
         :submittedGraphSolution="bleachedGraph!"
         v-else-if="stage === 'reveal'" />
 
@@ -61,12 +61,14 @@
   });
 
   const startGraph = ref<GraphComponent | undefined>();
+  const endGraph = ref<GraphComponent | undefined>();
   const bleachedGraph = ref<GraphComponent | undefined>();
   const edgeOptions = ref<EdgeOptions | undefined>();
   const vertexOptions = ref<VertexOptions | undefined>();
   const isReady = computed(
     () =>
       startGraph.value &&
+      endGraph.value &&
       bleachedGraph.value &&
       edgeOptions.value &&
       vertexOptions.value,
@@ -79,6 +81,7 @@
     vertexOptions.value = options.vertexOptions;
     edgeOptions.value = options.edgeOptions;
     startGraph.value = frames[0].graphComponents[0];
+    endGraph.value = frames[frames.length - 1].graphComponents[0];
   }
   function prepareExercise() {
     if (!startGraph.value) return;

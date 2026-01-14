@@ -24,6 +24,9 @@ export const getUserAlgorithmsUrl = (targetUsername: string) =>
 export const getAlgorithmResourceUrl = (uuid: string) =>
   `${prefix}/algorithm/${uuid}`;
 
+export const getIFExerciseUrl = (exerciseId: string) =>
+  `${prefix}/readymade/exercises/if/${exerciseId}`;
+
 //TODO: Convert to configurable parameter
 export const globalUrlPrefix = DEBUG ? debugAPIPrefix : "";
 
