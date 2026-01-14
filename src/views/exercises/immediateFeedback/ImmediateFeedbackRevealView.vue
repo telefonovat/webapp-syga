@@ -3,12 +3,14 @@
   <div class="immediate-feedback-reveal">
 
     <Grift
+      prefix="if-reveal-true"
       :component="trueGraphSolution"
       :edgeOptions="{}"
       :vertexOptions="{}"
       :viewBoxSize="400" />
 
     <Grift
+      prefix="if-reveal-submitted"
       :component="submittedGraphSolution"
       :edgeOptions="{}"
       :vertexOptions="{}"

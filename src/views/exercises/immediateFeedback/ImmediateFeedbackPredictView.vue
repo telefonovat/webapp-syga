@@ -9,6 +9,7 @@
     <PrettyText />
 
     <Grift
+      prefix="if-predict"
       @edge-option-selected="
         (start, end, option) =>
           emit('edge-option-selected', start, end, option)

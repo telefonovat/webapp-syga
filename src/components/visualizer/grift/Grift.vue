@@ -13,7 +13,7 @@
         )"
         :key="edgeId"
         @click="onGraphEdgeClick(edgeId)"
-        v-bind="{ ...edgePropsPartial, index }" />
+        v-bind="{ ...edgePropsPartial, id: `${prefix}-${index}` }" />
 
       <GraphNode
         class="clickable"
@@ -68,6 +68,7 @@
     vertexOptions: { [key: string]: string };
 
     static?: boolean;
+    prefix: string;
   }
   const props = withDefaults(defineProps<Props>(), { static: false });
   const emit = defineEmits<{

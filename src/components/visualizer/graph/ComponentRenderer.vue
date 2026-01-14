@@ -73,9 +73,7 @@
   }
 
   type EdgeProps = InstanceType<typeof GraphEdge>["$props"];
-  function getEdgeProps(
-    edge: GraphEdgeType,
-  ): Omit<EdgeProps, "index"> {
+  function getEdgeProps(edge: GraphEdgeType): Omit<EdgeProps, "id"> {
     function isEdgeValid({ start, end }: GraphEdgeType) {
       return (
         edges.value.includes(edge) &&
@@ -137,7 +135,7 @@
 
           isDirected: type === GraphType.DIRECTED,
 
-          index: index,
+          id: `${index}`,
         }" />
 
       <GraphNode

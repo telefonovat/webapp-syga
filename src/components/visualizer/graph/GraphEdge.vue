@@ -3,7 +3,7 @@
   import { computed, watch } from "vue";
 
   interface Props {
-    index: number;
+    id: string;
     x1: number;
     y1: number;
     x2: number;
@@ -22,7 +22,7 @@
     isDirected: defaultEdgeSettings["isDirected"] as boolean,
   });
 
-  const arrowheadId = `arrowhead-${props.index}`;
+  const arrowheadId = `arrowhead-${props.id}`;
   //stroke-dasharray to pass to svg line
   const strokeDashArray = computed(() => {
     switch (props.shape) {
