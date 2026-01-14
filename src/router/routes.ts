@@ -5,9 +5,10 @@ import ImmediateFeedbackView from "@/views/exercises/immediateFeedback/Immediate
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
-    path: "/if",
+    path: "/if/:exerciseId",
     name: "ImmediateFeedback",
     component: ImmediateFeedbackView,
+    props: true,
   },
   {
     path: "/:catchAll(.*)",

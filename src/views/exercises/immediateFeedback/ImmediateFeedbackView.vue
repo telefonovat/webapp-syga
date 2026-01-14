@@ -2,13 +2,13 @@
 
   <div class="test-view">
 
-    <div class="immediate-feedback">
+    <div v-if="isReady" class="immediate-feedback">
 
       <ImmediateFeedbackPredictView
         class="immediate-feedback-content"
-        :vertexOptions="vertexOptions"
-        :edgeOptions="edgeOptions"
-        :component="bleachedGraph"
+        :vertexOptions="vertexOptions!"
+        :edgeOptions="edgeOptions!"
+        :component="bleachedGraph!"
         @edge-option-selected="onSelectEdgeOption"
         @vertex-option-selected="onSelectVertexOption"
         v-if="stage === 'predict'" />
@@ -38,13 +38,50 @@
   import ImmmediateFeedbackRevealView from "./ImmediateFeedbackRevealView.vue";
   import ImmediateFeedbackShowView from "./ImmediateFeedbackShowView.vue";
 
-  import { ref } from "vue";
+  import { computed, onMounted, ref } from "vue";
   import {
     GraphComponent,
-    GraphType,
     GraphVertex,
   } from "@telefonovat/syga--contract";
-  import { bleachGraph } from "./util";
+  import { bleachGraph, retrieveIFExerciseData } from "./util";
+  import {
+    EdgeOptions,
+    VertexOptions,
+  } from "./util/retrieveIFExercise";
+
+  interface Props {
+    exerciseId: string;
+  }
+  const props = defineProps<Props>();
+  onMounted(async () => {
+    await retrieveExercise();
+    prepareExercise();
+  });
+
+  const startGraph = ref<GraphComponent | undefined>();
+  const bleachedGraph = ref<GraphComponent | undefined>();
+  const edgeOptions = ref<EdgeOptions | undefined>();
+  const vertexOptions = ref<VertexOptions | undefined>();
+  const isReady = computed(
+    () =>
+      startGraph.value &&
+      bleachedGraph.value &&
+      edgeOptions.value &&
+      vertexOptions.value,
+  );
+  //Retrieving exercises from syga--algorithms
+  async function retrieveExercise() {
+    const { options, frames } = await retrieveIFExerciseData(
+      props.exerciseId,
+    );
+    vertexOptions.value = options.vertexOptions;
+    edgeOptions.value = options.edgeOptions;
+    startGraph.value = frames[0].graphComponents[0];
+  }
+  function prepareExercise() {
+    if (!startGraph.value) return;
+    bleachedGraph.value = bleachGraph(startGraph.value);
+  }
 
   type ImmediateFeedbackFlowStage = "predict" | "reveal" | "show";
   const stages = [
@@ -55,11 +92,11 @@
   const stage = ref<ImmediateFeedbackFlowStage>("predict");
 
   function onSelectVertexOption(vertex: GraphVertex, option: string) {
+    if (!bleachedGraph.value || !vertexOptions.value) return;
     //TODO: Is this the fastest way?
     bleachedGraph.value.style.vertexColors = {
       ...bleachedGraph.value.style.vertexColors,
-      [vertex.id]:
-        vertexOptions[option as keyof typeof vertexOptions],
+      [vertex.id]: vertexOptions.value[option],
     };
   }
   function onSelectEdgeOption(
@@ -67,51 +104,12 @@
     end: GraphVertex,
     option: string,
   ) {
+    if (!bleachedGraph.value || !edgeOptions.value) return;
     const startId = start.id;
     const endId = end.id;
     bleachedGraph.value.style.edgeColors[startId][endId] =
-      edgeOptions[option as keyof typeof edgeOptions];
+      edgeOptions.value[option];
   }
-
-  const edgeOptions = {
-    tree: "grey",
-    back: "red",
-    cross: "blue",
-  };
-  const vertexOptions = {
-    good: "#0F0",
-    bad: "#444",
-  };
-  const testGraph: GraphComponent = {
-    type: GraphType.DIRECTED,
-    vertices: [{ id: 1 }, { id: 2 }, { id: 3 }],
-    edges: [
-      {
-        start: {
-          id: 1,
-        },
-        end: { id: 2 },
-      },
-      { start: { id: 2 }, end: { id: 3 } },
-    ],
-    style: {
-      vertexColors: {
-        "1": "white",
-        "2": "white",
-        "3": "white",
-      },
-      edgeColors: {
-        "1": { "2": "black" },
-        "2": { "3": "black" },
-      },
-      vertexLabels: {},
-      edgeLabels: {},
-      vertexShapes: {},
-      edgeShapes: {},
-    },
-  };
-
-  const bleachedGraph = ref(bleachGraph(testGraph));
 </script>
 
 <style scoped>
