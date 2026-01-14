@@ -6,7 +6,7 @@
 
   <div class="immediate-feedback-predict">
 
-    <PrettyText />
+    <PrettyText :input="text" type="markdown" />
 
     <Grift
       prefix="if-predict"
@@ -39,6 +39,7 @@
     component: GraphComponent;
     edgeOptions: { [key: string]: string };
     vertexOptions: { [key: string]: string };
+    text: string;
   }
   const props = defineProps<Props>();
 

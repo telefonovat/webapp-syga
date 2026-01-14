@@ -1,22 +1,16 @@
 import { getIFExerciseUrl } from "@/api";
 import {
-  GraphComponent,
-  GraphType,
   VisualizationFrame,
+  IFOptions,
   isGetIFExerciseSuccessBody,
 } from "@telefonovat/syga--contract";
 import { buildAlgorithm } from "./buildAlgorithm";
 
-export type EdgeOptions = { [key: string]: string };
-export type VertexOptions = { [key: string]: string };
-interface IFExerciseOptions {
-  edgeOptions: EdgeOptions;
-  vertexOptions: VertexOptions;
-}
 interface IFExerciseData {
-  options: IFExerciseOptions;
+  options: IFOptions;
   algorithm: string;
   frames: VisualizationFrame[];
+  markdownText: string;
 }
 export async function retrieveIFExerciseData(
   exerciseId: string,
@@ -33,8 +27,8 @@ export async function retrieveIFExerciseData(
     throw new Error("Invalid body");
   }
 
-  const { options, algorithm } = body;
+  const { options, algorithm, markdowntext } = body;
   const frames = await buildAlgorithm(algorithm);
 
-  return { options, frames, algorithm };
+  return { options, frames, algorithm, markdownText: markdowntext };
 }

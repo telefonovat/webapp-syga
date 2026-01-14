@@ -9,6 +9,7 @@
         :vertexOptions="vertexOptions!"
         :edgeOptions="edgeOptions!"
         :component="bleachedGraph!"
+        :text="algorithmText"
         @edge-option-selected="onSelectEdgeOption"
         @vertex-option-selected="onSelectVertexOption"
         v-if="stage === 'predict'" />
@@ -47,12 +48,9 @@
     GraphComponent,
     GraphVertex,
     VisualizationFrame,
+    IFOptions,
   } from "@telefonovat/syga--contract";
   import { bleachGraph, retrieveIFExerciseData } from "./util";
-  import {
-    EdgeOptions,
-    VertexOptions,
-  } from "./util/retrieveIFExercise";
 
   interface Props {
     exerciseId: string;
@@ -66,11 +64,12 @@
   const startGraph = ref<GraphComponent | undefined>();
   const endGraph = ref<GraphComponent | undefined>();
   const bleachedGraph = ref<GraphComponent | undefined>();
-  const edgeOptions = ref<EdgeOptions | undefined>();
-  const vertexOptions = ref<VertexOptions | undefined>();
+  const edgeOptions = ref<IFOptions["edgeOptions"] | undefined>();
+  const vertexOptions = ref<IFOptions["vertexOptions"] | undefined>();
 
   const visualizationFrames = ref<VisualizationFrame[] | undefined>();
   const algorithm = ref<string>("");
+  const algorithmText = ref<string>("");
   const isReady = computed(
     () =>
       startGraph.value &&
@@ -86,13 +85,16 @@
       options,
       frames,
       algorithm: retrievedAlgorithm,
+      markdownText,
     } = await retrieveIFExerciseData(props.exerciseId);
     vertexOptions.value = options.vertexOptions;
     edgeOptions.value = options.edgeOptions;
     startGraph.value = frames[0].graphComponents[0];
     endGraph.value = frames[frames.length - 1].graphComponents[0];
     visualizationFrames.value = frames;
+
     algorithm.value = retrievedAlgorithm;
+    algorithmText.value = markdownText;
   }
   function prepareExercise() {
     if (!startGraph.value) return;
