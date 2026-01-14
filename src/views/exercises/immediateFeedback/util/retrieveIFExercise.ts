@@ -15,6 +15,7 @@ interface IFExerciseOptions {
 }
 interface IFExerciseData {
   options: IFExerciseOptions;
+  algorithm: string;
   frames: VisualizationFrame[];
 }
 export async function retrieveIFExerciseData(
@@ -35,5 +36,5 @@ export async function retrieveIFExerciseData(
   const { options, algorithm } = body;
   const frames = await buildAlgorithm(algorithm);
 
-  return { options, frames };
+  return { options, frames, algorithm };
 }

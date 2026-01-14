@@ -20,6 +20,8 @@
         v-else-if="stage === 'reveal'" />
 
       <ImmediateFeedbackShowView
+        :algorithm="algorithm"
+        :frames="visualizationFrames!"
         class="immediate-feedback-content"
         v-else-if="stage === 'show'" />
 
@@ -44,6 +46,7 @@
   import {
     GraphComponent,
     GraphVertex,
+    VisualizationFrame,
   } from "@telefonovat/syga--contract";
   import { bleachGraph, retrieveIFExerciseData } from "./util";
   import {
@@ -65,23 +68,31 @@
   const bleachedGraph = ref<GraphComponent | undefined>();
   const edgeOptions = ref<EdgeOptions | undefined>();
   const vertexOptions = ref<VertexOptions | undefined>();
+
+  const visualizationFrames = ref<VisualizationFrame[] | undefined>();
+  const algorithm = ref<string>("");
   const isReady = computed(
     () =>
       startGraph.value &&
       endGraph.value &&
       bleachedGraph.value &&
       edgeOptions.value &&
-      vertexOptions.value,
+      vertexOptions.value &&
+      visualizationFrames.value,
   );
   //Retrieving exercises from syga--algorithms
   async function retrieveExercise() {
-    const { options, frames } = await retrieveIFExerciseData(
-      props.exerciseId,
-    );
+    const {
+      options,
+      frames,
+      algorithm: retrievedAlgorithm,
+    } = await retrieveIFExerciseData(props.exerciseId);
     vertexOptions.value = options.vertexOptions;
     edgeOptions.value = options.edgeOptions;
     startGraph.value = frames[0].graphComponents[0];
     endGraph.value = frames[frames.length - 1].graphComponents[0];
+    visualizationFrames.value = frames;
+    algorithm.value = retrievedAlgorithm;
   }
   function prepareExercise() {
     if (!startGraph.value) return;
