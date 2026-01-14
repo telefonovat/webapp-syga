@@ -15,6 +15,8 @@
 
       <ImmmediateFeedbackRevealView
         class="immediate-feedback-content"
+        :trueGraphSolution="startGraph!"
+        :submittedGraphSolution="bleachedGraph!"
         v-else-if="stage === 'reveal'" />
 
       <ImmediateFeedbackShowView

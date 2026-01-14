@@ -66,8 +66,10 @@
     component: GraphComponent;
     edgeOptions: { [key: string]: string };
     vertexOptions: { [key: string]: string };
+
+    static?: boolean;
   }
-  const props = defineProps<Props>();
+  const props = withDefaults(defineProps<Props>(), { static: false });
   const emit = defineEmits<{
     (
       e: "edge-option-selected",
@@ -101,6 +103,7 @@
   let handleGraphEdgeOptionSelect: (option: string) => void;
   let handleGraphVertexOptionSelect: (option: string) => void;
   function onGraphEdgeClick(edgeId: string) {
+    if (props.static) return;
     areOptionsVisible.value = true;
 
     const tokens = edgeId.split("->");
@@ -121,6 +124,7 @@
     };
   }
   function onGraphVertexClick(vertexId: string) {
+    if (props.static) return;
     areOptionsVisible.value = true;
     optionSelectionType.value = "vertex";
     handleGraphVertexOptionSelect = (option: string) => {
