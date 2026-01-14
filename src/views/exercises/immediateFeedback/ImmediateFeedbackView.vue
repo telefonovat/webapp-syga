@@ -9,13 +9,7 @@
         :vertexOptions="vertexOptions"
         :edgeOptions="edgeOptions"
         :component="bleachedGraph"
-        @edge-option-selected="
-          () => {
-            throw new Error(
-              'Edge option selection handler is not implemented!',
-            );
-          }
-        "
+        @edge-option-selected="onSelectEdgeOption"
         @vertex-option-selected="onSelectVertexOption"
         v-if="stage === 'predict'" />
 
@@ -61,11 +55,22 @@
   const stage = ref<ImmediateFeedbackFlowStage>("predict");
 
   function onSelectVertexOption(vertex: GraphVertex, option: string) {
+    //TODO: Is this the fastest way?
     bleachedGraph.value.style.vertexColors = {
       ...bleachedGraph.value.style.vertexColors,
       [vertex.id]:
         vertexOptions[option as keyof typeof vertexOptions],
     };
+  }
+  function onSelectEdgeOption(
+    start: GraphVertex,
+    end: GraphVertex,
+    option: string,
+  ) {
+    const startId = start.id;
+    const endId = end.id;
+    bleachedGraph.value.style.edgeColors[startId][endId] =
+      edgeOptions[option as keyof typeof edgeOptions];
   }
 
   const edgeOptions = {
