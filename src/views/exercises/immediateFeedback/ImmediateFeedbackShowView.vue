@@ -9,7 +9,7 @@
 
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { VisualizationFrame } from "@telefonovat/syga--contract";
-  import { onBeforeMount, onMounted } from "vue";
+  import { onBeforeMount } from "vue";
   import { useEditorStore } from "@/store/editor/editorStore";
 
   interface Props {
