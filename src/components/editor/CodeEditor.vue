@@ -1,24 +1,29 @@
+<template>
+
+  <Codemirror
+    v-model="codeModel"
+    :extensions="extensions"
+    @ready="handleReady" />
+
+</template>
+
 <script setup lang="ts">
   import { Codemirror } from "vue-codemirror";
   import { python } from "@codemirror/lang-python";
-  import { useEditorStore } from "@/store/editor/editorStore";
-  import { storeToRefs } from "pinia";
   import { oneDark } from "@codemirror/theme-one-dark";
   import { shallowRef } from "vue";
   import { EditorView } from "codemirror";
 
   import { Decoration } from "@codemirror/view";
   import { StateEffect, StateField } from "@codemirror/state";
-  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-  import { computed } from "vue";
   import { watch } from "vue";
 
-  const editorStore = useEditorStore();
-  const visualizerStore = useVisualizerStore();
+  interface Props {
+    linesToHighlight: number[];
+  }
+  const props = defineProps<Props>();
+  const codeModel = defineModel<string>("code", { required: true });
 
-  const currentLineNos = computed(
-    () => visualizerStore.currentFrame?.lineNo ?? [],
-  );
   const lineHighlightMark = Decoration.line({
     attributes: { style: "background-color: #008b8b" },
   });
@@ -43,40 +48,33 @@
   });
 
   // Usage in extensions
-  const { code } = storeToRefs(editorStore);
   const extensions = [python(), oneDark, lineHighlightField];
 
-  watch(currentLineNos, (value, _old) => {
-    if (view.value === undefined) {
-      return;
-    }
-    const linesToHighlight = value.map(
-      (line) => view.value!.state.doc.line(line).from,
-    );
+  watch(
+    () => props.linesToHighlight,
+    (value, _old) => {
+      if (view.value === undefined) {
+        return;
+      }
+      const linesToHighlight = value.map(
+        (line) => view.value!.state.doc.line(line).from,
+      );
 
-    view.value.dispatch({
-      effects: linesToHighlight.map((line) =>
-        addLineHighlight.of({
-          line: line,
-        }),
-      ),
-    });
-  });
+      view.value.dispatch({
+        effects: linesToHighlight.map((line) =>
+          addLineHighlight.of({
+            line: line,
+          }),
+        ),
+      });
+    },
+  );
 
   const view = shallowRef<EditorView>();
   const handleReady = (payload: { view: EditorView }) => {
     view.value = payload.view as EditorView;
   };
 </script>
-
-<template>
-
-  <Codemirror
-    v-model="code"
-    :extensions="extensions"
-    @ready="handleReady" />
-
-</template>
 
 <style scoped>
 

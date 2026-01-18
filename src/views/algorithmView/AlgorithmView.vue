@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import Visualizer from "@/components/visualizer/Visualizer.vue";
-  import CodeEditor from "@/components/editor/CodeEditor.vue";
   import AlgorithmControlPanel from "@/views/AlgorithmControlPanel.vue";
   import AlgorithmVisualizationPage from "../pages/AlgorithmVisualizationPage.vue";
 </script>
