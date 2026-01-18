@@ -12,7 +12,12 @@
         :value="option[0]"
         @change="emit('selected', option[0])" />
 
-      <label :for="option[1]">{{ option[0] }}->{{ option[1] }}</label>
+      <label :for="option[1]">
+         {{ option[0] }}->
+        <div
+          :style="{ backgroundColor: option[1], height: '16px' }" />
+
+      </label>
 
     </div>
 
