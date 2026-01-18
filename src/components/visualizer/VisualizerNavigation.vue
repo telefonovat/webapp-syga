@@ -63,9 +63,9 @@
     <button
       :disabled="!canVisualizerPlay"
       @click="
-        sliderModel.value = modulo(
-          sliderModel.value + 1,
+        sliderModel.value = Math.min(
           sliderModel.max,
+          sliderModel.value + 1,
         )
       ">
        >
