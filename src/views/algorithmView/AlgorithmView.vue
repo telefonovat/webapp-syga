@@ -2,6 +2,7 @@
   import Visualizer from "@/components/visualizer/Visualizer.vue";
   import CodeEditor from "@/components/editor/CodeEditor.vue";
   import AlgorithmControlPanel from "@/views/AlgorithmControlPanel.vue";
+  import AlgorithmVisualizationPage from "../pages/AlgorithmVisualizationPage.vue";
 </script>
 
 <template>
@@ -10,13 +11,7 @@
 
     <AlgorithmControlPanel class="control-panel" />
 
-    <div class="view-container">
-
-      <CodeEditor />
-
-      <Visualizer class="visualizer" />
-
-    </div>
+    <AlgorithmVisualizationPage />
 
   </div>
 
