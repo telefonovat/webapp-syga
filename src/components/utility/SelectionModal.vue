@@ -1,6 +1,6 @@
 <template>
 
-  <fieldset>
+  <fieldset v-if="typeof options === 'object'">
 
     <legend>Please select type</legend>
 
@@ -18,15 +18,37 @@
 
   </fieldset>
 
+  <form
+    @submit.prevent="emit('selected', inputNumber.toString())"
+    v-if="options === 'number'">
+
+    <label>
+       Please input value:
+      <input type="number" v-model="inputNumber" />
+
+      <button type="submit">Submit</button>
+
+    </label>
+
+  </form>
+
 </template>
 
 <script setup lang="ts">
+  import {
+    EdgeOption,
+    VertexOption,
+  } from "@telefonovat/syga--contract";
+  import { ref } from "vue";
+
   interface Props {
-    options: { [key: string]: string };
+    options: { [key: string]: string } | "number";
   }
   const emit = defineEmits<{
-    (e: "selected", selected: string): void;
+    (e: "selected", selected: VertexOption | EdgeOption): void;
   }>();
   const props = defineProps<Props>();
+
+  const inputNumber = ref(0);
 </script>
 

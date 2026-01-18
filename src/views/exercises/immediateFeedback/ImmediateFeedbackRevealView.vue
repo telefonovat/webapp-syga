@@ -24,12 +24,14 @@
   import Grift from "@/components/visualizer/grift/Grift.vue";
 
   import { GraphComponent } from "@telefonovat/syga--contract";
+  import { onMounted } from "vue";
 
   interface Props {
     trueGraphSolution: GraphComponent;
     submittedGraphSolution: GraphComponent;
   }
-  defineProps<Props>();
+  const props = defineProps<Props>();
+  onMounted(() => console.log(props.trueGraphSolution));
 </script>
 
 <style scoped>

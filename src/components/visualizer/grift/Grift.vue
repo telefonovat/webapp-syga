@@ -56,16 +56,18 @@
   import { computed, ref, toRefs } from "vue";
   import { useGraphRenderData } from "./useGraphRenderData";
   import {
+    EdgeOption,
     GraphComponent,
     GraphVertex,
+    VertexOption,
   } from "@telefonovat/syga--contract";
   import { useDraggable } from "@vueuse/core";
 
   interface Props {
     viewBoxSize: number;
     component: GraphComponent;
-    edgeOptions: { [key: string]: string };
-    vertexOptions: { [key: string]: string };
+    edgeOptions: { [key: string]: string } | "number";
+    vertexOptions: { [key: string]: string } | "number";
 
     static?: boolean;
     prefix: string;
@@ -76,12 +78,12 @@
       e: "edge-option-selected",
       start: GraphVertex,
       end: GraphVertex,
-      option: string,
+      option: EdgeOption,
     ): void;
     (
       e: "vertex-option-selected",
       vertex: GraphVertex,
-      option: string,
+      option: VertexOption,
     ): void;
   }>();
 
@@ -101,8 +103,8 @@
   );
 
   const areOptionsVisible = ref(false);
-  let handleGraphEdgeOptionSelect: (option: string) => void;
-  let handleGraphVertexOptionSelect: (option: string) => void;
+  let handleGraphEdgeOptionSelect: (option: EdgeOption) => void;
+  let handleGraphVertexOptionSelect: (option: VertexOption) => void;
   function onGraphEdgeClick(edgeId: string) {
     if (props.static || Object.keys(props.edgeOptions).length === 0)
       return;
@@ -116,7 +118,7 @@
     y.value = edgesPropsPartial.value[edgeId].y1;
 
     optionSelectionType.value = "edge";
-    handleGraphEdgeOptionSelect = (option: string) => {
+    handleGraphEdgeOptionSelect = (option: EdgeOption) => {
       emit(
         "edge-option-selected",
         { id: start },
@@ -130,7 +132,7 @@
       return;
     areOptionsVisible.value = true;
     optionSelectionType.value = "vertex";
-    handleGraphVertexOptionSelect = (option: string) => {
+    handleGraphVertexOptionSelect = (option: VertexOption) => {
       emit("vertex-option-selected", { id: vertexId }, option);
     };
   }

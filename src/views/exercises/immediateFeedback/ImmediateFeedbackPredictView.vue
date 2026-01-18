@@ -29,16 +29,18 @@
 
 <script setup lang="ts">
   import {
+    EdgeOption,
     GraphComponent,
     GraphVertex,
+    VertexOption,
   } from "@telefonovat/syga--contract";
   import Grift from "@/components/visualizer/grift/Grift.vue";
   import PrettyText from "@/components/utility/text/PrettyText.vue";
 
   interface Props {
     component: GraphComponent;
-    edgeOptions: { [key: string]: string };
-    vertexOptions: { [key: string]: string };
+    edgeOptions: { [key: string]: string } | "number";
+    vertexOptions: { [key: string]: string } | "number";
     text: string;
   }
   const props = defineProps<Props>();
@@ -48,12 +50,12 @@
       e: "edge-option-selected",
       start: GraphVertex,
       end: GraphVertex,
-      option: string,
+      option: EdgeOption,
     ): void;
     (
       e: "vertex-option-selected",
       vertex: GraphVertex,
-      option: string,
+      option: VertexOption,
     ): void;
   }>();
 </script>

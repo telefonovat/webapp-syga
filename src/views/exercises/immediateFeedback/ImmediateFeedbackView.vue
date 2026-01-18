@@ -6,8 +6,8 @@
 
       <ImmediateFeedbackPredictView
         class="immediate-feedback-content"
-        :vertexOptions="vertexOptions!"
-        :edgeOptions="edgeOptions!"
+        :vertexOptions="vertexOptionInput!"
+        :edgeOptions="edgeOptionInput!"
         :component="bleachedGraph!"
         :text="algorithmText"
         @edge-option-selected="onSelectEdgeOption"
@@ -43,12 +43,14 @@
   import ImmmediateFeedbackRevealView from "./ImmediateFeedbackRevealView.vue";
   import ImmediateFeedbackShowView from "./ImmediateFeedbackShowView.vue";
 
-  import { computed, onMounted, ref } from "vue";
+  import { computed, onMounted, ref, toRaw } from "vue";
   import {
     GraphComponent,
     GraphVertex,
     VisualizationFrame,
     IFOptions,
+    VertexOption,
+    EdgeOption,
   } from "@telefonovat/syga--contract";
   import { bleachGraph, retrieveIFExerciseData } from "./util";
 
@@ -64,8 +66,12 @@
   const startGraph = ref<GraphComponent | undefined>();
   const endGraph = ref<GraphComponent | undefined>();
   const bleachedGraph = ref<GraphComponent | undefined>();
-  const edgeOptions = ref<IFOptions["edgeOptions"] | undefined>();
-  const vertexOptions = ref<IFOptions["vertexOptions"] | undefined>();
+  const edgeOptionInput = ref<
+    IFOptions["edgeOptionInput"] | undefined
+  >();
+  const vertexOptionInput = ref<
+    IFOptions["vertexOptionInput"] | undefined
+  >();
 
   const visualizationFrames = ref<VisualizationFrame[] | undefined>();
   const algorithm = ref<string>("");
@@ -75,8 +81,8 @@
       startGraph.value &&
       endGraph.value &&
       bleachedGraph.value &&
-      edgeOptions.value &&
-      vertexOptions.value &&
+      edgeOptionInput.value &&
+      vertexOptionInput.value &&
       visualizationFrames.value,
   );
   //Retrieving exercises from syga--algorithms
@@ -87,8 +93,8 @@
       algorithm: retrievedAlgorithm,
       markdownText,
     } = await retrieveIFExerciseData(props.exerciseId);
-    vertexOptions.value = options.vertexOptions;
-    edgeOptions.value = options.edgeOptions;
+    vertexOptionInput.value = options.vertexOptionInput;
+    edgeOptionInput.value = options.edgeOptionInput;
     startGraph.value = frames[0].graphComponents[0];
     endGraph.value = frames[frames.length - 1].graphComponents[0];
     visualizationFrames.value = frames;
@@ -98,7 +104,8 @@
   }
   function prepareExercise() {
     if (!startGraph.value) return;
-    bleachedGraph.value = bleachGraph(startGraph.value);
+    const clone = structuredClone(toRaw(startGraph.value));
+    bleachedGraph.value = bleachGraph(clone);
   }
 
   type ImmediateFeedbackFlowStage = "predict" | "reveal" | "show";
@@ -109,24 +116,37 @@
   ] satisfies ImmediateFeedbackFlowStage[];
   const stage = ref<ImmediateFeedbackFlowStage>("predict");
 
-  function onSelectVertexOption(vertex: GraphVertex, option: string) {
-    if (!bleachedGraph.value || !vertexOptions.value) return;
+  function onSelectVertexOption(
+    vertex: GraphVertex,
+    option: VertexOption,
+  ) {
+    if (!bleachedGraph.value || !vertexOptionInput.value) return;
+    if (vertexOptionInput.value === "number") {
+      bleachedGraph.value.style.vertexLabels[vertex.id] =
+        option as string;
+      return;
+    }
     //TODO: Is this the fastest way?
     bleachedGraph.value.style.vertexColors = {
       ...bleachedGraph.value.style.vertexColors,
-      [vertex.id]: vertexOptions.value[option],
+      [vertex.id]: vertexOptionInput.value[option],
     };
   }
   function onSelectEdgeOption(
     start: GraphVertex,
     end: GraphVertex,
-    option: string,
+    option: EdgeOption,
   ) {
-    if (!bleachedGraph.value || !edgeOptions.value) return;
+    if (!bleachedGraph.value || !edgeOptionInput.value) return;
     const startId = start.id;
     const endId = end.id;
+    if (edgeOptionInput.value === "number") {
+      bleachedGraph.value.style.edgeLabels[startId][endId] =
+        option as string;
+      return;
+    }
     bleachedGraph.value.style.edgeColors[startId][endId] =
-      edgeOptions.value[option];
+      edgeOptionInput.value[option];
   }
 </script>
 

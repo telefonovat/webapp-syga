@@ -10,7 +10,7 @@ import { computed, reactive } from "vue";
 
 type EdgePropsPartial = Omit<
   InstanceType<typeof GraphEdge>["$props"],
-  "index"
+  "id"
 >;
 type VertexProps = InstanceType<typeof GraphNode>["$props"];
 
@@ -70,7 +70,9 @@ function getEdgePropsPartial(
   { edgeColors, edgeLabels, edgeShapes }: EdgeStyle,
 ): EdgePropsPartial {
   const edgeHasColor =
-    start in edgeColors && end in edgeColors[start];
+    start in edgeColors &&
+    end in edgeColors[start] &&
+    edgeColors[start][end] !== null;
   const edgeHasLabel =
     start in edgeLabels && end in edgeLabels[start];
   const edgeHasShape =
