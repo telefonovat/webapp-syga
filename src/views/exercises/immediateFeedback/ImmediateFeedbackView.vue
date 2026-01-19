@@ -53,6 +53,7 @@
     EdgeOption,
   } from "@telefonovat/syga--contract";
   import { bleachGraph, retrieveIFExerciseData } from "./util";
+  import { Style } from "./util/bleachGraph";
 
   interface Props {
     exerciseId: string;
@@ -95,7 +96,12 @@
     } = await retrieveIFExerciseData(props.exerciseId);
     vertexOptionInput.value = options.vertexOptionInput;
     edgeOptionInput.value = options.edgeOptionInput;
-    startGraph.value = frames[0].graphComponents[0];
+
+    //HACK: Temporary hack for 19-01 demo
+    startGraph.value =
+      vertexOptionInput.value === "number"
+        ? frames[2].graphComponents[0]
+        : frames[0].graphComponents[0];
     endGraph.value = frames[frames.length - 1].graphComponents[0];
     visualizationFrames.value = frames;
 
@@ -105,7 +111,9 @@
   function prepareExercise() {
     if (!startGraph.value) return;
     const clone = structuredClone(toRaw(startGraph.value));
-    bleachedGraph.value = bleachGraph(clone);
+    const stylesToBleach: Style[] =
+      vertexOptionInput.value === "number" ? ["vertexLabel"] : [];
+    bleachedGraph.value = bleachGraph(clone, stylesToBleach);
   }
 
   type ImmediateFeedbackFlowStage = "predict" | "reveal" | "show";

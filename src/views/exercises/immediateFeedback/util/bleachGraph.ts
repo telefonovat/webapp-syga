@@ -7,9 +7,18 @@ import {
   GraphComponentStyle,
 } from "@telefonovat/syga--contract";
 
-export function bleachGraph(graph: GraphComponent): GraphComponent {
+export type Style = "vertexLabel" | "vertexColors";
+
+export function bleachGraph(
+  graph: GraphComponent,
+  stylesToBleach: Style[],
+): GraphComponent {
   const bleachedStyle: GraphComponentStyle = {
-    vertexLabels: graph.style.vertexLabels,
+    vertexLabels: stylesToBleach.includes("vertexLabel")
+      ? Object.fromEntries(
+          Object.keys(graph.style.vertexLabels).map((k) => [k, k]),
+        )
+      : graph.style.vertexLabels,
     edgeLabels: graph.style.edgeLabels,
 
     //TODO: Shapes must be bleached as well
