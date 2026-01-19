@@ -3,13 +3,16 @@
   <div class="immediate-feedback-reveal">
 
     <Grift
+      title="Correct Solution"
       prefix="if-reveal-true"
+      class="immediate-feedback-reveal-left"
       :component="trueGraphSolution"
       :edgeOptions="{}"
       :vertexOptions="{}"
       :viewBoxSize="400" />
 
     <Grift
+      title="Your Solution"
       prefix="if-reveal-submitted"
       :component="submittedGraphSolution"
       :edgeOptions="{}"
@@ -40,6 +43,9 @@
   height: 100%;
   & > *{
     flex-grow: 1;
+  }
+  .immediate-feedback-reveal-left{
+    border-right: 1px solid #444;
   }
 }
 </style>

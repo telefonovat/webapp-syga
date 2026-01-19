@@ -2,6 +2,8 @@
 
   <div>
 
+    <h3 v-if="title" class="grift-title"> {{ title }}</h3>
+
     <svg
       class="component"
       :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
@@ -70,6 +72,7 @@
     vertexOptions: { [key: string]: string } | "number";
 
     static?: boolean;
+    title?: string;
     prefix: string;
   }
   const props = withDefaults(defineProps<Props>(), { static: false });
@@ -144,6 +147,9 @@
   height: 100%;
   margin: auto;
 }
+  .grift-title{
+    text-align: center;
+  }
 
   .clickable:hover{
     cursor: pointer
