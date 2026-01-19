@@ -164,6 +164,7 @@
 
   .immediate-feedback-content{
     flex-grow: 11;
+    border-bottom: 1px solid #444;
   }
   .immediate-feedback-control-panel{
     flex-grow: 1;

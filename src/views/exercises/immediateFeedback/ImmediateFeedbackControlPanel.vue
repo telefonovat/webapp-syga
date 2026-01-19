@@ -2,9 +2,15 @@
 
   <div class="if-control-panel">
 
-    <button @click="prevStage()">Back</button>
+    <button :disabled="currentIndex === 0" @click="prevStage()">
+      Back
+    </button>
 
-    <button @click="nextStage()">Next</button>
+    <button
+      :disabled="currentIndex === stages.length - 1"
+      @click="nextStage()">
+      Next
+    </button>
 
     <button @click="restart()">Restart</button>
 
@@ -13,27 +19,33 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from "vue";
+
   interface Props {
     stages: string[];
   }
   const props = defineProps<Props>();
 
   const stage = defineModel<string>();
+  const currentIndex = computed(() => {
+    if (!stage.value) return 0;
+    return props.stages.indexOf(stage.value);
+  });
 
   function nextStage() {
     if (!stage.value) return;
 
-    const index = props.stages.indexOf(stage.value);
-    if (index === props.stages.length - 1) return;
-    stage.value = props.stages[(index + 1) % props.stages.length];
+    if (currentIndex.value === props.stages.length - 1) return;
+    stage.value =
+      props.stages[(currentIndex.value + 1) % props.stages.length];
   }
 
   function prevStage() {
     if (!stage.value) return;
 
-    const index = props.stages.indexOf(stage.value);
-    if (index === 0) return;
-    stage.value = props.stages[(index - 1) % props.stages.length];
+    if (currentIndex.value === 0) return;
+    stage.value =
+      props.stages[(currentIndex.value - 1) % props.stages.length];
   }
 
   function restart() {
