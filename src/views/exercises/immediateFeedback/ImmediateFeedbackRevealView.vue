@@ -2,22 +2,36 @@
 
   <div class="immediate-feedback-reveal">
 
-    <Grift
-      title="Correct Solution"
-      prefix="if-reveal-true"
-      class="immediate-feedback-reveal-left"
-      :component="trueGraphSolution"
-      :edgeOptions="{}"
-      :vertexOptions="{}"
-      :viewBoxSize="400" />
+    <SplitterGroup id="if-reveal" direction="horizontal">
 
-    <Grift
-      title="Your Solution"
-      prefix="if-reveal-submitted"
-      :component="submittedGraphSolution"
-      :edgeOptions="{}"
-      :vertexOptions="{}"
-      :viewBoxSize="400" />
+      <SplitterPanel>
+
+        <Grift
+          title="Correct Solution"
+          prefix="if-reveal-true"
+          class="immediate-feedback-reveal-left"
+          :component="trueGraphSolution"
+          :edgeOptions="{}"
+          :vertexOptions="{}"
+          :viewBoxSize="400" />
+
+      </SplitterPanel>
+
+      <SplitterResizeHandle />
+
+      <SplitterPanel>
+
+        <Grift
+          title="Your Solution"
+          prefix="if-reveal-submitted"
+          :component="submittedGraphSolution"
+          :edgeOptions="{}"
+          :vertexOptions="{}"
+          :viewBoxSize="400" />
+
+      </SplitterPanel>
+
+    </SplitterGroup>
 
   </div>
 
@@ -28,6 +42,12 @@
 
   import { GraphComponent } from "@telefonovat/syga--contract";
   import { onMounted } from "vue";
+
+  import {
+    SplitterGroup,
+    SplitterPanel,
+    SplitterResizeHandle,
+  } from "radix-vue";
 
   interface Props {
     trueGraphSolution: GraphComponent;
