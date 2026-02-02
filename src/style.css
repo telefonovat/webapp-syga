@@ -1,75 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #1a1a1e;
+
+  --color-muted: #2e2e32;
+
+  --color-text: #e8e6e3;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-200;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --global-font-size: 16px;
+  background-color: var(--color-paper);
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  /* line-height: 1.5; */
+  /* font-weight: 400; */
+  /**/
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
+  /**/
+  /* font-synthesis: none; */
+  /* text-rendering: optimizeLegibility; */
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+  /**/
+  /* --global-font-size: 16px; */
 }
 
 /* 
 * Resetting browser defaults
 */
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
   /* border: 1px solid red !important; */
   /* overflow: auto; */
-  box-sizing: border-box;
-  min-height: 0;
+  /* box-sizing: border-box; */
+  /* min-height: 0; */
 }
 
 html,
 body,
 #app {
   height: 100%;
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
 
-  font-size: var(--global-font-size);
+  /* font-size: var(--global-font-size); */
 }
 
 button,
 select,
 textarea {
-  color: white;
-  background-color: transparent;
-  border-style: none;
+  /* color: white; */
+  /* background-color: transparent; */
+  /* border-style: none; */
 }
 
 input {
-  color: white;
-  background-color: #444;
+  /* color: white; */
+  /* background-color: #444; */
 }
 
 button {
-  padding: 0 1rem;
-  cursor: pointer;
+  /* padding: 0 1rem; */
+  /* cursor: pointer; */
 }
 
 button:hover {
-  background-color: #555555;
+  /* background-color: #555555; */
 }
 
 button:disabled {
-  background-color: #666;
-  cursor: not-allowed;
+  /* background-color: #666; */
+  /* cursor: not-allowed; */
 }
 
 .popping-button {
-  background-color: #444;
-
-  padding: 0.5rem;
-
-  border-radius: 0.5rem;
+  /* background-color: #444; */
+  /**/
+  /* padding: 0.5rem; */
+  /**/
+  /* border-radius: 0.5rem; */
   border: 1px solid black;
 }
 
@@ -82,6 +98,6 @@ button:disabled {
 */
 
 .mock {
-  border-style: solid;
-  border-color: red;
+  /* border-style: solid; */
+  /* border-color: red; */
 }

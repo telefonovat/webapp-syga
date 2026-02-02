@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-  import { computed, onMounted, ref } from "vue";
+  import { computed, ref } from "vue";
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
 

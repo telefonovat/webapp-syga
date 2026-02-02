@@ -2,17 +2,21 @@
 
   <div class="if-control-panel">
 
-    <button :disabled="currentIndex === 0" @click="prevStage()">
-      Back
+    <button
+      class="btn-primary"
+      :disabled="currentIndex === 0"
+      @click="prevStage()">
+       Back
     </button>
 
     <button
+      class="btn-primary"
       :disabled="currentIndex === stages.length - 1"
       @click="nextStage()">
-      Next
+       Next
     </button>
 
-    <button @click="restart()">Restart</button>
+    <button class="btn-primary" @click="restart()">Restart</button>
 
   </div>
 

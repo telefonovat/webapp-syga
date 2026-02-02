@@ -57,6 +57,8 @@
   import GraphNode from "../graph/GraphNode.vue";
   import SelectionModal from "@/components/utility/SelectionModal.vue";
 
+  import { PopoverRoot } from "radix-vue";
+
   import { computed, ref, toRefs } from "vue";
   import { useGraphRenderData } from "./useGraphRenderData";
   import {
