@@ -14,6 +14,7 @@
           edgesPropsPartial,
         )"
         :key="edgeId"
+        :width="4"
         @click="onGraphEdgeClick(edgeId)"
         v-bind="{ ...edgePropsPartial, id: `${prefix}-${index}` }" />
 
@@ -23,6 +24,7 @@
           verticesProps,
         )"
         :key="vertexId"
+        :radius="13"
         @click="onGraphVertexClick(vertexId)"
         v-bind="vertexProps" />
 
