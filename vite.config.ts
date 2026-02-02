@@ -1,9 +1,7 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
-import mkcert from "vite-plugin-mkcert";
-// https://vitejs.dev/config
-/// <reference types="vitest/config" />/
+
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -16,12 +14,12 @@ export default defineConfig({
     port: 8080,
     host: "0.0.0.0",
   },
-  test: {
-    globals: true,
-    environment: "happy-dom",
-    setupFiles: ["src/testSetup.ts"],
-    deps: {
-      inline: ["vuetify"],
-    },
-  },
+  // test: {
+  //   globals: true,
+  //   environment: "happy-dom",
+  //   setupFiles: ["src/testSetup.ts"],
+  //   deps: {
+  //     inline: ["vuetify"],
+  //   },
+  // },
 });
