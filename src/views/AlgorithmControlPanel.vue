@@ -5,7 +5,7 @@
 
 <template>
 
-  <div class="panel-wrapper" dark density="compact">
+  <div class="panel-wrapper">
 
     <div class="navigation-container">
 
@@ -29,7 +29,6 @@
 
 .navigation-container{
   display: flex;
-  width: 50%;
 }
 </style>
 

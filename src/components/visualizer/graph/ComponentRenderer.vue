@@ -122,30 +122,27 @@
 
 <template>
 
-  <div v-if="!editorStore.isCodeBuilding">
+  <svg
+    v-if="!editorStore.isCodeBuilding"
+    class="component"
+    :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
 
-    <svg
-      class="component"
-      :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
+    <GraphEdge
+      v-for="(edge, index) in edges"
+      v-bind="{
+        ...getEdgeProps(edge),
 
-      <GraphEdge
-        v-for="(edge, index) in edges"
-        v-bind="{
-          ...getEdgeProps(edge),
+        isDirected: type === GraphType.DIRECTED,
 
-          isDirected: type === GraphType.DIRECTED,
+        id: `${index}`,
+      }" />
 
-          id: `${index}`,
-        }" />
+    <GraphNode
+      v-for="vertex in nodes"
+      :data-testid="`graph-vertex-${vertex.id}`"
+      v-bind="getNodeProps(vertex)" />
 
-      <GraphNode
-        v-for="vertex in nodes"
-        :data-testid="`graph-vertex-${vertex.id}`"
-        v-bind="getNodeProps(vertex)" />
-
-    </svg>
-
-  </div>
+  </svg>
 
   <div v-else role="status">Code is building :)</div>
 
@@ -154,8 +151,9 @@
 <style scoped>
   .component{
   display: block;
-  height: 100%;
   margin: auto;
+
+  height: 100%;
 }
 </style>
 

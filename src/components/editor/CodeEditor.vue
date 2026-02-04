@@ -82,7 +82,7 @@
 
 <style>
   .cm-editor{
-  flex: auto;
+    flex-grow: 1;
   max-width: 50%;
 }
 </style>

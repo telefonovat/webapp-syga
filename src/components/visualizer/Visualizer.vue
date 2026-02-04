@@ -9,7 +9,7 @@
 
     <ComponentRenderer :componentIndex="0" class="renderer" />
 
-    <VisualizerConsole class="console" />
+    <VisualizerConsole />
 
   </div>
 
@@ -17,18 +17,15 @@
 
 <style scoped>
   .visualizer{
-  display: flex;
-  flex-direction: column;
-  background-color: #282c34;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+
+    height: 100%;
+    background-color: #282c34;
 }
 
 .renderer{
-  flex: 3 1 0%;
   border-bottom: 1px solid #444;
-}
-
-.console{
-  flex: 1 1 0%;
 }
 </style>
 

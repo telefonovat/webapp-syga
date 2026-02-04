@@ -33,17 +33,22 @@
 
   <div class="container">
 
-    <button :disabled="!canVisualizerPlay" @click="togglePlay()">
+    <button
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="togglePlay()">
        {{ store.isPlaying ? "Pause" : "Play" }}
     </button>
 
     <button
+      class="btn-primary"
       :disabled="!canVisualizerPlay"
       @click="sliderModel.value = 1">
        <<
     </button>
 
     <button
+      class="btn-primary"
       :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = Math.max(
@@ -61,6 +66,7 @@
       v-model="sliderModel" />
 
     <button
+      class="btn-primary"
       :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = Math.min(
@@ -72,12 +78,11 @@
     </button>
 
     <button
+      class="btn-primary"
       :disabled="!canVisualizerPlay"
       @click="sliderModel.value = sliderModel.max">
        >>
     </button>
-
-    <button @click="store.$reset()">X</button>
 
   </div>
 
@@ -93,6 +98,7 @@
 }
 
 .container__frames-slider{
+  @apply text-(--color-text);
   min-width: 200px;
   align-self: center;
 

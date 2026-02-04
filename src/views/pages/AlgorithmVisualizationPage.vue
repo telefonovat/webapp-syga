@@ -1,12 +1,12 @@
 <template>
 
-  <div class="algorithm-visualization-page">
+  <div class="page">
 
     <CodeEditor
       :linesToHighlight="currentLineNos"
       v-model:code="code" />
 
-    <Visualizer class="algorithm-visualization-page-visualizer" />
+    <Visualizer class="" />
 
   </div>
 
@@ -31,7 +31,19 @@
 </script>
 
 <style scoped>
+  .page{
+  height: 100%;
+
+  min-height: 0px;
+  display: flex;
+  height: 100%;
+
+  & > *{
+    flex-grow: 1;
+  }
+}
   .algorithm-visualization-page{
+  min-height: 0px;
   display: flex;
   height: 100%;
 

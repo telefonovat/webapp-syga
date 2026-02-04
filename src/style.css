@@ -2,15 +2,15 @@
 
 @theme {
   --color-paper: #1a1a1e;
-
   --color-muted: #2e2e32;
-
   --color-text: #e8e6e3;
+  --color-primary: #7f5af0;
+  --color-border: #3a3a3f;
 }
 
 /* Buttons */
 .btn-primary {
-  @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-200;
+  @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) font-semibold py-2 px-4 shadow-md transition-colors duration-200;
 }
 
 :root {
@@ -98,6 +98,5 @@ button:disabled {
 */
 
 .mock {
-  /* border-style: solid; */
-  /* border-color: red; */
+  border: solid red 2px;
 }

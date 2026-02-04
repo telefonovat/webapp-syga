@@ -9,7 +9,7 @@
 
 <template>
 
-  <button @click="buildCode(code)">Build</button>
+  <button class="btn-primary" @click="buildCode(code)">Build</button>
 
 </template>
 
