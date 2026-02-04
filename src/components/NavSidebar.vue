@@ -1,82 +1,78 @@
 <script setup lang="ts">
-import RegisterAccountDialog from './user/authentication/RegisterAccountDialog.vue';
-import { router } from '@/router';
-import { ref } from 'vue';
+  import RegisterAccountDialog from "./user/authentication/RegisterAccountDialog.vue";
+  import { router } from "@/router";
+  import { ref } from "vue";
 
-interface Props {
-  isCollapsed: boolean;
-}
-
-const props = defineProps<Props>();
-const emit = defineEmits(['collapseSidebar', 'expandSidebar']);
-
-const notLoggedInSnackBar = ref(false);
-
-/*
- * Navigation
- */
-function goToHome() {
-  router.replace('/');
-}
-
-function goToSettings() {
-  router.replace('/settings');
-}
-
-function goToProfile() {
-  if (!localStorage.getItem('username')) {
-    notLoggedInSnackBar.value = true;
-    return;
+  interface Props {
+    isCollapsed: boolean;
   }
 
-  router.replace(`/users/${localStorage.getItem('username')}`);
-}
+  const props = defineProps<Props>();
+  const emit = defineEmits(["collapseSidebar", "expandSidebar"]);
 
-/*
- * User experience
- */
+  const notLoggedInSnackBar = ref(false);
 
-function toggleCollapse() {
-  emit(props.isCollapsed ? 'expandSidebar' : 'collapseSidebar');
-}
+  /*
+   * Navigation
+   */
+  function goToHome() {
+    router.replace("/");
+  }
+
+  function goToProfile() {
+    if (!localStorage.getItem("username")) {
+      notLoggedInSnackBar.value = true;
+      return;
+    }
+
+    router.replace(`/users/${localStorage.getItem("username")}`);
+  }
 </script>
 
 <template>
+
   <div>
+
     <v-snackbar v-model="notLoggedInSnackBar">
-      Please log in first
+       Please log in first
     </v-snackbar>
+
     <v-navigation-drawer v-model="props.isCollapsed" temporary>
+
       <v-list nav>
+
         <v-list-item
           title="Home"
           value="Home"
           prepend-icon="mdi-home"
-          @click="goToHome()"
-        ></v-list-item>
+          @click="goToHome()"></v-list-item>
+
         <v-list-item
           title="Dashboard"
           value="Dashboard"
           prepend-icon="mdi-code-tags"
-          @click="goToProfile()"
-        ></v-list-item>
+          @click="goToProfile()"></v-list-item>
+
         <v-list-item
           title="Featured"
           value="Featured"
-          prepend-icon="mdi-rocket-launch-outline"
-        ></v-list-item>
+          prepend-icon="mdi-rocket-launch-outline"></v-list-item>
+
         <v-list-item
           title="Settings"
           value="Settings"
-          prepend-icon="mdi-cog-outline"
-        ></v-list-item>
+          prepend-icon="mdi-cog-outline"></v-list-item>
+
       </v-list>
+
     </v-navigation-drawer>
+
   </div>
+
 </template>
 
 <style scoped>
-.app-navigation-sidebar{
+  .app-navigation-sidebar{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -97,3 +93,4 @@ function toggleCollapse() {
 
 }
 </style>
+

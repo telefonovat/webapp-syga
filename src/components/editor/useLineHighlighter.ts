@@ -1,18 +1,18 @@
-import { useVisualizerStore } from '@/store/visualizer/visualizerStore';
-import { Decoration, highlightActiveLine } from '@codemirror/view';
-import { EditorView } from 'codemirror';
-import { computed, Ref, watch } from 'vue';
+import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
+import { Decoration } from "@codemirror/view";
+import { EditorView } from "codemirror";
+import { computed, watch } from "vue";
 
-import { StateEffect, StateField } from '@codemirror/state';
+import { StateEffect, StateField } from "@codemirror/state";
 
 export function useLineHighlighter(view: EditorView) {
   const visualizerStore = useVisualizerStore();
 
   const currentLineNos = computed(
-    () => visualizerStore.currentFrame?.lineNo ?? []
+    () => visualizerStore.currentFrame?.lineNo ?? [],
   );
   const lineHighlightMark = Decoration.line({
-    attributes: { style: 'background-color: yellow' },
+    attributes: { style: "background-color: yellow" },
   });
   const addLineHighlight = StateEffect.define<{ line: number }>();
   const lineHighlightField = StateField.define({
@@ -39,14 +39,14 @@ export function useLineHighlighter(view: EditorView) {
       return;
     }
     const linesToHighlight = value.map(
-      (line) => view.state.doc.line(line).from
+      (line) => view.state.doc.line(line).from,
     );
 
     view.dispatch({
       effects: linesToHighlight.map((line) =>
         addLineHighlight.of({
           line: line,
-        })
+        }),
       ),
     });
   });

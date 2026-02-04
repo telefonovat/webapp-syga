@@ -5,9 +5,9 @@ import {
   NodeColors,
   NodeLabels,
   NodeShapes,
-} from '@/shared-types/visualization/ComponentStyle';
-import { Edge } from '@/shared-types/visualization/Edge';
-import { Node } from '@/shared-types/visualization/Node';
+} from "@telefonovat/syga--contract";
+import { Edge } from "@telefonovat/syga--contract";
+import { Node } from "@telefonovat/syga--contract";
 
 export interface NodePositions {
   [key: Node]: {
@@ -18,7 +18,7 @@ export interface NodePositions {
 
 export interface RenderData {
   //todo: refactor so that this type depends on shared-types
-  type: 'DiGraph' | 'Graph';
+  type: "DiGraph" | "Graph";
 
   nodes: Node[];
   nodeShapes: NodeShapes;

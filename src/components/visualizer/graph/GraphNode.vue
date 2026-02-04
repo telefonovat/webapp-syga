@@ -11,7 +11,7 @@
     radius?: number;
   }
 
-  const props = withDefaults(defineProps<Props>(), {
+  withDefaults(defineProps<Props>(), {
     //Is this dangerous?
     color: defaultNodeSettings["color"] as string,
     shape: defaultNodeSettings["shape"] as string,

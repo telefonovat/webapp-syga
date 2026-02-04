@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { defaultEdgeSettings } from "./defaults";
-  import { computed, watch } from "vue";
+  import { computed } from "vue";
 
   interface Props {
     id: string;

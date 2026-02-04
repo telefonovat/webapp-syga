@@ -1,6 +1,4 @@
-import { defineStore, storeToRefs } from "pinia";
-import { useAnimationStore_ } from "./animationStore";
-import { computed, ref } from "vue";
+import { defineStore } from "pinia";
 import { VisualizationFrame } from "@telefonovat/syga--contract";
 
 const TICK_PERIOD_MS = 750;

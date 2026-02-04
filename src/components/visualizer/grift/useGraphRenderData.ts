@@ -52,7 +52,7 @@ function getVertexPositions(
 function getVertexProps(
   id: GraphVertexId,
   positions: VertexPositions,
-  { vertexLabels, vertexColors, vertexShapes }: VertexStyle,
+  { vertexLabels, vertexColors }: VertexStyle,
 ): VertexProps {
   return {
     x: positions[id].x,

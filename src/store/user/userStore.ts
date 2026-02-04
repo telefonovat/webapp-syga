@@ -1,4 +1,4 @@
-import { Algorithm } from "@/shared-types/user/Algorithm";
+import { Algorithm } from "@telefonovat/syga--contract";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
