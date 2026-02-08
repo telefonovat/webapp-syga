@@ -5,7 +5,7 @@
 
 <template>
 
-  <div>
+  <div class="h-full">
 
     <AlgorithmControlPanel class="control-panel" />
 

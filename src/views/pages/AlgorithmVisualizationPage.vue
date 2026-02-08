@@ -1,14 +1,27 @@
 <template>
 
-  <div class="page">
+  <SplitterGroup class="page" id="test" direction="horizontal">
 
-    <CodeEditor
-      :linesToHighlight="currentLineNos"
-      v-model:code="code" />
+    <SplitterPanel :min-size="20">
 
-    <Visualizer class="" />
+      <CodeEditor
+        :style="{ height: '100%' }"
+        :linesToHighlight="currentLineNos"
+        v-model:code="code" />
 
-  </div>
+    </SplitterPanel>
+
+    <SplitterResizeHandle class="horizontal-splitter" />
+
+    <SplitterPanel :min-size="20">
+
+      <Visualizer class="" />
+
+    </SplitterPanel>
+
+  </SplitterGroup>
+
+  <!-- </div> -->
 
 </template>
 
@@ -19,6 +32,12 @@
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { storeToRefs } from "pinia";
   import { computed } from "vue";
+
+  import {
+    SplitterGroup,
+    SplitterPanel,
+    SplitterResizeHandle,
+  } from "radix-vue";
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
@@ -32,15 +51,10 @@
 
 <style scoped>
   .page{
-  height: 100%;
 
   min-height: 0px;
-  display: flex;
   height: 100%;
 
-  & > *{
-    flex-grow: 1;
-  }
 }
   .algorithm-visualization-page{
   min-height: 0px;

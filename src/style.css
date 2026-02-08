@@ -13,6 +13,14 @@
   @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) font-semibold py-2 px-4 shadow-md transition-colors duration-200;
 }
 
+/* UX */
+.horizontal-splitter {
+  @apply bg-(--color-border) w-1;
+}
+.vertical-splitter {
+  @apply bg-(--color-border) h-1;
+}
+
 :root {
   background-color: var(--color-paper);
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */

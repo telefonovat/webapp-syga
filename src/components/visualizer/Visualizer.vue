@@ -1,31 +1,41 @@
 <script setup lang="ts">
   import ComponentRenderer from "./graph/ComponentRenderer.vue";
   import VisualizerConsole from "./VisualizerConsole.vue";
+
+  import {
+    SplitterGroup,
+    SplitterPanel,
+    SplitterResizeHandle,
+  } from "radix-vue";
 </script>
 
 <template>
 
-  <div class="visualizer">
+  <SplitterGroup class="visualizer" direction="vertical">
 
-    <ComponentRenderer :componentIndex="0" class="renderer" />
+    <SplitterPanel :min-size="20">
 
-    <VisualizerConsole />
+      <ComponentRenderer :componentIndex="0" />
 
-  </div>
+    </SplitterPanel>
+
+    <SplitterResizeHandle class="vertical-splitter" />
+
+    <SplitterPanel :min-size="20">
+
+      <VisualizerConsole />
+
+    </SplitterPanel>
+
+  </SplitterGroup>
 
 </template>
 
 <style scoped>
   .visualizer{
-    display: grid;
-    grid-template-rows: 3fr 1fr;
 
     height: 100%;
     background-color: #282c34;
-}
-
-.renderer{
-  border-bottom: 1px solid #444;
 }
 </style>
 
