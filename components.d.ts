@@ -28,6 +28,7 @@ declare module 'vue' {
     MockFooter: typeof import('./src/components/mock/sfc/MockFooter.vue')['default']
     MockHeader: typeof import('./src/components/mock/sfc/MockHeader.vue')['default']
     NavSidebar: typeof import('./src/components/NavSidebar.vue')['default']
+    Playback: typeof import('./src/components/visualizer/playback/Playback.vue')['default']
     PrettyText: typeof import('./src/components/utility/text/PrettyText.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
