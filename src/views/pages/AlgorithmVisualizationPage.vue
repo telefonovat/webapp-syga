@@ -21,8 +21,6 @@
 
   </SplitterGroup>
 
-  <!-- </div> -->
-
 </template>
 
 <script setup lang="ts">
@@ -68,7 +66,6 @@
 
 .algorithm-visualization-page-visualizer{
 
-  border-left: 1px solid #444;
 }
 </style>
 
