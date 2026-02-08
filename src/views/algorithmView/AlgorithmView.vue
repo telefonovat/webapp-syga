@@ -1,7 +1,3 @@
-<script setup lang="ts">
-  import AlgorithmControlPanel from "@/views/AlgorithmControlPanel.vue";
-  import AlgorithmVisualizationPage from "../pages/AlgorithmVisualizationPage.vue";
-</script>
 
 <template>
 
@@ -14,6 +10,15 @@
   </div>
 
 </template>
+
+<script setup lang="ts">
+  import AlgorithmControlPanel from "@/views/AlgorithmControlPanel.vue";
+  import AlgorithmVisualizationPage from "../pages/AlgorithmVisualizationPage.vue";
+  import { onMounted } from "vue";
+  import { usePrepareInitCode } from "./usePrepareInitCode";
+
+  onMounted(async () => usePrepareInitCode());
+</script>
 
 <style scoped>
   .control-panel{
