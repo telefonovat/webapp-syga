@@ -35,7 +35,6 @@
   .visualizer{
 
     height: 100%;
-    background-color: #282c34;
 }
 </style>
 

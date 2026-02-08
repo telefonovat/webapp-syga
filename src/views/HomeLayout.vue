@@ -12,7 +12,7 @@
 
     </div>
 
-    <HomeLayoutFooter class="home-layout__footer" />
+    <HomeLayoutFooter class="footer border-top" />
 
   </div>
 
@@ -28,5 +28,9 @@
 .primary-viewport{
   overflow-y: auto;
 }
+
+  .footer{
+    width: 100%;
+  }
 </style>
 

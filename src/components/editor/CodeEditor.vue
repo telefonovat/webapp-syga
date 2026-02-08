@@ -82,6 +82,7 @@
 
 <style>
   .cm-editor{
+    @apply bg-(--color-paper);
 }
 </style>
 

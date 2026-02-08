@@ -9,7 +9,18 @@
   --color-muted: #1f2a30;
   --color-acent: #8674b9;
 
-  --color-border: #3a3a3f;
+  --color-border: #444;
+  /* --color-border: rgbda(255, 255, 255, 0.1); */
+}
+
+/* Utils */
+.border-top {
+  @apply border-t;
+  border-color: var(--color-border);
+}
+.border-bottom {
+  @apply border-b;
+  border-color: var(--color-border);
 }
 
 /* Buttons */
