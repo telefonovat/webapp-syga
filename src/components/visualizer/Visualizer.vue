@@ -3,15 +3,20 @@
 
   <SplitterGroup class="visualizer" direction="vertical">
 
-    <SplitterPanel :min-size="20">
+    <SplitterPanel
+      class="grid place-items-center h-full"
+      :min-size="20">
 
       <Grift
+        class="component-renderer"
         v-if="componentToDisplay"
         :component="componentToDisplay"
         prefix="visualizer"
         :view-box-size="400"
         :vertexOptions="{}"
         :edgeOptions="{}" />
+
+      <LoadingCard v-else />
 
     </SplitterPanel>
 
@@ -28,15 +33,17 @@
 </template>
 
 <script setup lang="ts">
-  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import Grift from "./grift/Grift.vue";
   import VisualizerConsole from "./VisualizerConsole.vue";
+  import LoadingCard from "./grift/LoadingCard.vue";
+
+  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 
   import {
     SplitterGroup,
     SplitterPanel,
     SplitterResizeHandle,
-  } from "radix-vue";
+  } from "reka-ui";
   import { computed } from "vue";
   import { storeToRefs } from "pinia";
 
@@ -52,8 +59,11 @@
 
 <style scoped>
   .visualizer{
-
     height: 100%;
 }
+
+  .component-renderer{
+  height: 100%;
+  }
 </style>
 

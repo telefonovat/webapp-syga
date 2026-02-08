@@ -64,7 +64,7 @@
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
 
-  import { ToolbarButton, ToolbarRoot } from "radix-vue";
+  import { ToolbarButton, ToolbarRoot } from "reka-ui";
 
   const store = useVisualizerStore();
   const { togglePlay } = useVisualizerCommands();

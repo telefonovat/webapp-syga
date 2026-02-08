@@ -56,6 +56,9 @@ importers:
       radix-vue:
         specifier: ^1.9.17
         version: 1.9.17(vue@3.5.11(typescript@5.6.2))
+      reka-ui:
+        specifier: ^2.8.0
+        version: 2.8.0(vue@3.5.11(typescript@5.6.2))
       vue:
         specifier: ^3.5.10
         version: 3.5.11(typescript@5.6.2)
@@ -1023,17 +1026,30 @@ packages:
     peerDependencies:
       vue: ^3.5.0
 
+  '@vueuse/core@14.2.0':
+    resolution: {integrity: sha512-tpjzVl7KCQNVd/qcaCE9XbejL38V6KJAEq/tVXj7mDPtl6JtzmUdnXelSS+ULRkkrDgzYVK7EerQJvd2jR794Q==}
+    peerDependencies:
+      vue: ^3.5.0
+
   '@vueuse/metadata@10.11.1':
     resolution: {integrity: sha512-IGa5FXd003Ug1qAZmyE8wF3sJ81xGLSqTqtQ6jaVfkeZ4i5kS2mwQF61yhVqojRnenVew5PldLyRgvdl4YYuSw==}
 
   '@vueuse/metadata@13.9.0':
     resolution: {integrity: sha512-1AFRvuiGphfF7yWixZa0KwjYH8ulyjDCC0aFgrGRz8+P4kvDFSdXLVfTk5xAN9wEuD1J6z4/myMoYbnHoX07zg==}
 
+  '@vueuse/metadata@14.2.0':
+    resolution: {integrity: sha512-i3axTGjU8b13FtyR4Keeama+43iD+BwX9C2TmzBVKqjSHArF03hjkp2SBZ1m72Jk2UtrX0aYCugBq2R1fhkuAQ==}
+
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
 
   '@vueuse/shared@13.9.0':
     resolution: {integrity: sha512-e89uuTLMh0U5cZ9iDpEI2senqPGfbPRTHM/0AaQkcxnpqjkZqDYP8rpfm7edOz8s+pOCOROEy1PIveSW8+fL5g==}
+    peerDependencies:
+      vue: ^3.5.0
+
+  '@vueuse/shared@14.2.0':
+    resolution: {integrity: sha512-Z0bmluZTlAXgUcJ4uAFaML16JcD8V0QG00Db3quR642I99JXIDRa2MI2LGxiLVhcBjVnL1jOzIvT5TT2lqJlkA==}
     peerDependencies:
       vue: ^3.5.0
 
@@ -1915,6 +1931,9 @@ packages:
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
 
+  ohash@2.0.11:
+    resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
+
   on-finished@2.3.0:
     resolution: {integrity: sha512-ikqdkGAAyf/X/gPhXGvfgAytDZtDbr+bkNUJ0N9h5MI/dmdgCs3l6hoHrcUv41sRKew3jIwrp4qQDXiK99Utww==}
     engines: {node: '>= 0.8'}
@@ -2065,6 +2084,11 @@ packages:
   regexp.prototype.flags@1.5.4:
     resolution: {integrity: sha512-dYqgNSZbDwkaJ2ceRd9ojCGjBq+mOm9LmtXnAnEGyHhN/5R7iDW2TRw3h+o/jCFxus3P2LfWIIiwowAjANm7IA==}
     engines: {node: '>= 0.4'}
+
+  reka-ui@2.8.0:
+    resolution: {integrity: sha512-N4JOyIrmDE7w2i06WytqcV2QICubtS2PsK5Uo8FIMAgmO13KhUAgAByP26cXjjm2oF/w7rTyRs8YaqtvaBT+SA==}
+    peerDependencies:
+      vue: '>= 3.2.0'
 
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -3343,9 +3367,18 @@ snapshots:
       '@vueuse/shared': 13.9.0(vue@3.5.11(typescript@5.6.2))
       vue: 3.5.11(typescript@5.6.2)
 
+  '@vueuse/core@14.2.0(vue@3.5.11(typescript@5.6.2))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 14.2.0
+      '@vueuse/shared': 14.2.0(vue@3.5.11(typescript@5.6.2))
+      vue: 3.5.11(typescript@5.6.2)
+
   '@vueuse/metadata@10.11.1': {}
 
   '@vueuse/metadata@13.9.0': {}
+
+  '@vueuse/metadata@14.2.0': {}
 
   '@vueuse/shared@10.11.1(vue@3.5.11(typescript@5.6.2))':
     dependencies:
@@ -3355,6 +3388,10 @@ snapshots:
       - vue
 
   '@vueuse/shared@13.9.0(vue@3.5.11(typescript@5.6.2))':
+    dependencies:
+      vue: 3.5.11(typescript@5.6.2)
+
+  '@vueuse/shared@14.2.0(vue@3.5.11(typescript@5.6.2))':
     dependencies:
       vue: 3.5.11(typescript@5.6.2)
 
@@ -4298,6 +4335,8 @@ snapshots:
 
   obug@2.1.1: {}
 
+  ohash@2.0.11: {}
+
   on-finished@2.3.0:
     dependencies:
       ee-first: 1.1.1
@@ -4446,6 +4485,22 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       set-function-name: 2.0.2
+
+  reka-ui@2.8.0(vue@3.5.11(typescript@5.6.2)):
+    dependencies:
+      '@floating-ui/dom': 1.7.5
+      '@floating-ui/vue': 1.1.10(vue@3.5.11(typescript@5.6.2))
+      '@internationalized/date': 3.10.1
+      '@internationalized/number': 3.6.5
+      '@tanstack/vue-virtual': 3.13.18(vue@3.5.11(typescript@5.6.2))
+      '@vueuse/core': 14.2.0(vue@3.5.11(typescript@5.6.2))
+      '@vueuse/shared': 14.2.0(vue@3.5.11(typescript@5.6.2))
+      aria-hidden: 1.2.6
+      defu: 6.1.4
+      ohash: 2.0.11
+      vue: 3.5.11(typescript@5.6.2)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   require-directory@2.1.1: {}
 

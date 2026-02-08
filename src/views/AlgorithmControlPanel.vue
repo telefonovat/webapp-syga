@@ -18,7 +18,7 @@
   import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
   import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
 
-  import { Separator } from "radix-vue";
+  import { Separator } from "reka-ui";
 </script>
 
 <style scoped>

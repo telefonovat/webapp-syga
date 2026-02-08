@@ -18,7 +18,7 @@
   import { storeToRefs } from "pinia";
   import { buildCode } from "./buildCode";
 
-  import { ToolbarButton, ToolbarRoot } from "radix-vue";
+  import { ToolbarButton, ToolbarRoot } from "reka-ui";
 
   const editorStore = useEditorStore();
   const { code } = storeToRefs(editorStore);

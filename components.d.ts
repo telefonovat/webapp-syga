@@ -22,6 +22,7 @@ declare module 'vue' {
     GraphNode: typeof import('./src/components/visualizer/graph/GraphNode.vue')['default']
     Grift: typeof import('./src/components/visualizer/grift/Grift.vue')['default']
     IconButton: typeof import('./src/components/utility/iconButton/IconButton.vue')['default']
+    LoadingCard: typeof import('./src/components/visualizer/grift/LoadingCard.vue')['default']
     MockButton: typeof import('./src/components/mock/sfc/MockButton.vue')['default']
     MockComponent: typeof import('./src/components/mock/sfc/MockComponent.vue')['default']
     MockFooter: typeof import('./src/components/mock/sfc/MockFooter.vue')['default']

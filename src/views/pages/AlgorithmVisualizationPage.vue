@@ -35,7 +35,7 @@
     SplitterGroup,
     SplitterPanel,
     SplitterResizeHandle,
-  } from "radix-vue";
+  } from "reka-ui";
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();

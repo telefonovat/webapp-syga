@@ -47,7 +47,7 @@
     SplitterGroup,
     SplitterPanel,
     SplitterResizeHandle,
-  } from "radix-vue";
+  } from "reka-ui";
 
   interface Props {
     trueGraphSolution: GraphComponent;
