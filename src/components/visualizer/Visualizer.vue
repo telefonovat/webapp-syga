@@ -44,17 +44,17 @@
     SplitterPanel,
     SplitterResizeHandle,
   } from "reka-ui";
-  import { computed } from "vue";
+  import { computed, watch } from "vue";
   import { storeToRefs } from "pinia";
 
   const visualizerStore = useVisualizerStore();
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const componentToDisplay = computed(() =>
-    currentFrame.value
+  const componentToDisplay = computed(() => {
+    return currentFrame.value
       ? currentFrame.value.graphComponents[0]
-      : undefined,
-  );
+      : undefined;
+  });
 </script>
 
 <style scoped>

@@ -6,7 +6,7 @@ import {
 } from "@telefonovat/syga--contract";
 import GraphEdge from "../graph/GraphEdge.vue";
 import GraphNode from "../graph/GraphNode.vue";
-import { computed, reactive } from "vue";
+import { computed, reactive, Ref } from "vue";
 
 type EdgePropsPartial = Omit<
   InstanceType<typeof GraphEdge>["$props"],
@@ -91,20 +91,19 @@ function getEdgePropsPartial(
 }
 
 export function useGraphRenderData(
-  graph: GraphComponent,
+  // NOTE: This adds unnecessary complexity
+  graph: Ref<GraphComponent>,
   viewBoxSize: number,
 ): GraphRenderData {
-  console.log("Render run");
-
   const vertexPositions = computed(() => {
-    const vertices = graph.vertices;
+    const vertices = graph.value.vertices;
     return getVertexPositions(vertices, viewBoxSize);
   });
   const verticesProps = computed(() => {
-    const vertices = graph.vertices;
-    const vertexLabels = graph.style.vertexLabels;
-    const vertexColors = graph.style.vertexColors;
-    const vertexShapes = graph.style.vertexShapes;
+    const vertices = graph.value.vertices;
+    const vertexLabels = graph.value.style.vertexLabels;
+    const vertexColors = graph.value.style.vertexColors;
+    const vertexShapes = graph.value.style.vertexShapes;
     const props: Record<string, VertexProps> = {};
     vertices.forEach(
       ({ id }) =>
@@ -120,11 +119,11 @@ export function useGraphRenderData(
   const edgesPropsPartial = computed(() => {
     const propsPartial: Record<string, EdgePropsPartial> = {};
 
-    const edges = graph.edges;
-    const isGraphDirected = graph.type === GraphType.DIRECTED;
-    const edgeLabels = graph.style.edgeLabels;
-    const edgeColors = graph.style.edgeColors;
-    const edgeShapes = graph.style.edgeShapes;
+    const edges = graph.value.edges;
+    const isGraphDirected = graph.value.type === GraphType.DIRECTED;
+    const edgeLabels = graph.value.style.edgeLabels;
+    const edgeColors = graph.value.style.edgeColors;
+    const edgeShapes = graph.value.style.edgeShapes;
     edges.forEach(
       ({ start, end }) =>
         (propsPartial[`${start.id}->${end.id}`] = getEdgePropsPartial(

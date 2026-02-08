@@ -65,11 +65,15 @@
   import { useVisualizerCommands } from "./useVisualizerCommands";
 
   import { ToolbarButton, ToolbarRoot } from "reka-ui";
+  import { storeToRefs } from "pinia";
 
   const store = useVisualizerStore();
+  const { activeFrameNumber, numberOfFrames } = storeToRefs(store);
   const { togglePlay } = useVisualizerCommands();
 
-  const canVisualizerPlay = computed(() => store.frames.length !== 0);
+  const canVisualizerPlay = computed(
+    () => numberOfFrames.value !== 0,
+  );
 
   function modulo(a: number, n: number): number {
     return ((a % n) + n) % n;
@@ -78,14 +82,14 @@
   // WARN: The store is 0-indexed but the sliderModel is 1-indexed
   const sliderModel = ref<AwesomeSliderModel>({
     get value() {
-      return store.activeFrameNumber + 1;
+      return activeFrameNumber.value + 1;
     },
     set value(v) {
-      store.activeFrameNumber = v - 1;
+      activeFrameNumber.value = v - 1;
     },
     min: 1,
     get max() {
-      return store.numberOfFrames;
+      return numberOfFrames.value;
     },
   });
 </script>

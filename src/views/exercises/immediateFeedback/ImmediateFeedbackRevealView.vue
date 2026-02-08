@@ -41,7 +41,6 @@
   import Grift from "@/components/visualizer/grift/Grift.vue";
 
   import { GraphComponent } from "@telefonovat/syga--contract";
-  import { onMounted } from "vue";
 
   import {
     SplitterGroup,
@@ -53,8 +52,7 @@
     trueGraphSolution: GraphComponent;
     submittedGraphSolution: GraphComponent;
   }
-  const props = defineProps<Props>();
-  onMounted(() => console.log(props.trueGraphSolution));
+  defineProps<Props>();
 </script>
 
 <style scoped>

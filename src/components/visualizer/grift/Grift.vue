@@ -57,7 +57,7 @@
   import GraphNode from "../graph/GraphNode.vue";
   import SelectionModal from "@/components/utility/SelectionModal.vue";
 
-  import { computed, ref, toRefs } from "vue";
+  import { computed, ref, toRef, toRefs } from "vue";
   import { useGraphRenderData } from "./useGraphRenderData";
   import {
     EdgeOption,
@@ -98,7 +98,7 @@
   });
 
   const { verticesProps, edgesPropsPartial } = toRefs(
-    useGraphRenderData(props.component, props.viewBoxSize),
+    useGraphRenderData(toRef(props, "component"), props.viewBoxSize),
   );
   const optionSelectionType = ref<"vertex" | "edge">("edge");
   const options = computed(() =>

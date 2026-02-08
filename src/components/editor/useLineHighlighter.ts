@@ -4,13 +4,15 @@ import { EditorView } from "codemirror";
 import { computed, watch } from "vue";
 
 import { StateEffect, StateField } from "@codemirror/state";
+import { storeToRefs } from "pinia";
 
 export function useLineHighlighter(view: EditorView) {
   const visualizerStore = useVisualizerStore();
+  const { currentFrame } = storeToRefs(visualizerStore);
 
-  const currentLineNos = computed(
-    () => visualizerStore.currentFrame?.lineNo ?? [],
-  );
+  const currentLineNos = computed(() => {
+    return currentFrame.value?.lineNo ?? [];
+  });
   const lineHighlightMark = Decoration.line({
     attributes: { style: "background-color: yellow" },
   });

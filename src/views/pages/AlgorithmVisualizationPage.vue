@@ -41,10 +41,11 @@
   const visualizerStore = useVisualizerStore();
 
   const { code } = storeToRefs(editorStore);
+  const { currentFrame } = storeToRefs(visualizerStore);
 
-  const currentLineNos = computed(
-    () => visualizerStore.currentFrame?.lineNo ?? [],
-  );
+  const currentLineNos = computed(() => {
+    return currentFrame.value?.lineNo ?? [];
+  });
 </script>
 
 <style scoped>

@@ -47,8 +47,6 @@
   const isPlaybackMode = ref(false);
   const mode = ref<Mode>("edit");
 
-  console.log(`testing ${isPlaybackMode.value}`);
-
   watch(isPlaybackMode, (newVal) => {
     mode.value = newVal ? "playback" : "edit";
     emit("switchMode", mode.value);
