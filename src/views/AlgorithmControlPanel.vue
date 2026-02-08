@@ -1,8 +1,3 @@
-<script setup lang="ts">
-  import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
-  import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
-</script>
-
 <template>
 
   <div class="panel-wrapper">
@@ -11,14 +6,20 @@
 
       <CodeEditorNavigation />
 
-      <VisualizerNavigation
-        data-testid="visualizer-navigation-panel" />
+      <VisualizerNavigation />
 
     </div>
 
   </div>
 
 </template>
+
+<script setup lang="ts">
+  import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
+  import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
+
+  import { Separator } from "radix-vue";
+</script>
 
 <style scoped>
   .panel-wrapper{

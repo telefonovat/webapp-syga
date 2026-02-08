@@ -1,9 +1,70 @@
+<template>
+
+  <ToolbarRoot class="container">
+
+    <ToolbarButton
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="togglePlay()">
+       {{ store.isPlaying ? "Pause" : "Play" }}
+    </ToolbarButton>
+
+    <ToolbarButton
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="sliderModel.value = 1">
+       <<
+    </ToolbarButton>
+
+    <ToolbarButton
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="
+        sliderModel.value = Math.max(
+          sliderModel.min,
+          modulo(sliderModel.value - 1, sliderModel.max),
+        )
+      ">
+       <
+    </ToolbarButton>
+
+    <AwesomeSlider
+      :disabled="!canVisualizerPlay"
+      data-testid="visualizer-frame-slider"
+      class="container__frames-slider"
+      v-model="sliderModel" />
+
+    <ToolbarButton
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="
+        sliderModel.value = Math.min(
+          sliderModel.max,
+          sliderModel.value + 1,
+        )
+      ">
+       >
+    </ToolbarButton>
+
+    <ToolbarButton
+      class="btn-primary"
+      :disabled="!canVisualizerPlay"
+      @click="sliderModel.value = sliderModel.max">
+       >>
+    </ToolbarButton>
+
+  </ToolbarRoot>
+
+</template>
+
 <script setup lang="ts">
   import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { computed, ref } from "vue";
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
+
+  import { ToolbarButton, ToolbarRoot } from "radix-vue";
 
   const store = useVisualizerStore();
   const { togglePlay } = useVisualizerCommands();
@@ -28,65 +89,6 @@
     },
   });
 </script>
-
-<template>
-
-  <div class="container">
-
-    <button
-      class="btn-primary"
-      :disabled="!canVisualizerPlay"
-      @click="togglePlay()">
-       {{ store.isPlaying ? "Pause" : "Play" }}
-    </button>
-
-    <button
-      class="btn-primary"
-      :disabled="!canVisualizerPlay"
-      @click="sliderModel.value = 1">
-       <<
-    </button>
-
-    <button
-      class="btn-primary"
-      :disabled="!canVisualizerPlay"
-      @click="
-        sliderModel.value = Math.max(
-          sliderModel.min,
-          modulo(sliderModel.value - 1, sliderModel.max),
-        )
-      ">
-       <
-    </button>
-
-    <AwesomeSlider
-      :disabled="!canVisualizerPlay"
-      data-testid="visualizer-frame-slider"
-      class="container__frames-slider"
-      v-model="sliderModel" />
-
-    <button
-      class="btn-primary"
-      :disabled="!canVisualizerPlay"
-      @click="
-        sliderModel.value = Math.min(
-          sliderModel.max,
-          sliderModel.value + 1,
-        )
-      ">
-       >
-    </button>
-
-    <button
-      class="btn-primary"
-      :disabled="!canVisualizerPlay"
-      @click="sliderModel.value = sliderModel.max">
-       >>
-    </button>
-
-  </div>
-
-</template>
 
 <style scoped>
   .container{
