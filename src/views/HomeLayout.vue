@@ -12,7 +12,7 @@
 
     </div>
 
-    <HomeLayoutFooter class="footer border-top" />
+    <!-- <HomeLayoutFooter class="footer border-top" /> -->
 
   </div>
 
