@@ -1,6 +1,6 @@
 <template>
 
-  <div class="h-full">
+  <VueZoomable :min-zoom="0.8" :max-zoom="3" class="h-full">
 
     <Grift
       class="h-full"
@@ -10,11 +10,13 @@
       :vertexOptions="{}"
       :edgeOptions="{}" />
 
-  </div>
+  </VueZoomable>
 
 </template>
 
 <script setup lang="ts">
+  import VueZoomable from "vue-zoomable";
+
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { storeToRefs } from "pinia";
   import { computed } from "vue";
