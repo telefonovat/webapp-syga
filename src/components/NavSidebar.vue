@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import RegisterAccountDialog from "./user/authentication/RegisterAccountDialog.vue";
   import { router } from "@/router";
   import { ref } from "vue";
 

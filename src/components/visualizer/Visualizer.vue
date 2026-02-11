@@ -44,7 +44,7 @@
     SplitterPanel,
     SplitterResizeHandle,
   } from "reka-ui";
-  import { computed, watch } from "vue";
+  import { computed } from "vue";
   import { storeToRefs } from "pinia";
 
   const visualizerStore = useVisualizerStore();

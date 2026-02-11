@@ -35,8 +35,6 @@ declare module 'vue' {
     SaveAlgorithmModal: typeof import('./src/components/utility/SaveAlgorithmModal.vue')['default']
     SelectionModal: typeof import('./src/components/utility/SelectionModal.vue')['default']
     SimpleMessagePopup: typeof import('./src/components/utility/SimpleMessagePopup.vue')['default']
-    ToastAction: typeof import('radix-vue')['ToastAction']
-    ToastViewport: typeof import('radix-vue')['ToastViewport']
     Visualizer: typeof import('./src/components/visualizer/Visualizer.vue')['default']
     VisualizerConsole: typeof import('./src/components/visualizer/VisualizerConsole.vue')['default']
     VisualizerNavigation: typeof import('./src/components/visualizer/VisualizerNavigation.vue')['default']
