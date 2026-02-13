@@ -22,7 +22,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 8080,
+    port: 80,
     host: "0.0.0.0",
   },
   // test: {
