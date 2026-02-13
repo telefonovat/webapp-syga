@@ -11,18 +11,29 @@
   import { Codemirror } from "vue-codemirror";
   import { python } from "@codemirror/lang-python";
   import { oneDark } from "@codemirror/theme-one-dark";
-  import { shallowRef } from "vue";
+  import { computed, shallowRef } from "vue";
   import { EditorView } from "codemirror";
 
   import { Decoration } from "@codemirror/view";
-  import { StateEffect, StateField } from "@codemirror/state";
+  import {
+    Compartment,
+    StateEffect,
+    StateField,
+    EditorState,
+  } from "@codemirror/state";
   import { watch } from "vue";
+  import { usePreferencesContent } from "../settings/preferences/usePreferencesContent";
 
   interface Props {
     linesToHighlight: number[];
   }
   const props = defineProps<Props>();
   const codeModel = defineModel<string>("code", { required: true });
+
+  const view = shallowRef<EditorView>();
+  const handleReady = (payload: { view: EditorView }) => {
+    view.value = payload.view as EditorView;
+  };
 
   const lineHighlightMark = Decoration.line({
     attributes: { style: "background-color: #008b8b" },
@@ -47,8 +58,30 @@
     provide: (f) => EditorView.decorations.from(f),
   });
 
+  const { fontSizePx } = usePreferencesContent();
+  const fontSizeCompartment = new Compartment();
+  const getFontSizeTheme = (sizePx: number) =>
+    EditorView.theme({
+      "&": { fontSize: `${sizePx}pt` },
+    });
+  watch(fontSizePx, (newSize) => {
+    if (!view.value) return;
+    view.value.dispatch({
+      effects: fontSizeCompartment.reconfigure(
+        getFontSizeTheme(newSize),
+      ),
+    });
+  });
+
   // Usage in extensions
-  const extensions = [python(), oneDark, lineHighlightField];
+  const extensions = [
+    python(),
+    oneDark,
+    lineHighlightField,
+
+    //User preferences
+    fontSizeCompartment.of(getFontSizeTheme(fontSizePx.value)),
+  ];
 
   watch(
     () => props.linesToHighlight,
@@ -69,11 +102,6 @@
       });
     },
   );
-
-  const view = shallowRef<EditorView>();
-  const handleReady = (payload: { view: EditorView }) => {
-    view.value = payload.view as EditorView;
-  };
 </script>
 
 <style scoped>

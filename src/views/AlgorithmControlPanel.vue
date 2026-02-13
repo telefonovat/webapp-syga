@@ -26,6 +26,8 @@
 
       </div>
 
+      <PreferencesPopoverButton />
+
     </div>
 
   </div>
@@ -35,6 +37,7 @@
 <script setup lang="ts">
   import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
   import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
+  import PreferencesPopoverButton from "@/components/settings/preferences/PreferencesPopoverButton.vue";
 
   import { SwitchRoot, SwitchThumb } from "reka-ui";
   import { ref, watch } from "vue";
