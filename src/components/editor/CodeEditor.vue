@@ -11,7 +11,7 @@
   import { Codemirror } from "vue-codemirror";
   import { python } from "@codemirror/lang-python";
   import { oneDark } from "@codemirror/theme-one-dark";
-  import { computed, shallowRef } from "vue";
+  import { shallowRef } from "vue";
   import { EditorView } from "codemirror";
 
   import { Decoration } from "@codemirror/view";
@@ -19,7 +19,6 @@
     Compartment,
     StateEffect,
     StateField,
-    EditorState,
   } from "@codemirror/state";
   import { watch } from "vue";
   import { usePreferencesContent } from "../settings/preferences/usePreferencesContent";
@@ -35,10 +34,13 @@
     view.value = payload.view as EditorView;
   };
 
+  const { fontSizePx, isCodeHighlightOn } = usePreferencesContent();
+
   const lineHighlightMark = Decoration.line({
-    attributes: { style: "background-color: #008b8b" },
+    attributes: { style: "background-color: var(--color-highlight)" },
   });
   const addLineHighlight = StateEffect.define<{ line: number }>();
+  const clearLineHighlights = StateEffect.define<void>();
   const lineHighlightField = StateField.define({
     create() {
       return Decoration.none;
@@ -51,14 +53,45 @@
           lines = lines.update({
             add: [lineHighlightMark.range(e.value.line)],
           });
+        } else if (e.is(clearLineHighlights)) {
+          lines = Decoration.none;
+          return lines;
         }
       }
       return lines;
     },
     provide: (f) => EditorView.decorations.from(f),
   });
+  function highlightLines(lineNumbers: number[]) {
+    if (view.value === undefined) return;
+    const linesToHighlight = lineNumbers.map(
+      (line) => view.value!.state.doc.line(line).from,
+    );
 
-  const { fontSizePx } = usePreferencesContent();
+    view.value.dispatch({
+      effects: linesToHighlight.map((line) =>
+        addLineHighlight.of({
+          line: line,
+        }),
+      ),
+    });
+  }
+  watch(isCodeHighlightOn, (newVal) => {
+    if (view.value === undefined) return;
+    if (!newVal) {
+      view.value.dispatch({ effects: clearLineHighlights.of() });
+    } else {
+      highlightLines(props.linesToHighlight);
+    }
+  });
+  watch(
+    () => props.linesToHighlight,
+    (newVal) => {
+      if (!isCodeHighlightOn) return;
+      highlightLines(newVal);
+    },
+  );
+
   const fontSizeCompartment = new Compartment();
   const getFontSizeTheme = (sizePx: number) =>
     EditorView.theme({
@@ -82,26 +115,6 @@
     //User preferences
     fontSizeCompartment.of(getFontSizeTheme(fontSizePx.value)),
   ];
-
-  watch(
-    () => props.linesToHighlight,
-    (value, _old) => {
-      if (view.value === undefined) {
-        return;
-      }
-      const linesToHighlight = value.map(
-        (line) => view.value!.state.doc.line(line).from,
-      );
-
-      view.value.dispatch({
-        effects: linesToHighlight.map((line) =>
-          addLineHighlight.of({
-            line: line,
-          }),
-        ),
-      });
-    },
-  );
 </script>
 
 <style scoped>
