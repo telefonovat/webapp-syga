@@ -3,9 +3,19 @@
   <ToolbarRoot class="container">
 
     <ToolbarButton
-      class="btn-primary"
+      class="btn-primary flex items-center"
       :disabled="!canVisualizerPlay"
       @click="togglePlay()">
+
+      <Icon
+        v-if="store.isPlaying"
+        icon="material-symbols-light:pause-outline"
+        class="w-7 h-7 p-1" />
+
+      <Icon
+        v-else
+        icon="fluent:play-16-regular"
+        class="w-7 h-7 p-1" />
        {{ store.isPlaying ? "Pause" : "Play" }}
     </ToolbarButton>
 
@@ -59,12 +69,15 @@
 
 <script setup lang="ts">
   import AwesomeSlider from "@/components/utility/slider/AwesomeSlider.vue";
+
+  import { ToolbarButton, ToolbarRoot } from "reka-ui";
+  import { Icon } from "@iconify/vue";
+
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { computed, ref } from "vue";
   import { AwesomeSliderModel } from "../utility/slider";
   import { useVisualizerCommands } from "./useVisualizerCommands";
 
-  import { ToolbarButton, ToolbarRoot } from "reka-ui";
   import { storeToRefs } from "pinia";
 
   const store = useVisualizerStore();

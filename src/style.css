@@ -27,7 +27,7 @@
 
 /* Buttons */
 .btn-primary {
-  @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) font-semibold py-2 px-4 shadow-md transition-colors duration-200;
+  @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) text-lg font-semibold py-2 px-4 shadow-md transition-colors duration-200;
 }
 
 /* UX */
@@ -39,11 +39,12 @@
 }
 
 :root {
+  @apply text-base;
   background-color: var(--color-paper);
   color: var(--color-text);
   /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   /* line-height: 1.5; */
-  /* font-weight: 400; */
+  font-weight: normal bold;
   /**/
   /* color-scheme: light dark; */
   /* color: rgba(255, 255, 255, 0.87); */
