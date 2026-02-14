@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { Separator } from "reka-ui";
+
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { VisualizationFrame } from "@telefonovat/syga--contract";
   import { storeToRefs } from "pinia";
@@ -48,15 +50,17 @@
 
   <div class="visualizer-console ma-0 pa-0">
 
-    <template v-for="output in consoleOutputs">
+    <template v-for="(output, index) in consoleOutputs">
 
-      <div
-        class="console-card"
-        style="background-color: rgba(0, 0, 0, 0.1)">
+      <Separator
+        v-if="index > 0"
+        class="bg-stone-300/50 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-1/2 data-[orientation=horizontal]:mx-auto data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px my-3" />
 
-        <pre class="console-logs">{{ output[0] }}</pre>
+      <div class="console-card pt-3 pb-3">
 
-        <span class="meta-info">{{ output[1] }}</span>
+        <pre class="console-logs pl-4">{{ output[0] }}</pre>
+
+        <span class="meta-info pr-4">{{ output[1] }}</span>
 
       </div>
 
@@ -66,24 +70,21 @@
 
 </template>
 
-<style scoped>
+<style lang="postcss" scoped>
   .visualizer-console{
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .console-card{
   display: flex;
-  padding: 0.25rem;
 }
 
 .console-logs{
   margin-right: auto;
-  padding-left: 0.5rem;
 }
 
 .meta-info{
   margin-left: auto;
-  padding-right: 0.5rem;
 }
 </style>
 
