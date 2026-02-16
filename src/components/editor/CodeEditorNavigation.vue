@@ -1,4 +1,3 @@
-
 <template>
 
   <ToolbarRoot>
@@ -12,8 +11,6 @@
     </ToolbarButton>
 
   </ToolbarRoot>
-
-  <!-- <button class="btn-primary" @click="buildCode(code)">Build</button> -->
 
 </template>
 

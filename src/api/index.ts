@@ -1,2 +1,2 @@
-export { buildHeaders } from "./util";
+export { buildHeaders, buildRequest } from "./util";
 export * from "./endpoints";

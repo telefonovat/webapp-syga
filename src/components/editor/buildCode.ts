@@ -1,29 +1,23 @@
 import { buildUrl } from "@/api";
-import { useEditorStore } from "@/store/editor/editorStore";
+import { buildRequest } from "@/api";
 import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 import {
   isExecuteAlgorithmResult,
   isApiErrorResponse,
 } from "@telefonovat/syga--contract";
-import { storeToRefs } from "pinia";
+import { triggerNonFatalError } from "../error/useErrorHandler";
+import {
+  handleAPIError,
+  handleUnknownError,
+} from "@/api/errorHandler";
 
 export function buildCode(code: string) {
-  const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
-  const { isCodeBuilding } = storeToRefs(editorStore);
-  isCodeBuilding.value = true;
-  fetch(buildUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      mode: "anonymous",
-      code,
-    }),
-  }).then(async (response) => {
+
+  fetch(
+    buildUrl,
+    buildRequest("POST", JSON.stringify({ mode: "anonymous", code })),
+  ).then(async (response) => {
     const body = await response.json();
 
     if (!("success" in body) || !("payload" in body)) {
@@ -34,14 +28,21 @@ export function buildCode(code: string) {
     const payload = body.payload;
 
     if (body.success && isExecuteAlgorithmResult(payload)) {
+      if (payload.response !== "success") {
+        // Engine can send back some frames in case the result is missed
+        triggerNonFatalError({
+          errorMessage:
+            payload.errorMessage ??
+            "There was an issue executing your code. Please check.",
+        });
+        return;
+      }
       visualizerStore.frames = payload.frames;
       visualizerStore.activeFrameNumber = 0;
     } else if (isApiErrorResponse(payload)) {
-      console.log("Error");
+      handleAPIError();
     } else {
-      console.log("Unknown case");
+      handleUnknownError();
     }
-
-    isCodeBuilding.value = false;
   });
 }
