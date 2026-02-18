@@ -39,6 +39,9 @@
     transparent 100%
   );
   text-align: center;
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
 }
 </style>
 

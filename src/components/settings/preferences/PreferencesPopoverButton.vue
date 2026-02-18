@@ -3,10 +3,10 @@
   <PopoverRoot>
 
     <PopoverTrigger
-      class="m-auto w-[35px] h-[35px] inline-flex items-center justify-center text-grass11 bg-(--color-muted) shadow-sm border hover:bg-stone-50 cursor-default focus:shadow-[0_0_0_2px] focus:shadow-black dark:focus:shadow-green8 focus:outline-none"
+      class="btn-primary flex items-center"
       aria-label="Update dimensions">
 
-      <Icon icon="radix-icons:mixer-horizontal" />
+      <Icon icon="radix-icons:mixer-horizontal" class="w-5 h-5" />
 
     </PopoverTrigger>
 
@@ -15,7 +15,7 @@
       <PopoverContent
         side="bottom"
         :side-offset="5"
-        class="rounded-lg p-5 w-[260px] bg-white text-black shadow-sm border will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade">
+        class="rounded-lg p-4 w-[260px] bg-(--color-muted) shadow-sm border will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade">
 
         <PreferencesContent />
 

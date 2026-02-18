@@ -7,6 +7,7 @@
       'control-panel': !isPlaybackMode,
       'control-panel__floating': isPlaybackMode,
     }"
+    class="h-15"
     @switch-mode="onPlaybackModeSwitch" />
 
   <div v-if="isPlaybackMode" class="h-full">
@@ -39,7 +40,6 @@
 <style scoped>
   .control-panel{
   min-height: 2.5rem;
-  max-height: 2.75rem;
 }
 
   .control-panel__floating{

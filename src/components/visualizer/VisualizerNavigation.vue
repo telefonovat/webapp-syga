@@ -20,14 +20,18 @@
     </ToolbarButton>
 
     <ToolbarButton
-      class="btn-primary"
+      class="btn-primary flex items-center"
       :disabled="!canVisualizerPlay"
       @click="sliderModel.value = 1">
-       <<
+
+      <Icon
+        icon="material-symbols-light:keyboard-double-arrow-left"
+        class="w-9 h-9 p-1" />
+
     </ToolbarButton>
 
     <ToolbarButton
-      class="btn-primary"
+      class="btn-primary flex items-center"
       :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = Math.max(
@@ -35,17 +39,19 @@
           modulo(sliderModel.value - 1, sliderModel.max),
         )
       ">
-       <
+
+      <Icon icon="iconamoon:arrow-left-2-light" class="w-9 h-9 p-1" />
+
     </ToolbarButton>
 
     <AwesomeSlider
       :disabled="!canVisualizerPlay"
       data-testid="visualizer-frame-slider"
-      class="container__frames-slider"
+      class="container__frames-slider h-full"
       v-model="sliderModel" />
 
     <ToolbarButton
-      class="btn-primary"
+      class="btn-primary flex items-center"
       :disabled="!canVisualizerPlay"
       @click="
         sliderModel.value = Math.min(
@@ -53,14 +59,22 @@
           sliderModel.value + 1,
         )
       ">
-       >
+
+      <Icon
+        icon="iconamoon:arrow-right-2-light"
+        class="w-9 h-9 p-1" />
+
     </ToolbarButton>
 
     <ToolbarButton
-      class="btn-primary"
+      class="btn-primary flex items-center"
       :disabled="!canVisualizerPlay"
       @click="sliderModel.value = sliderModel.max">
-       >>
+
+      <Icon
+        icon="material-symbols-light:keyboard-double-arrow-right"
+        class="w-9 h-9 p-1" />
+
     </ToolbarButton>
 
   </ToolbarRoot>

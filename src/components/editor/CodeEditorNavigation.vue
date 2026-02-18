@@ -1,6 +1,6 @@
 <template>
 
-  <ToolbarRoot>
+  <ToolbarRoot class="flex">
 
     <ToolbarButton
       class="btn-primary flex items-center"
