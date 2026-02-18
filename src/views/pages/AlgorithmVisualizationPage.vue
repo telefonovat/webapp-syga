@@ -29,19 +29,30 @@
   import { useEditorStore } from "@/store/editor/editorStore";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import { storeToRefs } from "pinia";
-  import { computed } from "vue";
+  import { computed, onMounted, watch } from "vue";
 
   import {
     SplitterGroup,
     SplitterPanel,
     SplitterResizeHandle,
   } from "reka-ui";
+  import { useEditorPersistence } from "@/components/editor/useEditorPersistence";
+  import { buildCode } from "@/components/editor/buildCode";
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
 
   const { code } = storeToRefs(editorStore);
   const { currentFrame } = storeToRefs(visualizerStore);
+
+  const { state } = useEditorPersistence();
+  onMounted(() => {
+    code.value = state.value.code;
+    buildCode(code.value);
+  });
+  watch(code, (newVal) => {
+    state.value.code = newVal;
+  });
 
   const currentLineNos = computed(() => {
     return currentFrame.value?.lineNo ?? [];

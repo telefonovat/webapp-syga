@@ -28,15 +28,12 @@
   import AlgorithmVisualizationPage from "../pages/AlgorithmVisualizationPage.vue";
   import Playback from "@/components/visualizer/playback/Playback.vue";
 
-  import { onMounted, ref } from "vue";
-  import { usePrepareInitCode } from "./usePrepareInitCode";
+  import { ref } from "vue";
 
   const isPlaybackMode = ref(false);
   function onPlaybackModeSwitch(mode: any) {
     isPlaybackMode.value = mode === "playback";
   }
-
-  onMounted(async () => usePrepareInitCode());
 </script>
 
 <style scoped>
