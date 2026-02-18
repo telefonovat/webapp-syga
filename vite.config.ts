@@ -25,12 +25,4 @@ export default defineConfig({
     port: 8080,
     host: "0.0.0.0",
   },
-  // test: {
-  //   globals: true,
-  //   environment: "happy-dom",
-  //   setupFiles: ["src/testSetup.ts"],
-  //   deps: {
-  //     inline: ["vuetify"],
-  //   },
-  // },
 });
