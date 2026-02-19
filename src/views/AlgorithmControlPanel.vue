@@ -12,6 +12,8 @@
 
       <PreferencesPopoverButton class="h-full" />
 
+      <ExercisesNavigationPopoverButton class="h-full" />
+
     </div>
 
   </div>
@@ -22,7 +24,7 @@
   import VisualizerNavigation from "@/components/visualizer/VisualizerNavigation.vue";
   import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
   import PreferencesPopoverButton from "@/components/settings/preferences/PreferencesPopoverButton.vue";
-  import UserQOLControlPanel from "./UserQOLControlPanel.vue";
+  import ExercisesNavigationPopoverButton from "@/components/ExercisesNavigationPopoverButton.vue";
 </script>
 
 <style scoped>

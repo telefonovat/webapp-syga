@@ -2,6 +2,7 @@ import MockComponent from "@/components/mock/sfc/MockComponent.vue";
 import type { RouterOptions } from "vue-router";
 import { homeLayoutRouterRecord } from "./homeLayoutRoutes";
 import ImmediateFeedbackView from "@/views/exercises/immediateFeedback/ImmediateFeedbackView.vue";
+import ExercisesOverview from "@/views/exercises/ExercisesOverview.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -9,6 +10,11 @@ export const routes: RouterOptions["routes"] = [
     name: "ImmediateFeedback",
     component: ImmediateFeedbackView,
     props: true,
+  },
+  {
+    path: "/exercises",
+    name: "ExerciesOverview",
+    component: ExercisesOverview,
   },
   {
     path: "/:catchAll(.*)",

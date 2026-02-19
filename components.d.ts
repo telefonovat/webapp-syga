@@ -18,6 +18,7 @@ declare module 'vue' {
     CodeEditorNavigation: typeof import('./src/components/editor/CodeEditorNavigation.vue')['default']
     ComponentRenderer: typeof import('./src/components/visualizer/graph/ComponentRenderer.vue')['default']
     ErrorBoundary: typeof import('./src/components/ErrorBoundary.vue')['default']
+    ExercisesNavigationPopoverButton: typeof import('./src/components/ExercisesNavigationPopoverButton.vue')['default']
     GraphEdge: typeof import('./src/components/visualizer/graph/GraphEdge.vue')['default']
     GraphNode: typeof import('./src/components/visualizer/graph/GraphNode.vue')['default']
     Grift: typeof import('./src/components/visualizer/grift/Grift.vue')['default']
