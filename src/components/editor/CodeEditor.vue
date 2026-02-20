@@ -10,7 +10,7 @@
 <script setup lang="ts">
   import { Codemirror } from "vue-codemirror";
   import { python } from "@codemirror/lang-python";
-  import { oneDark } from "@codemirror/theme-one-dark";
+  import { catppuccinMocha } from "@fsegurai/codemirror-theme-bundle";
   import { shallowRef } from "vue";
   import { EditorView } from "codemirror";
 
@@ -109,7 +109,7 @@
   // Usage in extensions
   const extensions = [
     python(),
-    oneDark,
+    catppuccinMocha,
     lineHighlightField,
 
     //User preferences
@@ -122,8 +122,6 @@
 </style>
 
 <style>
-  .cm-editor{
-    @apply bg-(--color-paper);
-}
+
 </style>
 

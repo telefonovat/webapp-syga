@@ -1,6 +1,6 @@
 <template>
 
-  <div class="panel-wrapper">
+  <div class="panel-wrapper bg-(--color-secondary)">
 
     <div class="navigation-container">
 
