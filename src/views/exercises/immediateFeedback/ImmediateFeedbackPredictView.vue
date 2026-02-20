@@ -9,6 +9,7 @@
     <PrettyText :input="text" type="markdown" />
 
     <Grift
+      :edgeColorChoices="[]"
       prefix="if-predict"
       @edge-option-selected="
         (start, end, option) =>

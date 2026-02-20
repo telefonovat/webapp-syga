@@ -2,15 +2,29 @@
 
   <div class="flex items-stretch">
 
-    <div class="bg-red-500 grow-1">
+    <div class="grow-1">
 
-      <h1>Stuff</h1>
+      <h1>Practice your DFS Skills!</h1>
+
+      <p>
+         Practice how well you understand depth-first search by
+        predicting what it does to this graph. Identify tree-edges and
+        back-edges. We start at vertex A.
+      </p>
+
+      <p>
+         For choosing which neighbor to explore first, pick by
+        alphabetical order. In order to pick edge type, click on the
+        edge.
+      </p>
 
     </div>
 
     <Grift
       class=""
       prefix="immediatefeedback-predict"
+      @edge-color-choice-made="onEdgeColorChoice"
+      :edgeColorChoices="edgeColorChoices"
       :viewBoxSize="400"
       :component="component"
       :vertexOptions="{}"
@@ -23,10 +37,26 @@
 <script setup lang="ts">
   import Grift from "@/components/visualizer/grift/Grift.vue";
 
-  import { GraphComponent } from "@telefonovat/syga--contract";
+  import {
+    GraphComponent,
+    GraphVertex,
+  } from "@telefonovat/syga--contract";
+  import { EdgeChoice } from "./useImmediateFeedbackData";
+
+  interface Props {
+    edgeColorChoices: EdgeChoice[];
+  }
+  defineProps<Props>();
 
   const component = defineModel<GraphComponent>("component", {
     required: true,
   });
+
+  function onEdgeColorChoice(
+    [start, end]: [GraphVertex, GraphVertex],
+    { color }: EdgeChoice,
+  ) {
+    component.value.style.edgeColors[start.id][end.id] = color;
+  }
 </script>
 

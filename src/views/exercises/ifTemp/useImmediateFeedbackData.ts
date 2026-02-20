@@ -77,12 +77,33 @@ for u, v in G.edges:
     else:
         G.edges[u, v]["type"] = "tree_edge"`;
 
+export type EdgeChoice = {
+  title: string;
+  color: string;
+};
+
+export type NodeChoice = {
+  title: string;
+  color: string;
+};
+
 export async function useImmediateFeedbackData() {
   const frames = await buildCodeNew(code);
+
+  const edgeColorChoices: EdgeChoice[] = [
+    { title: "Back edge", color: "#22ba3b" },
+    { title: "Tree edge", color: "#2abfb8" },
+  ];
 
   const solutionComponent = ref(
     frames[frames.length - 1].graphComponents[0],
   );
   const blankComponent = ref(frames[0].graphComponents[0]);
-  return { code, solutionComponent, blankComponent };
+  return {
+    code,
+    frames,
+    edgeColorChoices,
+    solutionComponent,
+    blankComponent,
+  };
 }

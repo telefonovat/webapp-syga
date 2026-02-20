@@ -6,12 +6,23 @@
 
       <ImmediateFeedbackPredictView
         class="h-full"
+        :edgeColorChoices="edgeColorChoices"
         v-model:component="blankComponent"
         v-if="isCurrent('predict')" />
 
-      <div v-if="isCurrent('reveal')">Reveal</div>
+      <div class="h-full" v-if="isCurrent('reveal')">
 
-      <div v-if="isCurrent('code')">Code</div>
+        <ImmediateFeedbackRevealView
+          :solution="solutionComponent"
+          :userSubmitted="blankComponent" />
+
+      </div>
+
+      <div class="h-full" v-if="isCurrent('code')">
+
+        <ImmediateFeedbackCodeView :code="code" />
+
+      </div>
 
     </div>
 
@@ -33,6 +44,14 @@
           <Icon
             icon="material-symbols:next-plan-outline"
             class="size-10" />
+
+        </ToolbarButton>
+
+        <ToolbarButton
+          @click="router.replace('/')"
+          class="btn-primary flex items-center">
+           Home
+          <Icon icon="mdi:home-circle-outline" class="size-10" />
 
         </ToolbarButton>
 
@@ -59,12 +78,15 @@
 
 <script setup lang="ts">
   import ImmediateFeedbackPredictView from "./ImmediateFeedbackPredictView.vue";
+  import ImmediateFeedbackRevealView from "./ImmediateFeedbackRevealView.vue";
+  import ImmediateFeedbackCodeView from "./ImmediateFeedbackCodeView.vue";
+
+  import { ToolbarRoot, ToolbarButton } from "reka-ui";
 
   import { Icon } from "@iconify/vue";
   import { useStepper } from "@vueuse/core";
-  import { ToolbarRoot, ToolbarButton } from "reka-ui";
   import { useImmediateFeedbackData } from "./useImmediateFeedbackData";
-  import { onMounted } from "vue";
+  import { router } from "@/router";
 
   const { isCurrent, goToNext, goToPrevious } = useStepper({
     predict: {
@@ -78,9 +100,11 @@
     },
   });
 
-  const { code, solutionComponent, blankComponent } =
-    await useImmediateFeedbackData();
-
-  onMounted(() => console.log("Nice"));
+  const {
+    code,
+    edgeColorChoices,
+    blankComponent,
+    solutionComponent,
+  } = await useImmediateFeedbackData();
 </script>
 

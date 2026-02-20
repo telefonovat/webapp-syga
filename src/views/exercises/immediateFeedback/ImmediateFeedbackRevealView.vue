@@ -7,6 +7,7 @@
       <SplitterPanel>
 
         <Grift
+          :edgeColorChoices="[]"
           title="Correct Solution"
           prefix="if-reveal-true"
           class="immediate-feedback-reveal-left"
@@ -22,6 +23,7 @@
       <SplitterPanel>
 
         <Grift
+          :edgeColorChoices="[]"
           title="Your Solution"
           prefix="if-reveal-submitted"
           :component="submittedGraphSolution"

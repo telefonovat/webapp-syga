@@ -8,6 +8,7 @@
       :min-size="20">
 
       <Grift
+        :edge-color-choices="[]"
         class="component-renderer"
         v-if="componentToDisplay"
         :component="componentToDisplay"
