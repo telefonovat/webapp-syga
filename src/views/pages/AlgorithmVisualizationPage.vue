@@ -26,11 +26,9 @@
 <script setup lang="ts">
   import CodeEditor from "@/components/editor/CodeEditor.vue";
   import Visualizer from "@/components/visualizer/Visualizer.vue";
+
   import { useEditorStore } from "@/store/editor/editorStore";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
-  import { storeToRefs } from "pinia";
-  import { computed, onMounted, watch } from "vue";
-
   import {
     SplitterGroup,
     SplitterPanel,
@@ -38,6 +36,14 @@
   } from "reka-ui";
   import { useEditorPersistence } from "@/components/editor/useEditorPersistence";
   import { buildCode } from "@/components/editor/buildCode";
+
+  import { storeToRefs } from "pinia";
+  import { computed, onMounted, watch } from "vue";
+
+  interface Props {
+    code?: string;
+  }
+  const props = defineProps<Props>();
 
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
@@ -47,6 +53,7 @@
 
   const { state } = useEditorPersistence();
   onMounted(() => {
+    if (props.code) state.value.code = props.code;
     code.value = state.value.code;
     buildCode(code.value);
   });
