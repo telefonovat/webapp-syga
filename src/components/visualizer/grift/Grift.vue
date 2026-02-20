@@ -24,7 +24,7 @@
           verticesProps,
         )"
         :key="vertexId"
-        :radius="13"
+        :radius="18"
         @click="onGraphVertexClick(vertexId)"
         v-bind="vertexProps" />
 

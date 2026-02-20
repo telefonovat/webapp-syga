@@ -21,13 +21,15 @@
 
 <template>
 
-  <g class="node" role="img" :aria-label="label as string">
+  <g role="img" :aria-label="label as string">
 
     <circle
       v-if="shape === 'circle'"
       :cx="x"
       :cy="y"
       :r="radius"
+      stroke="white"
+      stroke-width="1"
       :fill="color" />
 
     <rect
@@ -36,6 +38,8 @@
       :y="y - radius"
       :width="radius * 2"
       :height="radius * 2"
+      stroke="white"
+      stroke-width="1"
       :fill="color" />
 
     <text

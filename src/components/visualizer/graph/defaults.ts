@@ -4,14 +4,14 @@ type DefaultValues = {
 };
 
 const defaultNodeSettings: DefaultValues = {
-  color: '#555',
-  shape: 'circle' as string,
-  radius: 12 as number,
+  color: "#555",
+  shape: "circle" as string,
+  radius: 15 as number,
 };
 
 const defaultEdgeSettings: DefaultValues = {
-  color: '#aaa' as string,
-  shape: 'solid' as string,
+  color: "#aaa" as string,
+  shape: "solid" as string,
   width: 3,
   isDirected: false,
 };
