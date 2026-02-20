@@ -5,18 +5,17 @@
     <DialogPortal>
 
       <DialogOverlay
-        class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+        class="data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
 
       <DialogContent
-        class="text-black data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]">
+        class="bg-(--color-muted) text-(--color-text) data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]">
 
-        <DialogTitle
-          class="text-mauve12 m-0 text-[17px] font-semibold">
+        <DialogTitle class="m-0 text-[17px] font-bold">
            Error
         </DialogTitle>
 
         <DialogDescription
-          class="text-mauve11 mt-[10px] mb-5 text-sm leading-normal">
+          class="mt-[10px] mb-5 text-sm leading-normal">
            {{ errorMessage }}
         </DialogDescription>
 
@@ -27,7 +26,7 @@
             <button
               asChild
               @click="errorOccured = false"
-              class="bg-green4 text-green11 text-sm hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-lg px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
+              class="text-sm hover:bg(--color-accent) focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-lg px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
                I understand
             </button>
 
