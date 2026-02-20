@@ -1,18 +1,12 @@
 import MockComponent from "@/components/mock/sfc/MockComponent.vue";
 import type { RouterOptions } from "vue-router";
 import { homeLayoutRouterRecord } from "./homeLayoutRoutes";
-import ImmediateFeedbackView from "@/views/exercises/immediateFeedback/ImmediateFeedbackView.vue";
+import ImmediateFeedbackViewWrapper from "@/views/exercises/ifTemp/ImmediateFeedbackViewWrapper.vue";
 import ExercisesOverview from "@/views/exercises/ExercisesOverview.vue";
 import ApplyExerciseView from "@/views/exercises/apply/ApplyExerciseView.vue";
 import ApplyBipartiteView from "@/views/exercises/apply/ApplyBipartiteView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
-  {
-    path: "/if/:exerciseId",
-    name: "ImmediateFeedback",
-    component: ImmediateFeedbackView,
-    props: true,
-  },
   {
     path: "/exercises",
     name: "ExerciesOverview",
@@ -31,10 +25,7 @@ export const routes: RouterOptions["routes"] = [
   {
     path: "/exercise/week-3/practice-depth-first-search",
     name: "PracticeDepthFirstSearch",
-    component: ImmediateFeedbackView,
-    props: {
-      exerciseId: "dfs-vanilla",
-    },
+    component: ImmediateFeedbackViewWrapper,
   },
   {
     path: "/:catchAll(.*)",

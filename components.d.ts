@@ -37,6 +37,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SaveAlgorithmModal: typeof import('./src/components/utility/SaveAlgorithmModal.vue')['default']
     SelectionModal: typeof import('./src/components/utility/SelectionModal.vue')['default']
+    Separator: typeof import('radix-vue')['Separator']
     SimpleMessagePopup: typeof import('./src/components/utility/SimpleMessagePopup.vue')['default']
     SwitchRoot: typeof import('radix-vue')['SwitchRoot']
     SwitchThumb: typeof import('radix-vue')['SwitchThumb']

@@ -1,11 +1,15 @@
 
 <template>
 
-  <AlgorithmControlPanel class="h-15 border-bottom" />
+  <div class="h-full flex flex-col">
 
-  <div class="h-full">
+    <AlgorithmControlPanel class="h-15 h-1/5" />
 
-    <AlgorithmVisualizationPage :code="code" />
+    <div class="h-4/5 grow-1">
+
+      <AlgorithmVisualizationPage :code="code" />
+
+    </div>
 
   </div>
 

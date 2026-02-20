@@ -8,7 +8,13 @@
 
     <div class="primary-viewport">
 
-      <RouterView name="main" />
+      <Suspense>
+
+        <RouterView name="main" />
+
+        <template #fallback><div>Loading</div></template>
+
+      </Suspense>
 
     </div>
 
