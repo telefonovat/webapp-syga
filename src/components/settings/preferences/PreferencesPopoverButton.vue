@@ -6,7 +6,7 @@
       class="btn-primary flex items-center"
       aria-label="Update dimensions">
 
-      <Icon icon="radix-icons:mixer-horizontal" class="w-5 h-5" />
+      <Icon icon="ph:gear-light" class="size-7" />
 
     </PopoverTrigger>
 
