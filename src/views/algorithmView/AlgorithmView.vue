@@ -1,24 +1,28 @@
 
 <template>
 
-  <AlgorithmControlPanel
-    :class="{
-      'border-bottom': !isPlaybackMode,
-      'control-panel': !isPlaybackMode,
-      'control-panel__floating': isPlaybackMode,
-    }"
-    class="h-15"
-    @switch-mode="onPlaybackModeSwitch" />
+  <div class="h-full flex flex-col">
 
-  <div v-if="isPlaybackMode" class="h-full">
+    <AlgorithmControlPanel
+      :class="{
+        'border-bottom': !isPlaybackMode,
+        'control-panel': !isPlaybackMode,
+        'control-panel__floating': isPlaybackMode,
+      }"
+      class="h-15 h-1/5"
+      @switch-mode="onPlaybackModeSwitch" />
 
-    <Playback />
+    <div v-if="isPlaybackMode" class="h-full">
 
-  </div>
+      <Playback />
 
-  <div v-else class="h-full">
+    </div>
 
-    <AlgorithmVisualizationPage />
+    <div v-else class="h-4/5 grow-1">
+
+      <AlgorithmVisualizationPage />
+
+    </div>
 
   </div>
 

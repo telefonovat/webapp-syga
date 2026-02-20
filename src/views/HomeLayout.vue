@@ -12,25 +12,18 @@
 
     </div>
 
-    <!-- <HomeLayoutFooter class="footer border-top" /> -->
-
   </div>
 
 </template>
 
 <style scoped>
   .layout{
-    display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100vh;
+    height: 100%;
 }
 
 .primary-viewport{
+  height: 100%;
   overflow-y: auto;
-}
-
-  .footer{
-    width: 100%;
   }
 </style>
 

@@ -66,16 +66,16 @@
   /* padding: 0; */
   /* border: 1px solid red !important; */
   /* overflow: auto; */
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   /* min-height: 0; */
 }
 
 html,
 body,
 #app {
-  height: 100%;
-  /* margin: 0; */
-  /* padding: 0; */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 
   /* font-size: var(--global-font-size); */
 }
