@@ -27,6 +27,16 @@ export function buildCode(code: string) {
 
     const payload = body.payload;
 
+    //HACK: Needs long-term error strategy
+    if (!body.success && body.payload.errorMessage) {
+      triggerNonFatalError({
+        errorMessage:
+          payload.errorMessage ??
+          "There was an issue executing your code. Please check.",
+      });
+      return;
+    }
+
     if (body.success && isExecuteAlgorithmResult(payload)) {
       if (payload.response !== "success") {
         // Engine can send back some frames in case the result is missed
