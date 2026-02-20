@@ -4,12 +4,12 @@
 
     <TreeRoot
       v-slot="{ flattenItems }"
-      class="list-none select-none w-100 h-75 bg-white text-stone-700 rounded-lg border shadow-sm p-2 text-sm font-medium"
+      class="list-none select-none w-100 h-75 bg-(--color-muted) rounded-lg border shadow-sm p-2 text-sm font-medium"
       :items="items"
       :get-key="(item) => item.title"
       :default-expanded="['components']">
 
-      <h2 class="font-semibold text-sm text-stone-400 px-2 pt-1 pb-3">
+      <h2 class="font-semibold text-sm px-2 pt-1 pb-3">
          Published exercises
       </h2>
 
@@ -70,9 +70,9 @@
           url: "/exercise/week-3/cycles-are-fun",
         },
         {
-          title: "Pouring water",
-          icon: "mdi:alphabet-c-box",
-          url: "/exercise/week-3/pouring-water",
+          title: "Is it bipartite?",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-3/is-it-bipartite",
         },
       ],
     },

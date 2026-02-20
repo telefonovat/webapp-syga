@@ -41,6 +41,7 @@
     <text
       :x="x"
       :y="y"
+      fill="white"
       text-anchor="middle"
       dominant-baseline="middle">
        {{ label }}

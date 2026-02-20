@@ -4,6 +4,7 @@ import { homeLayoutRouterRecord } from "./homeLayoutRoutes";
 import ImmediateFeedbackView from "@/views/exercises/immediateFeedback/ImmediateFeedbackView.vue";
 import ExercisesOverview from "@/views/exercises/ExercisesOverview.vue";
 import ApplyExerciseView from "@/views/exercises/apply/ApplyExerciseView.vue";
+import ApplyBipartiteView from "@/views/exercises/apply/ApplyBipartiteView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -21,6 +22,19 @@ export const routes: RouterOptions["routes"] = [
     path: "/exercise/week-3/cycles-are-fun",
     name: "ApplyExerciseView",
     component: ApplyExerciseView,
+  },
+  {
+    path: "/exercise/week-3/is-it-bipartite",
+    name: "ApplyBipartiteView",
+    component: ApplyBipartiteView,
+  },
+  {
+    path: "/exercise/week-3/practice-depth-first-search",
+    name: "PracticeDepthFirstSearch",
+    component: ImmediateFeedbackView,
+    props: {
+      exerciseId: "dfs-vanilla",
+    },
   },
   {
     path: "/:catchAll(.*)",
