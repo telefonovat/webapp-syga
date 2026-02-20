@@ -48,9 +48,9 @@
 
 <template>
 
-  <div class="visualizer-console ma-0 pa-0">
+  <div class="overflow-y-scroll h-full">
 
-    <template v-for="(output, index) in consoleOutputs">
+    <div v-for="(output, index) in consoleOutputs">
 
       <Separator
         v-if="index > 0"
@@ -64,7 +64,7 @@
 
       </div>
 
-    </template>
+    </div>
 
   </div>
 
