@@ -73,7 +73,7 @@ def is_back_edge(u, v):
 
 for u, v in G.edges:
     if is_back_edge(u, v):
-        G.edges[u, v]["type"] = "back_edge"
+        G.edges[u, v]["type"] = "non_tree_edges"
     else:
         G.edges[u, v]["type"] = "tree_edge"`;
 
@@ -91,7 +91,7 @@ export async function useImmediateFeedbackData() {
   const frames = await buildCodeNew(code);
 
   const edgeColorChoices: EdgeChoice[] = [
-    { title: "Back edge", color: "#22ba3b" },
+    { title: "Non-tree edges", color: "#22ba3b" },
     { title: "Tree edge", color: "#2abfb8" },
   ];
 

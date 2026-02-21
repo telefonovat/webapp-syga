@@ -71,9 +71,9 @@ G.color_edges_by(color_edges)
 def dfs(v):
     if G.nodes[v]["reached"]:
         return
-    G.nodes[v]["reached"] = True # Visualization logic
+    G.nodes[v]["reached"] = True # Visualize if we reached v
     for neighbor in G.adj[v]:
-        G.nodes[neighbor]["pred"] = v # Visualization logic
+        G.nodes[neighbor]["pred"] = v # Visualize if we reached neighbour
         dfs(neighbor)
 
 # You may use the partition coloring logic like this

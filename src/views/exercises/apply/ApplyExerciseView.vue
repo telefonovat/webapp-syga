@@ -63,9 +63,9 @@ G.color_edges_by(color_edges)
 def dfs(v):
     if G.nodes[v]["reached"]:
         return
-    G.nodes[v]["reached"] = True
+    G.nodes[v]["reached"] = True # Visualization if we reached v
     for neighbor in G.adj[v]:
-        G.nodes[neighbor]["pred"] = v
+        G.nodes[neighbor]["pred"] = v # Visualization if we reached v
         dfs(neighbor)
 
 

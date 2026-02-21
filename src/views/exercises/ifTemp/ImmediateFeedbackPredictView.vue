@@ -9,14 +9,21 @@
       <p>
          Practice how well you understand depth-first search by
         predicting what it does to this graph. Identify tree-edges and
-        back-edges. We start at vertex A.
+        non-tree edges. We start at vertex A.
       </p>
 
       <p>
          For choosing which neighbor to explore first, pick by
-        alphabetical order. In order to pick edge type, click on the
-        edge.
+        alphabetical order. There may be more than one component. If
+        you have exhausted one component, choose the next unexplored
+        vertex in alphabetical order. In order to pick edge type,
+        click on the edge.
       </p>
+
+      <strong>
+        Green denotes non-tree edges and DeepSkyBlue denotes tree
+        edges
+      </strong>
 
     </div>
 
