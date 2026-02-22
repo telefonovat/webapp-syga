@@ -37,7 +37,7 @@ for u, v in G.edges:
     G.edges[u, v]["type"] = None
 
 # Style
-G.color_edges_by(prop="type", colors=["#22ba3b", "#2abfb8"])
+G.color_edges_by(prop="type", colors=["#22ba3b", "#2abfb8", "red"])
 
 
 # Algorithm
@@ -69,13 +69,19 @@ def is_back_edge(u, v):
         G.nodes[v]["pre"] < G.nodes[u]["pre"]
         and G.nodes[u]["post"] < G.nodes[v]["post"]
     )
-
+def is_tree_edge(u, v):
+    return (
+        G.nodes[u]["pre"] < G.nodes[v]["pre"]
+        and G.nodes[v]["post"] < G.nodes[u]["post"]
+    )
 
 for u, v in G.edges:
     if is_back_edge(u, v):
-        G.edges[u, v]["type"] = "non_tree_edges"
+        G.edges[u, v]["type"] = "back_edge"
+    elif is_tree_edge(u, v):
+        G.edges[u, v]["type"] = "tree_edge"
     else:
-        G.edges[u, v]["type"] = "tree_edge"`;
+        G.edges[u, v]["type"] = "other"`;
 
 export type EdgeChoice = {
   title: string;
@@ -91,8 +97,9 @@ export async function useImmediateFeedbackData() {
   const frames = await buildCodeNew(code);
 
   const edgeColorChoices: EdgeChoice[] = [
-    { title: "Non-tree edges", color: "#22ba3b" },
-    { title: "Tree edge", color: "#2abfb8" },
+    { title: "Back edge", color: "#22ba3b" },
+    { title: "Tree edge", color: "red" },
+    { title: "Other", color: "#2abfb8" },
   ];
 
   const solutionComponent = ref(

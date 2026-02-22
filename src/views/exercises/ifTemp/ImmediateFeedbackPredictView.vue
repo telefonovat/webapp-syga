@@ -21,8 +21,8 @@
       </p>
 
       <strong>
-        Green denotes non-tree edges and DeepSkyBlue denotes tree
-        edges
+         Green denotes back edges, Red denotes tree edges and
+        DeepSkyBlue denotes tree edges
       </strong>
 
     </div>
