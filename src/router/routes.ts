@@ -15,7 +15,7 @@ export const routes: RouterOptions["routes"] = [
   },
   {
     path: "/exercise/week-2/practice-depth-first-search",
-    name: "PracticeDepthFirstSearch",
+    name: "PracticeDepthFirstSearchWeek2",
     component: ImmediateFeedbackViewWrapper,
   },
   {
@@ -35,7 +35,7 @@ export const routes: RouterOptions["routes"] = [
   },
   {
     path: "/exercise/week-3/practice-depth-first-search",
-    name: "PracticeDepthFirstSearch",
+    name: "PracticeDepthFirstSearchWeek3",
     component: ImmediateFeedbackViewWrapper,
   },
   {
