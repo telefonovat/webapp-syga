@@ -55,6 +55,24 @@
 
   const items = [
     {
+      title: "week 2",
+      icon: "lucide:folder",
+      url: undefined,
+      children: [
+        {
+          title: "Practice Depth-first Search",
+          icon: "mdi:alphabet-p-box",
+          url: "/exercise/week-2/practice-depth-first-search",
+        },
+        {
+          title: "Singly Connected Graphs",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-2/singly-connected-graphs",
+        },
+      ],
+    },
+    /*
+    {
       title: "week 3",
       icon: "lucide:folder",
       url: undefined,
@@ -76,6 +94,7 @@
         },
       ],
     },
+    */
   ];
 
   function handleClick(exerciseTitle: string) {
