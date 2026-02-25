@@ -95,7 +95,9 @@
   const fontSizeCompartment = new Compartment();
   const getFontSizeTheme = (sizePx: number) =>
     EditorView.theme({
-      "&": { fontSize: `${sizePx}pt` },
+      ".cm-line": {
+        fontSize: `${sizePx}pt`,
+      },
     });
   watch(fontSizePx, (newSize) => {
     if (!view.value) return;
