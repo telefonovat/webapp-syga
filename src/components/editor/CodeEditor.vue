@@ -13,7 +13,11 @@
   import { catppuccinMocha } from "@fsegurai/codemirror-theme-bundle";
   import { shallowRef } from "vue";
   import { EditorView } from "codemirror";
-
+  import { tags } from "@lezer/highlight";
+  import {
+    HighlightStyle,
+    syntaxHighlighting,
+  } from "@codemirror/language";
   import { Decoration } from "@codemirror/view";
   import {
     Compartment,
@@ -108,11 +112,23 @@
     });
   });
 
+  const commentColor = "#a6e3a1";
+  const customCommentStyle = HighlightStyle.define([
+    { tag: tags.meta, color: commentColor },
+    { tag: tags.comment, fontStyle: "italic", color: commentColor },
+    {
+      tag: tags.docComment,
+      fontStyle: "italic",
+      color: commentColor,
+    },
+  ]);
+
   // Usage in extensions
   const extensions = [
+    syntaxHighlighting(customCommentStyle),
     python(),
-    catppuccinMocha,
     lineHighlightField,
+    catppuccinMocha,
 
     //User preferences
     fontSizeCompartment.of(getFontSizeTheme(fontSizePx.value)),
