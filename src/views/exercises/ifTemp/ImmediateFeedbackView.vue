@@ -56,10 +56,13 @@
         </ToolbarButton>
 
         <ToolbarButton
+          :disabled="isCurrent('predict') && !isSolutionComplete"
           @click="goToNext"
           class="btn-primary flex items-center">
            Next
-          <Icon icon="weui:previous2-outlined" class="size-10" />
+          <Icon
+            icon="weui:previous2-outlined"
+            class="size-10 disabled:opacity-75" />
 
         </ToolbarButton>
 
@@ -87,6 +90,7 @@
   import { useStepper } from "@vueuse/core";
   import { useImmediateFeedbackData } from "./useImmediateFeedbackData";
   import { router } from "@/router";
+  import { computed } from "vue";
 
   const { isCurrent, goToNext, goToPrevious } = useStepper({
     predict: {
@@ -106,5 +110,16 @@
     blankComponent,
     solutionComponent,
   } = await useImmediateFeedbackData();
+  const isSolutionComplete = computed<boolean>(() => {
+    const filledColors = blankComponent.value.edges.map(
+      ({ start, end }) =>
+        blankComponent.value.style.edgeColors[start.id][end.id],
+    );
+    console.log(filledColors);
+    console.log(
+      filledColors.every((c) => c !== "#AAAAAA" && c !== null),
+    );
+    return filledColors.every((c) => c !== "#AAAAAA" && c !== null);
+  });
 </script>
 

@@ -114,7 +114,7 @@ export async function useImmediateFeedbackData() {
     { title: "Back edge", color: "DeepSkyBlue" },
     { title: "Forward edge", color: "Black" },
     { title: "Cross edge", color: "LimeGreen" },
-    { title: "Reset", color: "#AAAAAA" },
+    { title: "Reset", color: null },
   ];
 
   const solutionComponent = ref(

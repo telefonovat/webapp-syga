@@ -30,6 +30,10 @@
   @apply bg-transparent hover:bg-(--color-muted) text-(--color-text) text-lg font-semibold py-2 px-4 shadow-md transition-colors duration-200;
 }
 
+.btn-primary:disabled {
+  cursor: not-allowed;
+}
+
 /* UX */
 .horizontal-splitter {
   @apply bg-(--color-muted) w-1;
