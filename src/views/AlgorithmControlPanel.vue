@@ -1,6 +1,6 @@
 <template>
 
-  <div class="panel-wrapper bg-(--color-secondary)">
+  <div class="panel-wrapper bg-(--color-secondary) justify-between">
 
     <div class="navigation-container">
 
@@ -24,6 +24,8 @@
 
     </div>
 
+    <InfoNavigationPopoverButton class="h-full" />
+
   </div>
 
 </template>
@@ -33,6 +35,7 @@
   import CodeEditorNavigation from "@/components/editor/CodeEditorNavigation.vue";
   import PreferencesPopoverButton from "@/components/settings/preferences/PreferencesPopoverButton.vue";
   import ExercisesNavigationPopoverButton from "@/components/ExercisesNavigationPopoverButton.vue";
+  import InfoNavigationPopoverButton from "@/components/InfoNavigationPopoverButton.vue";
 
   import { Separator } from "reka-ui";
 </script>
