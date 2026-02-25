@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { Node } from "@telefonovat/syga--contract";
   import { defaultNodeSettings } from "./defaults";
+  import { usePreferencesContent } from "@/components/settings/preferences/usePreferencesContent";
 
   interface Props {
     x: number;
@@ -17,6 +18,8 @@
     shape: defaultNodeSettings["shape"] as string,
     radius: defaultNodeSettings["radius"] as number,
   });
+
+  const { isVertexThemeWhite } = usePreferencesContent();
 </script>
 
 <template>
@@ -28,7 +31,7 @@
       :cx="x"
       :cy="y"
       :r="radius"
-      stroke="white"
+      :stroke="isVertexThemeWhite ? 'white' : 'black'"
       stroke-width="1"
       :fill="color" />
 
@@ -45,7 +48,7 @@
     <text
       :x="x"
       :y="y"
-      fill="white"
+      :fill="isVertexThemeWhite ? 'white' : 'black'"
       text-anchor="middle"
       dominant-baseline="middle">
        {{ label }}
