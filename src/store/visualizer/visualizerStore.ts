@@ -54,7 +54,12 @@ export const useVisualizerStore = defineStore("Visualizer state", {
         return;
       }
 
-      this.nextFrame();
+      if (this.activeFrameNumber === this.numberOfFrames - 1) {
+        this.pause();
+        return;
+      } else {
+        this.nextFrame();
+      }
 
       window.clearInterval(this.intervalId);
       this.intervalId = window.setInterval(
