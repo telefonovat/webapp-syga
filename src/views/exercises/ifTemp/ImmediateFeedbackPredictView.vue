@@ -8,8 +8,9 @@
 
       <p>
          Practice how well you understand depth-first search by
-        predicting what it does to this graph. Identify tree-edges and
-        non-tree edges. We start at vertex A.
+        predicting what it does to this graph. Identify tree edges,
+        back edges, forward edges and cross edges. We start at vertex
+        A.
       </p>
 
       <p>
@@ -21,8 +22,12 @@
       </p>
 
       <strong>
-         Green denotes back edges, Red denotes tree edges and
-        DeepSkyBlue denotes tree edges
+         Red denotes tree edges, blue denotes back edges, black
+        denotes forward edges and Green denotes cross edges.
+      </strong>
+
+      <strong>
+         Please choose all edges before moving onto the solution!
       </strong>
 
     </div>
