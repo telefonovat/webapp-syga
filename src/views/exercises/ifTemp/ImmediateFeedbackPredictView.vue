@@ -22,8 +22,8 @@
       </p>
 
       <strong>
-         Red denotes tree edges, blue denotes back edges, black
-        denotes forward edges and Green denotes cross edges.
+         Red denotes tree edges, blue denotes back edges, gold denotes
+        forward edges and green denotes cross edges.
       </strong>
 
       <strong>

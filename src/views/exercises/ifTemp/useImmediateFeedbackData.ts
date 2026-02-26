@@ -6,15 +6,15 @@ const code = `connections = [
     ("C", "B"),
     ("D", "C"),
     ("D", "E"),
-    ("F", "E"),
-    ("G", "F"),
-    ("H", "G"),
-    ("A", "H"),
-    ("G", "A"),
-    ("G", "B"),
     ("B", "F"),
     ("F", "C"),
     ("F", "D"),
+    ("F", "E"),
+    ("G", "A"),
+    ("G", "B"),
+    ("G", "F"),
+    ("A", "H"),
+    ("H", "G"),
 ]
 
 
@@ -38,34 +38,9 @@ for u, v in G.edges:
 
 # Style
 # G.color_nodes_by(lambda u, G: "Gold" if G.nodes[u]["state"] != STATE_DEFAULT else None) # Uncomment this to trace DFS
-G.color_edges_by(prop="type", colors=["DeepSkyBlue", "Lime", "Crimson", "White"])
+G.color_edges_by(prop="type", colors=["DeepSkyBlue", "Lime", "Gold", "Crimson"])
 
-# Helpers
-def is_back_edge(u, v):
-    return (
-        G.nodes[v]["pre"] < G.nodes[u]["pre"]
-        and G.nodes[u]["post"] < G.nodes[v]["post"]
-    )
-def is_tree_edge(u, v):
-    return (
-        G.nodes[u]["pre"] < G.nodes[v]["pre"]
-        and G.nodes[v]["post"] < G.nodes[u]["post"]
-    )
 
-def is_forward_edge(u, v):
-    return (
-        G.nodes[u]["pre"] < G.nodes[v]["pre"] and
-        G.nodes[v]["post"] < G.nodes[u]["post"] 
-    )
-def determine_edge_type(u,v):
-  if is_back_edge(u, v):
-        G.edges[u, v]["type"] = "back_edge"
-  elif is_tree_edge(u, v):
-      G.edges[u, v]["type"] = "tree_edge"
-  elif is_forward_edge(u, v):
-      G.edges[u, v]["type"] = "forward_edge"
-  else:
-      G.edges[u, v]["type"] = "cross_edge"
 # Algorithm
 
 def dfs_step(u):
@@ -74,12 +49,18 @@ def dfs_step(u):
     G.graph["time"] += 1
 
     # Explore in alphabetical order
-    for v in sorted(G.adj[u]):
+    for v in G.adj[u]:
         if G.nodes[v]["state"] == STATE_DEFAULT:
             G.nodes[v]["pred"] = u
+            G.edges[u, v]["type"] = "tree_edge"
             dfs_step(v)
-        elif G.nodes[u]["pred"] != v:
-            G.edges[u, v]["back"] = True
+        else:
+            if G.nodes[v]["post"] == None:
+                G.edges[u, v]["type"] = "back_edge"
+            elif G.nodes[u]["pre"] < G.nodes[v]["pre"]:
+                G.edges[u, v]["type"] = "forward_edge"
+            else:
+                G.edges[u, v]["type"] = "cross_edge"
 
     G.nodes[u]["state"] = STATE_CLOSED
     G.nodes[u]["post"] = G.graph["time"]
@@ -87,14 +68,10 @@ def dfs_step(u):
 
 
 # Run DFS over all components
+root = "A"
+
 G.graph["time"] = 0
-for u in G.nodes:
-    if G.nodes[u]["state"] == STATE_DEFAULT:
-        dfs_step(u)
-
-
-for u, v in G.edges:
-  determine_edge_type(u,v)`;
+dfs_step(root)`;
 
 export type EdgeChoice = {
   title: string;
@@ -112,7 +89,7 @@ export async function useImmediateFeedbackData() {
   const edgeColorChoices: EdgeChoice[] = [
     { title: "Tree edge", color: "Crimson" },
     { title: "Back edge", color: "DeepSkyBlue" },
-    { title: "Forward edge", color: "Black" },
+    { title: "Forward edge", color: "Gold" },
     { title: "Cross edge", color: "LimeGreen" },
     { title: "Reset", color: null },
   ];
