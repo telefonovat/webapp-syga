@@ -78,6 +78,10 @@
                    {{ choice.title }}
                 </label>
 
+                <div
+                  class="w-3 h-3 ml-5"
+                  :style="{ backgroundColor: choice.color }" />
+
               </div>
 
             </RadioGroupRoot>
