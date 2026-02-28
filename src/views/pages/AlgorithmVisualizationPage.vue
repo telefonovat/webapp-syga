@@ -34,11 +34,11 @@
     SplitterPanel,
     SplitterResizeHandle,
   } from "reka-ui";
-  import { useEditorPersistence } from "@/components/editor/useEditorPersistence";
   import { buildCode } from "@/components/editor/buildCode";
 
   import { storeToRefs } from "pinia";
   import { computed, onMounted, watch } from "vue";
+  import { usePersistentUserSettings } from "@/components/settings/usePersistentUserSettings";
 
   interface Props {
     code?: string;
@@ -48,17 +48,17 @@
   const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
 
-  const { code } = storeToRefs(editorStore);
+  const { code: editorCode } = storeToRefs(editorStore);
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const { state } = useEditorPersistence();
+  const { code } = usePersistentUserSettings();
   onMounted(() => {
-    if (props.code) state.value.code = props.code;
-    code.value = state.value.code;
-    buildCode(code.value);
+    if (props.code) code.value = props.code;
+    editorCode.value = code.value;
+    buildCode(editorCode.value);
   });
   watch(code, (newVal) => {
-    state.value.code = newVal;
+    code.value = newVal;
   });
 
   const currentLineNos = computed(() => {
@@ -81,10 +81,6 @@
   & > *{
     flex-grow: 1;
   }
-}
-
-.algorithm-visualization-page-visualizer{
-
 }
 </style>
 

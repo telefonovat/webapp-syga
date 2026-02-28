@@ -62,14 +62,75 @@
 
     </fieldset>
 
+    <fieldset class="flex gap-5 items-center">
+
+      <label
+        class="text-xs text-grass11 w-[75px]"
+        for="clear-settings">
+         Clear cache?
+      </label>
+
+      <DialogRoot>
+
+        <DialogTrigger class="btn-primary pl-1">
+
+          <Icon icon="ri:reset-left-line" />
+
+        </DialogTrigger>
+
+        <DialogContent
+          class="bg-(--color-muted) border data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]">
+
+          <DialogTitle class="m-0 text-[17px] font-semibold">
+             Clear SYGA cache?
+          </DialogTitle>
+
+          <DialogDescription
+            class="mt-[10px] mb-5 text-sm leading-normal">
+             Your current code will be reset to the default value.
+          </DialogDescription>
+
+          <div class="mt-[25px] flex justify-end">
+
+            <DialogClose @click="reset" as-child>
+
+              <button
+                class="bg-green4 text-green11 text-sm hover:bg-green5 focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-lg px-[15px] font-semibold leading-none focus:shadow-[0_0_0_2px] focus:outline-none">
+                 Do it
+              </button>
+
+            </DialogClose>
+
+          </div>
+
+        </DialogContent>
+
+      </DialogRoot>
+
+    </fieldset>
+
   </div>
 
 </template>
 
 <script setup lang="ts">
-  import { SwitchRoot, SwitchThumb } from "reka-ui";
+  import {
+    SwitchRoot,
+    SwitchThumb,
+    DialogRoot,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+    DialogTrigger,
+  } from "reka-ui";
+  import { Icon } from "@iconify/vue";
+
   import { usePreferencesContent } from "./usePreferencesContent";
+  import { usePersistentUserSettings } from "../usePersistentUserSettings";
+
   const { fontSizePx, isCodeHighlightOn, isVertexThemeWhite } =
     usePreferencesContent();
+  const { reset } = usePersistentUserSettings();
 </script>
 
