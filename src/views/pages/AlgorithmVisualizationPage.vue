@@ -27,7 +27,6 @@
   import CodeEditor from "@/components/editor/CodeEditor.vue";
   import Visualizer from "@/components/visualizer/Visualizer.vue";
 
-  import { useEditorStore } from "@/store/editor/editorStore";
   import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
   import {
     SplitterGroup,
@@ -45,17 +44,14 @@
   }
   const props = defineProps<Props>();
 
-  const editorStore = useEditorStore();
   const visualizerStore = useVisualizerStore();
 
-  const { code: editorCode } = storeToRefs(editorStore);
   const { currentFrame } = storeToRefs(visualizerStore);
 
   const { code } = usePersistentUserSettings();
   onMounted(() => {
     if (props.code) code.value = props.code;
-    editorCode.value = code.value;
-    buildCode(editorCode.value);
+    buildCode(code.value);
   });
   watch(code, (newVal) => {
     code.value = newVal;

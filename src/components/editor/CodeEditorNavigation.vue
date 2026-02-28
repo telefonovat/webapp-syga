@@ -18,12 +18,10 @@
   import { ToolbarButton, ToolbarRoot } from "reka-ui";
   import { Icon } from "@iconify/vue";
 
-  import { useEditorStore } from "@/store/editor/editorStore";
-  import { storeToRefs } from "pinia";
   import { buildCode } from "./buildCode";
+  import { usePersistentUserSettings } from "../settings/usePersistentUserSettings";
 
-  const editorStore = useEditorStore();
-  const { code } = storeToRefs(editorStore);
+  const { code } = usePersistentUserSettings();
 </script>
 
 <style scoped></style>

@@ -16,10 +16,10 @@
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    color: defaultEdgeSettings["color"] as string,
-    shape: defaultEdgeSettings["shape"] as string,
-    width: defaultEdgeSettings["width"] as number,
-    isDirected: defaultEdgeSettings["isDirected"] as boolean,
+    color: "#aaaaaa", // Grey
+    shape: "solid",
+    width: 3,
+    isDirected: false,
   });
 
   const arrowheadId = `arrowhead-${props.id}`;
