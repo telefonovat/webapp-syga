@@ -71,7 +71,6 @@
         },
       ],
     },
-    /*
     {
       title: "week 3",
       icon: "lucide:folder",
@@ -94,12 +93,13 @@
         },
       ],
     },
-    */
   ];
 
   function handleClick(exerciseTitle: string) {
-    const exercise = items[0];
-    const nextUrl = exercise?.children.find(
+    const exerciseWeek = items.find((week) =>
+      week.children.find((e) => e.title === exerciseTitle),
+    );
+    const nextUrl = exerciseWeek?.children.find(
       (c) => c.title === exerciseTitle,
     )?.url;
     if (!nextUrl) return;
