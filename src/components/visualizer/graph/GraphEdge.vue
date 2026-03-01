@@ -16,11 +16,13 @@
   }
 
   const props = withDefaults(defineProps<Props>(), {
-    color: "#aaaaaa", // Grey
+    color: "#555555", // Grey
     shape: "solid",
     width: 3,
     isDirected: false,
   });
+
+  const outlineColor = "black";
 
   const arrowheadId = `arrowhead-${props.id}`;
   //stroke-dasharray to pass to svg line
@@ -44,18 +46,34 @@
 
       <marker
         :id="arrowheadId"
-        markerWidth="3"
-        markerHeight="3"
-        refX="6"
-        refY="1.75"
-        orient="auto"
-        :fill="color">
+        markerWidth="4"
+        markerHeight="4"
+        refX="9"
+        refY="2"
+        orient="auto">
 
-        <polygon points="0 0, 4 2, 0 3.5" />
+        <path
+          d="M 0 0 L 4 2 M 0 4 L 4 2"
+          :stroke="outlineColor"
+          stroke-width="2" />
+
+        <path
+          d="M 0 0 L 4 2 M 0 4 L 4 2"
+          :stroke="color"
+          stroke-width="1" />
 
       </marker>
 
     </defs>
+
+    <line
+      :x1="x1"
+      :y1="y1"
+      :x2="x2"
+      :y2="y2"
+      :stroke="outlineColor"
+      :stroke-width="width + 2"
+      :stroke-dasharray="strokeDashArray" />
 
     <line
       :x1="x1"

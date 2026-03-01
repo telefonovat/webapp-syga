@@ -14,9 +14,9 @@
 
   withDefaults(defineProps<Props>(), {
     //Is this dangerous?
-    color: defaultNodeSettings["color"] as string,
-    shape: defaultNodeSettings["shape"] as string,
-    radius: defaultNodeSettings["radius"] as number,
+    color: "#555",
+    shape: "circle",
+    radius: 15,
   });
 
   const { isVertexThemeWhite } = usePreferencesContent();
