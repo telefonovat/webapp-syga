@@ -4,13 +4,29 @@
   <SplitterGroup class="visualizer" direction="vertical">
 
     <SplitterPanel
-      class="grid place-items-center h-full"
+      class="relative grid place-items-center h-full"
       :min-size="20">
 
+      <div
+        class="absolute top-8 left-8 bg-(--color-secondary) flex border p-3">
+
+        <label
+          class="text-stone-700 dark:text-white text-sm leading-none pl-[15px]">
+           {{ isCodeDirty ? "Out of sync" : "Synced" }}
+        </label>
+
+        <div
+          class="w-3 h-3 ml-5 pl-3"
+          :style="{
+            backgroundColor: isCodeDirty ? 'yellow' : 'green',
+          }" />
+
+      </div>
+
       <Grift
-        :edge-color-choices="[]"
-        class="component-renderer"
         v-if="componentToDisplay"
+        :edge-color-choices="[]"
+        class="h-full"
         :component="componentToDisplay"
         prefix="visualizer"
         :view-box-size="400"
@@ -47,6 +63,8 @@
   } from "reka-ui";
   import { computed } from "vue";
   import { storeToRefs } from "pinia";
+  import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
+  import { router } from "@/router";
 
   const visualizerStore = useVisualizerStore();
   const { currentFrame } = storeToRefs(visualizerStore);
@@ -56,6 +74,10 @@
       ? currentFrame.value.graphComponents[0]
       : undefined;
   });
+
+  const { isCodeDirty } = usePersistentTabSettings(
+    router.currentRoute.value.fullPath,
+  );
 </script>
 
 <style scoped>

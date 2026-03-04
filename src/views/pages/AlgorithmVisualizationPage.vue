@@ -36,7 +36,7 @@
   import { buildCode } from "@/components/editor/buildCode";
 
   import { storeToRefs } from "pinia";
-  import { computed, onMounted, watch } from "vue";
+  import { computed, onMounted } from "vue";
   import { usePersistentTabSettings } from "@/components/settings/usePersistentTabSettings";
   import { router } from "@/router";
 
@@ -49,15 +49,13 @@
 
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const { code } = usePersistentTabSettings(
+  const { code, markClean } = usePersistentTabSettings(
     router.currentRoute.value.fullPath,
   );
   onMounted(() => {
     if (props.code) code.value = props.code;
     buildCode(code.value);
-  });
-  watch(code, (newVal) => {
-    code.value = newVal;
+    markClean();
   });
 
   const currentLineNos = computed(() => {

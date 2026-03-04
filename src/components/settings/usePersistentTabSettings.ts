@@ -1,4 +1,5 @@
 import { useStorage } from "@vueuse/core";
+import { watch } from "vue";
 
 const helloWorldCode = `text = 'hello, stranger!'
 G = engine.DiGraph([(i + 1, i + 2) for i in range(len(text) - 1)])\n
@@ -20,12 +21,30 @@ function extractTabId(url: string): string {
 
 export function usePersistentTabSettings(url: string) {
   const tabId = extractTabId(url);
-  const code = useStorage(`${tabId}-tab-settings`, helloWorldCode);
+
+  const localStorageId = `${tabId}-tab-settings`;
+
+  const code = useStorage(`${localStorageId}--code`, helloWorldCode);
+
+  const isCodeDirty = useStorage(`${localStorageId}--dirty`, false);
+  function markClean() {
+    isCodeDirty.value = false;
+  }
+  watch(code, () => {
+    if (isCodeDirty.value === false) isCodeDirty.value = true;
+  });
+
   function reset() {
     code.value = helloWorldCode;
+    isCodeDirty.value = false;
   }
+
   return {
     code,
+
+    isCodeDirty,
+    markClean,
+
     reset,
   };
 }

@@ -10,6 +10,7 @@ import {
   handleAPIError,
   handleUnknownError,
 } from "@/api/errorHandler";
+import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
 
 export async function buildCodeNew(code: string) {
   const frames = await fetch(
@@ -58,6 +59,7 @@ export async function buildCodeNew(code: string) {
 }
 
 export function buildCode(code: string) {
+  buildCodeNew(code);
   const visualizerStore = useVisualizerStore();
 
   fetch(

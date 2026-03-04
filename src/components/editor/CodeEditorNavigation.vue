@@ -4,7 +4,12 @@
 
     <ToolbarButton
       class="btn-primary flex items-center"
-      @click="buildCode(code)">
+      @click="
+        () => {
+          buildCode(code);
+          markClean();
+        }
+      ">
 
       <Icon icon="streamline-sharp:startup" class="w-5 h-5 pr-1" />
        Build
@@ -22,7 +27,7 @@
   import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
   import { router } from "@/router";
 
-  const { code } = usePersistentTabSettings(
+  const { code, markClean } = usePersistentTabSettings(
     router.currentRoute.value.fullPath,
   );
 </script>
