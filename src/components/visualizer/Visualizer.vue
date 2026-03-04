@@ -91,9 +91,9 @@
     } else if (buildStatus.value === "failure")
       return { text: "Build failed", color: "red" };
     else if (buildStatus.value === "building")
-      return { text: "Building", color: "blue" };
+      return { text: "Building", color: "MediumBlue" };
     else if (buildStatus.value === "success") {
-      return { text: "Synced", color: "green" };
+      return { text: "Synced", color: "Lime" };
     } else {
       return { text: "Unknown status", color: "red" };
     }
