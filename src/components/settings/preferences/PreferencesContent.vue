@@ -127,10 +127,13 @@
   import { Icon } from "@iconify/vue";
 
   import { usePreferencesContent } from "./usePreferencesContent";
-  import { usePersistentUserSettings } from "../usePersistentUserSettings";
+  import { usePersistentTabSettings } from "../usePersistentTabSettings";
+  import { router } from "@/router";
 
   const { fontSizePx, isCodeHighlightOn, isVertexThemeWhite } =
     usePreferencesContent();
-  const { reset } = usePersistentUserSettings();
+  const { reset } = usePersistentTabSettings(
+    router.currentRoute.value.fullPath,
+  );
 </script>
 

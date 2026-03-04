@@ -19,9 +19,12 @@
   import { Icon } from "@iconify/vue";
 
   import { buildCode } from "./buildCode";
-  import { usePersistentUserSettings } from "../settings/usePersistentUserSettings";
+  import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
+  import { router } from "@/router";
 
-  const { code } = usePersistentUserSettings();
+  const { code } = usePersistentTabSettings(
+    router.currentRoute.value.fullPath,
+  );
 </script>
 
 <style scoped></style>

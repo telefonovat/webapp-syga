@@ -37,7 +37,8 @@
 
   import { storeToRefs } from "pinia";
   import { computed, onMounted, watch } from "vue";
-  import { usePersistentUserSettings } from "@/components/settings/usePersistentUserSettings";
+  import { usePersistentTabSettings } from "@/components/settings/usePersistentTabSettings";
+  import { router } from "@/router";
 
   interface Props {
     code?: string;
@@ -48,7 +49,9 @@
 
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const { code } = usePersistentUserSettings();
+  const { code } = usePersistentTabSettings(
+    router.currentRoute.value.fullPath,
+  );
   onMounted(() => {
     if (props.code) code.value = props.code;
     buildCode(code.value);
