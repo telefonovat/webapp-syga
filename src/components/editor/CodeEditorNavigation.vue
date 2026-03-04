@@ -9,6 +9,7 @@
           const visualizerStore = useVisualizerStore();
           const frames = await buildCodeNew(code);
           visualizerStore.frames = frames;
+          visualizerStore.activeFrameNumber = 0;
           markClean();
         }
       ">

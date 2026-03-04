@@ -60,6 +60,7 @@
     const visualizerStore = useVisualizerStore();
     const frames = await buildCodeNew(code.value);
     visualizerStore.frames = frames;
+    visualizerStore.activeFrameNumber = 0;
     if (buildStatus.value === "success") markClean();
   });
 
