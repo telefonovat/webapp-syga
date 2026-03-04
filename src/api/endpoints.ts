@@ -12,6 +12,8 @@ const prefix = webappConfig.API_URL;
 
 // Static urls
 export const buildUrl = `${prefix}/algorithm/build`;
+export const formatUrl = `${prefix}/v2/format`;
+
 export const signinUrl = `${prefix}/signin`;
 export const algorithmsUrl = `${prefix}/algorithms`;
 export const verifyAuthUrl = `${prefix}/auth`;

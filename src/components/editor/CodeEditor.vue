@@ -18,7 +18,7 @@
     HighlightStyle,
     syntaxHighlighting,
   } from "@codemirror/language";
-  import { Decoration } from "@codemirror/view";
+  import { Decoration, keymap } from "@codemirror/view";
   import {
     Compartment,
     StateEffect,
@@ -26,6 +26,9 @@
   } from "@codemirror/state";
   import { watch } from "vue";
   import { usePreferencesContent } from "../settings/preferences/usePreferencesContent";
+  import { triggerNonFatalError } from "../error/useErrorHandler";
+  import { formatCode } from "./formatCode";
+  import { useSnackBar } from "../utility/snack/useSnackBar";
 
   interface Props {
     linesToHighlight: number[];
@@ -123,10 +126,43 @@
     },
   ]);
 
+  // QOL features for user
+  const saveKeymap = keymap.of([
+    {
+      key: "Ctrl-s",
+      mac: "Cmd-s",
+      preventDefault: true,
+      run: (_view) => {
+        (async () => {
+          try {
+            const formattedCode = await formatCode(codeModel.value);
+            codeModel.value = formattedCode;
+
+            const { triggerSnackBar } = useSnackBar();
+            triggerSnackBar("Code formatted");
+          } catch (e) {
+            if (e instanceof Error) {
+              triggerNonFatalError({ errorMessage: e.message });
+            } else {
+              triggerNonFatalError({
+                errorMessage:
+                  "An unknown error occurred while formatting",
+              });
+            }
+          }
+        })();
+        return true;
+      },
+    },
+  ]);
+
   // Usage in extensions
   const extensions = [
     syntaxHighlighting(customCommentStyle),
     python(),
+
+    saveKeymap,
+
     lineHighlightField,
     catppuccinMocha,
 
