@@ -5,8 +5,10 @@
     <ToolbarButton
       class="btn-primary flex items-center"
       @click="
-        () => {
-          buildCode(code);
+        async () => {
+          const visualizerStore = useVisualizerStore();
+          const frames = await buildCodeNew(code);
+          visualizerStore.frames = frames;
           markClean();
         }
       ">
@@ -23,9 +25,10 @@
   import { ToolbarButton, ToolbarRoot } from "reka-ui";
   import { Icon } from "@iconify/vue";
 
-  import { buildCode } from "./buildCode";
+  import { buildCodeNew } from "./buildCode";
   import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
   import { router } from "@/router";
+  import { useVisualizerStore } from "@/store/visualizer/visualizerStore";
 
   const { code, markClean } = usePersistentTabSettings(
     router.currentRoute.value.fullPath,

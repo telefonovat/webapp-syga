@@ -21,9 +21,6 @@ export const useAnimationStore_ = defineStore(
 
     // API for player
     function nextFrame() {
-      console.log(
-        `Alpha : ${activeFrameNumber.value},${numberOfFrames.value}`,
-      );
       if (numberOfFrames.value === 0) {
         throw new Error("There are no frames");
       }

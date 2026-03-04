@@ -115,10 +115,6 @@
       ({ start, end }) =>
         blankComponent.value.style.edgeColors[start.id][end.id],
     );
-    console.log(filledColors);
-    console.log(
-      filledColors.every((c) => c !== "#AAAAAA" && c !== null),
-    );
     return filledColors.every((c) => c !== "#AAAAAA" && c !== null);
   });
 </script>

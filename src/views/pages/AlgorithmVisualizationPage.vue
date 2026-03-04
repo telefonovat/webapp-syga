@@ -33,12 +33,13 @@
     SplitterPanel,
     SplitterResizeHandle,
   } from "reka-ui";
-  import { buildCode } from "@/components/editor/buildCode";
+  import { buildCodeNew } from "@/components/editor/buildCode";
 
   import { storeToRefs } from "pinia";
   import { computed, onMounted } from "vue";
   import { usePersistentTabSettings } from "@/components/settings/usePersistentTabSettings";
   import { router } from "@/router";
+  import { useBuildStatus } from "@/components/editor/useBuildStatus";
 
   interface Props {
     code?: string;
@@ -52,10 +53,14 @@
   const { code, markClean } = usePersistentTabSettings(
     router.currentRoute.value.fullPath,
   );
-  onMounted(() => {
+  const { buildStatus } = useBuildStatus();
+  onMounted(async () => {
     if (props.code) code.value = props.code;
-    buildCode(code.value);
-    markClean();
+
+    const visualizerStore = useVisualizerStore();
+    const frames = await buildCodeNew(code.value);
+    visualizerStore.frames = frames;
+    if (buildStatus.value === "success") markClean();
   });
 
   const currentLineNos = computed(() => {

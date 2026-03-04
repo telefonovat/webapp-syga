@@ -10,9 +10,12 @@ import {
   handleAPIError,
   handleUnknownError,
 } from "@/api/errorHandler";
-import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
+import { useBuildStatus } from "./useBuildStatus";
 
 export async function buildCodeNew(code: string) {
+  const { buildStatus } = useBuildStatus();
+
+  buildStatus.value = "building";
   const frames = await fetch(
     buildUrl,
     buildRequest("POST", JSON.stringify({ mode: "anonymous", code })),
@@ -21,6 +24,7 @@ export async function buildCodeNew(code: string) {
 
     if (!("success" in body) || !("payload" in body)) {
       // TODO: Proper error handling
+      buildStatus.value = "failure";
       throw "Response from API is deformed";
     }
 
@@ -33,6 +37,7 @@ export async function buildCodeNew(code: string) {
           payload.errorMessage ??
           "There was an issue executing your code. Please check.",
       });
+      buildStatus.value = "failure";
       return [];
     }
 
@@ -46,12 +51,15 @@ export async function buildCodeNew(code: string) {
         });
         return [];
       }
+      buildStatus.value = "success";
       return payload.frames;
     } else if (isApiErrorResponse(payload)) {
       handleAPIError();
+      buildStatus.value = "failure";
       return [];
     } else {
       handleUnknownError();
+      buildStatus.value = "failure";
       return [];
     }
   });
@@ -60,6 +68,7 @@ export async function buildCodeNew(code: string) {
 
 export function buildCode(code: string) {
   buildCodeNew(code);
+  return;
   const visualizerStore = useVisualizerStore();
 
   fetch(
