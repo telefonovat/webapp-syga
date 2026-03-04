@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { Node } from "@telefonovat/syga--contract";
-  import { defaultNodeSettings } from "./defaults";
   import { usePreferencesContent } from "@/components/settings/preferences/usePreferencesContent";
 
   interface Props {
@@ -46,6 +45,8 @@
       :fill="color" />
 
     <text
+      class="text-base"
+      v-if="label.toString().length <= 3"
       :x="x"
       :y="y"
       :fill="isVertexThemeWhite ? 'white' : 'black'"
@@ -53,6 +54,30 @@
       dominant-baseline="middle">
        {{ label }}
     </text>
+
+    <g v-else>
+
+      <rect
+        :x="x - 65"
+        :y="y - 30"
+        width="130"
+        :fill="color"
+        height="26"
+        :stroke="isVertexThemeWhite ? 'white' : 'black'"
+        stroke-width="1" />
+
+      <text
+        class="text-base"
+        :x="x"
+        :y="y - 20"
+        :fill="isVertexThemeWhite ? 'white' : 'black'"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        text-length="100">
+         {{ label }}
+      </text>
+
+    </g>
 
   </g>
 
