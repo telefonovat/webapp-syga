@@ -40,7 +40,7 @@
       :y="y - radius"
       :width="radius * 2"
       :height="radius * 2"
-      stroke="white"
+      :stroke="isVertexThemeWhite ? 'white' : 'black'"
       stroke-width="1"
       :fill="color" />
 
