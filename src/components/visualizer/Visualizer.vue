@@ -93,7 +93,7 @@
     else if (buildStatus.value === "building")
       return { text: "Building", color: "MediumBlue" };
     else if (buildStatus.value === "success") {
-      return { text: "Synced", color: "Lime" };
+      return { text: "Synced", color: "LimeGreen" };
     } else {
       return { text: "Unknown status", color: "red" };
     }
