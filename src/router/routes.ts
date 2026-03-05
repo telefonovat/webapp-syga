@@ -6,6 +6,7 @@ import ExercisesOverview from "@/views/exercises/ExercisesOverview.vue";
 import ApplyCyclesView from "@/views/exercises/apply/ApplyCyclesView.vue";
 import ApplyBipartiteView from "@/views/exercises/apply/ApplyBipartiteView.vue";
 import ApplySinglyConnectedView from "@/views/exercises/apply/ApplySinglyConnectedView.vue";
+import ApplyPeelingGraphsView from "@/views/exercises/apply/ApplyPeelingGraphsView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -32,6 +33,11 @@ export const routes: RouterOptions["routes"] = [
     path: "/exercise/week-3/is-it-bipartite",
     name: "ApplyBipartiteView",
     component: ApplyBipartiteView,
+  },
+  {
+    path: "/exercise/week-3/peeling-graphs",
+    name: "ApplyPeelingGraphsView",
+    component: ApplyPeelingGraphsView,
   },
   {
     path: "/exercise/week-3/practice-depth-first-search",

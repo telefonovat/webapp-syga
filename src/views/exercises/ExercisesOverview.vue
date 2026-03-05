@@ -77,6 +77,12 @@
       url: undefined,
       children: [
         {
+          title: "Peeling graphs",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-3/peeling-graphs",
+        },
+        /*
+        {
           title: "Practice Depth-first Search",
           icon: "mdi:alphabet-p-box",
           url: "/exercise/week-3/practice-depth-first-search",
@@ -91,6 +97,7 @@
           icon: "mdi:alphabet-a-box",
           url: "/exercise/week-3/is-it-bipartite",
         },
+        */
       ],
     },
   ];
