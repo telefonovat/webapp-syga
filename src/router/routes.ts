@@ -7,6 +7,8 @@ import ApplyCyclesView from "@/views/exercises/apply/ApplyCyclesView.vue";
 import ApplyBipartiteView from "@/views/exercises/apply/ApplyBipartiteView.vue";
 import ApplySinglyConnectedView from "@/views/exercises/apply/ApplySinglyConnectedView.vue";
 import ApplyPeelingGraphsView from "@/views/exercises/apply/ApplyPeelingGraphsView.vue";
+import HomeworkCaterpillarView from "@/views/homeworks/HomeworkCaterpillarView.vue";
+import HomeworksOverview from "@/views/homeworks/HomeworksOverview.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -43,6 +45,17 @@ export const routes: RouterOptions["routes"] = [
     path: "/exercise/week-3/practice-depth-first-search",
     name: "PracticeDepthFirstSearchWeek3",
     component: ImmediateFeedbackViewWrapper,
+  },
+  // Homeworks
+  {
+    path: "/homeworks",
+    name: "HomeworksOverview",
+    component: HomeworksOverview,
+  },
+  {
+    path: "/homework/search/caterpillar",
+    name: "HomeworkCaterpillar",
+    component: HomeworkCaterpillarView,
   },
   {
     path: "/:catchAll(.*)",

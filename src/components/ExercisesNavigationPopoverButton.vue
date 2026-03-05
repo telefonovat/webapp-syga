@@ -25,7 +25,18 @@
             aria-label="Update dimensions">
 
             <Icon icon="hugeicons:teacher" class="w-16 h-16 pr-1" />
-             Go to ADS1 in-class exercises
+             ADS1 in-class exercises
+          </ToolbarButton>
+
+          <ToolbarButton
+            @click="router.push('/homeworks')"
+            class="btn-primary flex items-center"
+            aria-label="Update dimensions">
+
+            <Icon
+              icon="game-icons:classical-knowledge"
+              class="w-16 h-16 pr-1" />
+             ADS1 homeworks
           </ToolbarButton>
 
         </ToolbarRoot>
