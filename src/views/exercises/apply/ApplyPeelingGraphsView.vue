@@ -45,12 +45,8 @@ import networkx as nx
 ## Visualization setup ##
 def setup():
     for u in G.nodes:
-        G.nodes[u][
-            "state"
-        ] = STATE_DEFAULT
-        G.nodes[u][
-            "pred"
-        ] = None  # Predecessor in search
+        G.nodes[u]["state"] = STATE_DEFAULT
+        G.nodes[u]["pred"] = None  # Predecessor in search
 
         G.nodes[u]["pre"] = None
         G.nodes[u]["post"] = None
@@ -58,19 +54,13 @@ def setup():
 
 
 def color_edge(u, v, G):
-    if (
-        G.nodes[u]["pred"] == v
-        or G.nodes[v]["pred"] == u
-    ):
+    if G.nodes[u]["pred"] == v or G.nodes[v]["pred"] == u:
         return "DeepSkyBlue"
     return None
 
 
 def color_node(u, G):
-    if (
-        G.nodes[u]["state"]
-        != STATE_DEFAULT
-    ):
+    if G.nodes[u]["state"] != STATE_DEFAULT:
         return "DeepSkyBlue"
     return None
 
@@ -113,10 +103,7 @@ def dfs_step(u):
     G.nodes[u]["pre"] = t
     t += 1
     for v in G.adj[u]:
-        if (
-            G.nodes[v]["state"]
-            == STATE_DEFAULT
-        ):
+        if G.nodes[v]["state"] == STATE_DEFAULT:
             G.nodes[v]["pred"] = u
             dfs_step(v)
 
@@ -130,21 +117,14 @@ def bfs(start):
     q.put(start)
     while not q.empty():
         u = q.get()
-        G.nodes[u][
-            "state"
-        ] = STATE_OPENED
+        G.nodes[u]["state"] = STATE_OPENED
         G.nodes[u]["pre"] = t
         t += 1
         for v in G.adj[u]:
-            if (
-                G.nodes[v]["state"]
-                == STATE_DEFAULT
-            ):
+            if G.nodes[v]["state"] == STATE_DEFAULT:
                 q.put(v)
                 G.nodes[v]["pred"] = u
-        G.nodes[u][
-            "state"
-        ] = STATE_CLOSED
+        G.nodes[u]["state"] = STATE_CLOSED
         G.nodes[u]["post"] = t
 
 
@@ -198,8 +178,6 @@ for u in order:
 if flag:
     print("Graph was peeled correctly!")
 else:
-    print(
-        "Graph was disconnected at some point"
-    )`;
+    print("Graph was disconnected at some point")`;
 </script>
 
