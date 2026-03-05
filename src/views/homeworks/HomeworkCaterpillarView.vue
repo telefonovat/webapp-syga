@@ -83,13 +83,13 @@ def color_node(u, G):
     if G.nodes[u]["is_caterpillar"]:
         return "Gold"
     elif G.nodes[u]["pred"] != None:
-        return "Gray"
+        return "LightSlateGray"
     return None
 
 
 def color_edge(u, v, G):
     if G.nodes[v]["pred"] == u:
-        return "Gray"
+        return "LightSlateGray"
     return None
 
 
