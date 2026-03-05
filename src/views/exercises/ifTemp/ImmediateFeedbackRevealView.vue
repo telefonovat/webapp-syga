@@ -27,7 +27,8 @@
         static
         prefix="immediatefeedback-reveal-user-submitted"
         :edgeColorChoices="[]"
-        :viewBoxSize="400"
+        :viewBoxWidth="400"
+        :viewBoxHeight="400"
         :component="userSubmitted"
         :vertexOptions="{}"
         :edgeOptions="{}" />

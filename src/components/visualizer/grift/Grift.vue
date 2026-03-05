@@ -6,7 +6,7 @@
 
     <svg
       class="component"
-      :viewBox="`0 0 ${props.viewBoxSize} ${props.viewBoxSize}`">
+      :viewBox="`0 0 ${props.viewBoxWidth} ${props.viewBoxHeight}`">
 
       <GraphEdge
         class="clickable"
@@ -150,7 +150,8 @@
   import { EdgeChoice } from "@/views/exercises/ifTemp/useImmediateFeedbackData";
 
   interface Props {
-    viewBoxSize: number;
+    viewBoxHeight: number;
+    viewBoxWidth: number;
     component: GraphComponent;
     edgeOptions: { [key: string]: string } | "number";
     vertexOptions: { [key: string]: string } | "number";
@@ -181,7 +182,13 @@
   }>();
 
   const { verticesProps, edgesPropsPartial } = toRefs(
-    useGraphRenderData(toRef(props, "component"), props.viewBoxSize),
+    useGraphRenderData(
+      toRef(props, "component"),
+      // HACK: Hardcoded. Must fix
+      props.viewBoxWidth - 100, // Some room of labels
+      props.viewBoxHeight,
+      50,
+    ),
   );
 
   const isEdgeClicked = ref(false);

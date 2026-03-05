@@ -35,17 +35,26 @@ interface GraphRenderData {
 
 function getVertexPositions(
   vertices: GraphVertex[],
-  viewBoxSize: number,
+  viewBoxWidth: number,
+  viewBoxHeight: number,
 ) {
   const positions: VertexPositions = {};
 
+  const centerX = viewBoxWidth / 2;
+  const centerY = viewBoxHeight / 2;
+
+  const radiusX = viewBoxWidth * 0.4;
+  const radiusY = viewBoxHeight * 0.4;
+
   vertices.forEach((vertex, index) => {
     const rads = Math.PI * 2 * (index / vertices.length - 0.25);
+
     positions[vertex.id] = {
-      x: Math.cos(rads) * viewBoxSize * 0.4 + viewBoxSize / 2,
-      y: Math.sin(rads) * viewBoxSize * 0.4 + viewBoxSize / 2,
+      x: Math.cos(rads) * radiusX + centerX,
+      y: Math.sin(rads) * radiusY + centerY,
     };
   });
+
   return positions;
 }
 
@@ -53,9 +62,11 @@ function getVertexProps(
   id: GraphVertexId,
   positions: VertexPositions,
   { vertexLabels, vertexColors, vertexShapes }: VertexStyle,
+  offsetX: number,
 ): VertexProps {
   return {
-    x: positions[id].x,
+    // HACK: Offset to allow extra x space in canvas
+    x: positions[id].x + offsetX,
     y: positions[id].y,
     label: vertexLabels[id] || id,
     ...(vertexColors[id] && { color: vertexColors[id] }),
@@ -69,6 +80,7 @@ function getEdgePropsPartial(
   positions: VertexPositions,
   isDirectedGraph: boolean,
   { edgeColors, edgeLabels, edgeShapes }: EdgeStyle,
+  offsetX: number,
 ): EdgePropsPartial {
   const edgeHasColor =
     start in edgeColors &&
@@ -79,9 +91,10 @@ function getEdgePropsPartial(
   const edgeHasShape =
     start in edgeShapes && end in edgeShapes[start];
   return {
-    x1: positions[start].x,
+    // HACK: Offset to allow extra x space in canvas
+    x1: positions[start].x + offsetX,
     y1: positions[start].y,
-    x2: positions[end].x,
+    x2: positions[end].x + offsetX,
     y2: positions[end].y,
 
     isDirected: isDirectedGraph,
@@ -94,11 +107,18 @@ function getEdgePropsPartial(
 export function useGraphRenderData(
   // NOTE: This adds unnecessary complexity
   graph: Ref<GraphComponent>,
-  viewBoxSize: number,
+  viewBoxWidth: number,
+  viewBoxHeight: number,
+  offsetX: number,
 ): GraphRenderData {
   const vertexPositions = computed(() => {
     const vertices = graph.value.vertices;
-    return getVertexPositions(vertices, viewBoxSize);
+    const positions = getVertexPositions(
+      vertices,
+      viewBoxWidth,
+      viewBoxHeight,
+    );
+    return positions;
   });
   const verticesProps = computed(() => {
     const vertices = graph.value.vertices;
@@ -108,11 +128,16 @@ export function useGraphRenderData(
     const props: Record<string, VertexProps> = {};
     vertices.forEach(
       ({ id }) =>
-        (props[id] = getVertexProps(id, vertexPositions.value, {
-          vertexLabels,
-          vertexColors,
-          vertexShapes,
-        })),
+        (props[id] = getVertexProps(
+          id,
+          vertexPositions.value,
+          {
+            vertexLabels,
+            vertexColors,
+            vertexShapes,
+          },
+          offsetX,
+        )),
     );
     return props;
   });
@@ -132,6 +157,7 @@ export function useGraphRenderData(
           vertexPositions.value,
           isGraphDirected,
           { edgeColors, edgeLabels, edgeShapes },
+          offsetX,
         )),
     );
     return propsPartial;

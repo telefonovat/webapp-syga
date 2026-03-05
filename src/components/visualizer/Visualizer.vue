@@ -32,7 +32,8 @@
           class="h-full"
           :component="componentToDisplay"
           prefix="visualizer"
-          :view-box-size="400"
+          :view-box-width="500"
+          :view-box-height="400"
           :vertexOptions="{}"
           :edgeOptions="{}" />
 

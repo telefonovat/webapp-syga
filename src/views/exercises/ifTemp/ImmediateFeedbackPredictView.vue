@@ -37,7 +37,8 @@
       prefix="immediatefeedback-predict"
       @edge-color-choice-made="onEdgeColorChoice"
       :edgeColorChoices="edgeColorChoices"
-      :viewBoxSize="400"
+      :viewBoxWidth="400"
+      :viewBoxHeight="400"
       :component="component"
       :vertexOptions="{}"
       :edgeOptions="{}" />
