@@ -50,12 +50,14 @@
 
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const { code, markClean } = usePersistentTabSettings(
-    router.currentRoute.value.fullPath,
-  );
+  const { source, code, calculateLineDiffs, markClean } =
+    usePersistentTabSettings(router.currentRoute.value.fullPath);
   const { buildStatus } = useBuildStatus();
   onMounted(async () => {
-    if (props.code) code.value = props.code;
+    if (props.code) {
+      source.value = props.code;
+    }
+    calculateLineDiffs();
 
     const visualizerStore = useVisualizerStore();
     const frames = await buildCodeNew(code.value);

@@ -29,6 +29,8 @@
   import { triggerNonFatalError } from "../error/useErrorHandler";
   import { formatCode } from "./formatCode";
   import { useSnackBar } from "../utility/snack/useSnackBar";
+  import { usePersistentTabSettings } from "../settings/usePersistentTabSettings";
+  import { router } from "@/router";
 
   interface Props {
     linesToHighlight: number[];
@@ -42,6 +44,31 @@
   };
 
   const { fontSizePx, isCodeHighlightOn } = usePreferencesContent();
+
+  const { modifiedLineNos } = usePersistentTabSettings(
+    router.currentRoute.value.fullPath,
+  );
+  const addedLineMark = Decoration.line({
+    attributes: { style: "border-left: thick solid Lime" },
+  });
+  const addLineDiff = StateEffect.define<{ line: number }>();
+  function addDiffLinesStyle(lineNumbers: number[]) {
+    if (view.value === undefined) return;
+    const linesToHighlight = lineNumbers.map(
+      (line) => view.value!.state.doc.line(line).from,
+    );
+
+    view.value.dispatch({
+      effects: linesToHighlight.map((line) =>
+        addLineDiff.of({
+          line: line,
+        }),
+      ),
+    });
+  }
+  watch(modifiedLineNos, () => {
+    addDiffLinesStyle(Array.from(modifiedLineNos.value));
+  });
 
   const lineHighlightMark = Decoration.line({
     attributes: { style: "background-color: var(--color-highlight)" },
@@ -62,7 +89,10 @@
           });
         } else if (e.is(clearLineHighlights)) {
           lines = Decoration.none;
-          return lines;
+        } else if (e.is(addLineDiff)) {
+          lines = lines.update({
+            add: [addedLineMark.range(e.value.line)],
+          });
         }
       }
       return lines;
