@@ -66,6 +66,28 @@
 
       <label
         class="text-xs text-grass11 w-[75px]"
+        for="code-highlight-mode">
+         The label color of edges is {{
+          isEdgeThemeWhite ? "white" : "black"
+        }}
+      </label>
+
+      <SwitchRoot
+        id="code-highlight-mode"
+        v-model="isEdgeThemeWhite"
+        class="w-[32px] h-[20px] shadow-sm flex data-[state=unchecked]:bg-stone-500 data-[state=checked]:bg-emerald-800 border border-stone-300 data-[state=checked]:border-stone-700 dark:border-stone-700 rounded-full relative transition-[background] focus-within:outline-none focus-within:shadow-[0_0_0_1px] focus-within:border-stone-800 focus-within:shadow-stone-800">
+
+        <SwitchThumb
+          class="w-3.5 h-3.5 my-auto bg-white text-xs flex items-center justify-center shadow-xl rounded-full transition-transform translate-x-0.5 will-change-transform data-[state=checked]:translate-x-full" />
+
+      </SwitchRoot>
+
+    </fieldset>
+
+    <fieldset class="flex gap-5 items-center">
+
+      <label
+        class="text-xs text-grass11 w-[75px]"
         for="clear-settings">
          Clear cache?
       </label>
@@ -130,8 +152,12 @@
   import { usePersistentTabSettings } from "../usePersistentTabSettings";
   import { router } from "@/router";
 
-  const { fontSizePx, isCodeHighlightOn, isVertexThemeWhite } =
-    usePreferencesContent();
+  const {
+    fontSizePx,
+    isCodeHighlightOn,
+    isVertexThemeWhite,
+    isEdgeThemeWhite,
+  } = usePreferencesContent();
   const { reset } = usePersistentTabSettings(
     router.currentRoute.value.fullPath,
   );

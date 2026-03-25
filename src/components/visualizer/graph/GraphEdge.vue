@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { usePreferencesContent } from "@/components/settings/preferences/usePreferencesContent";
   import { defaultEdgeSettings } from "./defaults";
   import { computed } from "vue";
 
@@ -22,8 +23,6 @@
     isDirected: false,
   });
 
-  const outlineColor = "black";
-
   const arrowheadId = `arrowhead-${props.id}`;
   //stroke-dasharray to pass to svg line
   const strokeDashArray = computed(() => {
@@ -36,6 +35,9 @@
         return "0 0";
     }
   });
+
+  const { isEdgeThemeWhite } = usePreferencesContent();
+  const outlineColor = "black";
 </script>
 
 <template>
@@ -85,7 +87,15 @@
       :stroke-dasharray="strokeDashArray"
       :marker-end="isDirected ? `url(#${arrowheadId})` : undefined" />
 
-    <text :x="(x1 + x2) / 2" :y="(y1 + y2) / 2">{{ label }}</text>
+    <text
+      class="font-bold"
+      font-size="1rem"
+      :x="(x1 + x2) / 2"
+      :y="(y1 + y2) / 2"
+      :fill="isEdgeThemeWhite ? 'white' : 'black'"
+      :stroke="isEdgeThemeWhite ? 'black' : 'white'">
+       {{ label }}
+    </text>
 
   </g>
 
