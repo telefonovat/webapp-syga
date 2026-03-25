@@ -100,6 +100,28 @@
         */
       ],
     },
+    {
+      title: "week 6",
+      icon: "lucide:folder",
+      url: undefined,
+      children: [
+        {
+          title: "Three Smooth",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-6/three-smooth",
+        },
+        {
+          title: "Fatigueing Path",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-6/fatigueing-path",
+        },
+        {
+          title: "K-Edge Shortest Path",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-6/k-edge-shortest-path",
+        },
+      ],
+    },
   ];
 
   function handleClick(exerciseTitle: string) {

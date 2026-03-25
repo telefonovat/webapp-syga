@@ -89,12 +89,14 @@
       lines = lines.map(tr.changes);
       for (let e of tr.effects) {
         if (e.is(addLineHighlight)) {
+          lines = Decoration.none;
           lines = lines.update({
             add: [lineHighlightMark.range(e.value.line)],
           });
         } else if (e.is(clearLineHighlights)) {
           lines = Decoration.none;
-        } else if (e.is(addLineDiff)) {
+        }
+        if (e.is(addLineDiff)) {
           lines = lines.update({
             add: [addedLineMark.range(e.value.line)],
           });

@@ -56,6 +56,7 @@
   onMounted(async () => {
     if (props.code) {
       source.value = props.code;
+      //code.value = source.value;
     }
     calculateLineDiffs();
 

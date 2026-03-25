@@ -9,6 +9,7 @@ import ApplySinglyConnectedView from "@/views/exercises/apply/ApplySinglyConnect
 import ApplyPeelingGraphsView from "@/views/exercises/apply/ApplyPeelingGraphsView.vue";
 import HomeworkCaterpillarView from "@/views/homeworks/HomeworkCaterpillarView.vue";
 import HomeworksOverview from "@/views/homeworks/HomeworksOverview.vue";
+import ApplyExerciseView from "@/views/exercises/apply/ApplyExerciseView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -40,6 +41,12 @@ export const routes: RouterOptions["routes"] = [
     path: "/exercise/week-3/peeling-graphs",
     name: "ApplyPeelingGraphsView",
     component: ApplyPeelingGraphsView,
+  },
+  {
+    path: "/exercise/:exerciseUrl(.*)",
+    name: "ApplyExerciseView",
+    component: ApplyExerciseView,
+    props: true,
   },
   {
     path: "/exercise/week-3/practice-depth-first-search",
