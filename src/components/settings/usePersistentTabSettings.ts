@@ -46,12 +46,19 @@ export function usePersistentTabSettings(url: string) {
   const lineDiffs = ref<ChangeObject<string>[]>([]);
   const modifiedLineNos = ref<Set<number>>(new Set());
   function calculateLineDiffs() {
+    if (sources[url]) {
+      source.value = sources[url];
+    }
     lineDiffs.value = diffLines(source.value, code.value);
 
     const modified = new Set<number>();
     let offset = 0; // The first valid number is 1
     for (const change of lineDiffs.value) {
-      const lineCount = change.value.split("\n").length - 1;
+      const lines = change.value.split("\n");
+      const lineCount =
+        lines[lines.length - 1] === ""
+          ? lines.length - 1
+          : lines.length;
       if (change.removed) {
         continue;
       } else if (change.added) {
@@ -69,7 +76,7 @@ export function usePersistentTabSettings(url: string) {
   });
 
   function reset() {
-    code.value = helloWorldCode;
+    code.value = source.value;
     isCodeDirty.value = false;
     lineDiffs.value = [];
   }

@@ -45,9 +45,8 @@
 
   const { fontSizePx, isCodeHighlightOn } = usePreferencesContent();
 
-  const { modifiedLineNos } = usePersistentTabSettings(
-    router.currentRoute.value.fullPath,
-  );
+  const { modifiedLineNos, calculateLineDiffs } =
+    usePersistentTabSettings(router.currentRoute.value.fullPath);
   const addedLineMark = Decoration.line({
     attributes: { style: "border-left: thick solid Lime" },
   });
@@ -66,8 +65,15 @@
       ),
     });
   }
-  watch(modifiedLineNos, () => {
-    addDiffLinesStyle(Array.from(modifiedLineNos.value));
+  watch(
+    modifiedLineNos,
+    () => {
+      addDiffLinesStyle(Array.from(modifiedLineNos.value));
+    },
+    { immediate: true },
+  );
+  watch(view, () => {
+    if (view.value) calculateLineDiffs();
   });
 
   const lineHighlightMark = Decoration.line({
@@ -83,7 +89,6 @@
       lines = lines.map(tr.changes);
       for (let e of tr.effects) {
         if (e.is(addLineHighlight)) {
-          lines = Decoration.none;
           lines = lines.update({
             add: [lineHighlightMark.range(e.value.line)],
           });
@@ -191,7 +196,7 @@
     syntaxHighlighting(customCommentStyle),
     python(),
 
-    saveKeymap,
+    // saveKeymap,
 
     lineHighlightField,
     catppuccinMocha,
