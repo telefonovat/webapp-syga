@@ -2,7 +2,7 @@ import { useStorage } from "@vueuse/core";
 import { reactive, ref, watch } from "vue";
 import { diffLines, ChangeObject } from "diff";
 
-const helloWorldCode = `text = 'hello, stranger!'
+export const helloWorldCode = `text = 'hello, stranger!'
 G = engine.DiGraph([(i + 1, i + 2) for i in range(len(text) - 1)])\n
 G.color_edges_by(lambda u, v, G: v if 'label' in G.nodes[v] else None)
 G.color_nodes_by(lambda v, G: v if 'label' in G.nodes[v] else None)

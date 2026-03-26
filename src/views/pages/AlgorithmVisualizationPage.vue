@@ -37,7 +37,10 @@
 
   import { storeToRefs } from "pinia";
   import { computed, onMounted } from "vue";
-  import { usePersistentTabSettings } from "@/components/settings/usePersistentTabSettings";
+  import {
+    helloWorldCode,
+    usePersistentTabSettings,
+  } from "@/components/settings/usePersistentTabSettings";
   import { router } from "@/router";
   import { useBuildStatus } from "@/components/editor/useBuildStatus";
 
@@ -50,7 +53,7 @@
 
   const { currentFrame } = storeToRefs(visualizerStore);
 
-  const { source, code, calculateLineDiffs, markClean } =
+  const { source, code, calculateLineDiffs, markClean, reset } =
     usePersistentTabSettings(router.currentRoute.value.fullPath);
   const { buildStatus } = useBuildStatus();
   onMounted(async () => {
@@ -61,6 +64,8 @@
     calculateLineDiffs();
 
     const visualizerStore = useVisualizerStore();
+    // TODO: Temporary hack. Must remove
+    if (code.value === helloWorldCode) reset();
     const frames = await buildCodeNew(code.value);
     visualizerStore.frames = frames;
     visualizerStore.activeFrameNumber = 0;

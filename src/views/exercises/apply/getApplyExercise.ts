@@ -102,7 +102,7 @@ G.color_edges_by(color_edges)
 ############ / / / Main Processes / / / #############
 #####################################################
 
-def KSmoothTest(v, w, k):
+def k_smooth_test(v, w, k):
     nonlocal source
     if v == source:
         return True
@@ -120,7 +120,7 @@ def relax(source, k):
     while len(opens) > 0:
         v = opens.pop(0) 
         for w in G.adj[v]:
-            if KSmoothTest(v, w, k) and G.nodes[w]["dist"] > G.nodes[v]["dist"] + 1:
+            if k_smooth_test(v, w, k) and G.nodes[w]["dist"] > G.nodes[v]["dist"] + 1:
                 G.nodes[w]["dist"] = G.nodes[v]["dist"] + 1
                 opens.append(w)
                 G.nodes[w]["pred"] = v
