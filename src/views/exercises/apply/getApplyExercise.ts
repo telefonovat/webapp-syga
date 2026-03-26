@@ -20,16 +20,7 @@ graph1 = [
 ]
 
 graph2 = [
-    ("S", "A", 1),
-    ("A", "B", 5),
-    ("B", "T", 10),
-    ("S", "C", 2),
-    ("C", "D", 7),
-    ("D", "T", 12),
-]
-
-graph3 = [
-    ("S", "A", 5),
+    ("S", "A", 3),
     ("A", "T", 7),
     ("S", "B", 1),
     ("B", "C", 2),
@@ -92,16 +83,17 @@ G.color_edges_by(color_edges)
 # we say that a walk in G is 'k-smooth' if the weights of
 # each pair of consecutive edges differ by at most k. 
 
-# Develop an algorithm that finds a 3-smooth walk from a
-# node \(s\) to a node \(t\) with the least number of edges.
+# Below is Jamie's algorithm for finding minimal 3-smooth
+# paths. Find an example graph on which it fails and propose 
+# a correction. What is the time complexity of your correction?
 
 # A general relaxation algorithm is given below. Modify it to
 # assign the 'pred' of each node to match the correct path.
 
 
 ### Note:
-# There are three example graphs given at the top of this code. 
-# The second does NOT have a k-smooth s-t path. 
+# Jamie's algorithm finds the correct path on the two example 
+# graphs given at the top of this code.
 
 
 
@@ -110,31 +102,39 @@ G.color_edges_by(color_edges)
 ############ / / / Main Processes / / / #############
 #####################################################
 
-def relax(source):
-    open_vertices = list()
-    open_vertices.append(source)
-    G.nodes[source]["dist"] = 0 # Distance
+def KSmoothTest(v, w, k):
+    nonlocal source
+    if v == source:
+        return True
+    u = G.nodes[v]["pred"]
+    if G.edges[u, v]["weight"] - G.edges[v, w]["weight"] in range(-k, k):
+        return True
+    else: return False
+
+
+def relax(source, k):
+    opens = list()
+    opens.append(source)
+    G.nodes[source]["dist"] = 0
     G.nodes[source]["pred"] = source
-    while len(open_vertices) > 0:
-        v = open_vertices.pop(0)
+    while len(opens) > 0:
+        v = opens.pop(0) 
         for w in G.adj[v]:
-            if G.nodes[w]["dist"] > G.nodes[v]["dist"] + G.edges[v, w]["weight"]:
-                G.nodes[w]["dist"] = G.nodes[v]["dist"] + G.edges[v, w]["weight"]
-                open_vertices.append(w)
+            if KSmoothTest(v, w, k) and G.nodes[w]["dist"] > G.nodes[v]["dist"] + 1:
+                G.nodes[w]["dist"] = G.nodes[v]["dist"] + 1
+                opens.append(w)
                 G.nodes[w]["pred"] = v
 
 
+
 def backtrack(v):
-    # Utility function to
-    # assemble the path from v to the source
     nonlocal path
     path.append(v)
     u = G.nodes[v]["pred"]
     if u != v:
         G.nodes[v]["path"] = u
         backtrack(u)
-    else:
-        G.nodes[v]["path"] = "source"
+    else: G.nodes[v]["path"] = "source"
 
 
 
@@ -145,9 +145,9 @@ def backtrack(v):
 
 source = "S"
 sink = "T"
+k = 3
 
-
-relax(source)
+relax(source, k)
 
 if G.nodes[sink]["pred"] != None:
     path = list()
@@ -155,8 +155,7 @@ if G.nodes[sink]["pred"] != None:
     path.reverse()
     print(f'shortest 3-smooth path: {path}')
 else: 
-    print('no 3-smooth path found')
-`,
+    print(f'no {k}-smooth path found')`,
   },
   "week-6/fatigueing-path": {
     code: `#####################################################
