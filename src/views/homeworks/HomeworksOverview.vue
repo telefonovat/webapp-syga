@@ -66,6 +66,23 @@
         },
       ],
     },
+    {
+      title: "shortest-path",
+      icon: "iwwa:search",
+      url: undefined,
+      children: [
+        {
+          title: "Skyscanner",
+          icon: "streamline-plump:memes-comment-reply",
+          url: "/homework/shortest-path/skyscanner",
+        },
+        {
+          title: "Limbo Escape",
+          icon: "streamline-plump:memes-comment-reply",
+          url: "/homework/shortest-path/limbo-escape",
+        },
+      ],
+    },
   ];
 
   function handleClick(exerciseTitle: string) {

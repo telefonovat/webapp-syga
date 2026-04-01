@@ -10,6 +10,8 @@ import ApplyPeelingGraphsView from "@/views/exercises/apply/ApplyPeelingGraphsVi
 import HomeworkCaterpillarView from "@/views/homeworks/HomeworkCaterpillarView.vue";
 import HomeworksOverview from "@/views/homeworks/HomeworksOverview.vue";
 import ApplyExerciseView from "@/views/exercises/apply/ApplyExerciseView.vue";
+import HomeworkSkyscannerView from "@/views/homeworks/HomeworkSkyscannerView.vue";
+import HomeworkLimboEscapeView from "@/views/homeworks/HomeworkLimboEscapeView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -63,6 +65,16 @@ export const routes: RouterOptions["routes"] = [
     path: "/homework/search/caterpillar",
     name: "HomeworkCaterpillar",
     component: HomeworkCaterpillarView,
+  },
+  {
+    path: "/homework/shortest-path/skyscanner",
+    name: "HomeworkSkyscanner",
+    component: HomeworkSkyscannerView,
+  },
+  {
+    path: "/homework/shortest-path/limbo-escape",
+    name: "HomeworkLimboEscape",
+    component: HomeworkLimboEscapeView,
   },
   {
     path: "/:catchAll(.*)",
