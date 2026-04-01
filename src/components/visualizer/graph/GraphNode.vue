@@ -19,10 +19,6 @@
   });
 
   const { isVertexThemeWhite } = usePreferencesContent();
-
-  function getLabelBoxCoordinates(): { x: number; y: number } {
-    return { x: 0, y: 0 };
-  }
 </script>
 
 <template>
@@ -59,29 +55,16 @@
        {{ label }}
     </text>
 
-    <g v-else>
-
-      <rect
-        :x="x - 30"
-        :y="y - 30"
-        width="60"
-        :fill="color"
-        height="26"
-        :stroke="isVertexThemeWhite ? 'white' : 'black'"
-        stroke-width="1" />
-
-      <text
-        class="text-xs"
-        :x="x"
-        :y="y - 20"
-        :fill="isVertexThemeWhite ? 'white' : 'black'"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        text-length="100">
-         {{ label }}
-      </text>
-
-    </g>
+    <text
+      class="text-xs"
+      v-else
+      :x="x"
+      :y="y"
+      :fill="isVertexThemeWhite ? 'white' : 'black'"
+      text-anchor="middle"
+      dominant-baseline="middle">
+       {{ label }}
+    </text>
 
   </g>
 

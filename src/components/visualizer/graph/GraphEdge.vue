@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { usePreferencesContent } from "@/components/settings/preferences/usePreferencesContent";
-  import { defaultEdgeSettings } from "./defaults";
   import { computed } from "vue";
 
   interface Props {
@@ -116,7 +115,7 @@
 
     <text
       class="font-bold"
-      font-size="1.15rem"
+      font-size="1.1rem"
       :x="labelX"
       :y="labelY"
       :fill="isEdgeThemeWhite ? 'white' : 'black'"
