@@ -38,6 +38,33 @@
 
   const { isEdgeThemeWhite } = usePreferencesContent();
   const outlineColor = "black";
+
+  function getLabelCoordinates(
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+  ): [number, number] {
+    const t = 0.4;
+
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const length = Math.sqrt(dx * dx + dy * dy);
+
+    const offset = 0;
+    const offsetX = (-dy / length) * offset;
+    const offsetY = (dx / length) * offset;
+
+    const labelX = x1 + dx * t + offsetX;
+    const labelY = y1 + dy * t + offsetY;
+    return [labelX, labelY];
+  }
+
+  const labelCoordinates = computed(() =>
+    getLabelCoordinates(props.x1, props.y1, props.x2, props.y2),
+  );
+  const labelX = computed(() => labelCoordinates.value[0]);
+  const labelY = computed(() => labelCoordinates.value[1]);
 </script>
 
 <template>
@@ -89,9 +116,9 @@
 
     <text
       class="font-bold"
-      font-size="1rem"
-      :x="(x1 + x2) / 2"
-      :y="(y1 + y2) / 2"
+      font-size="1.15rem"
+      :x="labelX"
+      :y="labelY"
       :fill="isEdgeThemeWhite ? 'white' : 'black'"
       :stroke="isEdgeThemeWhite ? 'black' : 'white'">
        {{ label }}
