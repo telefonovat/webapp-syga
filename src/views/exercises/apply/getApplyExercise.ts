@@ -474,6 +474,133 @@ if G.nodes[sink]["pred"] != None:
     else:
         print(f'The shortest {k}-edge path {path} has length {G.nodes[sink]["dist"]}')`,
   },
+  "week-7/fixed-edges-mst": {
+    code: `#####################################################
+############# / / / Graph Setup / / / ###############
+#####################################################
+
+graph1 = [
+    ("S", "T", 11),
+    ("A", "T", 5),
+    ("S", "A", 5),
+    ("B", "T", 3),
+    ("C", "B", 3),
+    ("S", "C", 3),
+    ("D", "T", 2),
+    ("E", "D", 2),
+    ("F", "E", 2),
+    ("S", "F", 2),
+]
+
+edges1 = [
+    ("S", "T"),
+    ("A", "T"),
+]
+
+edges2 = [
+    ("S", "T"),
+    ("A", "T"),
+    ("S", "A"),
+]
+
+edges3 = [
+   ("S", "T"),
+   ("C", "B")
+]
+
+G = engine.Graph() # Main graph
+G.add_weighted_edges_from(graph1)
+
+starting_edges= edges1
+T = engine.Graph() # The eventual tree
+
+#####################################################
+########### / / / Visualizer Setup / / / ############
+#####################################################
+
+
+def label_edges(u, v, G):
+    return G.edges[u, v]["weight"]
+
+G.label_edges_by(label_edges)
+G.color_nodes_by(T.nodes, colors=[None, '#00bfff'])
+G.color_edges_by(lambda u, v, G:
+  'Purple' if (u,v) in starting_edges and (u,v) in T.edges else
+  'Purple' if (v,u) in starting_edges and (v,u) in T.edges else
+  'Red' if (u,v) in starting_edges or (v,u) in starting_edges else
+  'DeepSkyBlue' if (u, v) in T.edges else
+	None
+)
+G.label_edges_by(label_edges)
+
+
+
+#####################################################
+############ / / / Main Processes / / / #############
+#####################################################
+
+## Jarnik's Algorithm
+def Jarnik(start):
+    considering = []
+    T.add_node(start)
+    while True:
+        considering = [(u, v) for u, v in G.edges if (u in T.nodes) ^ (v in T.nodes)]
+      
+        if len(considering) == 0:
+            break
+      
+        best = sorted(considering, key=lambda e: G.edges[e]['weight'])[0]
+        T.add_edge(*best, w=G.edges[best]['weight'])
+
+
+
+## Kruskal's Algorithm
+from queue import PriorityQueue
+from networkx import connected_components
+def Kruskal():
+    k = 0
+    for w in G.nodes: # Assign colors to each node
+        G.nodes[w]["K"] = k
+        k += 1
+          
+    Q = PriorityQueue() # Queue the edges by weight
+    for e in G.edges: 
+        if e not in T.edges:
+              Q.put(e, G.edges[e]["weight"])
+          
+    while not Q.empty(): # Kruskals Algorithm
+        u, v = Q.get()
+        if G.nodes[u]["K"] != G.nodes[v]["K"]: # If u and v are in different components
+            T.add_edge(u, v)                   # Add (u,v) to T
+            k = G.nodes[u]["K"]
+            for w in G.nodes:                  # Fix colors of new componenet
+                if G.nodes[w]["K"] == k:
+                    G.nodes[w]["K"] = G.nodes[v]["K"]
+                    #print(f'K({w}) = {G.nodes[w]["K"]}')
+
+
+
+
+#####################################################
+################# / / / Run / / / ###################
+#####################################################
+
+Jarnik("S")
+#Kruskal()
+
+if len(T.nodes) == len(G.nodes):
+    if len(T.edges) == len(T.nodes)-1:
+        print("T is a spanning tree")
+    elif len(T.edges) > len(T.nodes)-1:
+        print("T contains a cycle!")
+    else:
+        print("T is a spanning forest")
+else: 
+    print("T does not span G")`,
+  },
+  "week-7/fixed-leaves-mst": {
+    code: ``,
+  },
 };
 export function getApplyExercise(url: string): ApplyExercise {
   if (!exercises[url])

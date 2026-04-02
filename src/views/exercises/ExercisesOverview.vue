@@ -122,6 +122,24 @@
         },
       ],
     },
+    {
+      title: "week 7",
+      icon: "lucide:folder",
+      url: undefined,
+      children: [
+        {
+          title: "Fixed Edges [MST]",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-7/fixed-edges-mst",
+        },
+
+        //{
+        //title: "Fixed Leaves [MST]",
+        // icon: "mdi:alphabet-a-box",
+        //url: "/exercise/week-7/fixed-leaves-mst",
+        //},
+      ],
+    },
   ];
 
   function handleClick(exerciseTitle: string) {
