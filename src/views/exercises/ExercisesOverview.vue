@@ -133,11 +133,11 @@
           url: "/exercise/week-7/fixed-edges-mst",
         },
 
-        //{
-        //title: "Fixed Leaves [MST]",
-        // icon: "mdi:alphabet-a-box",
-        //url: "/exercise/week-7/fixed-leaves-mst",
-        //},
+        {
+          title: "Fixed Leaves [MST]",
+          icon: "mdi:alphabet-a-box",
+          url: "/exercise/week-7/fixed-leaves-mst",
+        },
       ],
     },
   ];

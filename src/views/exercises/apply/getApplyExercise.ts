@@ -599,7 +599,115 @@ else:
     print("T does not span G")`,
   },
   "week-7/fixed-leaves-mst": {
-    code: ``,
+    code: `#####################################################
+############# / / / Graph Setup / / / ###############
+#####################################################
+
+graph1 = [
+    ("S", "T", 11),
+    ("A", "T", 5),
+    ("S", "A", 5),
+    ("B", "T", 3),
+    ("C", "B", 3),
+    ("S", "C", 3),
+    ("D", "T", 2),
+    ("E", "D", 2),
+    ("F", "E", 2),
+    ("S", "F", 2),
+]
+
+leaves1 = [
+  "E",
+  "B"
+]
+
+
+#####################################################
+########### / / / Visualizer Setup / / / ############
+#####################################################
+
+G = engine.Graph() # Main graph
+G.add_weighted_edges_from(graph1)
+
+fixed_leaves = leaves1
+T = engine.Graph(visualize=False) # Given tree that is a subgraph of G
+
+
+def color_nodes(u, G):
+  if u in fixed_leaves:
+    return "Red"
+  elif u in T.nodes:
+    return "DeepSkyBlue"
+  else:
+    return None
+
+def label_edges(u, v, G):
+    return G.edges[u, v]["weight"]
+
+G.color_nodes_by(color_nodes)
+G.color_edges_by(lambda u, v, G:
+  'DeepSkyBlue' if (u, v) in T.edges else
+	None
+)
+G.label_edges_by(label_edges)
+
+
+
+
+#####################################################
+############ / / / Main Processes / / / #############
+#####################################################
+
+
+
+## Jarnik's Algorithm
+def Jarnik(start):
+    considering = []
+    T.add_node(start)
+    while True:
+        considering = [(u, v) for u, v in G.edges if (u in T.nodes) ^ (v in T.nodes)]
+      
+        if len(considering) == 0:
+            break
+      
+        best = sorted(considering, key=lambda e: G.edges[e]['weight'])[0]
+        T.add_edge(*best, w=G.edges[best]['weight'])
+
+
+
+
+
+
+# You may use the skeleton of Jarnik above
+# Construct a tree containing the starting leaves
+
+def skeleton_solution():
+  # You can do these things
+  T.add_node("S")
+  T.add_edge("S","A")
+  G.remove_edge("S", "A")
+  pass
+
+
+
+  
+#####################################################
+################# / / / Run / / / ###################
+#####################################################
+
+Jarnik("S")
+
+
+if len(T.nodes) == len(G.nodes):
+    if len(T.edges) == len(T.nodes)-1:
+        print("T is a spanning tree")
+    elif len(T.edges) > len(T.nodes)-1:
+        print("T contains a cycle!")
+    else:
+        print("T is a spanning forest")
+else: 
+    print("T does not span G")
+  `,
   },
 };
 export function getApplyExercise(url: string): ApplyExercise {
