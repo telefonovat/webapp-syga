@@ -1,7 +1,6 @@
 name: Commit lint workflow
 
 on:
-  push
 
 jobs:
   runs-commit-lint:
