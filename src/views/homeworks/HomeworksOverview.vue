@@ -83,6 +83,18 @@
         },
       ],
     },
+    {
+      title: "spanning-trees",
+      icon: "iwwa:search",
+      url: undefined,
+      children: [
+        {
+          title: "Second Lightest MST",
+          icon: "streamline-plump:memes-comment-reply",
+          url: "/homework/spanning-trees/second-lightest-mst",
+        },
+      ],
+    },
   ];
 
   function handleClick(exerciseTitle: string) {

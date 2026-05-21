@@ -12,6 +12,7 @@ import HomeworksOverview from "@/views/homeworks/HomeworksOverview.vue";
 import ApplyExerciseView from "@/views/exercises/apply/ApplyExerciseView.vue";
 import HomeworkSkyscannerView from "@/views/homeworks/HomeworkSkyscannerView.vue";
 import HomeworkLimboEscapeView from "@/views/homeworks/HomeworkLimboEscapeView.vue";
+import HomeworkSecondLightestMSTView from "@/views/homeworks/HomeworkSecondLightestMSTView.vue";
 export const routes: RouterOptions["routes"] = [
   homeLayoutRouterRecord,
   {
@@ -75,6 +76,11 @@ export const routes: RouterOptions["routes"] = [
     path: "/homework/shortest-path/limbo-escape",
     name: "HomeworkLimboEscape",
     component: HomeworkLimboEscapeView,
+  },
+  {
+    path: "/homework/spanning-trees/second-lightest-mst",
+    name: "HomeworkSecondLightestMST",
+    component: HomeworkSecondLightestMSTView,
   },
   {
     path: "/:catchAll(.*)",
